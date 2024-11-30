@@ -1,23 +1,46 @@
-import { useEffect } from 'react';
-import { Button } from '@extension/ui';
+import { useEffect, useState } from 'react';
+import { Button, cn } from '@extension/ui';
 import { useStorage } from '@extension/shared';
 import { exampleThemeStorage } from '@extension/storage';
+import type { User } from '@supabase/supabase-js';
+import { UserAvatar } from './components/UserAvatar';
+import { MessageCircleMore } from 'lucide-react';
+import { CommentLayer } from './components/CommentLayer';
+
+const users = [
+  { name: 'Tariq Rafid', email: 'tareq.rafed2@gmail.com' },
+  { name: 'Tariq Rafid', email: 'tareq.rafed22@gmail.com' },
+];
+const colors = ['red-500', 'green-500', 'blue-500', 'yellow-500'];
 
 export default function App() {
   const theme = useStorage(exampleThemeStorage);
 
+  const [user, setUser] = useState<User | null>();
+  const [isCommenting, setIsCommenting] = useState<boolean>(false);
+
   useEffect(() => {
-    console.log('content ui loaded');
+    chrome.runtime.sendMessage({ action: 'GET_USER' }, async (user: User | null) => {
+      setUser(user);
+    });
   }, []);
 
   return (
-    <div className="flex items-center justify-between gap-2 rounded bg-blue-100 px-2 py-1">
-      <div className="flex gap-1 text-blue-500">
-        Edit <strong className="text-blue-700">pages/content-ui/src/app.tsx</strong> and save to reload.
+    <>
+      <div className="comment-cursor bg-background dark fixed left-1/2 top-5 z-[2147483647] flex w-52 -translate-x-1/2 items-center justify-between rounded-md border-b px-5 py-2">
+        <div className="flex items-center">
+          <div className="flex -space-x-4">
+            <UserAvatar className={cn(['hover:z-[10] relative'])} color={colors[0]} />
+            {users.map((user, i) => (
+              <UserAvatar className={cn(['hover:z-[10] relative'])} key={user.email} color={colors[i + 1]} />
+            ))}
+          </div>
+        </div>
+        <Button className="rounded-full" variant={'ghost'}>
+          <MessageCircleMore />
+        </Button>
       </div>
-      <Button theme={theme} onClick={exampleThemeStorage.toggle}>
-        Toggle Theme
-      </Button>
-    </div>
+      <CommentLayer />
+    </>
   );
 }

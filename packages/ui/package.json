@@ -28,6 +28,8 @@
     "tsc-alias": "^1.8.10"
   },
   "dependencies": {
+    "@radix-ui/react-avatar": "^1.1.1",
+    "@radix-ui/react-slot": "^1.1.0",
     "clsx": "^2.1.1",
     "tailwind-merge": "^2.4.0"
   }

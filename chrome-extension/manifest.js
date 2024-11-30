@@ -30,12 +30,14 @@ const manifest = deepmerge(
     host_permissions: ['<all_urls>'],
     permissions: ['storage', 'scripting', 'tabs', 'notifications'],
     options_page: 'options/index.html',
+    externally_connectable: {
+      matches: ['http://localhost:3000/*'],
+    },
     background: {
       service_worker: 'background.iife.js',
       type: 'module',
     },
     action: {
-      default_popup: 'popup/index.html',
       default_icon: 'icon-34.png',
     },
     chrome_url_overrides: {
@@ -61,7 +63,7 @@ const manifest = deepmerge(
     devtools_page: 'devtools/index.html',
     web_accessible_resources: [
       {
-        resources: ['*.js', '*.css', '*.svg', 'icon-128.png', 'icon-34.png'],
+        resources: ['*.js', '*.css', '*.svg', '*.png', 'icon-128.png', 'icon-34.png'],
         matches: ['*://*/*'],
       },
     ],
