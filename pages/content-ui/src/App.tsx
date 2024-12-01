@@ -6,6 +6,9 @@ import type { User } from '@supabase/supabase-js';
 import { UserAvatar } from './components/UserAvatar';
 import { MessageCircleMore } from 'lucide-react';
 import { CommentLayer } from './components/CommentLayer';
+import useToolbarStore from './store/toolbar';
+import { useHotkeys } from 'react-hotkeys-hook';
+import { motion } from 'framer-motion';
 
 const users = [
   { name: 'Tariq Rafid', email: 'tareq.rafed2@gmail.com' },
@@ -17,7 +20,11 @@ export default function App() {
   const theme = useStorage(exampleThemeStorage);
 
   const [user, setUser] = useState<User | null>();
-  const [isCommenting, setIsCommenting] = useState<boolean>(false);
+
+  const { toggleToolbarItem, toolbar } = useToolbarStore();
+  useHotkeys('ctrl+c', () => toggleToolbarItem('comment'));
+
+  const [isHovered, setIsHovered] = useState(false);
 
   useEffect(() => {
     chrome.runtime.sendMessage({ action: 'GET_USER' }, async (user: User | null) => {
@@ -27,19 +34,31 @@ export default function App() {
 
   return (
     <>
-      <div className="comment-cursor bg-background dark fixed left-1/2 top-5 z-[2147483647] flex w-52 -translate-x-1/2 items-center justify-between rounded-md border-b px-5 py-2">
-        <div className="flex items-center">
-          <div className="flex -space-x-4">
-            <UserAvatar className={cn(['hover:z-[10] relative'])} color={colors[0]} />
-            {users.map((user, i) => (
-              <UserAvatar className={cn(['hover:z-[10] relative'])} key={user.email} color={colors[i + 1]} />
-            ))}
-          </div>
+      <motion.div
+        onMouseEnter={() => setIsHovered(true)}
+        onMouseLeave={() => setIsHovered(false)}
+        initial={{ translateX: '-50%' }}
+        whileHover={{ scale: 1.2 }}
+        transition={{ duration: 0.3 }}
+        className="bg-background dark fixed left-1/2 top-5 z-[2147483647] flex w-40 items-center justify-between rounded-full border p-2">
+        <div className="relative flex flex-col items-center">
+          <Button
+            onClick={() => toggleToolbarItem('comment')}
+            className={cn(['rounded-full', toolbar.comment.inUse && 'bg-primary'])}
+            variant={'ghost'}>
+            <MessageCircleMore />
+          </Button>
         </div>
-        <Button className="rounded-full" variant={'ghost'}>
-          <MessageCircleMore />
-        </Button>
+      </motion.div>
+      <div className="absolute left-[41%] top-8 z-[2147483647]">
+        <div className="flex -space-x-4">
+          <UserAvatar className={cn(['hover:z-[10] relative'])} color={colors[0]} />
+          {users.map((user, i) => (
+            <UserAvatar className={cn(['hover:z-[10] relative'])} key={user.email} color={colors[i + 1]} />
+          ))}
+        </div>
       </div>
+
       <CommentLayer />
     </>
   );

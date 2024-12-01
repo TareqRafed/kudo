@@ -26,7 +26,9 @@
     "@extension/shared": "workspace:*",
     "@extension/storage": "workspace:*",
     "@extension/ui": "workspace:*",
-    "lucide-react": "^0.461.0"
+    "framer-motion": "^11.12.0",
+    "lucide-react": "^0.461.0",
+    "react-hotkeys-hook": "^4.6.1"
   },
   "devDependencies": {
     "@extension/hmr": "workspace:*",
