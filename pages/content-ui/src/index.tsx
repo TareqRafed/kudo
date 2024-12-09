@@ -1,10 +1,10 @@
 import { createRoot } from 'react-dom/client';
 import App from '@src/App';
 import tailwindcssOutput from '../dist/tailwind-output.css?inline';
-import './auth';
+import { addMessageListener } from '@extension/shared';
+import { GlobalStateStorage } from '@extension/storage';
 
 const rootId = 'ab-cursor-content-view-root';
-let onScreen = false;
 
 const createRootContainer = () => {
   const root = document.createElement('div');
@@ -16,7 +16,6 @@ const createRootContainer = () => {
   rootIntoShadow.id = 'shadow-root';
 
   const shadowRoot = root.attachShadow({ mode: 'open' });
-  onScreen = true;
 
   if (navigator.userAgent.includes('Firefox')) {
     /**
@@ -40,21 +39,22 @@ const createRootContainer = () => {
 };
 
 const removeRootContainer = () => {
-  if (!onScreen) return;
   const root = document.getElementById(rootId);
   root?.remove();
-  onScreen = false;
 };
 
-chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
-  console.log('Message received from background script:', message);
-
-  // Respond to the background script if needed
-  if (message.action === 'TOGGLE') {
-    if (!onScreen) {
-      createRootContainer();
-    } else {
-      removeRootContainer();
+const registerListeners = () => {
+  addMessageListener(message => {
+    if (message.action == 'ACTION_CLICK') {
+      message.payload.isOnScreen ? createRootContainer() : removeRootContainer();
     }
-  }
-});
+  });
+};
+
+const init = async () => {
+  registerListeners();
+  const state = await GlobalStateStorage.get();
+  state.isOnScreen ? createRootContainer() : removeRootContainer();
+};
+
+init();

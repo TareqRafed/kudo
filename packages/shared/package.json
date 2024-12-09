@@ -23,5 +23,8 @@
   "devDependencies": {
     "@extension/storage": "workspace:*",
     "@extension/tsconfig": "workspace:*"
+  },
+  "dependencies": {
+    "@supabase/supabase-js": "^2.47.2"
   }
 }
