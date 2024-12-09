@@ -64,6 +64,13 @@
   .comment-cursor {
     cursor: url("chrome-extension://fpmdeiecpdmcighlmlkkophaaicfhlnf/add-comment-cursor.png") 30 30, auto;
   }
+
+  .first-index {
+  }
+  .second-index {
+  }
+  .third-index {
+  }
 }
 
 @layer base {

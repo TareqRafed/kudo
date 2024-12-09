@@ -2,11 +2,6 @@ import { toggleTheme } from '@src/toggleTheme';
 
 void toggleTheme();
 
-chrome.action.onClicked.addListener(tab => {
-  console.log('Action clicked in tab:', tab);
-  // Perform action
-});
-
 //
 // console.log('content script');
 //
