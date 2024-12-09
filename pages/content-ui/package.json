@@ -28,6 +28,7 @@
     "@extension/ui": "workspace:*",
     "framer-motion": "^11.12.0",
     "lucide-react": "^0.461.0",
+    "react-draggable": "^4.4.6",
     "react-hotkeys-hook": "^4.6.1"
   },
   "devDependencies": {
