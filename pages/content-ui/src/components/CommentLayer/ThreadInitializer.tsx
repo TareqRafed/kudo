@@ -1,22 +1,24 @@
-import type { Thread, ThreadLocation } from '@extension/shared';
 import { motion } from 'framer-motion';
 import type { ComponentPropsWithoutRef } from 'react';
 import Draggable from 'react-draggable';
 import CommentInput from './CommentInput';
 import { cn } from '@extension/ui';
 import usePositionCalculator from './usePositionCalculator';
+import type { ThreadPosition } from './types';
+
+type CallbackCreationParams = { comment: string } & ThreadPosition;
 
 interface ThreadInitProps extends ComponentPropsWithoutRef<'div'> {
-  pos: ThreadLocation;
-  onCreate: (val: Thread) => void;
+  pos: ThreadPosition;
+  onCreate: (val: CallbackCreationParams) => void;
 }
 
 const ThreadInit = ({ onCreate, pos, ...rest }: ThreadInitProps) => {
   const { position } = usePositionCalculator({
-    x: pos.x,
-    y: pos.y,
-    rect: pos.rect,
-    targetSelector: pos.targetSelector,
+    x: pos.x ?? 0,
+    y: pos.y ?? 0,
+    rect: pos.rect as DOMRect | null,
+    targetSelector: pos.targetSelector ?? undefined,
   });
 
   return (
@@ -37,11 +39,8 @@ const ThreadInit = ({ onCreate, pos, ...rest }: ThreadInitProps) => {
           <CommentInput
             onCreate={comment => {
               onCreate({
+                comment,
                 ...pos,
-                comments: [{ content: comment, creator: { name: 'test' }, created_at: new Date() }],
-                id: '3',
-                interacted: [],
-                creator: { name: 'creator' },
               });
             }}
           />

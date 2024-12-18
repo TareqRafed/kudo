@@ -5,8 +5,10 @@ import { UserAvatar } from '../UserAvatar';
 import CommentPin from './CommentPin';
 import { useState } from 'react';
 import { CheckIcon } from 'lucide-react';
-import type { Thread } from '@extension/shared';
+import type { Database } from '@extension/shared';
 import usePositionCalculator from './usePositionCalculator';
+
+type Thread = Database['public']['Functions']['get_threads']['Returns'] extends (infer U)[] ? U : never;
 
 type ThreadProps = {
   data: Thread;
@@ -15,10 +17,9 @@ type ThreadProps = {
 const ThreadTag = ({ data }: ThreadProps) => {
   const [isCollapsed, setIsCollapsed] = useState(true);
   const { position } = usePositionCalculator({
-    x: data.x,
-    y: data.y,
-    rect: data.rect,
-    targetSelector: data.targetSelector,
+    x: data.x || 0,
+    y: data.y || 0,
+    targetSelector: data.target_selector ?? undefined,
   });
 
   return (
@@ -40,13 +41,13 @@ const ThreadTag = ({ data }: ThreadProps) => {
                 <div className="mb-3 flex items-center justify-between">
                   <div className="flex items-center space-x-2">
                     <UserAvatar className={cn(['size-7'])} />
-                    <span className="text-xs font-bold">{data.comments[0].creator.name}</span>
+                    <span className="text-xs font-bold">{}</span>
                   </div>
-                  <Button variant={'ghost'} size={'sx'}>
+                  <Button variant={'ghost'} size={'xs'}>
                     <CheckIcon className="size-7" />
                   </Button>
                 </div>
-                <span className="text-sm">{data.comments[0].content}</span>
+                <span className="text-sm">{data.comments[0]?.content || 'Comment Deleted'}</span>
               </div>
             </motion.div>
           )}

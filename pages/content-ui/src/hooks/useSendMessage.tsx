@@ -1,18 +1,14 @@
-import type { ResponseType, Message } from '@extension/shared';
+import type { Message } from '@extension/shared';
 import { sendMessage } from '@extension/shared';
-import { useEffect, useState } from 'react';
+import { useQuery } from '@tanstack/react-query';
 
-export const useSendMessage = <T extends Message>(message: T): [ResponseType<T> | undefined, boolean] => {
-  const [res, setRes] = useState<ResponseType<T> | undefined>(undefined); // Explicit type
-  const [loading, setLoading] = useState<boolean>(true);
+type QueryKeys = 'auth' | 'threads' | 'comments';
 
-  useEffect(() => {
-    sendMessage(message)
-      .then(data => setRes(data))
-      .then(() => setLoading(false))
-      .catch(() => setLoading(false));
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [JSON.stringify(message)]);
+export const useSendMessage = <T extends Message>(message: T, key: QueryKeys = 'auth') => {
+  const query = useQuery({
+    queryKey: [key],
+    queryFn: () => sendMessage(message),
+  });
 
-  return [res, loading];
+  return query;
 };

@@ -5,16 +5,18 @@ import type { BaseStorage } from '../base/types';
 export type GlobalState = {
   isOnScreen: boolean;
   isLoggedIn: boolean;
+  loading: boolean;
 };
 
 type GlobalStateStorage = BaseStorage<GlobalState> & {
   toggleIsOnScreen: () => Promise<void>;
   toggleIsLoggedIn: () => Promise<void>;
+  toggleLoading: () => Promise<void>;
 };
 
 const storage = createStorage<GlobalState>(
   'global-state-storage-key',
-  { isOnScreen: false, isLoggedIn: false },
+  { isOnScreen: false, isLoggedIn: false, loading: false },
   {
     storageEnum: StorageEnum.Local,
     liveUpdate: true,
@@ -31,6 +33,11 @@ export const GlobalStateStorage: GlobalStateStorage = {
   async toggleIsLoggedIn() {
     await storage.set(state => {
       return { ...state, isLoggedIn: !state.isLoggedIn };
+    });
+  },
+  async toggleLoading() {
+    await storage.set(state => {
+      return { ...state, loading: !state.loading };
     });
   },
 };
