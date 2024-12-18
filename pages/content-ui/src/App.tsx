@@ -7,16 +7,16 @@ import { useSendMessage } from './hooks/useSendMessage';
 
 export default function App() {
   const { toggleToolbarItem } = useToolbarStore();
+  // const { website } = useWebsiteStore(); // TODO: set website data from supabase edge function
 
   useHotkeys('ctrl+c', () => toggleToolbarItem('comment'));
-  const [res, loading] = useSendMessage({ action: 'FETCH_DATA', payload: 'members' });
+  const { data } = useSendMessage({ action: 'GET_AUTH', payload: '' });
+  console.log(data, 'get_auth');
 
   return (
-    <>
-      <Provider>
-        <Toolbar />
-        <CommentLayer />
-      </Provider>
-    </>
+    <Provider>
+      <Toolbar />
+      <CommentLayer />
+    </Provider>
   );
 }

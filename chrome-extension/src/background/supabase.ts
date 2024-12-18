@@ -1,8 +1,12 @@
 import { initSupabase } from '@extension/shared';
+import { GlobalStateStorage } from '@extension/storage';
 
 export const supabase = initSupabase();
 
-export const isUserLoggedIn = async () => {
+export const updateUserState = async () => {
+  await GlobalStateStorage.toggleLoading();
   const { data } = await supabase.auth.getUser();
-  return !!data.user;
+  const isLoggedIn = !!data.user;
+  await GlobalStateStorage.set(val => ({ ...val, isLoggedIn, loading: false }));
+  return isLoggedIn;
 };
