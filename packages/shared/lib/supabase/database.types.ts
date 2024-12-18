@@ -18,6 +18,73 @@ export type Database = {
         };
         Relationships: [];
       };
+      comments: {
+        Row: {
+          content: string;
+          created_at: string;
+          creator_id: string;
+          id: number;
+          thread_id: number;
+        };
+        Insert: {
+          content: string;
+          created_at?: string;
+          creator_id: string;
+          id?: number;
+          thread_id: number;
+        };
+        Update: {
+          content?: string;
+          created_at?: string;
+          creator_id?: string;
+          id?: number;
+          thread_id?: number;
+        };
+        Relationships: [
+          {
+            foreignKeyName: 'comments_creator_id_fkey';
+            columns: ['creator_id'];
+            isOneToOne: false;
+            referencedRelation: 'members';
+            referencedColumns: ['id'];
+          },
+          {
+            foreignKeyName: 'comments_creator_id_fkey';
+            columns: ['creator_id'];
+            isOneToOne: false;
+            referencedRelation: 'members_with_board';
+            referencedColumns: ['id'];
+          },
+          {
+            foreignKeyName: 'comments_creator_id_fkey';
+            columns: ['creator_id'];
+            isOneToOne: false;
+            referencedRelation: 'members_with_boards';
+            referencedColumns: ['id'];
+          },
+          {
+            foreignKeyName: 'comments_creator_id_fkey';
+            columns: ['creator_id'];
+            isOneToOne: false;
+            referencedRelation: 'members_with_metadata';
+            referencedColumns: ['id'];
+          },
+          {
+            foreignKeyName: 'comments_thread_id_fkey';
+            columns: ['thread_id'];
+            isOneToOne: false;
+            referencedRelation: 'threads';
+            referencedColumns: ['id'];
+          },
+          {
+            foreignKeyName: 'comments_thread_id_fkey';
+            columns: ['thread_id'];
+            isOneToOne: false;
+            referencedRelation: 'threads_with_metadata';
+            referencedColumns: ['id'];
+          },
+        ];
+      };
       members: {
         Row: {
           first_name: string;
@@ -52,59 +119,121 @@ export type Database = {
       };
       teams: {
         Row: {
+          board_id: number | null;
           created_at: string;
           id: number;
           name: string;
         };
         Insert: {
+          board_id?: number | null;
           created_at?: string;
           id?: number;
           name: string;
         };
         Update: {
+          board_id?: number | null;
           created_at?: string;
           id?: number;
           name?: string;
         };
-        Relationships: [];
+        Relationships: [
+          {
+            foreignKeyName: 'teams_board_id_fkey';
+            columns: ['board_id'];
+            isOneToOne: false;
+            referencedRelation: 'boards';
+            referencedColumns: ['id'];
+          },
+          {
+            foreignKeyName: 'teams_board_id_fkey';
+            columns: ['board_id'];
+            isOneToOne: false;
+            referencedRelation: 'members_with_metadata';
+            referencedColumns: ['board_id'];
+          },
+        ];
       };
       threads: {
         Row: {
           created_at: string;
-          creator: string | null;
+          creator_id: string | null;
           id: number;
           rect: Json | null;
           resolved: boolean;
           target_selector: string | null;
+          website_id: number | null;
+          windowHeight: number | null;
+          windowWidth: number | null;
           x: number;
           y: number;
         };
         Insert: {
           created_at?: string;
-          creator?: string | null;
+          creator_id?: string | null;
           id?: number;
           rect?: Json | null;
           resolved: boolean;
           target_selector?: string | null;
+          website_id?: number | null;
+          windowHeight?: number | null;
+          windowWidth?: number | null;
           x: number;
           y: number;
         };
         Update: {
           created_at?: string;
-          creator?: string | null;
+          creator_id?: string | null;
           id?: number;
           rect?: Json | null;
           resolved?: boolean;
           target_selector?: string | null;
+          website_id?: number | null;
+          windowHeight?: number | null;
+          windowWidth?: number | null;
           x?: number;
           y?: number;
         };
         Relationships: [
           {
             foreignKeyName: 'threads_creator_fkey';
-            columns: ['creator'];
+            columns: ['creator_id'];
             isOneToOne: false;
             referencedRelation: 'members';
+            referencedColumns: ['id'];
+          },
+          {
+            foreignKeyName: 'threads_creator_fkey';
+            columns: ['creator_id'];
+            isOneToOne: false;
+            referencedRelation: 'members_with_board';
+            referencedColumns: ['id'];
+          },
+          {
+            foreignKeyName: 'threads_creator_fkey';
+            columns: ['creator_id'];
+            isOneToOne: false;
+            referencedRelation: 'members_with_boards';
+            referencedColumns: ['id'];
+          },
+          {
+            foreignKeyName: 'threads_creator_fkey';
+            columns: ['creator_id'];
+            isOneToOne: false;
+            referencedRelation: 'members_with_metadata';
+            referencedColumns: ['id'];
+          },
+          {
+            foreignKeyName: 'threads_website_id_fkey';
+            columns: ['website_id'];
+            isOneToOne: false;
+            referencedRelation: 'members_with_metadata';
+            referencedColumns: ['website_id'];
+          },
+          {
+            foreignKeyName: 'threads_website_id_fkey';
+            columns: ['website_id'];
+            isOneToOne: false;
+            referencedRelation: 'website';
             referencedColumns: ['id'];
           },
         ];
@@ -130,12 +259,281 @@ export type Database = {
         };
         Relationships: [];
       };
+      website: {
+        Row: {
+          board_id: number;
+          created_at: string;
+          domain: string;
+          hash_id: string;
+          id: number;
+        };
+        Insert: {
+          board_id: number;
+          created_at?: string;
+          domain: string;
+          hash_id: string;
+          id?: number;
+        };
+        Update: {
+          board_id?: number;
+          created_at?: string;
+          domain?: string;
+          hash_id?: string;
+          id?: number;
+        };
+        Relationships: [
+          {
+            foreignKeyName: 'website_board_id_fkey';
+            columns: ['board_id'];
+            isOneToOne: false;
+            referencedRelation: 'boards';
+            referencedColumns: ['id'];
+          },
+          {
+            foreignKeyName: 'website_board_id_fkey';
+            columns: ['board_id'];
+            isOneToOne: false;
+            referencedRelation: 'members_with_metadata';
+            referencedColumns: ['board_id'];
+          },
+        ];
+      };
     };
     Views: {
-      [_ in never]: never;
+      members_with_board: {
+        Row: {
+          board_id: number | null;
+          id: string | null;
+          team_id: number | null;
+        };
+        Relationships: [
+          {
+            foreignKeyName: 'members_team_id_fkey';
+            columns: ['team_id'];
+            isOneToOne: false;
+            referencedRelation: 'teams';
+            referencedColumns: ['id'];
+          },
+          {
+            foreignKeyName: 'teams_board_id_fkey';
+            columns: ['board_id'];
+            isOneToOne: false;
+            referencedRelation: 'boards';
+            referencedColumns: ['id'];
+          },
+          {
+            foreignKeyName: 'teams_board_id_fkey';
+            columns: ['board_id'];
+            isOneToOne: false;
+            referencedRelation: 'members_with_metadata';
+            referencedColumns: ['board_id'];
+          },
+        ];
+      };
+      members_with_boards: {
+        Row: {
+          board_id: number | null;
+          id: string | null;
+          team_id: number | null;
+        };
+        Relationships: [
+          {
+            foreignKeyName: 'members_team_id_fkey';
+            columns: ['team_id'];
+            isOneToOne: false;
+            referencedRelation: 'teams';
+            referencedColumns: ['id'];
+          },
+          {
+            foreignKeyName: 'teams_board_id_fkey';
+            columns: ['board_id'];
+            isOneToOne: false;
+            referencedRelation: 'boards';
+            referencedColumns: ['id'];
+          },
+          {
+            foreignKeyName: 'teams_board_id_fkey';
+            columns: ['board_id'];
+            isOneToOne: false;
+            referencedRelation: 'members_with_metadata';
+            referencedColumns: ['board_id'];
+          },
+        ];
+      };
+      members_with_metadata: {
+        Row: {
+          board_id: number | null;
+          id: string | null;
+          team_id: number | null;
+          website_id: number | null;
+        };
+        Relationships: [
+          {
+            foreignKeyName: 'members_team_id_fkey';
+            columns: ['team_id'];
+            isOneToOne: false;
+            referencedRelation: 'teams';
+            referencedColumns: ['id'];
+          },
+        ];
+      };
+      threads_with_metadata: {
+        Row: {
+          comments: Json | null;
+          created_at: string | null;
+          creator: Json | null;
+          creator_id: string | null;
+          id: number | null;
+          rect: Json | null;
+          resolved: boolean | null;
+          target_selector: string | null;
+          team_id: number | null;
+          website_id: number | null;
+          windowHeight: number | null;
+          windowWidth: number | null;
+          x: number | null;
+          y: number | null;
+        };
+        Relationships: [
+          {
+            foreignKeyName: 'members_team_id_fkey';
+            columns: ['team_id'];
+            isOneToOne: false;
+            referencedRelation: 'teams';
+            referencedColumns: ['id'];
+          },
+          {
+            foreignKeyName: 'threads_creator_fkey';
+            columns: ['creator_id'];
+            isOneToOne: false;
+            referencedRelation: 'members';
+            referencedColumns: ['id'];
+          },
+          {
+            foreignKeyName: 'threads_creator_fkey';
+            columns: ['creator_id'];
+            isOneToOne: false;
+            referencedRelation: 'members_with_board';
+            referencedColumns: ['id'];
+          },
+          {
+            foreignKeyName: 'threads_creator_fkey';
+            columns: ['creator_id'];
+            isOneToOne: false;
+            referencedRelation: 'members_with_boards';
+            referencedColumns: ['id'];
+          },
+          {
+            foreignKeyName: 'threads_creator_fkey';
+            columns: ['creator_id'];
+            isOneToOne: false;
+            referencedRelation: 'members_with_metadata';
+            referencedColumns: ['id'];
+          },
+          {
+            foreignKeyName: 'threads_website_id_fkey';
+            columns: ['website_id'];
+            isOneToOne: false;
+            referencedRelation: 'members_with_metadata';
+            referencedColumns: ['website_id'];
+          },
+          {
+            foreignKeyName: 'threads_website_id_fkey';
+            columns: ['website_id'];
+            isOneToOne: false;
+            referencedRelation: 'website';
+            referencedColumns: ['id'];
+          },
+        ];
+      };
     };
     Functions: {
-      [_ in never]: never;
+      authenticated_allowed_website_insert: {
+        Args: {
+          target_id: string;
+          target_board_id: number;
+        };
+        Returns: {
+          board_id: number | null;
+          id: string | null;
+          team_id: number | null;
+        }[];
+      };
+      authenticated_allowed_website_read: {
+        Args: {
+          target_id: string;
+        };
+        Returns: {
+          board_id: number | null;
+          id: string | null;
+          team_id: number | null;
+          website_id: number | null;
+        }[];
+      };
+      create_new_or_get_website: {
+        Args: {
+          hash_id: string;
+          domain: string;
+        };
+        Returns: {
+          board_id: number;
+          created_at: string;
+          domain: string;
+          hash_id: string;
+          id: number;
+        }[];
+      };
+      create_new_thread: {
+        Args: {
+          x: number;
+          y: number;
+          website_id: number;
+          content: string;
+          rect?: Json;
+          windowHeight?: number;
+          windowWidth?: number;
+          target_selector?: string;
+        };
+        Returns: {
+          created_at: string;
+          creator_id: string | null;
+          id: number;
+          rect: Json | null;
+          resolved: boolean;
+          target_selector: string | null;
+          website_id: number | null;
+          windowHeight: number | null;
+          windowWidth: number | null;
+          x: number;
+          y: number;
+        }[];
+      };
+      get_threads: {
+        Args: Record<PropertyKey, never>;
+        Returns: {
+          comments: Json | null;
+          created_at: string | null;
+          creator: Json | null;
+          creator_id: string | null;
+          id: number | null;
+          rect: Json | null;
+          resolved: boolean | null;
+          target_selector: string | null;
+          team_id: number | null;
+          website_id: number | null;
+          windowHeight: number | null;
+          windowWidth: number | null;
+          x: number | null;
+          y: number | null;
+        }[];
+      };
+      hamming_distance: {
+        Args: {
+          x: string;
+          y: string;
+        };
+        Returns: number;
+      };
     };
     Enums: {
       [_ in never]: never;
@@ -146,7 +544,7 @@ export type Database = {
   };
 };
 
-export type PublicSchema = Database[Extract<keyof Database, 'public'>];
+type PublicSchema = Database[Extract<keyof Database, 'public'>];
 
 export type Tables<
   PublicTableNameOrOptions extends keyof (PublicSchema['Tables'] & PublicSchema['Views']) | { schema: keyof Database },

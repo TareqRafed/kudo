@@ -15,7 +15,8 @@ const LoadingDots = () => {
   };
 
   return (
-    <div
+    <motion.div
+      layout
       style={{
         display: 'flex',
         alignItems: 'center',
@@ -39,7 +40,7 @@ const LoadingDots = () => {
           }}
         />
       ))}
-    </div>
+    </motion.div>
   );
 };
 

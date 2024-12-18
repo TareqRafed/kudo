@@ -2,8 +2,7 @@
  * This file holds everything regarding retrieving the session from the webapp
  */
 
-import { GlobalStateStorage } from '@extension/storage';
-import { isUserLoggedIn, supabase } from './supabase';
+import { supabase, updateUserState } from './supabase';
 
 const whiteListedWebApps = ['http://localhost:3000/en/dashboard'];
 chrome.runtime.onMessageExternal.addListener(async (request, sender) => {
@@ -15,8 +14,7 @@ chrome.runtime.onMessageExternal.addListener(async (request, sender) => {
   if (request.action == 'NEW_SESSION') {
     try {
       supabase.auth.setSession(request.payload);
-      const isLoggedIn = await isUserLoggedIn();
-      await GlobalStateStorage.set(val => ({ ...val, isLoggedIn }));
+      await updateUserState();
     } catch {
       console.error('Couldnt Log user in');
       // TODO: Add bug report here to track if someone reached this block

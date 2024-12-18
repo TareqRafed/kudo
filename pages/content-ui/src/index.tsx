@@ -3,8 +3,10 @@ import App from '@src/App';
 import tailwindcssOutput from '../dist/tailwind-output.css?inline';
 import { addMessageListener } from '@extension/shared';
 import { GlobalStateStorage } from '@extension/storage';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
 const rootId = 'ab-cursor-content-view-root';
+const queryClient = new QueryClient();
 
 const createRootContainer = () => {
   const root = document.createElement('div');
@@ -35,7 +37,11 @@ const createRootContainer = () => {
   }
 
   shadowRoot.appendChild(rootIntoShadow);
-  createRoot(rootIntoShadow).render(<App />);
+  createRoot(rootIntoShadow).render(
+    <QueryClientProvider client={queryClient}>
+      <App />
+    </QueryClientProvider>,
+  );
 };
 
 const removeRootContainer = () => {

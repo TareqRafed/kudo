@@ -1,47 +1,42 @@
-import { sendMessage, useStorage, withSuspense } from '@extension/shared';
+import { sendMessage, useStorage } from '@extension/shared';
 import { Button, cn, Tooltip, TooltipContent, TooltipTrigger } from '@extension/ui';
-import { useHover } from '@src/hooks/useHover';
-import { useSendMessage } from '@src/hooks/useSendMessage';
 import useToolbarStore from '@src/store/toolbar';
 import { AnimatePresence, motion } from 'framer-motion';
-import { Edit2, Edit3, Inbox, MessageCircleMore, Pencil, TextCursor, TextQuote, User } from 'lucide-react';
-import { useRef, type ReactNode } from 'react';
+import { ArrowRight, Inbox, MessageCircleMore, Pencil, TextCursor } from 'lucide-react';
+import { useRef, type ComponentPropsWithoutRef, type ReactNode } from 'react';
 import { GlobalStateStorage } from '@extension/storage';
 import LoadingDots from '../LoadingDots/LoadingDots';
+import { useHover } from '@src/hooks/useHover';
+
+const DELAY = 0.5;
+const DURATION = 0.3;
 
 const Toolbar = () => {
-  const { isLoggedIn } = useStorage(GlobalStateStorage);
+  const { loading, isLoggedIn } = useStorage(GlobalStateStorage);
+  const hoverRef = useRef<HTMLDivElement>(null);
+  const isHovering = useHover(hoverRef);
 
-  // const hoverRef = useRef<HTMLDivElement>(null);
-  // const isHover = useHover(hoverRef)
-  const [res, loading] = useSendMessage({ action: 'FETCH_DATA', payload: 'members' });
-  console.log(JSON.stringify(res));
+  const isExpanded = isHovering || !isLoggedIn || loading;
 
   return (
     <div className="pointer-events-none fixed top-5 z-[2147483645] flex w-full justify-center">
       <motion.div
+        ref={hoverRef}
+        initial={{ y: -10, opacity: 0 }}
+        animate={{
+          y: 0,
+          opacity: 1,
+          transition: { duration: 0.3 },
+        }}
         layout
-        whileHover={{ scale: 1.1 }}
-        transition={{ duration: 0.2 }}
-        className="bg-background dark pointer-events-auto flex h-12 items-center space-x-2 rounded-full border p-2">
+        transition={{ duration: DURATION, delay: 0, ease: 'easeIn' }}
+        className={cn([
+          isExpanded ? 'py-2 rounded-[5rem] min-w-[10rem] min-h-[2rem]' : 'py-1 rounded-[1rem]',
+          'overflow-hidden w-fit bg-background dark pointer-events-auto flex items-center space-x-1 border py-1 px-2',
+        ])}>
         <AnimatePresence>
-          {loading ? (
-            <div className="px-5">
-              <LoadingDots />
-            </div>
-          ) : (
-            <ToolbarOptions />
-          )}
+          <ToolbarOptions expanded={isExpanded} />
         </AnimatePresence>
-
-        {!loading && !isLoggedIn && (
-          <ToolbarItem
-            isActive={false}
-            onClick={() => sendMessage({ action: 'REQUEST_LOGIN', payload: '' })}
-            tooltipContent="Comment">
-            <User size={10} />
-          </ToolbarItem>
-        )}
       </motion.div>
     </div>
   );
@@ -49,30 +44,55 @@ const Toolbar = () => {
 
 export default Toolbar;
 
-const ToolbarOptions = () => {
+const ToolbarOptions = ({ expanded }: { expanded: boolean }) => {
   const { toggleToolbarItem, toolbar } = useToolbarStore();
+  const { isLoggedIn, loading } = useStorage(GlobalStateStorage);
 
+  if (loading) {
+    return <LoadingDots />;
+  }
+
+  if (!isLoggedIn) {
+    return (
+      <ToolbarItem
+        expanded
+        isActive={toolbar.comment.inUse}
+        onClick={() => sendMessage({ action: 'REQUEST_LOGIN', payload: '' })}
+        tooltipContent="Go to Dashboard"
+        className="flex w-full ">
+        Login to Continue <ArrowRight />
+      </ToolbarItem>
+    );
+  }
   return (
     <>
       <ToolbarItem
         isActive={toolbar.comment.inUse}
         onClick={() => toggleToolbarItem('comment')}
-        tooltipContent="Comment">
-        <MessageCircleMore size={10} />
+        tooltipContent="Comment"
+        expanded={expanded}>
+        <MessageCircleMore className={cn([expanded ? '!size-4' : '!size-3'])} />
       </ToolbarItem>
 
-      <ToolbarItem isActive={toolbar.comment.inUse} onClick={() => toggleToolbarItem('comment')} tooltipContent="Draw">
-        <Pencil size={10} />
+      {expanded && (
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{
+            opacity: 1,
+            transition: { duration: DURATION, delay: DELAY },
+          }}>
+          <ToolbarItem expanded={expanded} onClick={() => toggleToolbarItem('comment')} tooltipContent="Inbox">
+            <Inbox className={cn([expanded ? '!size-4' : '!size-3'])} />
+          </ToolbarItem>
+        </motion.div>
+      )}
+
+      <ToolbarItem expanded={expanded} onClick={() => toggleToolbarItem('comment')} tooltipContent="Draw">
+        <Pencil className={cn([expanded ? '!size-4' : '!size-3'])} />
       </ToolbarItem>
 
-      <ToolbarItem isActive={toolbar.comment.inUse} onClick={() => toggleToolbarItem('comment')} tooltipContent="Draw">
-        <TextCursor size={10} />
-      </ToolbarItem>
-
-      <div className="h-full w-1 border"></div>
-
-      <ToolbarItem isActive={toolbar.comment.inUse} onClick={() => toggleToolbarItem('comment')} tooltipContent="Inbox">
-        <Inbox size={10} />
+      <ToolbarItem expanded={expanded} onClick={() => toggleToolbarItem('comment')} tooltipContent="Draw">
+        <TextCursor className={cn([expanded ? '!size-4' : '!size-3'])} />
       </ToolbarItem>
     </>
   );
@@ -83,23 +103,26 @@ type ToolbarItemProps = {
   onClick: () => void;
   children: ReactNode;
   tooltipContent: ReactNode;
-};
+  expanded?: boolean;
+} & ComponentPropsWithoutRef<'button'>;
 
-const ToolbarItem = ({ isActive, onClick, children, tooltipContent }: ToolbarItemProps) => {
+const ToolbarItem = ({ expanded, isActive, onClick, children, tooltipContent, ...rest }: ToolbarItemProps) => {
   return (
-    <div className="relative flex items-center">
+    <motion.div layout className={cn(['relative flex items-center'])}>
       <Tooltip>
         <TooltipTrigger>
           <Button
-            size={'sx'}
+            size={expanded ? 'sm' : 'xs'}
             onClick={onClick}
-            className={cn(['rounded-full', isActive && 'bg-primary'])}
+            className={cn(['rounded-full', isActive && 'bg-primary', rest.className])}
             variant={'ghost'}>
-            {children}
+            <motion.span className="flex" layout>
+              {children}
+            </motion.span>
           </Button>
         </TooltipTrigger>
         <TooltipContent>{tooltipContent}</TooltipContent>
       </Tooltip>
-    </div>
+    </motion.div>
   );
 };
