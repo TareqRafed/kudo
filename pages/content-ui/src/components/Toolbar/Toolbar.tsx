@@ -7,16 +7,18 @@ import { useRef, type ComponentPropsWithoutRef, type ReactNode } from 'react';
 import { GlobalStateStorage } from '@extension/storage';
 import LoadingDots from '../LoadingDots/LoadingDots';
 import { useHover } from '@src/hooks/useHover';
+import { useDebounce } from '@uidotdev/usehooks';
 
 const DELAY = 0.5;
 const DURATION = 0.3;
 
 const Toolbar = () => {
-  const { loading, isLoggedIn } = useStorage(GlobalStateStorage);
+  const { tasks, isLoggedIn } = useStorage(GlobalStateStorage);
   const hoverRef = useRef<HTMLDivElement>(null);
   const isHovering = useHover(hoverRef);
+  const isLoading = !useDebounce(tasks.isFree, 100);
 
-  const isExpanded = isHovering || !isLoggedIn || loading;
+  const isExpanded = isHovering || !isLoggedIn || isLoading;
 
   return (
     <div className="pointer-events-none fixed top-5 z-[2147483645] flex w-full justify-center">
@@ -34,9 +36,7 @@ const Toolbar = () => {
           isExpanded ? 'py-2 rounded-[5rem] min-w-[10rem] min-h-[2rem]' : 'py-1 rounded-[1rem]',
           'overflow-hidden w-fit bg-background dark pointer-events-auto flex items-center space-x-1 border py-1 px-2',
         ])}>
-        <AnimatePresence>
-          <ToolbarOptions expanded={isExpanded} />
-        </AnimatePresence>
+        <AnimatePresence>{isLoading ? <LoadingDots /> : <ToolbarOptions expanded={isExpanded} />}</AnimatePresence>
       </motion.div>
     </div>
   );
@@ -46,11 +46,7 @@ export default Toolbar;
 
 const ToolbarOptions = ({ expanded }: { expanded: boolean }) => {
   const { toggleToolbarItem, toolbar } = useToolbarStore();
-  const { isLoggedIn, loading } = useStorage(GlobalStateStorage);
-
-  if (loading) {
-    return <LoadingDots />;
-  }
+  const { isLoggedIn } = useStorage(GlobalStateStorage);
 
   if (!isLoggedIn) {
     return (
@@ -108,7 +104,7 @@ type ToolbarItemProps = {
 
 const ToolbarItem = ({ expanded, isActive, onClick, children, tooltipContent, ...rest }: ToolbarItemProps) => {
   return (
-    <motion.div layout className={cn(['relative flex items-center'])}>
+    <motion.div layout transition={{ ease: 'easeIn' }} className={cn(['relative flex items-center'])}>
       <Tooltip>
         <TooltipTrigger>
           <Button

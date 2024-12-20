@@ -3,15 +3,16 @@ import { useHotkeys } from 'react-hotkeys-hook';
 import Provider from './providers';
 import Toolbar from './components/Toolbar/Toolbar';
 import { CommentLayer } from './components';
-import { useSendMessage } from './hooks/useSendMessage';
+import { useRegisterDocument } from './hooks/useRegisterDocument';
 
 export default function App() {
   const { toggleToolbarItem } = useToolbarStore();
-  // const { website } = useWebsiteStore(); // TODO: set website data from supabase edge function
 
   useHotkeys('ctrl+c', () => toggleToolbarItem('comment'));
-  const { data } = useSendMessage({ action: 'GET_AUTH', payload: '' });
-  console.log(data, 'get_auth');
+
+  const data = useRegisterDocument();
+
+  // console.log(data, 'data')
 
   return (
     <Provider>
