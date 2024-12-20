@@ -1,4 +1,4 @@
-import type { PostgrestSingleResponse } from '@supabase/supabase-js';
+import type { PostgrestSingleResponse, Session } from '@supabase/supabase-js';
 import type { Database } from '../supabase';
 import type { NonFunctionKeys, OnlyFunctionKeys } from '../utils';
 import type { GlobalState } from '@extension/storage';
@@ -32,7 +32,7 @@ export type ActionResponseMap<T extends Message> = {
   ACTION_CLICK: GlobalState;
   TOGGLE_STATE: boolean;
   REQUEST_LOGIN: boolean;
-  GET_AUTH: boolean;
+  GET_AUTH: Session | null;
 };
 
 export type ResponseType<R extends Message> = ResponseMessage<ActionResponseMap<R>[R['action']]>;

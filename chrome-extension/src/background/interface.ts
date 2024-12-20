@@ -10,7 +10,7 @@ const requestLogin = async () => {
 addMessageListener(async message => {
   if (message.action === 'RPC') {
     const result = await supabase.rpc(message.payload, { ...message.args });
-    return { success: true, data: result };
+    return { success: !result.error, data: result };
   }
 
   if (message.action === 'REQUEST_LOGIN') {
@@ -19,7 +19,9 @@ addMessageListener(async message => {
   }
 
   if (message.action === 'GET_AUTH') {
-    return { success: true, data: await updateUserState() };
+    await updateUserState();
+    const session = await supabase.auth.getSession();
+    return { success: true, data: session.data.session };
   }
 
   // if (message.action === 'INSERT_DATA') {

@@ -9,6 +9,7 @@ import ThreadTag from './Thread';
 import { useSendMessage } from '@src/hooks/useSendMessage';
 import type { ThreadPosition } from './types';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
+import useWebsiteStore from '@src/store/website';
 
 const getCssSelector = (el: Element) => {
   const path = [];
@@ -23,10 +24,20 @@ const getCssSelector = (el: Element) => {
 type NewThreadArgs = Extract<Message, { action: 'RPC'; payload: 'create_new_thread' }>['args'];
 
 export const CommentLayer = () => {
+  const { website } = useWebsiteStore();
   const { toolbar, toggleToolbarItem } = useToolbarStore();
 
   const clientQuery = useQueryClient();
-  const { data } = useSendMessage({ action: 'RPC', payload: 'get_threads', args: {} }, 'threads');
+  const { data } = useSendMessage(
+    {
+      action: 'RPC',
+      payload: 'get_threads_for_website_id',
+      args: {
+        id: website.id || 0,
+      },
+    },
+    ['threads', website.id],
+  );
   const { mutate } = useMutation({
     mutationFn: (args: NewThreadArgs) => sendMessage({ action: 'RPC', payload: 'create_new_thread', args }),
     mutationKey: ['threads'],
@@ -65,6 +76,9 @@ export const CommentLayer = () => {
     toggleToolbarItem('comment'); // off
   };
 
+  console.log(data, website);
+
+  if (!website.id) return;
   return (
     <div
       aria-hidden="true"
@@ -89,7 +103,7 @@ export const CommentLayer = () => {
               rect: (val.rect as Json) || undefined,
               windowWidth: val.windowWidth,
               windowHeight: val.windowHeight,
-              website_id: 1,
+              website_id: website.id,
             });
 
             setThreadSpawn(prev => ({ ...prev, active: false }));
