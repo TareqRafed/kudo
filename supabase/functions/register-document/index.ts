@@ -1,16 +1,20 @@
+/* eslint-disable @typescript-eslint/consistent-type-imports */
 // Follow this setup guide to integrate the Deno language server with your editor:
 // https://deno.land/manual/getting_started/setup_your_environment
 // This enables autocomplete, go to definition, etc.
 
 // Setup type definitions for built-in Supabase Runtime APIs
 import 'jsr:@supabase/functions-js/edge-runtime.d.ts';
-import { createClient, FunctionsHttpError } from 'jsr:@supabase/supabase-js';
+import { createClient } from 'jsr:@supabase/supabase-js';
 import { z, ZodError } from 'https://deno.land/x/zod@v3.24.0/mod.ts';
+import { Database } from './database.types.ts';
+import { corsHeaders } from '../_shared/cors.ts';
 
 const simhashEndpoint = 'https://aehpmfv04b.execute-api.eu-central-1.amazonaws.com/default/simHash';
 
 const requestSchema = z.object({
   document: z.string().min(1, 'Document cannot be empty'),
+  url: z.string().min(1, 'URL cannot be empty'),
 });
 
 type RemoteFnHashRequest = {
@@ -34,19 +38,15 @@ const remoteFnResponseSchema = z.object({
   }),
 });
 
-type Hash = {
-  hash: number;
-};
-
-type Data = Hash;
+type Data = Database['public']['Functions']['create_new_or_get_website']['Returns'][0];
 
 type Response = {
   success: boolean;
-  data?: Hash;
+  data?: Data;
   error?: string;
 };
 
-const headers = { 'Content-Type': 'application/json' };
+const headers = { ...corsHeaders, 'Content-Type': 'application/json' };
 const createErrorResponse = ({ status, message }: { status: number; message: string }) => {
   const body: Response = {
     success: false,
@@ -93,18 +93,38 @@ const remoteSimhash = async (document: string) => {
 };
 
 Deno.serve(async req => {
+  if (req.method === 'OPTIONS') {
+    return new Response('ok', { headers }); // allow browsers
+  }
   const authHeader = req.headers.get('Authorization')!;
-  const supabaseClient = createClient(Deno.env.get('SUPABASE_URL') ?? '', Deno.env.get('SUPABASE_ANON_KEY') ?? '', {
-    global: { headers: { Authorization: authHeader } },
-  });
+  const supabaseClient = createClient<Database>(
+    Deno.env.get('SUPABASE_URL') ?? '',
+    Deno.env.get('SUPABASE_ANON_KEY') ?? '',
+    {
+      global: { headers: { Authorization: authHeader } },
+    },
+  );
 
   try {
-    const { document } = parseWithValidation(requestSchema, await req.json());
+    const { user } = await supabaseClient.auth.getUser();
+
+    if (!user) {
+      return createErrorResponse({ status: 500, message: 'Something went wrong, try again later' });
+    }
+    const { document, url } = parseWithValidation(requestSchema, await req.json());
     const { Hash } = await remoteSimhash(document);
 
-    supabaseClient.from('').select();
+    const res = await supabaseClient.rpc('create_new_or_get_website', {
+      hash_id: Hash.hash.toString(),
+      domain: url, // strip it later to domain
+    });
 
-    return createResponse({ status: 200, success: true, data: Hash });
+    if (res.error) {
+      console.warn(res);
+      return createErrorResponse({ status: 500, message: 'Something went wrong, try again later' });
+    }
+
+    return createResponse({ status: 200, success: true, data: res.data?.[0] || res.data });
   } catch (e) {
     if (e instanceof Response) return e;
     return createErrorResponse({ status: 500, message: 'Internal Error' });
