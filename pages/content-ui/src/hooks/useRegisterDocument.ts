@@ -35,6 +35,8 @@ function cleanHTMLClone(currentElement: HTMLElement): HTMLElement {
   return clonedElement;
 }
 
+const delay = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));
+
 const TASK_ID = 'register_document';
 
 const edgeFunc = 'https://pfwrdyygogowjxyqcene.supabase.co/functions/v1/register-document';
@@ -45,6 +47,7 @@ export const useRegisterDocument = () => {
   useEffect(() => {
     const registerDocument = async () => {
       if (!res?.data?.access_token) return;
+      await delay(100);
       console.log(cleanHTMLClone(document.body).innerHTML);
       await GlobalStateStorage.appendTask({ name: TASK_ID });
       const body = {

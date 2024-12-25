@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 const LoadingDots = () => {
   const dotVariants = {
     animate: (i: number) => ({
-      y: [0, -8, 0], // Vertical bounce
+      y: [0, -2, 2], // Vertical bounce
       opacity: [1, 0.8, 1], // Slight fade during bounce
       transition: {
         duration: 2,
@@ -16,6 +16,10 @@ const LoadingDots = () => {
 
   return (
     <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 0.2 }}
       layout
       style={{
         display: 'flex',

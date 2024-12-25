@@ -511,12 +511,17 @@ export type Database = {
       get_threads: {
         Args: Record<PropertyKey, never>;
         Returns: {
-          comments: Json | null;
+          comments: { id: number; content: string; created_at: string }[] | null;
           created_at: string | null;
-          creator: Json | null;
+          creator: {
+            first_name: string | null;
+            last_name: string | null;
+            team_id: number;
+            profile_picture: string | null;
+          } | null;
           creator_id: string | null;
           id: number | null;
-          rect: Json | null;
+          rect: DOMRect | null;
           resolved: boolean | null;
           target_selector: string | null;
           team_id: number | null;

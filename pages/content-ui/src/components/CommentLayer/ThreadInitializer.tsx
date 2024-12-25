@@ -1,52 +1,47 @@
 import { motion } from 'framer-motion';
-import type { ComponentPropsWithoutRef } from 'react';
-import Draggable from 'react-draggable';
+import { useEffect, useState, type ComponentPropsWithoutRef } from 'react';
 import CommentInput from './CommentInput';
 import { cn } from '@extension/ui';
-import usePositionCalculator from './usePositionCalculator';
 import type { ThreadPosition } from './types';
+import BounceBoundary from '../BounceBoundary/BounceBoundary';
 
-type CallbackCreationParams = { comment: string } & ThreadPosition;
+type CallbackCreationParams = { comment: string };
 
 interface ThreadInitProps extends ComponentPropsWithoutRef<'div'> {
-  pos: ThreadPosition;
   onCreate: (val: CallbackCreationParams) => void;
 }
 
-const ThreadInit = ({ onCreate, pos, ...rest }: ThreadInitProps) => {
-  const { position } = usePositionCalculator({
-    x: pos.x ?? 0,
-    y: pos.y ?? 0,
-    rect: pos.rect as DOMRect | null,
-    targetSelector: pos.targetSelector ?? undefined,
-  });
-
+const ThreadInit = ({ onCreate, ...rest }: ThreadInitProps) => {
   return (
-    <Draggable>
-      <div>
-        <motion.div
-          onClick={e => e.stopPropagation()}
-          initial={{ scale: 0.8, opacity: 0.8 }}
-          animate={{ scale: 1, opacity: 1 }}
-          exit={{ scale: 0.8, opacity: 0.8 }}
-          style={{ position: 'absolute', left: `${position.left}px`, top: `${position.top}px` }}
-          className={cn([`bg-transparent items-start flex select-none`])}>
+    <div>
+      <motion.div
+        onClick={e => e.stopPropagation()}
+        initial={{ scale: 0.8, opacity: 0.8 }}
+        animate={{ scale: 1, opacity: 1 }}
+        exit={{ scale: 0.8, opacity: 0.8 }}
+        style={{ position: 'absolute', left: 0, top: 0 }}
+        className={cn([`bg-transparent items-start flex select-none`])}>
+        <pre className="cursor-grab">
           <img
             alt="Comment Flag"
             src={chrome.runtime.getURL('content-ui/comment-flag.svg')}
             className="pointer-events-none mr-5"
           />
+        </pre>
+        <BounceBoundary
+          transform={{ x: -120 }}
+          factor={{ x: '10px', y: '10px' }}
+          position={{ x: position.left, y: position.top }}>
           <CommentInput
             onCreate={comment => {
               onCreate({
                 comment,
-                ...pos,
               });
             }}
           />
-        </motion.div>
-      </div>
-    </Draggable>
+        </BounceBoundary>
+      </motion.div>
+    </div>
   );
 };
 

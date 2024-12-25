@@ -4,6 +4,8 @@
 
 @layer base {
   :host {
+    font-size: 16px !important;
+
     --background: 0 0% 95.3%;
     --background-gradient: 0 0% 100%;
     --background-gradient2: 0 0% 86%;
@@ -32,6 +34,7 @@
     --chart-5: 27 87% 67%;
     --radius: 0.5rem;
   }
+
   .dark {
     --background: 20 14.3% 4.1%;
     --background-gradient: 20 14.3% 6.1%;

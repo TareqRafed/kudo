@@ -9,5 +9,6 @@ export const updateUserState = async () => {
   const isLoggedIn = !!data.user;
   await GlobalStateStorage.set(val => ({ ...val, isLoggedIn }));
   await GlobalStateStorage.deleteTask({ name: 'auth' });
+  console.log(await GlobalStateStorage.get());
   return isLoggedIn;
 };

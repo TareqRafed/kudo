@@ -24,7 +24,7 @@ export type ResponseMessage<T> = {
   error?: string;
 };
 
-type SupabaseRpcResponse<T> = T extends Functions ? T : 'get_threads';
+type SupabaseRpcResponse<T> = T extends Functions ? T : Functions;
 
 export type ActionResponseMap<T extends Message> = {
   RPC: PostgrestSingleResponse<Database['public']['Functions'][SupabaseRpcResponse<T['payload']>]['Returns']>;
