@@ -17,7 +17,7 @@ const createRootContainer = () => {
   const rootIntoShadow = document.createElement('div');
   rootIntoShadow.id = 'shadow-root';
 
-  const shadowRoot = root.attachShadow({ mode: 'open' });
+  const shadowRoot = root.attachShadow({ mode: 'closed' });
 
   if (navigator.userAgent.includes('Firefox')) {
     /**

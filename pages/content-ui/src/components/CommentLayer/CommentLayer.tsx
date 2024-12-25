@@ -1,15 +1,18 @@
 import { cn } from '@extension/ui';
 import useToolbarStore from '@src/store/toolbar';
-import type { MouseEventHandler } from 'react';
-import { useState } from 'react';
-import type { Json, Message } from '@extension/shared';
+import type { MouseEventHandler, RefObject } from 'react';
+import { useRef, useState } from 'react';
+import type { Database, Json, Message } from '@extension/shared';
 import { sendMessage } from '@extension/shared';
 import ThreadInit from './ThreadInitializer';
+import type { ThreadData } from './Thread';
 import ThreadTag from './Thread';
 import { useSendMessage } from '@src/hooks/useSendMessage';
 import type { ThreadPosition } from './types';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import useWebsiteStore from '@src/store/website';
+import type { OnDropEvent } from '../Magnet/Magnet';
+import Magnet from '../Magnet/Magnet';
 
 const getCssSelector = (el: Element) => {
   const path = [];
@@ -22,6 +25,7 @@ const getCssSelector = (el: Element) => {
 };
 
 type NewThreadArgs = Extract<Message, { action: 'RPC'; payload: 'create_new_thread' }>['args'];
+type UpdateThreadArgs = Extract<Message, { action: 'RPC'; payload: 'update_record' }>['args'];
 
 export const CommentLayer = () => {
   const { website } = useWebsiteStore();
@@ -38,6 +42,7 @@ export const CommentLayer = () => {
     },
     ['threads', website.id],
   );
+
   const { mutate } = useMutation({
     mutationFn: (args: NewThreadArgs) => sendMessage({ action: 'RPC', payload: 'create_new_thread', args }),
     mutationKey: ['threads'],
@@ -56,10 +61,25 @@ export const CommentLayer = () => {
     targetSelector: null,
   });
 
-  const spawnThread: MouseEventHandler<HTMLDivElement> = e => {
-    setThreadSpawn(prev => ({ ...prev, active: false }));
-    if (!toolbar.comment.inUse) return;
-    const target = document.elementFromPoint(e.clientX, e.clientY);
+  const layerRef = useRef<HTMLDivElement>(null);
+
+  /**
+   * Changes the state of the captured element
+   */
+  const handleThreadSpawn = (clientX: number, clientY: number) => {
+    if (!layerRef.current) return;
+
+    const documentWidth = document.documentElement.clientWidth;
+    const documentHeight = document.documentElement.clientHeight;
+
+    // Clamp clientX and clientY
+    const clampedX = Math.max(5, Math.min(clientX, documentWidth - 40));
+    const clampedY = Math.max(5, Math.min(clientY, documentHeight - 30));
+
+    layerRef.current.style.pointerEvents = 'none';
+    const target = document.elementFromPoint(clampedX, clampedY);
+    layerRef.current.style.pointerEvents = 'auto';
+
     const selector = target ? getCssSelector(target) : '';
     const rect = target?.getBoundingClientRect();
 
@@ -67,50 +87,100 @@ export const CommentLayer = () => {
       windowW: window.innerWidth,
       windowH: window.innerHeight,
       rect: rect ?? null,
-      x: e.clientX,
-      y: e.clientY,
+      x: clampedX,
+      y: clampedY,
       active: true,
       targetSelector: selector,
     }));
+  };
+
+  const spawnThread: MouseEventHandler<HTMLDivElement> = e => {
+    setThreadSpawn(prev => ({ ...prev, active: false }));
+    if (!toolbar.comment.inUse) return;
+
+    handleThreadSpawn(e.clientX, e.clientY);
 
     toggleToolbarItem('comment'); // off
   };
 
-  console.log(data, website);
-
   if (!website.id) return;
   return (
     <div
+      ref={layerRef}
       aria-hidden="true"
-      className={cn([
-        toolbar.comment.inUse && 'comment-cursor',
-        toolbar.comment.inUse || threadSpawn.active ? 'pointer-events-auto' : 'pointer-events-none',
-        ' fixed inset-0 z-[2147483644] size-full',
-      ])}
+      style={{ pointerEvents: toolbar.comment.inUse || threadSpawn.active ? 'all' : 'none' }}
+      className={cn([toolbar.comment.inUse && 'comment-cursor', 'fixed inset-0 z-[2147483644] size-full'])}
       onClick={spawnThread}>
-      {(data?.data?.data ?? []).map(thread => {
-        return <ThreadTag key={thread.id} data={thread} />;
-      })}
+      {(data?.data?.data ?? []).map(thread => (
+        <MagnifiedTag key={thread.id} layerRef={layerRef} thread={thread} />
+      ))}
 
       {threadSpawn.active && !toolbar.comment.inUse && (
-        <ThreadInit
-          onCreate={val => {
-            mutate({
-              content: val.comment,
-              x: val.x,
-              y: val.y,
-              target_selector: val.targetSelector || undefined,
-              rect: (val.rect as Json) || undefined,
-              windowWidth: val.windowWidth,
-              windowHeight: val.windowHeight,
-              website_id: website.id,
-            });
-
-            setThreadSpawn(prev => ({ ...prev, active: false }));
+        <Magnet
+          layerRef={layerRef}
+          initData={{
+            targetSelector: threadSpawn.targetSelector ?? undefined,
+            x: threadSpawn.x,
+            y: threadSpawn.y,
+            rect: threadSpawn.rect,
           }}
-          pos={threadSpawn}
-        />
+          onDrop={e => setThreadSpawn(prev => ({ ...prev, ...e }))}>
+          <ThreadInit
+            onCreate={val => {
+              mutate({
+                ...threadSpawn,
+                content: val.comment,
+                window_width: threadSpawn.windowWidth,
+                window_height: threadSpawn.windowHeight,
+                website_id: website.id,
+              });
+
+              setThreadSpawn(prev => ({ ...prev, active: false }));
+            }}
+          />
+        </Magnet>
       )}
     </div>
+  );
+};
+
+type Thread = {
+  thread: ThreadData;
+  layerRef: RefObject<HTMLDivElement>;
+};
+const MagnifiedTag = ({ thread, layerRef }: Thread) => {
+  const clientQuery = useQueryClient();
+
+  const { mutate: mutateThread, isPending } = useMutation({
+    mutationFn: (args: UpdateThreadArgs) => sendMessage({ action: 'RPC', payload: 'update_record', args }),
+    mutationKey: ['threads'],
+    onError: () => {},
+    onSuccess: () => {
+      clientQuery.invalidateQueries({ queryKey: ['threads'] });
+    },
+  });
+
+  const handleTagDrop = (e: OnDropEvent, id: number) => {
+    const payload = {
+      window_width: e.windowW,
+      window_height: e.windowH,
+      rect: e.rect,
+      x: e.x,
+      y: e.y,
+      target_selector: e.targetSelector,
+    };
+
+    mutateThread({ table_name: 'threads', record_id: id, updates: payload as Json });
+  };
+
+  return (
+    <Magnet
+      layerRef={layerRef}
+      initData={{ targetSelector: thread.target_selector ?? undefined, x: thread.x, y: thread.y, rect: thread.rect }}
+      onDrop={e => handleTagDrop(e, thread.id ?? 0)}>
+      <div>
+        <ThreadTag data={thread} isLoading={isPending} />
+      </div>
+    </Magnet>
   );
 };

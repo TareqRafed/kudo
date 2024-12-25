@@ -12,8 +12,6 @@ export default function App() {
 
   const data = useRegisterDocument();
 
-  // console.log(data, 'data')
-
   return (
     <Provider>
       <Toolbar />
