@@ -16,7 +16,7 @@ const Toolbar = () => {
   const { tasks, isLoggedIn } = useStorage(GlobalStateStorage);
   const hoverRef = useRef<HTMLDivElement>(null);
   const isHovering = useHover(hoverRef);
-  const isLoading = !useDebounce(tasks.isFree, 100);
+  const isLoading = !useDebounce(tasks.isFree, 500);
 
   const isExpanded = isHovering || !isLoggedIn || isLoading;
 
@@ -33,8 +33,8 @@ const Toolbar = () => {
         layout
         transition={{ duration: DURATION, delay: 0, ease: 'easeIn' }}
         className={cn([
-          isExpanded ? 'py-2 rounded-[5rem] min-w-[10rem] min-h-[2rem]' : 'py-1 rounded-[1rem]',
-          'overflow-hidden w-fit bg-background dark pointer-events-auto flex items-center space-x-1 border py-1 px-2',
+          isExpanded ? 'py-2 rounded-[5em] min-w-[10em] min-h-[2.2em]' : 'py-1 rounded-[1em]',
+          'overflow-hidden w-fit bg-background text-white dark pointer-events-auto flex items-center space-x-1 border py-1 px-2',
         ])}>
         <AnimatePresence>{isLoading ? <LoadingDots /> : <ToolbarOptions expanded={isExpanded} />}</AnimatePresence>
       </motion.div>
@@ -61,7 +61,13 @@ const ToolbarOptions = ({ expanded }: { expanded: boolean }) => {
     );
   }
   return (
-    <>
+    <motion.span
+      className="flex w-full"
+      layout="position"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 0.5 }}>
       <ToolbarItem
         isActive={toolbar.comment.inUse}
         onClick={() => toggleToolbarItem('comment')}
@@ -90,7 +96,7 @@ const ToolbarOptions = ({ expanded }: { expanded: boolean }) => {
       <ToolbarItem expanded={expanded} onClick={() => toggleToolbarItem('comment')} tooltipContent="Draw">
         <TextCursor className={cn([expanded ? '!size-4' : '!size-3'])} />
       </ToolbarItem>
-    </>
+    </motion.span>
   );
 };
 

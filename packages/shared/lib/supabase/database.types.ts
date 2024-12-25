@@ -162,8 +162,8 @@ export type Database = {
           resolved: boolean;
           target_selector: string | null;
           website_id: number | null;
-          windowHeight: number | null;
-          windowWidth: number | null;
+          window_height: number | null;
+          window_width: number | null;
           x: number;
           y: number;
         };
@@ -175,8 +175,8 @@ export type Database = {
           resolved: boolean;
           target_selector?: string | null;
           website_id?: number | null;
-          windowHeight?: number | null;
-          windowWidth?: number | null;
+          window_height?: number | null;
+          window_width?: number | null;
           x: number;
           y: number;
         };
@@ -188,8 +188,8 @@ export type Database = {
           resolved?: boolean;
           target_selector?: string | null;
           website_id?: number | null;
-          windowHeight?: number | null;
-          windowWidth?: number | null;
+          window_height?: number | null;
+          window_width?: number | null;
           x?: number;
           y?: number;
         };
@@ -470,6 +470,19 @@ export type Database = {
           website_id: number | null;
         }[];
       };
+      create_new_comment: {
+        Args: {
+          target_thread_id: number;
+          target_content: string;
+        };
+        Returns: {
+          content: string;
+          created_at: string;
+          creator_id: string;
+          id: number;
+          thread_id: number;
+        }[];
+      };
       create_new_or_get_website: {
         Args: {
           hash_id: string;
@@ -502,14 +515,16 @@ export type Database = {
           resolved: boolean;
           target_selector: string | null;
           website_id: number | null;
-          windowHeight: number | null;
-          windowWidth: number | null;
+          window_height: number | null;
+          window_width: number | null;
           x: number;
           y: number;
         }[];
       };
-      get_threads: {
-        Args: Record<PropertyKey, never>;
+      get_threads_for_website_id: {
+        Args: {
+          id: number;
+        };
         Returns: {
           comments: Json | null;
           created_at: string | null;
@@ -533,6 +548,14 @@ export type Database = {
           y: string;
         };
         Returns: number;
+      };
+      update_record: {
+        Args: {
+          table_name: string;
+          record_id: number;
+          updates: Json;
+        };
+        Returns: Json;
       };
     };
     Enums: {
