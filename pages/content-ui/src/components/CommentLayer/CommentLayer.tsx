@@ -84,8 +84,8 @@ export const CommentLayer = () => {
     const rect = target?.getBoundingClientRect();
 
     setThreadSpawn(() => ({
-      windowW: window.innerWidth,
-      windowH: window.innerHeight,
+      windowWidth: window.innerWidth,
+      windowHeight: window.innerHeight,
       rect: rect ?? null,
       x: clampedX,
       y: clampedY,
@@ -106,6 +106,7 @@ export const CommentLayer = () => {
   if (!website.id) return;
   return (
     <div
+      id="ab-layer"
       ref={layerRef}
       aria-hidden="true"
       style={{ pointerEvents: toolbar.comment.inUse || threadSpawn.active ? 'all' : 'none' }}
@@ -124,20 +125,34 @@ export const CommentLayer = () => {
             y: threadSpawn.y,
             rect: threadSpawn.rect,
           }}
-          onDrop={e => setThreadSpawn(prev => ({ ...prev, ...e }))}>
-          <ThreadInit
-            onCreate={val => {
-              mutate({
-                ...threadSpawn,
-                content: val.comment,
-                window_width: threadSpawn.windowWidth,
-                window_height: threadSpawn.windowHeight,
-                website_id: website.id,
-              });
+          onDrop={e =>
+            setThreadSpawn(prev => ({
+              targetSelector: e.targetSelector,
+              x: e.x,
+              y: e.y,
+              active: prev.active,
+              rect: e.rect,
+              windowWidth: e.windowW,
+              windowHeight: e.windowH,
+            }))
+          }>
+          <div>
+            <ThreadInit
+              onCreate={val => {
+                const { active: _, targetSelector, windowWidth, windowHeight, ...rest } = threadSpawn;
+                mutate({
+                  ...rest,
+                  target_selector: targetSelector ?? undefined,
+                  content: val.comment,
+                  window_width: windowWidth,
+                  window_height: windowHeight,
+                  website_id: website.id ?? 0,
+                });
 
-              setThreadSpawn(prev => ({ ...prev, active: false }));
-            }}
-          />
+                setThreadSpawn(prev => ({ ...prev, active: false }));
+              }}
+            />
+          </div>
         </Magnet>
       )}
     </div>
