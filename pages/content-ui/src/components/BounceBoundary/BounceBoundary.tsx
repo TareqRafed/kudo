@@ -1,42 +1,86 @@
-import type { CSSProperties } from 'react';
+import { useEffect, useRef, useState, type CSSProperties } from 'react';
 
-function isPointInDocument(x: number, y: number) {
+const calculateOverflowPosition = (
+  x: number,
+  y: number,
+  elementWidth: number,
+  elementHeight: number,
+  options?: { x: CSSProperties['left']; y: CSSProperties['top'] },
+) => {
   const docWidth = document.documentElement.clientWidth;
   const docHeight = document.documentElement.clientHeight;
-  const inXzone = x >= 0 && x <= docWidth;
-  const inYzone = y >= 0 && y <= docHeight;
+  const padding = 10;
 
-  console.log('height', inYzone, y, docHeight);
+  const toLeft = x;
+  const toRight = docWidth - x;
+  const toTop = y;
+  const toBottom = docHeight - y;
 
-  return {
-    inXzone,
-    inYzone,
+  const position = {
+    x: x,
+    y: y,
+    transform: '',
+    nearestEdge: {
+      horizontal: toLeft < toRight ? 'left' : 'right',
+      vertical: toTop < toBottom ? 'top' : 'bottom',
+    },
   };
-}
+
+  if (x + elementWidth + padding > docWidth) {
+    position.transform = `translateX(${options?.x ?? '-100%'})`;
+  }
+
+  if (y + elementHeight + padding > docHeight) {
+    position.transform += `translateY(${options?.y ?? '-100%'})`;
+  }
+
+  return position;
+};
 
 type BounceBoundaryProps = {
-  position: { x: number; y: number };
   children: React.ReactNode;
 
   /**
    * Value that shifts element by
    */
-  factor?: { x: CSSProperties['right']; y: CSSProperties['top'] };
-  transform?: { x?: number; y?: number };
+  transform?: { x: CSSProperties['right']; y: CSSProperties['top'] };
 };
 
-const BounceBoundary = ({ position, children, factor, transform }: BounceBoundaryProps) => {
-  const locationResult = isPointInDocument(position.x + 400, position.y + 200);
+const BounceBoundary = ({ children, transform }: BounceBoundaryProps) => {
+  const childrenRef = useRef<HTMLDivElement>(null);
+  const [locationResult, setLocation] = useState(calculateOverflowPosition(0, 0, 0, 0));
+  useEffect(() => {
+    const handlePositionChange = () => {
+      const { x, y, width, height } = childrenRef.current?.firstElementChild?.getBoundingClientRect() || { x: 0, y: 0 };
+      setLocation(
+        calculateOverflowPosition(x, y, width || 0, height || 0, {
+          x: transform?.x ?? '-100%',
+          y: transform?.y ?? '-100%',
+        }),
+      );
+    };
+
+    const element = childrenRef.current?.firstElementChild;
+
+    if (!element) return;
+
+    handlePositionChange();
+  }, [transform?.x, transform?.y]);
 
   return (
     <div
       style={{
-        transform: `translate(${locationResult.inXzone ? 0 : transform?.x || -100}%, ${locationResult.inYzone ? 0 : transform?.y || -100}%)`,
-        bottom: locationResult.inYzone ? '0' : factor?.x || '40px',
-        right: locationResult.inXzone ? '0' : factor?.y || '40px',
         position: 'relative',
       }}>
-      {children}
+      <div
+        style={{
+          transform: locationResult.transform,
+          position: locationResult.nearestEdge.vertical == 'bottom' ? 'absolute' : 'unset',
+          bottom: 0,
+        }}
+        ref={childrenRef}>
+        {children}
+      </div>
     </div>
   );
 };

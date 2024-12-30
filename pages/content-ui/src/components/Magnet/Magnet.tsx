@@ -32,9 +32,10 @@ const handlePositionUpdate = (x: number, y: number, layer: HTMLElement) => {
   // Clamp clientX and clientY
   const clampedX = Math.max(5, Math.min(x, documentWidth - 40));
   const clampedY = Math.max(5, Math.min(y, documentHeight - 30));
-
+  const pointerEventsPrevState = layer.style.pointerEvents;
   layer.style.pointerEvents = 'none';
   const elements = document.elementsFromPoint(clampedX, clampedY);
+  layer.style.pointerEvents = pointerEventsPrevState;
   let target = elements[0];
   // sometime it fails and it pickups the extension
   if (elements[0]?.id === 'ab-cursor-content-view-root') {
