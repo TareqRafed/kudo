@@ -1,31 +1,53 @@
-import { Button } from '@extension/ui';
-import { Crop, Send } from 'lucide-react';
+import { Button, cn } from '@extension/ui';
+import { BoldIcon, Crop, ItalicIcon, Paperclip, Send } from 'lucide-react';
+import type { ComponentPropsWithoutRef } from 'react';
 import { useState } from 'react';
+import { createButton, Editor, EditorProvider, Toolbar } from 'react-simple-wysiwyg';
 
-interface Props {
+const BtnItalic = createButton('Italic', <ItalicIcon />, 'italic');
+const BtnBold = createButton('Bold', <BoldIcon />, 'bold');
+
+interface Props extends ComponentPropsWithoutRef<'div'> {
   onCreate: (val: string) => void;
 }
 
-const CommentInput = ({ onCreate }: Props) => {
+const CommentInput = ({ onCreate, ...rest }: Props) => {
   const [comment, setComment] = useState('');
 
   return (
-    <div className="dark relative flex w-64 flex-col overflow-hidden rounded-md border">
-      <textarea
-        onChange={e => setComment(e.target.value)}
-        value={comment}
-        placeholder="Leave a comment..."
-        className="w-full resize-none px-2 py-3"
-      />
-      <div id="toolbar" className="bg-background flex justify-end space-x-2 border-t p-1">
-        <Button size={'sm'} variant={'ghost'}>
-          <Crop />
-        </Button>
+    <div className={cn(['dark relative flex w-96 flex-col overflow-hidden', rest.className])}>
+      <EditorProvider>
+        <Editor
+          containerProps={{ className: 'flex flex-col-reverse cursor-text' }}
+          value={comment}
+          placeholder="Leave a comment..."
+          onChange={e => setComment(e.target.value)}
+          className="bg-background w-full resize-none px-2 pt-3 text-sm outline-none">
+          <Toolbar>
+            <div className="bg-background flex flex-row items-center justify-between space-x-1 px-2 pb-2 pt-1">
+              <div className="flex space-x-1">
+                <Button size={'xs'} variant={'ghost'} asChild>
+                  <BtnBold />
+                </Button>
 
-        <Button onClick={() => onCreate(comment)} size={'sm'} variant={'ghost'}>
-          <Send />
-        </Button>
-      </div>
+                <Button size={'xs'} variant={'ghost'} asChild>
+                  <BtnItalic />
+                </Button>
+              </div>
+              <Button
+                disabled={comment.length < 1}
+                onClick={() => {
+                  setComment('');
+                  onCreate(comment);
+                }}
+                size={'xs'}
+                variant={'ghost'}>
+                <Send className="!size-4" />
+              </Button>
+            </div>
+          </Toolbar>
+        </Editor>
+      </EditorProvider>
     </div>
   );
 };
