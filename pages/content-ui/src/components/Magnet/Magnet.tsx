@@ -70,23 +70,26 @@ const Magnet = <T extends HTMLElement>({ children, initData, onDrop, layerRef, .
     setDragPos({ x: position.left, y: position.top }); // update drag position only after setPos executes
   }, [position.left, position.top]);
 
-  return (
-    <Draggable
-      handle="pre"
-      {...rest}
-      position={{ x: dragPos.x, y: dragPos.y }}
-      onDrag={(_, { x, y }) => {
-        setDragPos({ x, y });
-      }}
-      onStop={(_, data) => {
-        if (!layerRef.current) return;
-        const calData = handlePositionUpdate(data.x, data.y, layerRef.current);
-        onDrop(calData);
-      }}
-      enableUserSelectHack>
-      {children}
-    </Draggable>
-  );
+  console.log(position, 'position');
+
+  if (!position.fail)
+    return (
+      <Draggable
+        handle="pre"
+        {...rest}
+        position={{ x: dragPos.x, y: dragPos.y }}
+        onDrag={(_, { x, y }) => {
+          setDragPos({ x, y });
+        }}
+        onStop={(_, data) => {
+          if (!layerRef.current) return;
+          const calData = handlePositionUpdate(data.x, data.y, layerRef.current);
+          onDrop(calData);
+        }}
+        enableUserSelectHack>
+        {children}
+      </Draggable>
+    );
 };
 
 export default Magnet;

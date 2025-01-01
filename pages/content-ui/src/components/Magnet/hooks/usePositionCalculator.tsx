@@ -34,6 +34,7 @@ const usePositionCalculator = (data: PositionData) => {
   const [position, setPosition] = useState({
     left: data.x,
     top: data.y,
+    fail: false,
   });
 
   useEffect(() => {
@@ -43,9 +44,9 @@ const usePositionCalculator = (data: PositionData) => {
 
       if (newRect) {
         const { newX, newY } = calculateScalePosition(data.rect, newRect, data.x, data.y);
-        setPosition({ left: newX, top: newY });
+        setPosition({ left: newX, top: newY, fail: false });
       } else {
-        setPosition({ left: data.x, top: data.y });
+        setPosition({ left: data.x, top: data.y, fail: true });
       }
     };
 
@@ -55,7 +56,9 @@ const usePositionCalculator = (data: PositionData) => {
 
       if (newRect) {
         const { newX, newY } = calculateScrollPosition(data.rect, newRect, data.x, data.y);
-        setPosition({ left: newX, top: newY });
+        setPosition({ left: newX, top: newY, fail: false });
+      } else {
+        setPosition({ left: data.x, top: data.y, fail: true });
       }
     };
 
@@ -63,9 +66,12 @@ const usePositionCalculator = (data: PositionData) => {
 
     window.addEventListener('resize', calculatePosition);
     window.addEventListener('scroll', calculateSPosition);
+    window.addEventListener('urlchange', calculatePosition);
+
     return () => {
       window.removeEventListener('resize', calculatePosition);
       window.removeEventListener('scroll', calculateSPosition);
+      window.removeEventListener('urlchange', calculatePosition);
     };
   }, [data.x, data.y, data.targetSelector, data.rect]);
 

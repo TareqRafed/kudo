@@ -10,7 +10,7 @@ export default function App() {
 
   useHotkeys('ctrl+c', () => toggleToolbarItem('comment'));
 
-  const data = useRegisterDocument();
+  useRegisterDocument();
 
   return (
     <Provider>
