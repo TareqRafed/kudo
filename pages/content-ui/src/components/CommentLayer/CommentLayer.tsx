@@ -110,7 +110,10 @@ export const CommentLayer = () => {
       ref={layerRef}
       aria-hidden="true"
       style={{ pointerEvents: toolbar.comment.inUse || threadSpawn.active ? 'all' : 'none' }}
-      className={cn([toolbar.comment.inUse && 'comment-cursor', 'fixed inset-0 z-[2147483644] size-full'])}
+      className={cn([
+        toolbar.comment.inUse && 'comment-cursor',
+        'text-white dark fixed inset-0 z-[2147483644] size-full',
+      ])}
       onClick={spawnThread}>
       {(data?.data?.data ?? []).map(thread => (
         <MagnifiedTag key={thread.id} layerRef={layerRef} thread={thread} />

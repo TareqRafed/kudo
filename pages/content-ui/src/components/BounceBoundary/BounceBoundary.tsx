@@ -12,9 +12,9 @@ const calculateOverflowPosition = (
   const padding = 10;
 
   const toLeft = x;
-  const toRight = docWidth - x;
+  const toRight = docWidth - x - elementWidth - padding;
   const toTop = y;
-  const toBottom = docHeight - y;
+  const toBottom = docHeight - y - elementHeight - padding;
 
   const position = {
     x: x,
@@ -26,11 +26,11 @@ const calculateOverflowPosition = (
     },
   };
 
-  if (x + elementWidth + padding > docWidth) {
+  if (position.nearestEdge.horizontal == 'right') {
     position.transform = `translateX(${options?.x ?? '-100%'})`;
   }
 
-  if (y + elementHeight + padding > docHeight) {
+  if (position.nearestEdge.vertical == 'bottom') {
     position.transform += `translateY(${options?.y ?? '-100%'})`;
   }
 
@@ -66,6 +66,8 @@ const BounceBoundary = ({ children, transform }: BounceBoundaryProps) => {
 
     handlePositionChange();
   }, [transform?.x, transform?.y]);
+
+  console.log(locationResult);
 
   return (
     <div

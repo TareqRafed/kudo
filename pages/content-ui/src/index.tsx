@@ -8,6 +8,15 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 const rootId = 'ab-cursor-content-view-root';
 const queryClient = new QueryClient();
 
+let lastUrl = window.location.href;
+
+setInterval(() => {
+  if (window.location.href !== lastUrl) {
+    lastUrl = window.location.href;
+    window.dispatchEvent(new Event('urlchange'));
+  }
+}, 1000);
+
 const createRootContainer = () => {
   const root = document.createElement('div');
   root.id = rootId;

@@ -16,7 +16,7 @@ const Toolbar = () => {
   const { tasks, isLoggedIn } = useStorage(GlobalStateStorage);
   const hoverRef = useRef<HTMLDivElement>(null);
   const isHovering = useHover(hoverRef);
-  const isLoading = !useDebounce(tasks.isFree, 500);
+  const isLoading = !useDebounce(tasks.isFree, 50);
 
   const isExpanded = isHovering || !isLoggedIn || isLoading;
 
@@ -101,14 +101,14 @@ const ToolbarOptions = ({ expanded }: { expanded: boolean }) => {
 };
 
 type ToolbarItemProps = {
-  isActive: boolean;
+  isActive?: boolean;
   onClick: () => void;
   children: ReactNode;
   tooltipContent: ReactNode;
   expanded?: boolean;
 } & ComponentPropsWithoutRef<'button'>;
 
-const ToolbarItem = ({ expanded, isActive, onClick, children, tooltipContent, ...rest }: ToolbarItemProps) => {
+const ToolbarItem = ({ expanded, isActive = false, onClick, children, tooltipContent, ...rest }: ToolbarItemProps) => {
   return (
     <motion.div layout transition={{ ease: 'easeIn' }} className={cn(['relative flex items-center'])}>
       <Tooltip>
