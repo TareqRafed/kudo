@@ -68,7 +68,7 @@ const ThreadTag = ({ data, isLoading }: ThreadProps) => {
       <CommentPin
         isLoading={isLoading}
         numberOfComments={data.comments.length}
-        usersIds={data.comments?.map(cmnt => cmnt.creator_id)}
+        usersIds={data.comments?.map(cmnt => cmnt.creator.id)}
       />
       <AnimatePresence>
         {!isCollapsed && (
@@ -124,6 +124,7 @@ type CommentSectionProps = {
     content: string;
     created_at: string;
     creator: {
+      id: string;
       first_name: string | null;
       last_name: string | null;
       profile_picture: string | null;
@@ -147,7 +148,7 @@ const ThreadComment = ({ comment, showActions = false, minimal = false }: Commen
     <div className="w-96 border-b px-2 py-3" ref={modalRef}>
       <div className="mb-3 flex items-start justify-between">
         <div className="flex items-center space-x-2">
-          <UserAvatar className={cn(['size-7'])} />
+          <UserAvatar userId={comment.creator?.id} className={cn(['size-7'])} />
           <div className="flex flex-col text-xs">
             <span className="font-bold">{`${comment.creator?.first_name} ${comment.creator?.last_name}`}</span>
             <span className="text-[10px]">{formatRelative(comment.created_at || new Date(), new Date())}</span>

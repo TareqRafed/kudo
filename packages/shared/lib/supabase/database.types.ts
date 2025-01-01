@@ -18,6 +18,24 @@ export type Database = {
         };
         Relationships: [];
       };
+      colors: {
+        Row: {
+          hex: string;
+          id: number;
+          name: string;
+        };
+        Insert: {
+          hex: string;
+          id?: number;
+          name: string;
+        };
+        Update: {
+          hex?: string;
+          id?: number;
+          name?: string;
+        };
+        Relationships: [];
+      };
       comments: {
         Row: {
           content: string;
@@ -389,8 +407,8 @@ export type Database = {
           target_selector: string | null;
           team_id: number | null;
           website_id: number | null;
-          windowHeight: number | null;
-          windowWidth: number | null;
+          window_height: number | null;
+          window_width: number | null;
           x: number | null;
           y: number | null;
         };
@@ -503,8 +521,8 @@ export type Database = {
           website_id: number;
           content: string;
           rect?: Json;
-          windowHeight?: number;
-          windowWidth?: number;
+          window_height?: number;
+          window_width?: number;
           target_selector?: string;
         };
         Returns: {
@@ -519,6 +537,17 @@ export type Database = {
           window_width: number | null;
           x: number;
           y: number;
+        }[];
+      };
+      get_members_with_metadata: {
+        Args: Record<PropertyKey, never>;
+        Returns: {
+          id: string;
+          first_name: string;
+          last_name: string;
+          team_id: number;
+          color_name: string;
+          color_hex: string;
         }[];
       };
       get_threads_for_website_id: {
@@ -536,11 +565,17 @@ export type Database = {
           target_selector: string | null;
           team_id: number | null;
           website_id: number | null;
-          windowHeight: number | null;
-          windowWidth: number | null;
+          window_height: number | null;
+          window_width: number | null;
           x: number | null;
           y: number | null;
         }[];
+      };
+      get_user_created_at: {
+        Args: {
+          user_id: string;
+        };
+        Returns: string;
       };
       hamming_distance: {
         Args: {

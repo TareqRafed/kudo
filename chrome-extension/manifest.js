@@ -38,13 +38,13 @@ const manifest = deepmerge(
       type: 'module',
     },
     action: {
-      default_icon: 'icon-34.png',
+      default_icon: 'icon-128-off.png',
     },
     chrome_url_overrides: {
       newtab: 'new-tab/index.html',
     },
     icons: {
-      128: 'icon-128.png',
+      128: 'icon-128-off.png',
     },
     content_scripts: [
       {
