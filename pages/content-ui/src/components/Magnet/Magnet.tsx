@@ -61,7 +61,7 @@ const handlePositionUpdate = (x: number, y: number, layer: HTMLElement) => {
 
 const Magnet = <T extends HTMLElement>({ children, initData, onDrop, layerRef, ...rest }: MagnetProps<T>) => {
   const { position } = usePositionCalculator(initData);
-
+  console.log(position, 'position-in-magnet');
   /**
    * locally drag position because setPos is slow
    */
@@ -70,11 +70,10 @@ const Magnet = <T extends HTMLElement>({ children, initData, onDrop, layerRef, .
     setDragPos({ x: position.left, y: position.top }); // update drag position only after setPos executes
   }, [position.left, position.top]);
 
-  console.log(position, 'position');
-
   if (!position.fail)
     return (
       <Draggable
+        defaultClassName="z-max-2 hover:z-max"
         handle="pre"
         {...rest}
         position={{ x: dragPos.x, y: dragPos.y }}
@@ -90,6 +89,7 @@ const Magnet = <T extends HTMLElement>({ children, initData, onDrop, layerRef, .
         {children}
       </Draggable>
     );
+  return <></>;
 };
 
 export default Magnet;

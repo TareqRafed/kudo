@@ -1,19 +1,22 @@
-import type { MouseEventHandler } from 'react';
-import React, { useState } from 'react';
+import { type ForwardedRef, forwardRef, type MouseEventHandler } from 'react';
+import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { UserAvatar } from '../UserAvatar';
 import { cn } from '@extension/ui';
 import LoadingDots from '../LoadingDots/LoadingDots';
 
-const CommentPin = ({
-  isLoading,
-  usersIds,
-  numberOfComments,
-}: {
-  isLoading?: boolean;
-  usersIds: number[];
-  numberOfComments: number;
-}) => {
+const CommentPin = (
+  {
+    isLoading,
+    usersIds,
+    numberOfComments,
+  }: {
+    isLoading?: boolean;
+    usersIds: number[];
+    numberOfComments: number;
+  },
+  ref: ForwardedRef<HTMLDivElement>,
+) => {
   const [position, setPosition] = useState({ x: 0, y: 0 });
 
   const handleMouseMove: MouseEventHandler<HTMLDivElement> = e => {
@@ -25,7 +28,7 @@ const CommentPin = ({
   };
 
   return (
-    <div className="flex">
+    <div ref={ref} className="flex">
       <pre>
         <motion.div
           initial={{ scale: 0.8, opacity: 0.8 }}
@@ -70,4 +73,4 @@ const CommentPin = ({
   );
 };
 
-export default CommentPin;
+export default forwardRef(CommentPin);
