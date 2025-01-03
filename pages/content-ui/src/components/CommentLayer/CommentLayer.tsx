@@ -2,7 +2,7 @@ import { cn } from '@extension/ui';
 import useToolbarStore from '@src/store/toolbar';
 import type { MouseEventHandler, RefObject } from 'react';
 import { useRef, useState } from 'react';
-import type { Database, Json, Message } from '@extension/shared';
+import type { Json, Message } from '@extension/shared';
 import { sendMessage } from '@extension/shared';
 import ThreadInit from './ThreadInitializer';
 import type { ThreadData } from './Thread';
@@ -30,6 +30,7 @@ type UpdateThreadArgs = Extract<Message, { action: 'RPC'; payload: 'update_recor
 export const CommentLayer = () => {
   const { website } = useWebsiteStore();
   const { toolbar, toggleToolbarItem } = useToolbarStore();
+  const [isDragging, setIsDragging] = useState(false);
 
   const clientQuery = useQueryClient();
   const { data } = useSendMessage(
@@ -118,6 +119,7 @@ export const CommentLayer = () => {
 
       {threadSpawn.active && !toolbar.comment.inUse && (
         <Magnet
+          onStart={() => setIsDragging(true)}
           layerRef={layerRef}
           initData={{
             targetSelector: threadSpawn.targetSelector ?? undefined,
@@ -125,7 +127,7 @@ export const CommentLayer = () => {
             y: threadSpawn.y,
             rect: threadSpawn.rect,
           }}
-          onDrop={e =>
+          onDrop={e => {
             setThreadSpawn(prev => ({
               targetSelector: e.targetSelector,
               x: e.x,
@@ -134,10 +136,12 @@ export const CommentLayer = () => {
               rect: e.rect,
               windowWidth: e.windowW,
               windowHeight: e.windowH,
-            }))
-          }>
+            }));
+            setIsDragging(false);
+          }}>
           <div>
             <ThreadInit
+              isDragging={isDragging}
               onCreate={val => {
                 const { active: _, targetSelector, windowWidth, windowHeight, ...rest } = threadSpawn;
                 mutate({
@@ -165,6 +169,7 @@ type Thread = {
 };
 const MagnifiedTag = ({ thread, layerRef }: Thread) => {
   const clientQuery = useQueryClient();
+  const [isDragging, setIsDragging] = useState(false);
 
   const { mutate: mutateThread, isPending } = useMutation({
     mutationFn: (args: UpdateThreadArgs) => sendMessage({ action: 'RPC', payload: 'update_record', args }),
@@ -190,11 +195,15 @@ const MagnifiedTag = ({ thread, layerRef }: Thread) => {
 
   return (
     <Magnet
+      onStart={() => setIsDragging(true)}
       layerRef={layerRef}
       initData={{ targetSelector: thread.target_selector ?? undefined, x: thread.x, y: thread.y, rect: thread.rect }}
-      onDrop={e => handleTagDrop(e, thread.id ?? 0)}>
+      onDrop={e => {
+        setIsDragging(false);
+        handleTagDrop(e, thread.id ?? 0);
+      }}>
       <div>
-        <ThreadTag data={thread} isLoading={isPending} />
+        <ThreadTag isDragging={isDragging} data={thread} isLoading={isPending} />
       </div>
     </Magnet>
   );
