@@ -17,7 +17,6 @@ export default function App() {
     <Provider>
       <Toolbar />
       <CommentLayer />
-      <Inbox />
     </Provider>
   );
 }
