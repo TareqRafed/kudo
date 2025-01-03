@@ -2,7 +2,7 @@ import { sendMessage, useStorage } from '@extension/shared';
 import { Button, cn, Tooltip, TooltipContent, TooltipTrigger } from '@extension/ui';
 import useToolbarStore from '@src/store/toolbar';
 import { AnimatePresence, motion } from 'framer-motion';
-import { ArrowRight, Inbox, MessageCircleMore, Pencil, TextCursor } from 'lucide-react';
+import { ArrowRight, Inbox, MessageCircleMore } from 'lucide-react';
 import { useRef, type ComponentPropsWithoutRef, type ReactNode } from 'react';
 import { GlobalStateStorage } from '@extension/storage';
 import LoadingDots from '../LoadingDots/LoadingDots';
@@ -33,7 +33,7 @@ const Toolbar = () => {
         layout
         transition={{ duration: DURATION, delay: 0, ease: 'easeIn' }}
         className={cn([
-          isExpanded ? 'py-2 rounded-[5em] min-w-[10em] min-h-[2.2em]' : 'py-1 rounded-[1em]',
+          isExpanded ? 'py-2 rounded-[1em] min-w-[5em] min-h-[2.2em]' : 'py-1 rounded-[0.5em]',
           'overflow-hidden w-fit bg-background text-white dark pointer-events-auto flex items-center space-x-1 border py-1 px-2',
         ])}>
         <AnimatePresence>{isLoading ? <LoadingDots /> : <ToolbarOptions expanded={isExpanded} />}</AnimatePresence>
@@ -83,19 +83,11 @@ const ToolbarOptions = ({ expanded }: { expanded: boolean }) => {
             opacity: 1,
             transition: { duration: DURATION, delay: DELAY },
           }}>
-          <ToolbarItem expanded={expanded} onClick={() => toggleToolbarItem('comment')} tooltipContent="Inbox">
+          <ToolbarItem expanded={expanded} onClick={() => toggleToolbarItem('inbox')} tooltipContent="Inbox">
             <Inbox className={cn([expanded ? '!size-4' : '!size-3'])} />
           </ToolbarItem>
         </motion.div>
       )}
-
-      <ToolbarItem expanded={expanded} onClick={() => toggleToolbarItem('comment')} tooltipContent="Draw">
-        <Pencil className={cn([expanded ? '!size-4' : '!size-3'])} />
-      </ToolbarItem>
-
-      <ToolbarItem expanded={expanded} onClick={() => toggleToolbarItem('comment')} tooltipContent="Draw">
-        <TextCursor className={cn([expanded ? '!size-4' : '!size-3'])} />
-      </ToolbarItem>
     </motion.span>
   );
 };

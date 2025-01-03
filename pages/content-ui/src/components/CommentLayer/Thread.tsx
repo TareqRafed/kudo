@@ -35,6 +35,8 @@ const ThreadTag = ({ data, isLoading }: ThreadProps) => {
   const [isCollapsed, setIsCollapsed] = useState(true);
   const [showExtended, setShowExtended] = useState(false);
 
+  const commentPinRef = useRef<HTMLDivElement>(null);
+
   const [ref, event] = useClickAway<HTMLDivElement>(() => {
     setIsCollapsed(true);
     setShowExtended(false);
@@ -59,26 +61,27 @@ const ThreadTag = ({ data, isLoading }: ThreadProps) => {
         }
       }}
       onMouseDown={e => {
-        e.stopPropagation();
+        e.preventDefault();
         document.dispatchEvent(event);
         setShowExtended(true);
       }}
       style={{ position: 'absolute', left: 0, top: 0 }}
-      className={cn([`pointer-events-auto flex flex-col select-none items-start`])}>
+      className={cn([`pointer-events-auto z-max-2 flex flex-col select-none items-start`])}>
       <CommentPin
+        ref={commentPinRef}
         isLoading={isLoading}
         numberOfComments={data.comments.length}
         usersIds={data.comments?.map(cmnt => cmnt.creator.id)}
       />
       <AnimatePresence>
         {!isCollapsed && (
-          <motion.div
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 5 }}
-            exit={{ opacity: 0, y: 10 }}
-            transition={{ duration: 0.2, delay: 0.2 }}>
-            <BounceBoundary transform={{ x: '-100%', y: '-50px' }}>
-              <div className="bg-background dark max-h-[450px] overflow-auto rounded-lg border">
+          <BounceBoundary helper={{ width: 420, height: 100 }} targetRef={commentPinRef}>
+            <motion.div
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 5 }}
+              exit={{ opacity: 0, y: 10 }}
+              transition={{ duration: 0.2, delay: 0.2 }}>
+              <div className="bg-background dark relative max-h-[450px] overflow-auto rounded-lg border">
                 <ThreadComment minimal={false} showActions={showExtended} comment={data.comments[0]} />
                 {showExtended && (
                   <>
@@ -91,8 +94,8 @@ const ThreadTag = ({ data, isLoading }: ThreadProps) => {
                   </>
                 )}
               </div>
-            </BounceBoundary>
-          </motion.div>
+            </motion.div>
+          </BounceBoundary>
         )}
       </AnimatePresence>
     </div>
