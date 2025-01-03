@@ -4,8 +4,10 @@ import tailwindcssOutput from '../dist/tailwind-output.css?inline';
 import { addMessageListener } from '@extension/shared';
 import { GlobalStateStorage } from '@extension/storage';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { domHelper } from './util';
 
 const rootId = 'ab-cursor-content-view-root';
+const shadowRootId = 'ab-cursor-shadow-root';
 const queryClient = new QueryClient();
 
 let lastUrl = window.location.href;
@@ -18,14 +20,8 @@ setInterval(() => {
 }, 1000);
 
 const createRootContainer = () => {
-  const root = document.createElement('div');
-  root.id = rootId;
-
-  document.body.prepend(root);
-
-  const rootIntoShadow = document.createElement('div');
-  rootIntoShadow.id = 'shadow-root';
-
+  const root = domHelper.createElement('div', { parent: document.body, id: rootId });
+  const rootIntoShadow = domHelper.createElement('div', { parent: root, root: true, id: shadowRootId });
   const shadowRoot = root.attachShadow({ mode: 'closed' });
 
   if (navigator.userAgent.includes('Firefox')) {
@@ -54,7 +50,7 @@ const createRootContainer = () => {
 };
 
 const removeRootContainer = () => {
-  const root = document.getElementById(rootId);
+  const root = domHelper.getElementById(rootId);
   root?.remove();
 };
 

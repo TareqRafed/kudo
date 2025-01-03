@@ -1,89 +1,104 @@
-import { useEffect, useRef, useState, type CSSProperties } from 'react';
+import { domHelper } from '@src/util';
+import { type RefObject, useEffect, useState } from 'react';
+import { createPortal } from 'react-dom';
+
+type Position = {
+  x: number;
+  y: number;
+  bottom: number;
+  nearestEdge: {
+    horizontal: 'left' | 'right';
+    vertical: 'top' | 'bottom';
+  };
+};
 
 const calculateOverflowPosition = (
   x: number,
   y: number,
   elementWidth: number,
   elementHeight: number,
-  options?: { x: CSSProperties['left']; y: CSSProperties['top'] },
+  targetElement: HTMLElement,
 ) => {
   const docWidth = document.documentElement.clientWidth;
   const docHeight = document.documentElement.clientHeight;
   const padding = 10;
 
   const toLeft = x;
-  const toRight = docWidth - x - elementWidth - padding;
+  const toRight = docWidth - x - padding;
   const toTop = y;
-  const toBottom = docHeight - y - elementHeight - padding;
+  const toBottom = docHeight - y - padding;
 
-  const position = {
+  const position: Position = {
     x: x,
     y: y,
-    transform: '',
+    bottom: 0,
     nearestEdge: {
       horizontal: toLeft < toRight ? 'left' : 'right',
       vertical: toTop < toBottom ? 'top' : 'bottom',
     },
   };
 
+  const targetRect = targetElement.getBoundingClientRect();
+
+  if (position.nearestEdge.horizontal == 'left') {
+    position.x += targetRect.width + padding;
+  }
+
   if (position.nearestEdge.horizontal == 'right') {
-    position.transform = `translateX(${options?.x ?? '-100%'})`;
+    position.x -= padding + elementWidth;
+  }
+
+  if (position.nearestEdge.vertical == 'top') {
+    position.y += targetRect.height + padding;
   }
 
   if (position.nearestEdge.vertical == 'bottom') {
-    position.transform += `translateY(${options?.y ?? '-100%'})`;
+    position.y -= padding + elementHeight;
   }
+
+  position.bottom = docHeight - position.y - elementHeight;
 
   return position;
 };
 
 type BounceBoundaryProps = {
   children: React.ReactNode;
-
-  /**
-   * Value that shifts element by
-   */
-  transform?: { x: CSSProperties['right']; y: CSSProperties['top'] };
+  targetRef: RefObject<HTMLElement>;
+  helper: {
+    width: number;
+    height: number;
+  };
 };
 
-const BounceBoundary = ({ children, transform }: BounceBoundaryProps) => {
-  const childrenRef = useRef<HTMLDivElement>(null);
-  const [locationResult, setLocation] = useState(calculateOverflowPosition(0, 0, 0, 0));
+const BounceBoundary = ({ children, targetRef, helper }: BounceBoundaryProps) => {
+  const [locationResult, setLocation] = useState<Position | null>(null);
+
   useEffect(() => {
     const handlePositionChange = () => {
-      const { x, y, width, height } = childrenRef.current?.firstElementChild?.getBoundingClientRect() || { x: 0, y: 0 };
-      setLocation(
-        calculateOverflowPosition(x, y, width || 0, height || 0, {
-          x: transform?.x ?? '-100%',
-          y: transform?.y ?? '-100%',
-        }),
-      );
+      if (!targetRef.current) return;
+      const target = targetRef.current?.getBoundingClientRect() || { x: 0, y: 0 };
+      setLocation(calculateOverflowPosition(target.x, target.y, helper.width, helper.height, targetRef.current));
     };
 
-    const element = childrenRef.current?.firstElementChild;
-
-    if (!element) return;
-
     handlePositionChange();
-  }, [transform?.x, transform?.y]);
+  }, [targetRef.current]);
 
-  console.log(locationResult);
+  console.log(targetRef, helper, locationResult, 'location');
 
-  return (
+  if (!locationResult) return <></>;
+
+  return createPortal(
     <div
+      className="z-max"
       style={{
-        position: 'relative',
+        position: 'absolute',
+        left: locationResult.x,
+        bottom: locationResult.nearestEdge.vertical == 'bottom' ? locationResult.bottom : 'unset',
+        top: locationResult.nearestEdge.vertical == 'top' ? locationResult.y : 'unset',
       }}>
-      <div
-        style={{
-          transform: locationResult.transform,
-          position: locationResult.nearestEdge.vertical == 'bottom' ? 'absolute' : 'unset',
-          bottom: 0,
-        }}
-        ref={childrenRef}>
-        {children}
-      </div>
-    </div>
+      {children}
+    </div>,
+    domHelper.getRoot()!,
   );
 };
 

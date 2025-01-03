@@ -8,6 +8,7 @@ type ToolbarItem = {
 
 type ToolbarState = {
   comment: ToolbarItem;
+  inbox: ToolbarItem;
 };
 
 type ToolbarStore = {
@@ -18,6 +19,7 @@ type ToolbarStore = {
 const useToolbarStore = create<ToolbarStore>(set => ({
   toolbar: {
     comment: { inUse: false, enabled: true, visible: true },
+    inbox: { inUse: false, enabled: true, visible: true },
   },
 
   /**

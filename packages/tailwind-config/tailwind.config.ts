@@ -55,6 +55,11 @@ export default {
     },
 
     extend: {
+      zIndex: {
+        'max-2': '2147483645',
+        'max-1': '2147483646',
+        max: '2147483647',
+      },
       lineHeight: {
         3: '12px',
         4: '16px',
