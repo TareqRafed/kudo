@@ -29,9 +29,13 @@ export type ThreadData = Database['public']['Functions']['get_threads_for_websit
 type ThreadProps = {
   data: ThreadData;
   isLoading?: boolean;
+  /**
+   * If dragging helper component near the comment pin won't be showen
+   */
+  isDragging?: boolean;
 };
 
-const ThreadTag = ({ data, isLoading }: ThreadProps) => {
+const ThreadTag = ({ data, isLoading, isDragging }: ThreadProps) => {
   const [isCollapsed, setIsCollapsed] = useState(true);
   const [showExtended, setShowExtended] = useState(false);
 
@@ -60,8 +64,7 @@ const ThreadTag = ({ data, isLoading }: ThreadProps) => {
           setShowExtended(false);
         }
       }}
-      onMouseDown={e => {
-        e.preventDefault();
+      onMouseDown={() => {
         document.dispatchEvent(event);
         setShowExtended(true);
       }}
@@ -74,7 +77,7 @@ const ThreadTag = ({ data, isLoading }: ThreadProps) => {
         usersIds={data.comments?.map(cmnt => cmnt.creator.id)}
       />
       <AnimatePresence>
-        {!isCollapsed && (
+        {!isCollapsed && !isDragging && (
           <BounceBoundary helper={{ width: 420, height: 100 }} targetRef={commentPinRef}>
             <motion.div
               initial={{ opacity: 0, y: 10 }}
