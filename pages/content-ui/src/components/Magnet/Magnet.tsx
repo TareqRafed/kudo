@@ -1,4 +1,4 @@
-import type { MutableRefObject, ReactNode, RefObject } from 'react';
+import type { ReactNode, RefObject } from 'react';
 import { useEffect, useState } from 'react';
 import Draggable from 'react-draggable';
 import usePositionCalculator from './hooks/usePositionCalculator';
@@ -18,7 +18,8 @@ export type OnDropEvent = {
 type MagnetProps<T extends HTMLElement> = {
   children: ReactNode;
   initData: PositionData;
-  onDrop: (val: OnDropEvent) => void;
+  onDrop?: (val: OnDropEvent) => void;
+  onStart?: () => void;
   layerRef: RefObject<T>;
 } & DraggableProps;
 
@@ -59,9 +60,9 @@ const handlePositionUpdate = (x: number, y: number, layer: HTMLElement) => {
   };
 };
 
-const Magnet = <T extends HTMLElement>({ children, initData, onDrop, layerRef, ...rest }: MagnetProps<T>) => {
+const Magnet = <T extends HTMLElement>({ children, initData, onDrop, layerRef, onStart, ...rest }: MagnetProps<T>) => {
   const { position } = usePositionCalculator(initData);
-  console.log(position, 'position-in-magnet');
+
   /**
    * locally drag position because setPos is slow
    */
@@ -73,17 +74,19 @@ const Magnet = <T extends HTMLElement>({ children, initData, onDrop, layerRef, .
   if (!position.fail)
     return (
       <Draggable
+        onMouseDown={e => e.stopPropagation()}
         defaultClassName="z-max-2 hover:z-max"
         handle="pre"
         {...rest}
         position={{ x: dragPos.x, y: dragPos.y }}
+        onStart={onStart}
         onDrag={(_, { x, y }) => {
           setDragPos({ x, y });
         }}
         onStop={(_, data) => {
           if (!layerRef.current) return;
           const calData = handlePositionUpdate(data.x, data.y, layerRef.current);
-          onDrop(calData);
+          onDrop?.(calData);
         }}
         enableUserSelectHack>
         {children}
