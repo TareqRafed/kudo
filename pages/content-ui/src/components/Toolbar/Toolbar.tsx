@@ -33,7 +33,7 @@ const Toolbar = () => {
         layout
         transition={{ duration: DURATION, delay: 0, ease: 'easeIn' }}
         className={cn([
-          isExpanded ? 'py-2 rounded-[1em] min-w-[5em] min-h-[2.2em]' : 'py-1 rounded-[0.5em]',
+          isExpanded ? 'py-2 rounded-[1em] min-w-[3em] min-h-[2.2em]' : 'py-1 rounded-[0.5em]',
           'overflow-hidden w-fit bg-background text-white dark pointer-events-auto flex items-center space-x-1 border py-1 px-2',
         ])}>
         <AnimatePresence>{isLoading ? <LoadingDots /> : <ToolbarOptions expanded={isExpanded} />}</AnimatePresence>
@@ -78,12 +78,17 @@ const ToolbarOptions = ({ expanded }: { expanded: boolean }) => {
 
       {expanded && (
         <motion.div
+          className="hidden"
           initial={{ opacity: 0 }}
           animate={{
             opacity: 1,
             transition: { duration: DURATION, delay: DELAY },
           }}>
-          <ToolbarItem expanded={expanded} onClick={() => toggleToolbarItem('inbox')} tooltipContent="Inbox">
+          <ToolbarItem
+            expanded={expanded}
+            isActive={toolbar.inbox.inUse}
+            onClick={() => toggleToolbarItem('inbox')}
+            tooltipContent="Inbox">
             <Inbox className={cn([expanded ? '!size-4' : '!size-3'])} />
           </ToolbarItem>
         </motion.div>
