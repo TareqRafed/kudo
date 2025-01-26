@@ -56,6 +56,7 @@ const removeRootContainer = () => {
 
 const registerListeners = () => {
   addMessageListener(message => {
+    console.log(message);
     if (message.action == 'ACTION_CLICK') {
       message.payload.isOnScreen ? createRootContainer() : removeRootContainer();
     }
@@ -64,8 +65,6 @@ const registerListeners = () => {
 
 const init = async () => {
   registerListeners();
-  const state = await GlobalStateStorage.get();
-  state.isOnScreen ? createRootContainer() : removeRootContainer();
 };
 
 init();

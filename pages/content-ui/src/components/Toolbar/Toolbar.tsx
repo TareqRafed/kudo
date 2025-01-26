@@ -8,6 +8,7 @@ import { GlobalStateStorage } from '@extension/storage';
 import LoadingDots from '../LoadingDots/LoadingDots';
 import { useHover } from '@src/hooks/useHover';
 import { useDebounce } from '@uidotdev/usehooks';
+import Draggable from 'react-draggable';
 
 const DELAY = 0.5;
 const DURATION = 0.3;
@@ -21,24 +22,37 @@ const Toolbar = () => {
   const isExpanded = isHovering || !isLoggedIn || isLoading;
 
   return (
-    <div className="pointer-events-none fixed top-5 z-[2147483645] flex w-full justify-center">
-      <motion.div
-        ref={hoverRef}
-        initial={{ y: -10, opacity: 0 }}
-        animate={{
-          y: 0,
-          opacity: 1,
-          transition: { duration: 0.3 },
-        }}
-        layout
-        transition={{ duration: DURATION, delay: 0, ease: 'easeIn' }}
-        className={cn([
-          isExpanded ? 'py-2 rounded-[1em] min-w-[3em] min-h-[2.2em]' : 'py-1 rounded-[0.5em]',
-          'overflow-hidden w-fit bg-background text-white dark pointer-events-auto flex items-center space-x-1 border py-1 px-2',
-        ])}>
-        <AnimatePresence>{isLoading ? <LoadingDots /> : <ToolbarOptions expanded={isExpanded} />}</AnimatePresence>
-      </motion.div>
-    </div>
+    <Draggable>
+      <div className="pointer-events-none fixed top-5 z-[2147483645] flex w-full justify-center">
+        <motion.div
+          ref={hoverRef}
+          initial={{ scale: 1, y: -10, opacity: 0 }}
+          animate={{
+            y: 0,
+            opacity: 1,
+            transition: { duration: 0.3 },
+          }}
+          whileHover={{
+            scale: 1.3,
+          }}
+          transition={{ duration: DURATION, delay: 0, ease: 'easeIn' }}
+          style={{ borderRadius: 50 }}
+          layout
+          className={cn([
+            'min-h-10 overflow-hidden w-fit bg-background text-white dark pointer-events-auto flex items-center space-x-1 border-2 p-1',
+          ])}>
+          <AnimatePresence>
+            {isLoading ? (
+              <motion.span layout className="px-4 py-1">
+                <LoadingDots />
+              </motion.span>
+            ) : (
+              <ToolbarOptions expanded={isExpanded} />
+            )}
+          </AnimatePresence>
+        </motion.div>
+      </div>
+    </Draggable>
   );
 };
 
@@ -61,19 +75,13 @@ const ToolbarOptions = ({ expanded }: { expanded: boolean }) => {
     );
   }
   return (
-    <motion.span
-      className="flex w-full"
-      layout="position"
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
-      transition={{ duration: 0.5 }}>
+    <motion.span layout>
       <ToolbarItem
         isActive={toolbar.comment.inUse}
         onClick={() => toggleToolbarItem('comment')}
         tooltipContent="Comment"
         expanded={expanded}>
-        <MessageCircleMore className={cn([expanded ? '!size-4' : '!size-3'])} />
+        <MessageCircleMore className={cn(['!size-4'])} />
       </ToolbarItem>
 
       {expanded && (
@@ -89,7 +97,7 @@ const ToolbarOptions = ({ expanded }: { expanded: boolean }) => {
             isActive={toolbar.inbox.inUse}
             onClick={() => toggleToolbarItem('inbox')}
             tooltipContent="Inbox">
-            <Inbox className={cn([expanded ? '!size-4' : '!size-3'])} />
+            <Inbox className={cn(['!size-4'])} />
           </ToolbarItem>
         </motion.div>
       )}
@@ -105,15 +113,14 @@ type ToolbarItemProps = {
   expanded?: boolean;
 } & ComponentPropsWithoutRef<'button'>;
 
-const ToolbarItem = ({ expanded, isActive = false, onClick, children, tooltipContent, ...rest }: ToolbarItemProps) => {
+const ToolbarItem = ({ isActive = false, onClick, children, tooltipContent, ...rest }: ToolbarItemProps) => {
   return (
-    <motion.div layout transition={{ ease: 'easeIn' }} className={cn(['relative flex items-center'])}>
+    <motion.div layout>
       <Tooltip>
         <TooltipTrigger>
           <Button
-            size={expanded ? 'sm' : 'xs'}
             onClick={onClick}
-            className={cn(['rounded-full', isActive && 'bg-primary', rest.className])}
+            className={cn(['size-7 p-1 rounded-full', isActive && 'bg-primary', rest.className])}
             variant={'ghost'}>
             <motion.span className="flex" layout>
               {children}
