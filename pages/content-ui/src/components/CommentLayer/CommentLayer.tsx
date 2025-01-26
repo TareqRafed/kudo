@@ -104,7 +104,7 @@ export const CommentLayer = () => {
     toggleToolbarItem('comment'); // off
   };
 
-  if (!website.id) return;
+  // if (!website.id) throw new Error('Something went wrong');
   return (
     <div
       id="ab-layer"

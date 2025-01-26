@@ -4,9 +4,9 @@
 
 import { supabase, updateUserState } from './supabase';
 
-const whiteListedWebApps = ['http://localhost:3000/en/dashboard'];
+const whiteListedWebApps = ['http://localhost:3000/~'];
 chrome.runtime.onMessageExternal.addListener(async (request, sender) => {
-  if (!whiteListedWebApps.includes(sender.url || '')) return;
+  // if (!whiteListedWebApps.includes(sender.url || '')) return;
 
   /**
    * Tab /dashboard is opened which sends the supabase session
