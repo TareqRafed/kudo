@@ -17,7 +17,7 @@ type Tasks = {
 };
 
 export type GlobalState = {
-  isOnScreen: boolean;
+  TabsOnScreen: number[];
   isLoggedIn: boolean;
   /**
    * Tasks that are pending between UI or Background.
@@ -26,7 +26,7 @@ export type GlobalState = {
 };
 
 type GlobalStateStorage = BaseStorage<GlobalState> & {
-  toggleIsOnScreen: () => Promise<void>;
+  toggleTabOnScreen: (id: number) => Promise<void>;
   toggleIsLoggedIn: () => Promise<void>;
   /**
    * Add element as a pending task, it changes the {@link isFree} state
@@ -39,8 +39,8 @@ type GlobalStateStorage = BaseStorage<GlobalState> & {
 };
 
 const storage = createStorage<GlobalState>( // duplicated keys causes
-  'global-state-storage',
-  { isOnScreen: false, isLoggedIn: false, tasks: { pool: {}, isFree: true } },
+  'global-storage',
+  { TabsOnScreen: [], isLoggedIn: false, tasks: { pool: {}, isFree: true } },
   {
     storageEnum: StorageEnum.Local,
     liveUpdate: true,
@@ -49,9 +49,12 @@ const storage = createStorage<GlobalState>( // duplicated keys causes
 
 export const GlobalStateStorage: GlobalStateStorage = {
   ...storage,
-  async toggleIsOnScreen() {
+  async toggleTabOnScreen(id: number) {
     await storage.set(state => {
-      return { ...state, isOnScreen: !state.isOnScreen };
+      const newTabs = state.TabsOnScreen.includes(id)
+        ? state.TabsOnScreen.filter(d => d !== id)
+        : [...state.TabsOnScreen, id];
+      return { ...state, TabsOnScreen: newTabs };
     });
   },
   async toggleIsLoggedIn() {

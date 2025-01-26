@@ -61,6 +61,7 @@ export const useRegisterDocument = () => {
       })
         .then(data => data.json())
         .then(data => {
+          console.log(data, 'website post edge function response');
           setWebsiteData(data?.data?.id, data?.data?.hash_id);
           GlobalStateStorage.deleteTask({ name: TASK_ID });
         });

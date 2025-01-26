@@ -30,7 +30,11 @@ const ThreadInit = ({ onCreate, isDragging, ...rest }: ThreadInitProps) => {
         <AnimatePresence>
           {!isDragging && (
             <BounceBoundary helper={{ width: 400, height: 40 }} targetRef={pointerRef}>
-              <motion.div initial={{ y: -12, opacity: 0 }} animate={{ y: 0, opacity: 1 }} exit={{ y: 12, opacity: 0 }}>
+              <motion.div
+                className="dark text-white"
+                initial={{ y: -12, opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                exit={{ y: 12, opacity: 0 }}>
                 <CommentInput
                   className="rounded-md border"
                   onCreate={comment => {

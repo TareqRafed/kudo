@@ -84,7 +84,7 @@ const ThreadTag = ({ data, isLoading, isDragging }: ThreadProps) => {
               animate={{ opacity: 1, y: 5 }}
               exit={{ opacity: 0, y: 10 }}
               transition={{ duration: 0.2, delay: 0.2 }}>
-              <div className="bg-background dark relative max-h-[450px] overflow-auto rounded-lg border">
+              <div className="bg-background dark relative max-h-[450px] overflow-auto rounded-lg border text-white">
                 <ThreadComment minimal={false} showActions={showExtended} comment={data.comments[0]} />
                 {showExtended && (
                   <>
