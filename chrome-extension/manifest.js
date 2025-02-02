@@ -46,20 +46,20 @@ const manifest = deepmerge(
     icons: {
       128: 'icon-128-off.png',
     },
-    content_scripts: [
-      {
-        matches: ['http://*/*', 'https://*/*', '<all_urls>'],
-        js: ['content/index.iife.js'],
-      },
-      {
-        matches: ['http://*/*', 'https://*/*', '<all_urls>'],
-        js: ['content-ui/index.iife.js'],
-      },
-      {
-        matches: ['http://*/*', 'https://*/*', '<all_urls>'],
-        css: ['content.css'], // public folder
-      },
-    ],
+    // content_scripts: [
+    //   {
+    //     matches: ['http://*/*', 'https://*/*', '<all_urls>'],
+    //     js: ['content/index.iife.js'],
+    //   },
+    //   {
+    //     matches: ['http://*/*', 'https://*/*', '<all_urls>'],
+    //     js: ['content-ui/index.iife.js'],
+    //   },
+    //   {
+    //     matches: ['http://*/*', 'https://*/*', '<all_urls>'],
+    //     css: ['content.css'], // public folder
+    //   },
+    // ],
     devtools_page: 'devtools/index.html',
     web_accessible_resources: [
       {

@@ -8,7 +8,7 @@ import { useRegisterDocument } from './hooks/useRegisterDocument';
 export default function App() {
   const { toggleToolbarItem } = useToolbarStore();
 
-  useHotkeys('ctrl+c', () => toggleToolbarItem('comment'));
+  useHotkeys('c', () => toggleToolbarItem('comment'));
 
   useRegisterDocument();
 
