@@ -22,9 +22,12 @@
   },
   "devDependencies": {
     "@extension/storage": "workspace:*",
-    "@extension/tsconfig": "workspace:*"
+    "@extension/tsconfig": "workspace:*",
+    "@types/webextension-polyfill": "^0.12.1",
+    "zod": "^3.24.1"
   },
   "dependencies": {
-    "@supabase/supabase-js": "^2.47.2"
+    "@supabase/supabase-js": "^2.47.2",
+    "webextension-polyfill": "^0.12.0"
   }
 }

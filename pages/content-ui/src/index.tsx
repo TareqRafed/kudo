@@ -1,17 +1,16 @@
 import { createRoot } from 'react-dom/client';
 import App from '@src/App';
 import tailwindcssOutput from '../dist/tailwind-output.css?inline';
-import { addMessageListener } from '@extension/shared';
-import { GlobalStateStorage } from '@extension/storage';
+import { addMessageListener, sendMessage } from '@extension/shared';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { domHelper } from './util';
+import useEnvStore from './store/env';
 
 const rootId = 'ab-cursor-content-view-root';
 const shadowRootId = 'ab-cursor-shadow-root';
 const queryClient = new QueryClient();
 
 let lastUrl = window.location.href;
-
 setInterval(() => {
   if (window.location.href !== lastUrl) {
     lastUrl = window.location.href;
@@ -56,15 +55,28 @@ const removeRootContainer = () => {
 
 const registerListeners = () => {
   addMessageListener(message => {
-    console.log(message);
-    if (message.action == 'ACTION_CLICK') {
+    if (message.action == 'TOGGLE') {
       message.payload.isOnScreen ? createRootContainer() : removeRootContainer();
+      return Promise.resolve({ success: true, data: 'Unknown message type' });
     }
+    if (message.action == 'PING') {
+      return Promise.resolve({ success: true, data: 'PONG' });
+    }
+    return Promise.resolve({ success: false, error: 'Unknown message type' });
   });
 };
 
 const init = async () => {
-  registerListeners();
+  // const res = await sendMessage({ action: 'GET_STATE', payload: 'TabsOnScreen' });
+  const res = await sendMessage({ action: 'PING' }).catch(() => {
+    useEnvStore.getState().setEnvironment('injected');
+  });
+  console.log('init');
+  createRootContainer();
+  if (res?.success) {
+    useEnvStore.getState().setEnvironment('extension');
+    registerListeners();
+  }
 };
 
 init();

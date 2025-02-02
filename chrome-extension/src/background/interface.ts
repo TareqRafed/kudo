@@ -24,6 +24,10 @@ addMessageListener(async message => {
     return { success: true, data: session.data.session };
   }
 
+  if (message.action === 'PING') {
+    return { success: true, data: 'PONG' };
+  }
+
   // if (message.action === 'INSERT_DATA') {
   //   const result = await supabase.from(message.payload).select();
   //   return { success: true, data: result };
