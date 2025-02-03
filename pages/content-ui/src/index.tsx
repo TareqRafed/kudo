@@ -19,6 +19,7 @@ setInterval(() => {
 }, 1000);
 
 const createRootContainer = () => {
+  chrome.runtime.connect();
   const root = domHelper.createElement('div', { parent: document.body, id: rootId });
   const rootIntoShadow = domHelper.createElement('div', { parent: root, root: true, id: shadowRootId });
   const shadowRoot = root.attachShadow({ mode: 'closed' });
@@ -56,7 +57,7 @@ const removeRootContainer = () => {
 const registerListeners = () => {
   addMessageListener(message => {
     if (message.action == 'TOGGLE') {
-      message.payload.isOnScreen ? createRootContainer() : removeRootContainer();
+      toggleConnection();
       return Promise.resolve({ success: true, data: 'Unknown message type' });
     }
     if (message.action == 'PING') {
@@ -66,16 +67,41 @@ const registerListeners = () => {
   });
 };
 
+let port: chrome.runtime.Port | null = null;
+let isConnected = false;
+
+function toggleConnection(): void {
+  if (isConnected && port) {
+    port.disconnect();
+    port = null;
+    removeRootContainer();
+    console.log('Disconnected from background script');
+  } else {
+    port = chrome.runtime.connect();
+    // Listen for disconnection events.
+    port.onDisconnect.addListener((): void => {
+      console.log('Port disconnected');
+      isConnected = false;
+      port = null;
+    });
+    createRootContainer();
+    console.log('Connected to background script');
+  }
+  isConnected = !isConnected;
+}
+
 const init = async () => {
   // const res = await sendMessage({ action: 'GET_STATE', payload: 'TabsOnScreen' });
   const res = await sendMessage({ action: 'PING' }).catch(() => {
     useEnvStore.getState().setEnvironment('injected');
   });
-  console.log('init');
-  createRootContainer();
+
   if (res?.success) {
     useEnvStore.getState().setEnvironment('extension');
     registerListeners();
+    toggleConnection();
+  } else {
+    createRootContainer();
   }
 };
 
