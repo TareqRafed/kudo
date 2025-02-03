@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import { useSendMessage } from './useSendMessage';
 import useWebsiteStore from '@src/store/website';
 import { GlobalStateStorage } from '@extension/storage';
+import { useToast } from '@extension/ui';
 
 // const responseSchema = z.object({
 //   success: z.boolean(),
@@ -44,6 +45,7 @@ export const useRegisterDocument = () => {
   const { data: res } = useSendMessage({ action: 'GET_AUTH', payload: '' });
   const { setWebsiteData } = useWebsiteStore();
 
+  const { toast } = useToast();
   useEffect(() => {
     const registerDocument = async () => {
       if (!res?.data?.access_token) return;
@@ -61,9 +63,18 @@ export const useRegisterDocument = () => {
       })
         .then(data => data.json())
         .then(data => {
-          console.log(data, 'website post edge function response');
+          if (!data.success && data.error) {
+            toast({
+              variant: 'destructive',
+              title: "Kudo couldn't retrive the project details",
+              description: data.error,
+            });
+          }
           setWebsiteData(data?.data?.id, data?.data?.hash_id);
           GlobalStateStorage.deleteTask({ name: TASK_ID });
+        })
+        .catch(() => {
+          toast({ description: "Network issue, Kudo couldn't connect to servers" });
         });
     };
     registerDocument();
