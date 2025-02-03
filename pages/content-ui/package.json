@@ -33,13 +33,15 @@
     "lucide-react": "^0.461.0",
     "react-draggable": "^4.4.6",
     "react-hotkeys-hook": "^4.6.1",
-    "react-simple-wysiwyg": "^3.2.0"
+    "react-simple-wysiwyg": "^3.2.0",
+    "webextension-polyfill": "^0.12.0"
   },
   "devDependencies": {
     "@extension/hmr": "workspace:*",
     "@extension/tailwindcss-config": "workspace:*",
     "@extension/tsconfig": "workspace:*",
     "@extension/vite-config": "workspace:*",
+    "@types/webextension-polyfill": "^0.12.1",
     "concurrently": "^9.0.1",
     "cross-env": "^7.0.3"
   }

@@ -1,3 +1,5 @@
+import browser from 'webextension-polyfill';
+
 /**
  * This file holds everything regarding retrieving the session from the webapp
  */
@@ -5,7 +7,7 @@
 import { supabase, updateUserState } from './supabase';
 
 const whiteListedWebApps = ['http://localhost:3000/~'];
-chrome.runtime.onMessageExternal.addListener(async (request, sender) => {
+browser.runtime.onMessageExternal.addListener(async (request, sender) => {
   // if (!whiteListedWebApps.includes(sender.url || '')) return;
 
   /**
