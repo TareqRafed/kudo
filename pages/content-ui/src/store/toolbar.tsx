@@ -6,20 +6,30 @@ type ToolbarItem = {
   visible: boolean;
 };
 
-type ToolbarState = {
+type ToolbarItemsState = {
   comment: ToolbarItem;
   inbox: ToolbarItem;
 };
 
+type ToolbarState = {
+  isDragging: boolean;
+};
+
 type ToolbarStore = {
+  toolbarItems: ToolbarItemsState;
   toolbar: ToolbarState;
-  toggleToolbarItem: (id: keyof ToolbarState) => void;
+  toggleToolbarItem: (id: keyof ToolbarItemsState) => void;
+  setDragging: (isDragging: boolean) => void;
+  reset: () => void;
 };
 
 const useToolbarStore = create<ToolbarStore>(set => ({
-  toolbar: {
+  toolbarItems: {
     comment: { inUse: false, enabled: true, visible: true },
     inbox: { inUse: false, enabled: true, visible: true },
+  },
+  toolbar: {
+    isDragging: false,
   },
 
   /**
@@ -27,9 +37,28 @@ const useToolbarStore = create<ToolbarStore>(set => ({
    */
   toggleToolbarItem: id =>
     set(state => ({
+      toolbarItems: {
+        ...state.toolbarItems,
+        [id]: { ...state.toolbarItems[id], inUse: !state.toolbarItems[id].inUse },
+      },
+    })),
+
+  setDragging: (isDragging: boolean) =>
+    set(state => ({
       toolbar: {
         ...state.toolbar,
-        [id]: { ...state.toolbar[id], inUse: !state.toolbar[id].inUse },
+        isDragging,
+      },
+    })),
+
+  /**
+   * Disables sets all other item `inUse` to false
+   */
+  reset: () =>
+    set(() => ({
+      toolbarItems: {
+        comment: { inUse: false, enabled: true, visible: true },
+        inbox: { inUse: false, enabled: true, visible: true },
       },
     })),
 }));

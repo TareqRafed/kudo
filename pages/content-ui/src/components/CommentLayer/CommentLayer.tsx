@@ -13,6 +13,8 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 import useWebsiteStore from '@src/store/website';
 import type { OnDropEvent } from '../Magnet/Magnet';
 import Magnet from '../Magnet/Magnet';
+import CommentPin from './CommentPin';
+import { useHotkeys } from 'react-hotkeys-hook';
 
 const getCssSelector = (el: Element) => {
   const path = [];
@@ -29,7 +31,7 @@ type UpdateThreadArgs = Extract<Message, { action: 'RPC'; payload: 'update_recor
 
 export const CommentLayer = () => {
   const { website } = useWebsiteStore();
-  const { toolbar, toggleToolbarItem } = useToolbarStore();
+  const { toolbarItems, toggleToolbarItem } = useToolbarStore();
   const [isDragging, setIsDragging] = useState(false);
 
   const clientQuery = useQueryClient();
@@ -44,7 +46,11 @@ export const CommentLayer = () => {
     ['threads', website.id],
   );
 
-  const { mutate } = useMutation({
+  const {
+    mutate,
+    isPending: pendingThread,
+    variables: pendingThreadData,
+  } = useMutation({
     mutationFn: (args: NewThreadArgs) => sendMessage({ action: 'RPC', payload: 'create_new_thread', args }),
     mutationKey: ['threads'],
     onSuccess: () => {
@@ -97,12 +103,12 @@ export const CommentLayer = () => {
 
   const spawnThread: MouseEventHandler<HTMLDivElement> = e => {
     setThreadSpawn(prev => ({ ...prev, active: false }));
-    if (!toolbar.comment.inUse) return;
-
+    if (!toolbarItems.comment.inUse) return;
     handleThreadSpawn(e.clientX, e.clientY);
-
     toggleToolbarItem('comment'); // off
   };
+
+  useHotkeys('esc', () => setThreadSpawn(prev => ({ ...prev, active: false })));
 
   // if (!website.id) throw new Error('Something went wrong');
   return (
@@ -110,14 +116,22 @@ export const CommentLayer = () => {
       id="ab-layer"
       ref={layerRef}
       aria-hidden="true"
-      style={{ pointerEvents: toolbar.comment.inUse || threadSpawn.active ? 'all' : 'none' }}
-      className={cn([toolbar.comment.inUse && 'comment-cursor', 'text-white dark fixed inset-0 z-max-2 size-full'])}
+      style={{ pointerEvents: toolbarItems.comment.inUse || threadSpawn.active ? 'all' : 'none' }}
+      className={cn([
+        toolbarItems.comment.inUse && 'comment-cursor',
+        'text-white dark fixed inset-0 z-max-2 size-full',
+      ])}
       onClick={spawnThread}>
+      {pendingThread && pendingThreadData && (
+        <span style={{ position: 'absolute', left: pendingThreadData.x, top: pendingThreadData.y }}>
+          <CommentPin isLoading usersIds={[]} content="" />
+        </span>
+      )}
       {(data?.data?.data ?? []).map(thread => (
         <MagnifiedTag key={thread.id} layerRef={layerRef} thread={thread} />
       ))}
 
-      {threadSpawn.active && !toolbar.comment.inUse && (
+      {threadSpawn.active && !toolbarItems.comment.inUse && (
         <Magnet
           onStart={() => setIsDragging(true)}
           layerRef={layerRef}

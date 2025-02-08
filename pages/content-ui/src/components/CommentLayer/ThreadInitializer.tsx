@@ -1,8 +1,9 @@
 import { AnimatePresence, motion } from 'framer-motion';
-import { useEffect, useRef, useState, type ComponentPropsWithoutRef } from 'react';
+import { useRef, type ComponentPropsWithoutRef } from 'react';
 import CommentInput from './CommentInput';
 import { cn } from '@extension/ui';
 import BounceBoundary from '../BounceBoundary/BounceBoundary';
+import CommentPin from './CommentPin';
 
 type CallbackCreationParams = { comment: string };
 
@@ -21,11 +22,7 @@ const ThreadInit = ({ onCreate, isDragging, ...rest }: ThreadInitProps) => {
         style={{ position: 'absolute', left: 0, top: 0 }}
         className={cn([`pointer-events-auto forth-index bg-transparent items-start flex select-none`])}>
         <pre ref={pointerRef} className="cursor-grab active:cursor-grabbing">
-          <img
-            alt="Comment Flag"
-            src={chrome.runtime.getURL('content-ui/comment-flag.svg')}
-            className="pointer-events-none mr-5"
-          />
+          <CommentPin usersIds={[]} content="+" />
         </pre>
         <AnimatePresence>
           {!isDragging && (

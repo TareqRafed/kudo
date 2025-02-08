@@ -81,6 +81,13 @@ const BounceBoundary = ({ children, targetRef, helper }: BounceBoundaryProps) =>
     };
 
     handlePositionChange();
+    window.addEventListener('scroll', handlePositionChange);
+    window.addEventListener('resize', handlePositionChange);
+
+    return () => {
+      window.removeEventListener('scroll', handlePositionChange);
+      window.removeEventListener('resize', handlePositionChange);
+    };
   }, [targetRef.current]);
 
   console.log(targetRef, helper, locationResult, 'location');
@@ -91,7 +98,7 @@ const BounceBoundary = ({ children, targetRef, helper }: BounceBoundaryProps) =>
     <div
       className="z-max"
       style={{
-        position: 'absolute',
+        position: 'fixed',
         left: locationResult.x,
         bottom: locationResult.nearestEdge.vertical == 'bottom' ? locationResult.bottom : 'unset',
         top: locationResult.nearestEdge.vertical == 'top' ? locationResult.y : 'unset',

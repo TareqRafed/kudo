@@ -73,7 +73,7 @@ const ThreadTag = ({ data, isLoading, isDragging }: ThreadProps) => {
       <CommentPin
         ref={commentPinRef}
         isLoading={isLoading}
-        numberOfComments={data.comments.length}
+        content={data.comments.length}
         usersIds={data.comments?.map(cmnt => cmnt.creator.id)}
       />
       <AnimatePresence>
