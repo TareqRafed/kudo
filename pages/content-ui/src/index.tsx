@@ -22,7 +22,7 @@ const createRootContainer = () => {
   chrome.runtime.connect();
   const root = domHelper.createElement('div', { parent: document.body, id: rootId });
   const rootIntoShadow = domHelper.createElement('div', { parent: root, root: true, id: shadowRootId });
-  const shadowRoot = root.attachShadow({ mode: 'closed' });
+  const shadowRoot = root.attachShadow({ mode: 'closed', delegatesFocus: true });
 
   if (navigator.userAgent.includes('Firefox')) {
     /**
@@ -75,7 +75,6 @@ function toggleConnection(): void {
     port.disconnect();
     port = null;
     removeRootContainer();
-    console.log('Disconnected from background script');
   } else {
     port = chrome.runtime.connect();
     // Listen for disconnection events.
@@ -85,13 +84,11 @@ function toggleConnection(): void {
       port = null;
     });
     createRootContainer();
-    console.log('Connected to background script');
   }
   isConnected = !isConnected;
 }
 
 const init = async () => {
-  // const res = await sendMessage({ action: 'GET_STATE', payload: 'TabsOnScreen' });
   const res = await sendMessage({ action: 'PING' }).catch(() => {
     useEnvStore.getState().setEnvironment('injected');
   });

@@ -3,17 +3,17 @@ import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { UserAvatar } from '../UserAvatar';
 import { cn } from '@extension/ui';
-import LoadingDots from '../LoadingDots/LoadingDots';
+import { LoaderCircle } from 'lucide-react';
 
 const CommentPin = (
   {
     isLoading,
     usersIds,
-    numberOfComments,
+    content,
   }: {
     isLoading?: boolean;
     usersIds: number[];
-    numberOfComments: number;
+    content?: string;
   },
   ref: ForwardedRef<HTMLDivElement>,
 ) => {
@@ -34,7 +34,7 @@ const CommentPin = (
           initial={{ scale: 0.8, opacity: 0.8 }}
           animate={{ scale: 1, opacity: 1 }}
           onMouseMove={handleMouseMove}
-          className="bg-background hover:border-1 hover:outline-border dark cursor-pointer rounded-full rounded-tl-none  border-2 hover:outline hover:outline-1"
+          className="bg-background hover:border-1 hover:outline-border dark flex cursor-pointer items-center justify-center rounded-full rounded-tl-none  border-2 hover:outline hover:outline-1"
           style={{
             position: 'relative',
             width: '32px',
@@ -43,7 +43,9 @@ const CommentPin = (
             textAlign: 'center',
             color: 'white',
           }}>
-          <span className="text-xs font-bold">{isLoading ? <LoadingDots /> : numberOfComments}</span>
+          <span className="text-xs font-bold">
+            {isLoading ? <LoaderCircle className="!size-3 animate-spin" /> : content}
+          </span>
           <motion.div
             style={{
               position: 'absolute',

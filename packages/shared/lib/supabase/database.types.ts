@@ -21,17 +21,14 @@ export type Database = {
       colors: {
         Row: {
           hex: string;
-          id: number;
           name: string;
         };
         Insert: {
           hex: string;
-          id?: number;
           name: string;
         };
         Update: {
           hex?: string;
-          id?: number;
           name?: string;
         };
         Relationships: [];
@@ -105,29 +102,218 @@ export type Database = {
       };
       members: {
         Row: {
+          color: string | null;
+          display_name: string;
           first_name: string;
           id: string;
           last_name: string;
           profile_picture: string | null;
-          team_id: number | null;
+          selected_team_id: number | null;
         };
         Insert: {
+          color?: string | null;
+          display_name?: string;
           first_name: string;
           id: string;
           last_name: string;
           profile_picture?: string | null;
-          team_id?: number | null;
+          selected_team_id?: number | null;
         };
         Update: {
+          color?: string | null;
+          display_name?: string;
           first_name?: string;
           id?: string;
           last_name?: string;
           profile_picture?: string | null;
-          team_id?: number | null;
+          selected_team_id?: number | null;
         };
         Relationships: [
           {
+            foreignKeyName: 'members_color_fkey';
+            columns: ['color'];
+            isOneToOne: false;
+            referencedRelation: 'colors';
+            referencedColumns: ['hex'];
+          },
+          {
             foreignKeyName: 'members_team_id_fkey';
+            columns: ['selected_team_id'];
+            isOneToOne: false;
+            referencedRelation: 'teams';
+            referencedColumns: ['id'];
+          },
+        ];
+      };
+      members_teams: {
+        Row: {
+          is_admin: boolean;
+          joined_at: string;
+          member_id: string;
+          team_id: number;
+        };
+        Insert: {
+          is_admin?: boolean;
+          joined_at?: string;
+          member_id?: string;
+          team_id: number;
+        };
+        Update: {
+          is_admin?: boolean;
+          joined_at?: string;
+          member_id?: string;
+          team_id?: number;
+        };
+        Relationships: [
+          {
+            foreignKeyName: 'members_teams_member_id_fkey';
+            columns: ['member_id'];
+            isOneToOne: false;
+            referencedRelation: 'members';
+            referencedColumns: ['id'];
+          },
+          {
+            foreignKeyName: 'members_teams_member_id_fkey';
+            columns: ['member_id'];
+            isOneToOne: false;
+            referencedRelation: 'members_with_board';
+            referencedColumns: ['id'];
+          },
+          {
+            foreignKeyName: 'members_teams_member_id_fkey';
+            columns: ['member_id'];
+            isOneToOne: false;
+            referencedRelation: 'members_with_boards';
+            referencedColumns: ['id'];
+          },
+          {
+            foreignKeyName: 'members_teams_member_id_fkey';
+            columns: ['member_id'];
+            isOneToOne: false;
+            referencedRelation: 'members_with_metadata';
+            referencedColumns: ['id'];
+          },
+          {
+            foreignKeyName: 'members_teams_team_id_fkey';
+            columns: ['team_id'];
+            isOneToOne: false;
+            referencedRelation: 'teams';
+            referencedColumns: ['id'];
+          },
+        ];
+      };
+      notifications: {
+        Row: {
+          content: string;
+          created_at: string;
+          id: number;
+          is_read: boolean;
+          link: string;
+          notifier_id: string | null;
+          title: string;
+          user_id: string;
+        };
+        Insert: {
+          content: string;
+          created_at?: string;
+          id?: number;
+          is_read?: boolean;
+          link: string;
+          notifier_id?: string | null;
+          title: string;
+          user_id: string;
+        };
+        Update: {
+          content?: string;
+          created_at?: string;
+          id?: number;
+          is_read?: boolean;
+          link?: string;
+          notifier_id?: string | null;
+          title?: string;
+          user_id?: string;
+        };
+        Relationships: [
+          {
+            foreignKeyName: 'notifications_notifier_id_fkey';
+            columns: ['notifier_id'];
+            isOneToOne: false;
+            referencedRelation: 'members';
+            referencedColumns: ['id'];
+          },
+          {
+            foreignKeyName: 'notifications_notifier_id_fkey';
+            columns: ['notifier_id'];
+            isOneToOne: false;
+            referencedRelation: 'members_with_board';
+            referencedColumns: ['id'];
+          },
+          {
+            foreignKeyName: 'notifications_notifier_id_fkey';
+            columns: ['notifier_id'];
+            isOneToOne: false;
+            referencedRelation: 'members_with_boards';
+            referencedColumns: ['id'];
+          },
+          {
+            foreignKeyName: 'notifications_notifier_id_fkey';
+            columns: ['notifier_id'];
+            isOneToOne: false;
+            referencedRelation: 'members_with_metadata';
+            referencedColumns: ['id'];
+          },
+          {
+            foreignKeyName: 'notifications_user_id_fkey';
+            columns: ['user_id'];
+            isOneToOne: false;
+            referencedRelation: 'members';
+            referencedColumns: ['id'];
+          },
+          {
+            foreignKeyName: 'notifications_user_id_fkey';
+            columns: ['user_id'];
+            isOneToOne: false;
+            referencedRelation: 'members_with_board';
+            referencedColumns: ['id'];
+          },
+          {
+            foreignKeyName: 'notifications_user_id_fkey';
+            columns: ['user_id'];
+            isOneToOne: false;
+            referencedRelation: 'members_with_boards';
+            referencedColumns: ['id'];
+          },
+          {
+            foreignKeyName: 'notifications_user_id_fkey';
+            columns: ['user_id'];
+            isOneToOne: false;
+            referencedRelation: 'members_with_metadata';
+            referencedColumns: ['id'];
+          },
+        ];
+      };
+      projects: {
+        Row: {
+          created_at: string;
+          domain: string;
+          id: number;
+          team_id: number;
+        };
+        Insert: {
+          created_at?: string;
+          domain: string;
+          id?: number;
+          team_id: number;
+        };
+        Update: {
+          created_at?: string;
+          domain?: string;
+          id?: number;
+          team_id?: number;
+        };
+        Relationships: [
+          {
+            foreignKeyName: 'projects_team_id_fkey';
             columns: ['team_id'];
             isOneToOne: false;
             referencedRelation: 'teams';
@@ -139,20 +325,32 @@ export type Database = {
         Row: {
           board_id: number | null;
           created_at: string;
+          created_by: string;
           id: number;
+          logo: string | null;
           name: string;
+          theme: string | null;
+          tier_id: number;
         };
         Insert: {
           board_id?: number | null;
           created_at?: string;
+          created_by?: string;
           id?: number;
+          logo?: string | null;
           name: string;
+          theme?: string | null;
+          tier_id?: number;
         };
         Update: {
           board_id?: number | null;
           created_at?: string;
+          created_by?: string;
           id?: number;
+          logo?: string | null;
           name?: string;
+          theme?: string | null;
+          tier_id?: number;
         };
         Relationships: [
           {
@@ -163,11 +361,102 @@ export type Database = {
             referencedColumns: ['id'];
           },
           {
-            foreignKeyName: 'teams_board_id_fkey';
-            columns: ['board_id'];
+            foreignKeyName: 'teams_created_by_fkey';
+            columns: ['created_by'];
+            isOneToOne: false;
+            referencedRelation: 'members';
+            referencedColumns: ['id'];
+          },
+          {
+            foreignKeyName: 'teams_created_by_fkey';
+            columns: ['created_by'];
+            isOneToOne: false;
+            referencedRelation: 'members_with_board';
+            referencedColumns: ['id'];
+          },
+          {
+            foreignKeyName: 'teams_created_by_fkey';
+            columns: ['created_by'];
+            isOneToOne: false;
+            referencedRelation: 'members_with_boards';
+            referencedColumns: ['id'];
+          },
+          {
+            foreignKeyName: 'teams_created_by_fkey';
+            columns: ['created_by'];
             isOneToOne: false;
             referencedRelation: 'members_with_metadata';
-            referencedColumns: ['board_id'];
+            referencedColumns: ['id'];
+          },
+          {
+            foreignKeyName: 'teams_tier_id_fkey';
+            columns: ['tier_id'];
+            isOneToOne: false;
+            referencedRelation: 'tiers';
+            referencedColumns: ['id'];
+          },
+        ];
+      };
+      teams_invitations: {
+        Row: {
+          created_at: string;
+          email: string;
+          status: Database['public']['Enums']['status'];
+          team_id: number;
+          token: string;
+          user_id: string;
+        };
+        Insert: {
+          created_at?: string;
+          email: string;
+          status?: Database['public']['Enums']['status'];
+          team_id: number;
+          token?: string;
+          user_id?: string;
+        };
+        Update: {
+          created_at?: string;
+          email?: string;
+          status?: Database['public']['Enums']['status'];
+          team_id?: number;
+          token?: string;
+          user_id?: string;
+        };
+        Relationships: [
+          {
+            foreignKeyName: 'teams_invitations_team_id_fkey';
+            columns: ['team_id'];
+            isOneToOne: false;
+            referencedRelation: 'teams';
+            referencedColumns: ['id'];
+          },
+          {
+            foreignKeyName: 'teams_invitations_user_id_fkey';
+            columns: ['user_id'];
+            isOneToOne: false;
+            referencedRelation: 'members';
+            referencedColumns: ['id'];
+          },
+          {
+            foreignKeyName: 'teams_invitations_user_id_fkey';
+            columns: ['user_id'];
+            isOneToOne: false;
+            referencedRelation: 'members_with_board';
+            referencedColumns: ['id'];
+          },
+          {
+            foreignKeyName: 'teams_invitations_user_id_fkey';
+            columns: ['user_id'];
+            isOneToOne: false;
+            referencedRelation: 'members_with_boards';
+            referencedColumns: ['id'];
+          },
+          {
+            foreignKeyName: 'teams_invitations_user_id_fkey';
+            columns: ['user_id'];
+            isOneToOne: false;
+            referencedRelation: 'members_with_metadata';
+            referencedColumns: ['id'];
           },
         ];
       };
@@ -244,13 +533,6 @@ export type Database = {
             foreignKeyName: 'threads_website_id_fkey';
             columns: ['website_id'];
             isOneToOne: false;
-            referencedRelation: 'members_with_metadata';
-            referencedColumns: ['website_id'];
-          },
-          {
-            foreignKeyName: 'threads_website_id_fkey';
-            columns: ['website_id'];
-            isOneToOne: false;
             referencedRelation: 'website';
             referencedColumns: ['id'];
           },
@@ -260,44 +542,47 @@ export type Database = {
         Row: {
           created_at: string;
           id: number;
-          max_users: number | null;
-          name: string | null;
+          max_users: number;
+          name: string;
         };
         Insert: {
           created_at?: string;
           id?: number;
-          max_users?: number | null;
-          name?: string | null;
+          max_users: number;
+          name: string;
         };
         Update: {
           created_at?: string;
           id?: number;
-          max_users?: number | null;
-          name?: string | null;
+          max_users?: number;
+          name?: string;
         };
         Relationships: [];
       };
       website: {
         Row: {
-          board_id: number;
+          board_id: number | null;
           created_at: string;
           domain: string;
           hash_id: string;
           id: number;
+          project_id: number | null;
         };
         Insert: {
-          board_id: number;
+          board_id?: number | null;
           created_at?: string;
           domain: string;
           hash_id: string;
           id?: number;
+          project_id?: number | null;
         };
         Update: {
-          board_id?: number;
+          board_id?: number | null;
           created_at?: string;
           domain?: string;
           hash_id?: string;
           id?: number;
+          project_id?: number | null;
         };
         Relationships: [
           {
@@ -308,11 +593,11 @@ export type Database = {
             referencedColumns: ['id'];
           },
           {
-            foreignKeyName: 'website_board_id_fkey';
-            columns: ['board_id'];
+            foreignKeyName: 'website_project_id_fkey';
+            columns: ['project_id'];
             isOneToOne: false;
-            referencedRelation: 'members_with_metadata';
-            referencedColumns: ['board_id'];
+            referencedRelation: 'projects';
+            referencedColumns: ['id'];
           },
         ];
       };
@@ -339,13 +624,6 @@ export type Database = {
             referencedRelation: 'boards';
             referencedColumns: ['id'];
           },
-          {
-            foreignKeyName: 'teams_board_id_fkey';
-            columns: ['board_id'];
-            isOneToOne: false;
-            referencedRelation: 'members_with_metadata';
-            referencedColumns: ['board_id'];
-          },
         ];
       };
       members_with_boards: {
@@ -369,26 +647,31 @@ export type Database = {
             referencedRelation: 'boards';
             referencedColumns: ['id'];
           },
-          {
-            foreignKeyName: 'teams_board_id_fkey';
-            columns: ['board_id'];
-            isOneToOne: false;
-            referencedRelation: 'members_with_metadata';
-            referencedColumns: ['board_id'];
-          },
         ];
       };
       members_with_metadata: {
         Row: {
-          board_id: number | null;
+          color: string | null;
+          display_name: string | null;
+          email: string | null;
+          first_name: string | null;
           id: string | null;
-          team_id: number | null;
-          website_id: number | null;
+          last_name: string | null;
+          profile_picture: string | null;
+          selected_team_id: number | null;
+          teams: Json | null;
         };
         Relationships: [
           {
+            foreignKeyName: 'members_color_fkey';
+            columns: ['color'];
+            isOneToOne: false;
+            referencedRelation: 'colors';
+            referencedColumns: ['hex'];
+          },
+          {
             foreignKeyName: 'members_team_id_fkey';
-            columns: ['team_id'];
+            columns: ['selected_team_id'];
             isOneToOne: false;
             referencedRelation: 'teams';
             referencedColumns: ['id'];
@@ -401,6 +684,7 @@ export type Database = {
           created_at: string | null;
           creator: Json | null;
           creator_id: string | null;
+          domain: string | null;
           id: number | null;
           rect: Json | null;
           resolved: boolean | null;
@@ -452,13 +736,6 @@ export type Database = {
             foreignKeyName: 'threads_website_id_fkey';
             columns: ['website_id'];
             isOneToOne: false;
-            referencedRelation: 'members_with_metadata';
-            referencedColumns: ['website_id'];
-          },
-          {
-            foreignKeyName: 'threads_website_id_fkey';
-            columns: ['website_id'];
-            isOneToOne: false;
             referencedRelation: 'website';
             referencedColumns: ['id'];
           },
@@ -466,28 +743,6 @@ export type Database = {
       };
     };
     Functions: {
-      authenticated_allowed_website_insert: {
-        Args: {
-          target_id: string;
-          target_board_id: number;
-        };
-        Returns: {
-          board_id: number | null;
-          id: string | null;
-          team_id: number | null;
-        }[];
-      };
-      authenticated_allowed_website_read: {
-        Args: {
-          target_id: string;
-        };
-        Returns: {
-          board_id: number | null;
-          id: string | null;
-          team_id: number | null;
-          website_id: number | null;
-        }[];
-      };
       create_new_comment: {
         Args: {
           target_thread_id: number;
@@ -507,11 +762,12 @@ export type Database = {
           domain: string;
         };
         Returns: {
-          board_id: number;
+          board_id: number | null;
           created_at: string;
           domain: string;
           hash_id: string;
           id: number;
+          project_id: number | null;
         }[];
       };
       create_new_thread: {
@@ -539,15 +795,72 @@ export type Database = {
           y: number;
         }[];
       };
-      get_members_with_metadata: {
+      delete_member: {
         Args: Record<PropertyKey, never>;
+        Returns: boolean;
+      };
+      get_current_member_with_metadata: {
+        Args: Record<PropertyKey, never>;
+        Returns: {
+          color: string | null;
+          display_name: string | null;
+          email: string | null;
+          first_name: string | null;
+          id: string | null;
+          last_name: string | null;
+          profile_picture: string | null;
+          selected_team_id: number | null;
+          teams: Json | null;
+        }[];
+      };
+      get_member_with_metadata: {
+        Args: {
+          user_id: string;
+        };
+        Returns: {
+          color: string | null;
+          display_name: string | null;
+          email: string | null;
+          first_name: string | null;
+          id: string | null;
+          last_name: string | null;
+          profile_picture: string | null;
+          selected_team_id: number | null;
+          teams: Json | null;
+        }[];
+      };
+      get_members_with_metadata: {
+        Args: {
+          for_team_id?: number;
+        };
         Returns: {
           id: string;
           first_name: string;
           last_name: string;
-          team_id: number;
+          selected_team_id: number;
+          profile_picture: string;
           color_name: string;
           color_hex: string;
+        }[];
+      };
+      get_teams: {
+        Args: Record<PropertyKey, never>;
+        Returns: {
+          comments: Json | null;
+          created_at: string | null;
+          creator: Json | null;
+          creator_id: string | null;
+          domain: string | null;
+          id: number | null;
+          rect: Json | null;
+          resolved: boolean | null;
+          target_selector: string | null;
+          team_id: number | null;
+          website_id: number | null;
+          window_height: number | null;
+          window_width: number | null;
+          x: number | null;
+          y: number | null;
         }[];
       };
       get_threads_for_website_id: {
@@ -559,6 +872,7 @@ export type Database = {
           created_at: string | null;
           creator: Json | null;
           creator_id: string | null;
+          domain: string | null;
           id: number | null;
           rect: Json | null;
           resolved: boolean | null;
@@ -584,6 +898,12 @@ export type Database = {
         };
         Returns: number;
       };
+      team_users_count: {
+        Args: {
+          _team_id: number;
+        };
+        Returns: Database['public']['CompositeTypes']['team_users_summary'][];
+      };
       update_record: {
         Args: {
           table_name: string;
@@ -594,10 +914,13 @@ export type Database = {
       };
     };
     Enums: {
-      [_ in never]: never;
+      status: 'positive' | 'negative' | 'neutral';
     };
     CompositeTypes: {
-      [_ in never]: never;
+      team_users_summary: {
+        total_count: number | null;
+        max_users: number | null;
+      };
     };
   };
 };
