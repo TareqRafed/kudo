@@ -2,30 +2,35 @@ import { sendMessage, useStorage } from '@extension/shared';
 import { Button, cn, Tooltip, TooltipContent, TooltipTrigger } from '@extension/ui';
 import useToolbarStore from '@src/store/toolbar';
 import { AnimatePresence, motion } from 'framer-motion';
-import { ArrowRight, Inbox, MessageCircleMore } from 'lucide-react';
-import { useRef, type ComponentPropsWithoutRef, type ReactNode } from 'react';
+import { ArrowRight, MessageCircleMore } from 'lucide-react';
+import { useEffect, useRef, useState, type ComponentPropsWithoutRef, type ReactNode } from 'react';
 import { GlobalStateStorage } from '@extension/storage';
 import LoadingDots from '../LoadingDots/LoadingDots';
-import { useHover } from '@src/hooks/useHover';
-import { useDebounce } from '@uidotdev/usehooks';
+import type { DraggableEventHandler } from 'react-draggable';
 import Draggable from 'react-draggable';
-
-const DELAY = 0.5;
-const DURATION = 0.3;
+import { useHotkeys } from 'react-hotkeys-hook';
+import { useDebounceValue } from 'usehooks-ts';
 
 const Toolbar = () => {
-  const { tasks, isLoggedIn } = useStorage(GlobalStateStorage);
-  const hoverRef = useRef<HTMLDivElement>(null);
-  const isHovering = useHover(hoverRef);
-  const isLoading = !useDebounce(tasks.isFree, 50);
+  const { tasks } = useStorage(GlobalStateStorage);
+  const { setDragging } = useToolbarStore();
+  const toolbarRef = useRef<HTMLDivElement>(null);
+  const [isLoading, setIsLoading] = useDebounceValue(true, 500);
 
-  const isExpanded = isHovering || !isLoggedIn || isLoading;
+  useEffect(() => {
+    setIsLoading(!tasks.isFree);
+  }, [tasks.isFree, setIsLoading]);
+
+  const [pos, setPos] = useState({ x: 10, y: 10 });
+  const onDrop: DraggableEventHandler = (e, { x, y }) => {
+    setPos({ x: 10, y: Math.min(Math.max(10, y), window.innerHeight - 20) });
+    setDragging(false);
+  };
 
   return (
-    <Draggable>
-      <div className="pointer-events-none fixed top-5 z-[2147483645] flex w-full justify-center">
+    <Draggable position={pos} onDrag={() => setDragging(true)} onStop={onDrop} nodeRef={toolbarRef}>
+      <span ref={toolbarRef} className="z-max-2 fixed left-0 top-0">
         <motion.div
-          ref={hoverRef}
           initial={{ scale: 1, y: -10, opacity: 0 }}
           animate={{
             y: 0,
@@ -33,13 +38,13 @@ const Toolbar = () => {
             transition: { duration: 0.3 },
           }}
           whileHover={{
-            scale: 1.3,
+            scale: 1.2,
           }}
-          transition={{ duration: DURATION, delay: 0, ease: 'easeIn' }}
+          // transition={{ duration: DURATION, delay: 0,  }}
           style={{ borderRadius: 50 }}
           layout
           className={cn([
-            'min-h-10 overflow-hidden w-fit bg-background text-white dark pointer-events-auto flex items-center space-x-1 border-2 p-1',
+            'min-h-10 overflow-hidden w-fit bg-background text-white dark pointer-events-auto flex justify-center items-center space-x-1 border p-1',
           ])}>
           <AnimatePresence>
             {isLoading ? (
@@ -47,26 +52,27 @@ const Toolbar = () => {
                 <LoadingDots />
               </motion.span>
             ) : (
-              <ToolbarOptions expanded={isExpanded} />
+              <ToolbarOptions />
             )}
           </AnimatePresence>
         </motion.div>
-      </div>
+      </span>
     </Draggable>
   );
 };
 
 export default Toolbar;
 
-const ToolbarOptions = ({ expanded }: { expanded: boolean }) => {
-  const { toggleToolbarItem, toolbar } = useToolbarStore();
+const ToolbarOptions = () => {
+  const { toggleToolbarItem, reset, toolbarItems, toolbar: state } = useToolbarStore();
   const { isLoggedIn } = useStorage(GlobalStateStorage);
+  useHotkeys('c', () => toggleToolbarItem('comment'));
+  useHotkeys('esc', () => reset());
 
   if (!isLoggedIn) {
     return (
       <ToolbarItem
-        expanded
-        isActive={toolbar.comment.inUse}
+        disabled={state.isDragging}
         onClick={() => sendMessage({ action: 'REQUEST_LOGIN', payload: '' })}
         tooltipContent="Go to Dashboard"
         className="flex w-full ">
@@ -77,30 +83,12 @@ const ToolbarOptions = ({ expanded }: { expanded: boolean }) => {
   return (
     <motion.span layout>
       <ToolbarItem
-        isActive={toolbar.comment.inUse}
+        disabled={state.isDragging}
+        isActive={toolbarItems.comment.inUse}
         onClick={() => toggleToolbarItem('comment')}
-        tooltipContent="Comment"
-        expanded={expanded}>
+        tooltipContent="Comment">
         <MessageCircleMore className={cn(['!size-4'])} />
       </ToolbarItem>
-
-      {expanded && (
-        <motion.div
-          className="hidden"
-          initial={{ opacity: 0 }}
-          animate={{
-            opacity: 1,
-            transition: { duration: DURATION, delay: DELAY },
-          }}>
-          <ToolbarItem
-            expanded={expanded}
-            isActive={toolbar.inbox.inUse}
-            onClick={() => toggleToolbarItem('inbox')}
-            tooltipContent="Inbox">
-            <Inbox className={cn(['!size-4'])} />
-          </ToolbarItem>
-        </motion.div>
-      )}
     </motion.span>
   );
 };
@@ -110,25 +98,23 @@ type ToolbarItemProps = {
   onClick: () => void;
   children: ReactNode;
   tooltipContent: ReactNode;
-  expanded?: boolean;
 } & ComponentPropsWithoutRef<'button'>;
 
 const ToolbarItem = ({ isActive = false, onClick, children, tooltipContent, ...rest }: ToolbarItemProps) => {
   return (
-    <motion.div layout>
-      <Tooltip>
-        <TooltipTrigger>
-          <Button
-            onClick={onClick}
-            className={cn(['size-7 p-1 rounded-full', isActive && 'bg-primary', rest.className])}
-            variant={'ghost'}>
-            <motion.span className="flex" layout>
-              {children}
-            </motion.span>
-          </Button>
-        </TooltipTrigger>
-        <TooltipContent>{tooltipContent}</TooltipContent>
-      </Tooltip>
-    </motion.div>
+    <Tooltip>
+      <TooltipTrigger disabled={rest.disabled} asChild>
+        <Button
+          onClick={onClick}
+          className={cn(['size-7 p-1 rounded-full', isActive && 'border border-border bg-primary', rest.className])}
+          variant={'ghost'}
+          {...rest}>
+          <motion.span className="flex p-1" layout>
+            {children}
+          </motion.span>
+        </Button>
+      </TooltipTrigger>
+      <TooltipContent>{tooltipContent}</TooltipContent>
+    </Tooltip>
   );
 };

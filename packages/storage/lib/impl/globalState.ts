@@ -64,6 +64,7 @@ export const GlobalStateStorage: GlobalStateStorage = {
   },
 
   async appendTask({ name }) {
+    console.log('new task name', name);
     await storage.set(state => {
       return {
         ...state,

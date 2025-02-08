@@ -5,15 +5,14 @@ import './session';
 
 import { GlobalStateStorage } from '@extension/storage';
 import { sendMessage } from '@extension/shared';
-import { ports } from './connect';
+import { isContentOnScreen, ports } from './connect';
 
 const updateIcon = (on: boolean) => {
   on ? browser.action.setIcon({ path: 'icon-128-on.png' }) : browser.action.setIcon({ path: 'icon-128-off.png' });
 };
 
 const syncAction = async (tabId: number) => {
-  const onScreen = !!ports[tabId];
-  console.log(tabId, ports, onScreen, 'showing tab');
+  const onScreen = isContentOnScreen(tabId);
   updateIcon(onScreen);
 };
 
@@ -25,7 +24,7 @@ const toggleKudo = async (tabId: number) => {
     if (alredyContentInjected) {
       await sendMessage({ action: 'TOGGLE', payload: { isOnScreen: !!ports[tabId] } }, { tabId: tabId });
       await syncAction(tabId);
-      return !!ports[tabId];
+      return isContentOnScreen(tabId);
     }
   } catch {
     await browser.scripting.executeScript({
@@ -44,8 +43,7 @@ const handleActionClick = async (tab: browser.Tabs.Tab) => {
 };
 
 const handleTabUpdate = async (tabId: number) => {
-  const onScreen = !!ports[tabId];
-
+  const onScreen = ports[tabId];
   if (onScreen) {
     chrome.scripting.executeScript({
       target: { tabId: tabId },

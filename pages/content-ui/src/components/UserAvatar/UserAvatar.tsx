@@ -1,17 +1,22 @@
 import { Avatar, AvatarFallback, AvatarImage, cn } from '@extension/ui';
-import useUserColor from '@src/hooks/useUserColor';
+import { useSendMessage } from '@src/hooks/useSendMessage';
 
 interface Props {
-  src?: string;
   userId: number | string;
   className?: string;
 }
 
-export const UserAvatar = ({ src, userId, className }: Props) => {
-  const color = useUserColor(userId);
+export const UserAvatar = ({ userId, className }: Props) => {
+  const { data: member } = useSendMessage({
+    action: 'RPC',
+    payload: 'get_member_with_metadata',
+    args: { user_id: userId.toString() },
+  });
+  const ppSrc = member?.data?.data?.[0].profile_picture ?? '';
+  const color = member?.data?.data?.[0].color ?? '#fff';
   return (
     <Avatar style={{ borderColor: color }} className={cn([`dark size-9 border-2`, className])}>
-      <AvatarImage src={src} />
+      <AvatarImage src={ppSrc} />
       <AvatarFallback>
         <div className="size-full" style={{ background: `linear-gradient(135deg, ${color}, #000)` }}></div>
       </AvatarFallback>

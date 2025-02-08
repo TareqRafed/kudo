@@ -70,6 +70,7 @@ export const useRegisterDocument = () => {
               description: data.error,
             });
           }
+          console.log('website id', data);
           setWebsiteData(data?.data?.id, data?.data?.hash_id);
           GlobalStateStorage.deleteTask({ name: TASK_ID });
         })
