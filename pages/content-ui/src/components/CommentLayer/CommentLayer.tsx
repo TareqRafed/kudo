@@ -32,15 +32,17 @@ type UpdateThreadArgs = Extract<Message, { action: 'RPC'; payload: 'update_recor
 export const CommentLayer = () => {
   const { website } = useWebsiteStore();
   const { toolbarItems, toggleToolbarItem } = useToolbarStore();
+
+  // is Dragging
   const [isDragging, setIsDragging] = useState(false);
 
   const clientQuery = useQueryClient();
-  const { data } = useSendMessage(
+  const { data: threads } = useSendMessage(
     {
       action: 'RPC',
       payload: 'get_threads_for_website_id',
       args: {
-        id: website.id || 0,
+        id: website.id,
       },
     },
     ['threads', website.id],
@@ -127,13 +129,14 @@ export const CommentLayer = () => {
           <CommentPin isLoading usersIds={[]} content="" />
         </span>
       )}
-      {(data?.data?.data ?? []).map(thread => (
+
+      {(threads?.data?.data ?? []).map(thread => (
         <MagnifiedTag key={thread.id} layerRef={layerRef} thread={thread} />
       ))}
 
       {threadSpawn.active && !toolbarItems.comment.inUse && (
         <Magnet
-          onStart={() => setIsDragging(true)}
+          onDrag={() => setIsDragging(true)}
           layerRef={layerRef}
           initData={{
             targetSelector: threadSpawn.targetSelector ?? undefined,

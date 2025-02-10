@@ -27,8 +27,8 @@ function calculateScrollPosition(oldRect: DOMRect, newRect: DOMRect, x: number, 
 }
 
 /**
- * This hook calculates the position of threads or threads initializers based on captured data from spawning.
- * In case a target element isn't specified it just go absulote on screen instead of following that element
+ * This hook calculates the position of elements based on captured data from mounting.
+ * In case a target element isn't specified it just go absolute on screen instead of tracking that element
  */
 const usePositionCalculator = (data: PositionData) => {
   const [position, setPosition] = useState({
