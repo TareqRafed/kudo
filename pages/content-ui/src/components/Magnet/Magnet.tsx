@@ -60,6 +60,9 @@ const handlePositionUpdate = (x: number, y: number, layer: HTMLElement) => {
   };
 };
 
+/**
+ * Trace specific component using initData
+ */
 const Magnet = <T extends HTMLElement>({ children, initData, onDrop, layerRef, onStart, ...rest }: MagnetProps<T>) => {
   const { position } = usePositionCalculator(initData);
 

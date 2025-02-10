@@ -21,6 +21,7 @@ import BounceBoundary from '../BounceBoundary/BounceBoundary';
 import CommentInput from './CommentInput';
 import { useClickAway } from '@src/hooks/useClickAway';
 import { Editor, EditorProvider } from 'react-simple-wysiwyg';
+import { useSendMessage } from '@src/hooks/useSendMessage';
 
 export type ThreadData = Database['public']['Functions']['get_threads_for_website_id']['Returns'] extends (infer U)[]
   ? U
@@ -150,6 +151,7 @@ type NewCommentArgs = Database['public']['Functions']['create_new_comment']['Arg
 
 const ThreadComment = ({ comment, showActions = false, minimal = false }: CommentSectionProps) => {
   const modalRef = useRef<HTMLDivElement>(null);
+
   return (
     <div className="w-96 border-b px-2 py-3" ref={modalRef}>
       <div className="mb-3 flex items-start justify-between">

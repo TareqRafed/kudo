@@ -1,8 +1,8 @@
 import { sendMessage, useStorage } from '@extension/shared';
-import { Button, cn, Tooltip, TooltipContent, TooltipTrigger } from '@extension/ui';
+import { Button, cn, Tooltip, TooltipPortal, TooltipContent, TooltipTrigger, KeyboardShortcut } from '@extension/ui';
 import useToolbarStore from '@src/store/toolbar';
 import { AnimatePresence, motion } from 'framer-motion';
-import { ArrowRight, MessageCircleMore } from 'lucide-react';
+import { ArrowRight, MessageCircle } from 'lucide-react';
 import { useEffect, useRef, useState, type ComponentPropsWithoutRef, type ReactNode } from 'react';
 import { GlobalStateStorage } from '@extension/storage';
 import LoadingDots from '../LoadingDots/LoadingDots';
@@ -10,6 +10,8 @@ import type { DraggableEventHandler } from 'react-draggable';
 import Draggable from 'react-draggable';
 import { useHotkeys } from 'react-hotkeys-hook';
 import { useDebounceValue } from 'usehooks-ts';
+import { domHelper } from '@src/util';
+import Logo from '../../../public/logo.svg';
 
 const Toolbar = () => {
   const { tasks } = useStorage(GlobalStateStorage);
@@ -38,7 +40,10 @@ const Toolbar = () => {
             transition: { duration: 0.3 },
           }}
           whileHover={{
-            scale: 1.2,
+            scale: 1.1,
+          }}
+          whileTap={{
+            scale: 0.9,
           }}
           // transition={{ duration: DURATION, delay: 0,  }}
           style={{ borderRadius: 50 }}
@@ -74,9 +79,11 @@ const ToolbarOptions = () => {
       <ToolbarItem
         disabled={state.isDragging}
         onClick={() => sendMessage({ action: 'REQUEST_LOGIN', payload: '' })}
-        tooltipContent="Go to Dashboard"
-        className="flex w-full ">
-        Login to Continue <ArrowRight />
+        tooltipContent="Login in the dashboard"
+        className="flex rounded-full">
+        <img src={Logo} className="size-5 mr-2" />
+        <span className="ml-5 mb-1">Login to Continue</span>
+        <ArrowRight className="ml-1 size-4" />
       </ToolbarItem>
     );
   }
@@ -86,8 +93,12 @@ const ToolbarOptions = () => {
         disabled={state.isDragging}
         isActive={toolbarItems.comment.inUse}
         onClick={() => toggleToolbarItem('comment')}
-        tooltipContent="Comment">
-        <MessageCircleMore className={cn(['!size-4'])} />
+        tooltipContent={
+          <>
+            Comment <KeyboardShortcut shortcut="C" />
+          </>
+        }>
+        <MessageCircle className={cn(['!size-4'])} />
       </ToolbarItem>
     </motion.span>
   );
@@ -109,12 +120,14 @@ const ToolbarItem = ({ isActive = false, onClick, children, tooltipContent, ...r
           className={cn(['size-7 p-1 rounded-full', isActive && 'border border-border bg-primary', rest.className])}
           variant={'ghost'}
           {...rest}>
-          <motion.span className="flex p-1" layout>
+          <motion.span className="flex justify-center items-center p-1" layout>
             {children}
           </motion.span>
         </Button>
       </TooltipTrigger>
-      <TooltipContent>{tooltipContent}</TooltipContent>
+      <TooltipPortal container={domHelper.getRoot()!}>
+        <TooltipContent side="right">{tooltipContent}</TooltipContent>
+      </TooltipPortal>
     </Tooltip>
   );
 };
