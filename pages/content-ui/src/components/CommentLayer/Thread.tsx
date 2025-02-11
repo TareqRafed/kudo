@@ -21,7 +21,6 @@ import BounceBoundary from '../BounceBoundary/BounceBoundary';
 import CommentInput from './CommentInput';
 import { useClickAway } from '@src/hooks/useClickAway';
 import { Editor, EditorProvider } from 'react-simple-wysiwyg';
-import { useSendMessage } from '@src/hooks/useSendMessage';
 
 export type ThreadData = Database['public']['Functions']['get_threads_for_website_id']['Returns'] extends (infer U)[]
   ? U
@@ -47,7 +46,7 @@ const ThreadTag = ({ data, isLoading, isDragging }: ThreadProps) => {
     setShowExtended(false);
   });
 
-  if (!data.id || !data.comments || !data.comments?.[0]) return;
+  if (!data.id) return;
 
   return (
     <div
@@ -74,8 +73,8 @@ const ThreadTag = ({ data, isLoading, isDragging }: ThreadProps) => {
       <CommentPin
         ref={commentPinRef}
         isLoading={isLoading}
-        content={data.comments.length}
-        usersIds={data.comments?.map(cmnt => cmnt.creator.id)}
+        content={data.comments.length + 1}
+        usersIds={[...new Set([data.creator.id, ...data.comments?.map(cmnt => cmnt.creator.id)])]}
       />
       <AnimatePresence>
         {!isCollapsed && !isDragging && (
@@ -86,11 +85,15 @@ const ThreadTag = ({ data, isLoading, isDragging }: ThreadProps) => {
               exit={{ opacity: 0, y: 10 }}
               transition={{ duration: 0.2, delay: 0.2 }}>
               <div className="bg-background dark relative max-h-[450px] overflow-auto rounded-lg border text-white">
-                <ThreadComment minimal={false} showActions={showExtended} comment={data.comments[0]} />
+                <ThreadComment
+                  minimal={false}
+                  showActions={showExtended}
+                  comment={{ content: data.content, creator: data.creator, created_at: data.created_at }}
+                />
                 {showExtended && (
                   <>
                     <div>
-                      {data.comments.slice(1).map(cmnt => (
+                      {data.comments.map(cmnt => (
                         <ThreadComment showActions minimal key={cmnt.id} comment={cmnt} />
                       ))}
                     </div>
@@ -132,8 +135,7 @@ type CommentSectionProps = {
     created_at: string;
     creator: {
       id: string;
-      first_name: string | null;
-      last_name: string | null;
+      display_name: string;
       profile_picture: string | null;
     } | null;
   };
@@ -158,7 +160,7 @@ const ThreadComment = ({ comment, showActions = false, minimal = false }: Commen
         <div className="flex items-center space-x-2">
           <UserAvatar userId={comment.creator?.id} className={cn(['size-7'])} />
           <div className="flex flex-col text-xs">
-            <span className="font-bold">{`${comment.creator?.first_name} ${comment.creator?.last_name}`}</span>
+            <span className="font-bold">{`${comment.creator?.display_name}`}</span>
             <span className="text-[10px]">{formatRelative(comment.created_at || new Date(), new Date())}</span>
           </div>
         </div>

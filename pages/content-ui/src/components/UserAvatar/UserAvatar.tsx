@@ -10,7 +10,7 @@ export const UserAvatar = ({ userId, className }: Props) => {
   const { data: member } = useSendMessage({
     action: 'RPC',
     payload: 'get_member_with_metadata',
-    args: { user_id: userId.toString() },
+    args: { user_id: userId?.toString() },
   });
   const ppSrc = member?.data?.data?.[0].profile_picture ?? '';
   const color = member?.data?.data?.[0].color ?? '#fff';
