@@ -1,5 +1,4 @@
 packages:
-  - "chrome-extension"
-  - "pages/*"
+  - "apps/*"
   - "packages/*"
   - "tests/*"

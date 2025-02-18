@@ -1,7 +1,7 @@
 import type { PostgrestSingleResponse, Session } from '@supabase/supabase-js';
 import type { Database } from '../supabase';
 import type { NonFunctionKeys, OnlyFunctionKeys } from '../utils';
-import type { GlobalState } from '@extension/storage';
+import type { GlobalState } from '@kudo/storage';
 
 type Functions = keyof Database['public']['Functions'];
 type Args<F extends Functions> = Database['public']['Functions'][F]['Args'];

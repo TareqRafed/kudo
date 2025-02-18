@@ -116,7 +116,7 @@ You have to do it on every browser launch.</i>
 1. Run `pnpm i <package> -F <module name>`
 
 `package` - Name of the package you want to install e.g. `nodemon` \
-`module-name` - You can find it inside each `package.json` under the key `name`, e.g. `@extension/content-script`, you can use only `content-script` without `@extension/` prefix
+`module-name` - You can find it inside each `package.json` under the key `name`, e.g. `@kudo/content-script`, you can use only `content-script` without `@kudo/` prefix
 
 ## Env Variables
 

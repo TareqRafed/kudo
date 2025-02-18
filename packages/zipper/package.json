@@ -1,5 +1,5 @@
 {
-  "name": "@extension/zipper",
+  "name": "@kudo/zipper",
   "version": "0.3.4",
   "description": "chrome extension - zipper",
   "private": true,
@@ -23,9 +23,12 @@
     "type-check": "tsc --noEmit"
   },
   "devDependencies": {
-    "@extension/tsconfig": "workspace:*",
-    "fast-glob": "^3.3.2",
+    "@kudo/tsconfig": "workspace:*",
+    "@types/node": "^20.17.16",
     "fflate": "^0.8.2",
     "tsx": "^4.19.1"
+  },
+  "dependencies": {
+    "fast-glob": "^3.3.2"
   }
 }

@@ -1,9 +1,9 @@
 {
-  "extends": "@extension/tsconfig/utils",
+  "extends": "@kudo/tsconfig/utils",
   "compilerOptions": {
     "baseUrl": ".",
     "outDir": "dist",
-    "types": ["chrome", "node"]
+    "types": ["node"]
   },
   "include": ["index.ts", "lib"]
 }

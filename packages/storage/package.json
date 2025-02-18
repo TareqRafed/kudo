@@ -1,5 +1,5 @@
 {
-  "name": "@extension/storage",
+  "name": "@kudo/storage",
   "version": "0.3.4",
   "description": "chrome extension - storage",
   "private": true,
@@ -21,6 +21,9 @@
     "type-check": "tsc --noEmit"
   },
   "devDependencies": {
-    "@extension/tsconfig": "workspace:*"
+    "@kudo/tsconfig": "workspace:*"
+  },
+  "dependencies": {
+    "react": "^19.0.0"
   }
 }

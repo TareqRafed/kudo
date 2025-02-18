@@ -1,0 +1,35 @@
+{
+  "pages": {
+    "/~/page": [
+      "static/chunks/[project]__5c448f._.js",
+      "static/chunks/src_app_layout_tsx_7a6aec._.js",
+      "static/chunks/[project]__5d292b._.js",
+      "static/chunks/src_app_not-found_tsx_4c7164._.js",
+      "static/chunks/[root of the server]__7ddb15._.css",
+      "static/chunks/src_bcbbbf._.js",
+      "static/chunks/f9a8d_next_65155d._.js",
+      "static/chunks/d7b8b_framer-motion_dist_es_dbc675._.js",
+      "static/chunks/036a0_@supabase_auth-js_dist_module_587cb4._.js",
+      "static/chunks/7716c_core-js-pure_c91240._.js",
+      "static/chunks/4646b_xregexp_11bae8._.js",
+      "static/chunks/103c8_@tanstack_query-core_build_modern_ae2f16._.js",
+      "static/chunks/08a98_@phosphor-icons_react_dist_053258._.js",
+      "static/chunks/08b5e__pnpm_4f7db5._.js",
+      "static/chunks/08b5e__pnpm_39a0d0._.js",
+      "static/chunks/src_app_~_layout_tsx_4c7164._.js",
+      "static/chunks/9aeaa_micromark_dev_lib_b10892._.js",
+      "static/chunks/52fd0_micromark-core-commonmark_dev_lib_276102._.js",
+      "static/chunks/08b5e__pnpm_b9cc46._.js",
+      "static/chunks/src_7898a0._.js",
+      "static/chunks/src_app_~_page_tsx_ac503a._.js",
+      "static/chunks/f9a8d_next_dist_compiled_react-dom_ab0906._.js",
+      "static/chunks/f9a8d_next_dist_compiled_843018._.js",
+      "static/chunks/f9a8d_next_dist_client_b0035f._.js",
+      "static/chunks/f9a8d_next_dist_a93cff._.js",
+      "static/chunks/eae63_@swc_helpers_cjs_e27e0a._.js",
+      "static/chunks/[turbopack]_browser_dev_hmr-client_hmr-client_ts_fc8914._.js",
+      "static/chunks/[project]_apps_web_e69f0d._.js",
+      "static/chunks/[project]_apps_web_c0c934._.js"
+    ]
+  }
+}
