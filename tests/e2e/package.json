@@ -1,5 +1,5 @@
 {
-  "name": "@extension/e2e",
+  "name": "@kudo/e2e",
   "version": "0.3.4",
   "description": "E2e tests configuration boilerplate",
   "private": true,
@@ -11,7 +11,7 @@
     "clean": "pnpm clean:turbo && pnpm clean:node_modules"
   },
   "devDependencies": {
-    "@extension/tsconfig": "workspace:*",
+    "@kudo/tsconfig": "workspace:*",
     "@wdio/cli": "^9.1.2",
     "@wdio/globals": "^9.1.2",
     "@wdio/local-runner": "^9.1.2",

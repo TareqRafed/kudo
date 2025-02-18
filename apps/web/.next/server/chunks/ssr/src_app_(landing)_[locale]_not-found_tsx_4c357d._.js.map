@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": [],
+  "sections": [
+    {"offset": {"line": 7, "column": 0}, "map": {"version":3,"sources":["file:///home/tareq/ab-cursors/cursor-tracker/apps/web/apps/web/src/app/%28landing%29/%5Blocale%5D/not-found.tsx"],"sourcesContent":["import { useTranslations } from 'next-intl';\n\nexport default function NotFoundPage() {\n  return (\n    <div className=\"min-h-screen flex items-center justify-center\">\n      <div className=\"text-center\">\n        <h1 className=\"text-4xl font-bold text-white\">404</h1>\n        <p className=\"text-lg text-white mt-2\">Page Not Found</p>\n        <p className=\"text-sm text-white mt-1\">\n          The page you're looking for does not exist.\n        </p>\n      </div>\n    </div>\n  );\n}\n"],"names":[],"mappings":";;;;;AAEe,SAAS;IACtB,qBACE,oaAAC;QAAI,WAAU;kBACb,cAAA,oaAAC;YAAI,WAAU;;8BACb,oaAAC;oBAAG,WAAU;8BAAgC;;;;;;8BAC9C,oaAAC;oBAAE,WAAU;8BAA0B;;;;;;8BACvC,oaAAC;oBAAE,WAAU;8BAA0B;;;;;;;;;;;;;;;;;AAM/C"}},
+    {"offset": {"line": 54, "column": 0}, "map": {"version":3,"sources":[],"names":[],"mappings":"A"}}]
+}

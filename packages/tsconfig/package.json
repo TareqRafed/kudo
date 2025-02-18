@@ -1,6 +1,6 @@
 {
-  "name": "@extension/tsconfig",
-  "version": "0.3.4",
-  "description": "chrome extension - tsconfig",
+  "name": "@kudo/tsconfig",
+  "version": "0.0.1",
+  "description": "kudo - tsconfig",
   "private": true
 }

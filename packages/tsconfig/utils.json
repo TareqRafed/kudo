@@ -1,6 +1,6 @@
 {
   "$schema": "https://json.schemastore.org/tsconfig",
-  "display": "Chrome Extension Utils",
+  "display": "Kudo Utils",
   "extends": "./base.json",
   "compilerOptions": {
     "noEmit": false,

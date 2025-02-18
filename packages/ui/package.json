@@ -1,5 +1,5 @@
 {
-  "name": "@extension/ui",
+  "name": "@kudo/ui",
   "version": "0.3.4",
   "description": "chrome extension - ui components",
   "private": true,
@@ -23,17 +23,20 @@
     "type-check": "tsc --noEmit"
   },
   "devDependencies": {
-    "@extension/tsconfig": "workspace:*",
+    "@kudo/tsconfig": "workspace:*",
     "deepmerge": "^4.3.1",
     "tsc-alias": "^1.8.10"
   },
   "dependencies": {
-    "@radix-ui/react-avatar": "^1.1.1",
-    "@radix-ui/react-dropdown-menu": "^2.1.4",
-    "@radix-ui/react-slot": "^1.1.0",
+    "@radix-ui/react-avatar": "^1.1.2",
+    "@radix-ui/react-dropdown-menu": "^2.1.5",
+    "@radix-ui/react-slot": "^1.1.1",
     "@radix-ui/react-toast": "^1.2.5",
-    "@radix-ui/react-tooltip": "^1.1.4",
+    "@radix-ui/react-tooltip": "^1.1.7",
+    "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
-    "tailwind-merge": "^2.4.0"
+    "lucide-react": "0.475.0",
+    "react": "^19.0.0",
+    "tailwind-merge": "^2.6.0"
   }
 }
