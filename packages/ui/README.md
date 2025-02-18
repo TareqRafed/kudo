@@ -15,7 +15,7 @@ Add the following to the dependencies in `package.json`.
 ```json
 {
   "dependencies": {
-    "@extension/ui": "workspace:*"
+    "@kudo/ui": "workspace:*"
   }
 }
 ```
@@ -29,8 +29,8 @@ pnpm install
 Add the following to the `tailwind.config.ts` file.
 
 ```ts
-import baseConfig from '@extension/tailwindcss-config';
-import { withUI } from '@extension/ui';
+import baseConfig from '@kudo/tailwindcss-config';
+import { withUI } from '@kudo/ui';
 
 export default withUI({
   ...baseConfig,
@@ -41,7 +41,7 @@ export default withUI({
 Add the following to the `index.tsx` file.
 
 ```tsx
-import '@extension/ui/dist/global.css';
+import '@kudo/ui/dist/global.css';
 ```
 
 ## Add Component
@@ -80,7 +80,7 @@ export function Button({ theme, className, children, ...props }: ButtonProps) {
 ## Usage
 
 ```tsx
-import { Button } from '@extension/ui';
+import { Button } from '@kudo/ui';
 
 export default function ToggleButton() {
   const [theme, setTheme] = useState<'light' | 'dark'>('light');
@@ -157,7 +157,7 @@ export function withUI(tailwindConfig: Config): Config {
   return deepmerge(
     shadcnConfig,
     deepmerge(tailwindConfig, {
-      content: ['./node_modules/@extension/ui/lib/**/*.{tsx,ts,js,jsx}'],
+      content: ['./node_modules/@kudo/ui/lib/**/*.{tsx,ts,js,jsx}'],
     }),
   );
 }

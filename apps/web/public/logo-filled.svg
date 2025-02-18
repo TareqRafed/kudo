@@ -1,0 +1,21 @@
+<svg width="702" height="702" viewBox="0 0 702 702" fill="none" xmlns="http://www.w3.org/2000/svg">
+<rect width="702" height="702" fill="url(#paint0_linear_7_10)"/>
+<mask id="path-2-inside-1_7_10" fill="white">
+<path d="M117 136.724C117 125.831 125.831 117 136.724 117H352C481.235 117 586 221.765 586 351C586 480.235 480.985 585 351.75 585C222.239 585 117 480.011 117 350.5V136.724Z"/>
+</mask>
+<path d="M117 136.724C117 125.831 125.831 117 136.724 117H352C481.235 117 586 221.765 586 351C586 480.235 480.985 585 351.75 585C222.239 585 117 480.011 117 350.5V136.724Z" fill="url(#paint1_radial_7_10)" stroke="url(#paint2_linear_7_10)" stroke-width="70" mask="url(#path-2-inside-1_7_10)"/>
+<defs>
+<linearGradient id="paint0_linear_7_10" x1="681.5" y1="650.5" x2="50" y2="18.5" gradientUnits="userSpaceOnUse">
+<stop stop-color="#090909"/>
+<stop offset="1"/>
+</linearGradient>
+<radialGradient id="paint1_radial_7_10" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(-22.5 14) rotate(42.5171) scale(530.475 531.608)">
+<stop stop-color="#7E7E7E"/>
+<stop offset="1"/>
+</radialGradient>
+<linearGradient id="paint2_linear_7_10" x1="123" y1="125" x2="556.5" y2="519.5" gradientUnits="userSpaceOnUse">
+<stop stop-color="#1B73E9"/>
+<stop offset="1"/>
+</linearGradient>
+</defs>
+</svg>

@@ -1,0 +1,928 @@
+globalThis.__RSC_MANIFEST = globalThis.__RSC_MANIFEST || {};
+globalThis.__RSC_MANIFEST['/~/page'] = {
+  moduleLoading: { prefix: '/_next/', crossOrigin: null },
+  clientModules: {
+    '[project]/node_modules/.pnpm/next@15.1.7_@babel+core@7.26.9_react-dom@19.0.0_react@19.0.0__react@19.0.0_sass@1.79.4/node_modules/next/dist/esm/client/components/layout-router.js':
+      {
+        id: '[project]/node_modules/.pnpm/next@15.1.7_@babel+core@7.26.9_react-dom@19.0.0_react@19.0.0__react@19.0.0_sass@1.79.4/node_modules/next/dist/client/components/layout-router.js [app-client] (ecmascript)',
+        name: '*',
+        chunks: ['static/chunks/[project]__5c448f._.js', 'static/chunks/src_app_layout_tsx_7a6aec._.js'],
+        async: false,
+      },
+    '[project]/node_modules/.pnpm/next@15.1.7_@babel+core@7.26.9_react-dom@19.0.0_react@19.0.0__react@19.0.0_sass@1.79.4/node_modules/next/dist/esm/client/components/client-segment.js <module evaluation>':
+      {
+        id: '[project]/node_modules/.pnpm/next@15.1.7_@babel+core@7.26.9_react-dom@19.0.0_react@19.0.0__react@19.0.0_sass@1.79.4/node_modules/next/dist/client/components/client-segment.js [app-client] (ecmascript)',
+        name: '*',
+        chunks: ['static/chunks/[project]__5c448f._.js', 'static/chunks/src_app_layout_tsx_7a6aec._.js'],
+        async: false,
+      },
+    '[project]/apps/web/src/app/not-found.tsx': {
+      id: '[project]/apps/web/src/app/not-found.tsx [app-client] (ecmascript)',
+      name: '*',
+      chunks: [
+        'static/chunks/[project]__5c448f._.js',
+        'static/chunks/src_app_layout_tsx_7a6aec._.js',
+        'static/chunks/[project]__5d292b._.js',
+        'static/chunks/src_app_not-found_tsx_4c7164._.js',
+      ],
+      async: false,
+    },
+    '[project]/node_modules/.pnpm/next@15.1.7_@babel+core@7.26.9_react-dom@19.0.0_react@19.0.0__react@19.0.0_sass@1.79.4/node_modules/next/dist/esm/client/components/error-boundary.js':
+      {
+        id: '[project]/node_modules/.pnpm/next@15.1.7_@babel+core@7.26.9_react-dom@19.0.0_react@19.0.0__react@19.0.0_sass@1.79.4/node_modules/next/dist/client/components/error-boundary.js [app-client] (ecmascript)',
+        name: '*',
+        chunks: ['static/chunks/[project]__5c448f._.js', 'static/chunks/src_app_layout_tsx_7a6aec._.js'],
+        async: false,
+      },
+    '[project]/node_modules/.pnpm/next@15.1.7_@babel+core@7.26.9_react-dom@19.0.0_react@19.0.0__react@19.0.0_sass@1.79.4/node_modules/next/dist/esm/client/components/client-page.js':
+      {
+        id: '[project]/node_modules/.pnpm/next@15.1.7_@babel+core@7.26.9_react-dom@19.0.0_react@19.0.0__react@19.0.0_sass@1.79.4/node_modules/next/dist/client/components/client-page.js [app-client] (ecmascript)',
+        name: '*',
+        chunks: ['static/chunks/[project]__5c448f._.js', 'static/chunks/src_app_layout_tsx_7a6aec._.js'],
+        async: false,
+      },
+    '[project]/node_modules/.pnpm/next@15.1.7_@babel+core@7.26.9_react-dom@19.0.0_react@19.0.0__react@19.0.0_sass@1.79.4/node_modules/next/dist/esm/lib/metadata/metadata-boundary.js':
+      {
+        id: '[project]/node_modules/.pnpm/next@15.1.7_@babel+core@7.26.9_react-dom@19.0.0_react@19.0.0__react@19.0.0_sass@1.79.4/node_modules/next/dist/lib/metadata/metadata-boundary.js [app-client] (ecmascript)',
+        name: '*',
+        chunks: ['static/chunks/[project]__5c448f._.js', 'static/chunks/src_app_layout_tsx_7a6aec._.js'],
+        async: false,
+      },
+    '[project]/node_modules/.pnpm/@tanstack+react-query@5.66.5_react@19.0.0/node_modules/@tanstack/react-query/build/modern/useQuery.js':
+      {
+        id: '[project]/node_modules/.pnpm/@tanstack+react-query@5.66.5_react@19.0.0/node_modules/@tanstack/react-query/build/modern/useQuery.js [app-client] (ecmascript)',
+        name: '*',
+        chunks: [
+          'static/chunks/[project]__5c448f._.js',
+          'static/chunks/src_app_layout_tsx_7a6aec._.js',
+          'static/chunks/src_bcbbbf._.js',
+          'static/chunks/f9a8d_next_65155d._.js',
+          'static/chunks/d7b8b_framer-motion_dist_es_dbc675._.js',
+          'static/chunks/036a0_@supabase_auth-js_dist_module_587cb4._.js',
+          'static/chunks/7716c_core-js-pure_c91240._.js',
+          'static/chunks/4646b_xregexp_11bae8._.js',
+          'static/chunks/103c8_@tanstack_query-core_build_modern_ae2f16._.js',
+          'static/chunks/08a98_@phosphor-icons_react_dist_053258._.js',
+          'static/chunks/08b5e__pnpm_4f7db5._.js',
+          'static/chunks/08b5e__pnpm_39a0d0._.js',
+          'static/chunks/src_app_~_layout_tsx_4c7164._.js',
+        ],
+        async: false,
+      },
+    '[project]/apps/web/src/app/~/page.tsx <module evaluation>': {
+      id: '[project]/apps/web/src/app/~/page.tsx [app-client] (ecmascript)',
+      name: '*',
+      chunks: [
+        'static/chunks/[project]__5c448f._.js',
+        'static/chunks/src_app_layout_tsx_7a6aec._.js',
+        'static/chunks/src_bcbbbf._.js',
+        'static/chunks/f9a8d_next_65155d._.js',
+        'static/chunks/d7b8b_framer-motion_dist_es_dbc675._.js',
+        'static/chunks/036a0_@supabase_auth-js_dist_module_587cb4._.js',
+        'static/chunks/7716c_core-js-pure_c91240._.js',
+        'static/chunks/4646b_xregexp_11bae8._.js',
+        'static/chunks/103c8_@tanstack_query-core_build_modern_ae2f16._.js',
+        'static/chunks/08a98_@phosphor-icons_react_dist_053258._.js',
+        'static/chunks/08b5e__pnpm_4f7db5._.js',
+        'static/chunks/08b5e__pnpm_39a0d0._.js',
+        'static/chunks/src_app_~_layout_tsx_4c7164._.js',
+        'static/chunks/9aeaa_micromark_dev_lib_b10892._.js',
+        'static/chunks/52fd0_micromark-core-commonmark_dev_lib_276102._.js',
+        'static/chunks/08b5e__pnpm_b9cc46._.js',
+        'static/chunks/src_7898a0._.js',
+        'static/chunks/src_app_~_page_tsx_ac503a._.js',
+      ],
+      async: false,
+    },
+    '[project]/apps/web/src/app/not-found.tsx <module evaluation>': {
+      id: '[project]/apps/web/src/app/not-found.tsx [app-client] (ecmascript)',
+      name: '*',
+      chunks: [
+        'static/chunks/[project]__5c448f._.js',
+        'static/chunks/src_app_layout_tsx_7a6aec._.js',
+        'static/chunks/[project]__5d292b._.js',
+        'static/chunks/src_app_not-found_tsx_4c7164._.js',
+      ],
+      async: false,
+    },
+    '[project]/apps/web/src/components/Sidebar/sidebar.tsx <module evaluation>': {
+      id: '[project]/apps/web/src/components/Sidebar/sidebar.tsx [app-client] (ecmascript)',
+      name: '*',
+      chunks: [
+        'static/chunks/[project]__5c448f._.js',
+        'static/chunks/src_app_layout_tsx_7a6aec._.js',
+        'static/chunks/src_bcbbbf._.js',
+        'static/chunks/f9a8d_next_65155d._.js',
+        'static/chunks/d7b8b_framer-motion_dist_es_dbc675._.js',
+        'static/chunks/036a0_@supabase_auth-js_dist_module_587cb4._.js',
+        'static/chunks/7716c_core-js-pure_c91240._.js',
+        'static/chunks/4646b_xregexp_11bae8._.js',
+        'static/chunks/103c8_@tanstack_query-core_build_modern_ae2f16._.js',
+        'static/chunks/08a98_@phosphor-icons_react_dist_053258._.js',
+        'static/chunks/08b5e__pnpm_4f7db5._.js',
+        'static/chunks/08b5e__pnpm_39a0d0._.js',
+        'static/chunks/src_app_~_layout_tsx_4c7164._.js',
+      ],
+      async: false,
+    },
+    '[project]/node_modules/.pnpm/next@15.1.7_@babel+core@7.26.9_react-dom@19.0.0_react@19.0.0__react@19.0.0_sass@1.79.4/node_modules/next/dist/esm/client/components/client-page.js <module evaluation>':
+      {
+        id: '[project]/node_modules/.pnpm/next@15.1.7_@babel+core@7.26.9_react-dom@19.0.0_react@19.0.0__react@19.0.0_sass@1.79.4/node_modules/next/dist/client/components/client-page.js [app-client] (ecmascript)',
+        name: '*',
+        chunks: ['static/chunks/[project]__5c448f._.js', 'static/chunks/src_app_layout_tsx_7a6aec._.js'],
+        async: false,
+      },
+    '[project]/apps/web/src/app/~/page.tsx': {
+      id: '[project]/apps/web/src/app/~/page.tsx [app-client] (ecmascript)',
+      name: '*',
+      chunks: [
+        'static/chunks/[project]__5c448f._.js',
+        'static/chunks/src_app_layout_tsx_7a6aec._.js',
+        'static/chunks/src_bcbbbf._.js',
+        'static/chunks/f9a8d_next_65155d._.js',
+        'static/chunks/d7b8b_framer-motion_dist_es_dbc675._.js',
+        'static/chunks/036a0_@supabase_auth-js_dist_module_587cb4._.js',
+        'static/chunks/7716c_core-js-pure_c91240._.js',
+        'static/chunks/4646b_xregexp_11bae8._.js',
+        'static/chunks/103c8_@tanstack_query-core_build_modern_ae2f16._.js',
+        'static/chunks/08a98_@phosphor-icons_react_dist_053258._.js',
+        'static/chunks/08b5e__pnpm_4f7db5._.js',
+        'static/chunks/08b5e__pnpm_39a0d0._.js',
+        'static/chunks/src_app_~_layout_tsx_4c7164._.js',
+        'static/chunks/9aeaa_micromark_dev_lib_b10892._.js',
+        'static/chunks/52fd0_micromark-core-commonmark_dev_lib_276102._.js',
+        'static/chunks/08b5e__pnpm_b9cc46._.js',
+        'static/chunks/src_7898a0._.js',
+        'static/chunks/src_app_~_page_tsx_ac503a._.js',
+      ],
+      async: false,
+    },
+    '[project]/node_modules/.pnpm/next@15.1.7_@babel+core@7.26.9_react-dom@19.0.0_react@19.0.0__react@19.0.0_sass@1.79.4/node_modules/next/dist/esm/client/components/render-from-template-context.js':
+      {
+        id: '[project]/node_modules/.pnpm/next@15.1.7_@babel+core@7.26.9_react-dom@19.0.0_react@19.0.0__react@19.0.0_sass@1.79.4/node_modules/next/dist/client/components/render-from-template-context.js [app-client] (ecmascript)',
+        name: '*',
+        chunks: ['static/chunks/[project]__5c448f._.js', 'static/chunks/src_app_layout_tsx_7a6aec._.js'],
+        async: false,
+      },
+    '[project]/node_modules/.pnpm/@tanstack+react-query@5.66.5_react@19.0.0/node_modules/@tanstack/react-query/build/modern/QueryClientProvider.js':
+      {
+        id: '[project]/node_modules/.pnpm/@tanstack+react-query@5.66.5_react@19.0.0/node_modules/@tanstack/react-query/build/modern/QueryClientProvider.js [app-client] (ecmascript)',
+        name: '*',
+        chunks: [
+          'static/chunks/[project]__5c448f._.js',
+          'static/chunks/src_app_layout_tsx_7a6aec._.js',
+          'static/chunks/src_bcbbbf._.js',
+          'static/chunks/f9a8d_next_65155d._.js',
+          'static/chunks/d7b8b_framer-motion_dist_es_dbc675._.js',
+          'static/chunks/036a0_@supabase_auth-js_dist_module_587cb4._.js',
+          'static/chunks/7716c_core-js-pure_c91240._.js',
+          'static/chunks/4646b_xregexp_11bae8._.js',
+          'static/chunks/103c8_@tanstack_query-core_build_modern_ae2f16._.js',
+          'static/chunks/08a98_@phosphor-icons_react_dist_053258._.js',
+          'static/chunks/08b5e__pnpm_4f7db5._.js',
+          'static/chunks/08b5e__pnpm_39a0d0._.js',
+          'static/chunks/src_app_~_layout_tsx_4c7164._.js',
+        ],
+        async: false,
+      },
+    '[project]/node_modules/.pnpm/next@15.1.7_@babel+core@7.26.9_react-dom@19.0.0_react@19.0.0__react@19.0.0_sass@1.79.4/node_modules/next/dist/esm/client/components/http-access-fallback/error-boundary.js':
+      {
+        id: '[project]/node_modules/.pnpm/next@15.1.7_@babel+core@7.26.9_react-dom@19.0.0_react@19.0.0__react@19.0.0_sass@1.79.4/node_modules/next/dist/client/components/http-access-fallback/error-boundary.js [app-client] (ecmascript)',
+        name: '*',
+        chunks: ['static/chunks/[project]__5c448f._.js', 'static/chunks/src_app_layout_tsx_7a6aec._.js'],
+        async: false,
+      },
+    '[project]/node_modules/.pnpm/@tanstack+react-query@5.66.5_react@19.0.0/node_modules/@tanstack/react-query/build/modern/useMutation.js':
+      {
+        id: '[project]/node_modules/.pnpm/@tanstack+react-query@5.66.5_react@19.0.0/node_modules/@tanstack/react-query/build/modern/useMutation.js [app-client] (ecmascript)',
+        name: '*',
+        chunks: [
+          'static/chunks/[project]__5c448f._.js',
+          'static/chunks/src_app_layout_tsx_7a6aec._.js',
+          'static/chunks/src_bcbbbf._.js',
+          'static/chunks/f9a8d_next_65155d._.js',
+          'static/chunks/d7b8b_framer-motion_dist_es_dbc675._.js',
+          'static/chunks/036a0_@supabase_auth-js_dist_module_587cb4._.js',
+          'static/chunks/7716c_core-js-pure_c91240._.js',
+          'static/chunks/4646b_xregexp_11bae8._.js',
+          'static/chunks/103c8_@tanstack_query-core_build_modern_ae2f16._.js',
+          'static/chunks/08a98_@phosphor-icons_react_dist_053258._.js',
+          'static/chunks/08b5e__pnpm_4f7db5._.js',
+          'static/chunks/08b5e__pnpm_39a0d0._.js',
+          'static/chunks/src_app_~_layout_tsx_4c7164._.js',
+        ],
+        async: false,
+      },
+    '[project]/node_modules/.pnpm/next@15.1.7_@babel+core@7.26.9_react-dom@19.0.0_react@19.0.0__react@19.0.0_sass@1.79.4/node_modules/next/dist/esm/lib/metadata/metadata-boundary.js <module evaluation>':
+      {
+        id: '[project]/node_modules/.pnpm/next@15.1.7_@babel+core@7.26.9_react-dom@19.0.0_react@19.0.0__react@19.0.0_sass@1.79.4/node_modules/next/dist/lib/metadata/metadata-boundary.js [app-client] (ecmascript)',
+        name: '*',
+        chunks: ['static/chunks/[project]__5c448f._.js', 'static/chunks/src_app_layout_tsx_7a6aec._.js'],
+        async: false,
+      },
+    '[project]/apps/web/src/components/ui/sidebar.tsx': {
+      id: '[project]/apps/web/src/components/ui/sidebar.tsx [app-client] (ecmascript)',
+      name: '*',
+      chunks: [
+        'static/chunks/[project]__5c448f._.js',
+        'static/chunks/src_app_layout_tsx_7a6aec._.js',
+        'static/chunks/src_bcbbbf._.js',
+        'static/chunks/f9a8d_next_65155d._.js',
+        'static/chunks/d7b8b_framer-motion_dist_es_dbc675._.js',
+        'static/chunks/036a0_@supabase_auth-js_dist_module_587cb4._.js',
+        'static/chunks/7716c_core-js-pure_c91240._.js',
+        'static/chunks/4646b_xregexp_11bae8._.js',
+        'static/chunks/103c8_@tanstack_query-core_build_modern_ae2f16._.js',
+        'static/chunks/08a98_@phosphor-icons_react_dist_053258._.js',
+        'static/chunks/08b5e__pnpm_4f7db5._.js',
+        'static/chunks/08b5e__pnpm_39a0d0._.js',
+        'static/chunks/src_app_~_layout_tsx_4c7164._.js',
+      ],
+      async: false,
+    },
+    '[project]/node_modules/.pnpm/next@15.1.7_@babel+core@7.26.9_react-dom@19.0.0_react@19.0.0__react@19.0.0_sass@1.79.4/node_modules/next/dist/esm/client/components/render-from-template-context.js <module evaluation>':
+      {
+        id: '[project]/node_modules/.pnpm/next@15.1.7_@babel+core@7.26.9_react-dom@19.0.0_react@19.0.0__react@19.0.0_sass@1.79.4/node_modules/next/dist/client/components/render-from-template-context.js [app-client] (ecmascript)',
+        name: '*',
+        chunks: ['static/chunks/[project]__5c448f._.js', 'static/chunks/src_app_layout_tsx_7a6aec._.js'],
+        async: false,
+      },
+    '[project]/apps/web/src/app/~/clientProviders.tsx <module evaluation>': {
+      id: '[project]/apps/web/src/app/~/clientProviders.tsx [app-client] (ecmascript)',
+      name: '*',
+      chunks: [
+        'static/chunks/[project]__5c448f._.js',
+        'static/chunks/src_app_layout_tsx_7a6aec._.js',
+        'static/chunks/src_bcbbbf._.js',
+        'static/chunks/f9a8d_next_65155d._.js',
+        'static/chunks/d7b8b_framer-motion_dist_es_dbc675._.js',
+        'static/chunks/036a0_@supabase_auth-js_dist_module_587cb4._.js',
+        'static/chunks/7716c_core-js-pure_c91240._.js',
+        'static/chunks/4646b_xregexp_11bae8._.js',
+        'static/chunks/103c8_@tanstack_query-core_build_modern_ae2f16._.js',
+        'static/chunks/08a98_@phosphor-icons_react_dist_053258._.js',
+        'static/chunks/08b5e__pnpm_4f7db5._.js',
+        'static/chunks/08b5e__pnpm_39a0d0._.js',
+        'static/chunks/src_app_~_layout_tsx_4c7164._.js',
+      ],
+      async: false,
+    },
+    '[project]/node_modules/.pnpm/next@15.1.7_@babel+core@7.26.9_react-dom@19.0.0_react@19.0.0__react@19.0.0_sass@1.79.4/node_modules/next/dist/client/components/error-boundary.js':
+      {
+        id: '[project]/node_modules/.pnpm/next@15.1.7_@babel+core@7.26.9_react-dom@19.0.0_react@19.0.0__react@19.0.0_sass@1.79.4/node_modules/next/dist/client/components/error-boundary.js [app-client] (ecmascript)',
+        name: '*',
+        chunks: ['static/chunks/[project]__5c448f._.js', 'static/chunks/src_app_layout_tsx_7a6aec._.js'],
+        async: false,
+      },
+    '[project]/apps/web/src/app/~/clientProviders.tsx': {
+      id: '[project]/apps/web/src/app/~/clientProviders.tsx [app-client] (ecmascript)',
+      name: '*',
+      chunks: [
+        'static/chunks/[project]__5c448f._.js',
+        'static/chunks/src_app_layout_tsx_7a6aec._.js',
+        'static/chunks/src_bcbbbf._.js',
+        'static/chunks/f9a8d_next_65155d._.js',
+        'static/chunks/d7b8b_framer-motion_dist_es_dbc675._.js',
+        'static/chunks/036a0_@supabase_auth-js_dist_module_587cb4._.js',
+        'static/chunks/7716c_core-js-pure_c91240._.js',
+        'static/chunks/4646b_xregexp_11bae8._.js',
+        'static/chunks/103c8_@tanstack_query-core_build_modern_ae2f16._.js',
+        'static/chunks/08a98_@phosphor-icons_react_dist_053258._.js',
+        'static/chunks/08b5e__pnpm_4f7db5._.js',
+        'static/chunks/08b5e__pnpm_39a0d0._.js',
+        'static/chunks/src_app_~_layout_tsx_4c7164._.js',
+      ],
+      async: false,
+    },
+    '[project]/node_modules/.pnpm/next@15.1.7_@babel+core@7.26.9_react-dom@19.0.0_react@19.0.0__react@19.0.0_sass@1.79.4/node_modules/next/dist/esm/client/components/layout-router.js <module evaluation>':
+      {
+        id: '[project]/node_modules/.pnpm/next@15.1.7_@babel+core@7.26.9_react-dom@19.0.0_react@19.0.0__react@19.0.0_sass@1.79.4/node_modules/next/dist/client/components/layout-router.js [app-client] (ecmascript)',
+        name: '*',
+        chunks: ['static/chunks/[project]__5c448f._.js', 'static/chunks/src_app_layout_tsx_7a6aec._.js'],
+        async: false,
+      },
+    '[project]/node_modules/.pnpm/@tanstack+react-query@5.66.5_react@19.0.0/node_modules/@tanstack/react-query/build/modern/QueryClientProvider.js <module evaluation>':
+      {
+        id: '[project]/node_modules/.pnpm/@tanstack+react-query@5.66.5_react@19.0.0/node_modules/@tanstack/react-query/build/modern/QueryClientProvider.js [app-client] (ecmascript)',
+        name: '*',
+        chunks: [
+          'static/chunks/[project]__5c448f._.js',
+          'static/chunks/src_app_layout_tsx_7a6aec._.js',
+          'static/chunks/src_bcbbbf._.js',
+          'static/chunks/f9a8d_next_65155d._.js',
+          'static/chunks/d7b8b_framer-motion_dist_es_dbc675._.js',
+          'static/chunks/036a0_@supabase_auth-js_dist_module_587cb4._.js',
+          'static/chunks/7716c_core-js-pure_c91240._.js',
+          'static/chunks/4646b_xregexp_11bae8._.js',
+          'static/chunks/103c8_@tanstack_query-core_build_modern_ae2f16._.js',
+          'static/chunks/08a98_@phosphor-icons_react_dist_053258._.js',
+          'static/chunks/08b5e__pnpm_4f7db5._.js',
+          'static/chunks/08b5e__pnpm_39a0d0._.js',
+          'static/chunks/src_app_~_layout_tsx_4c7164._.js',
+        ],
+        async: false,
+      },
+    '[project]/node_modules/.pnpm/next@15.1.7_@babel+core@7.26.9_react-dom@19.0.0_react@19.0.0__react@19.0.0_sass@1.79.4/node_modules/next/dist/esm/client/components/client-segment.js':
+      {
+        id: '[project]/node_modules/.pnpm/next@15.1.7_@babel+core@7.26.9_react-dom@19.0.0_react@19.0.0__react@19.0.0_sass@1.79.4/node_modules/next/dist/client/components/client-segment.js [app-client] (ecmascript)',
+        name: '*',
+        chunks: ['static/chunks/[project]__5c448f._.js', 'static/chunks/src_app_layout_tsx_7a6aec._.js'],
+        async: false,
+      },
+    '[project]/node_modules/.pnpm/@tanstack+react-query@5.66.5_react@19.0.0/node_modules/@tanstack/react-query/build/modern/useMutation.js <module evaluation>':
+      {
+        id: '[project]/node_modules/.pnpm/@tanstack+react-query@5.66.5_react@19.0.0/node_modules/@tanstack/react-query/build/modern/useMutation.js [app-client] (ecmascript)',
+        name: '*',
+        chunks: [
+          'static/chunks/[project]__5c448f._.js',
+          'static/chunks/src_app_layout_tsx_7a6aec._.js',
+          'static/chunks/src_bcbbbf._.js',
+          'static/chunks/f9a8d_next_65155d._.js',
+          'static/chunks/d7b8b_framer-motion_dist_es_dbc675._.js',
+          'static/chunks/036a0_@supabase_auth-js_dist_module_587cb4._.js',
+          'static/chunks/7716c_core-js-pure_c91240._.js',
+          'static/chunks/4646b_xregexp_11bae8._.js',
+          'static/chunks/103c8_@tanstack_query-core_build_modern_ae2f16._.js',
+          'static/chunks/08a98_@phosphor-icons_react_dist_053258._.js',
+          'static/chunks/08b5e__pnpm_4f7db5._.js',
+          'static/chunks/08b5e__pnpm_39a0d0._.js',
+          'static/chunks/src_app_~_layout_tsx_4c7164._.js',
+        ],
+        async: false,
+      },
+    '[project]/node_modules/.pnpm/next@15.1.7_@babel+core@7.26.9_react-dom@19.0.0_react@19.0.0__react@19.0.0_sass@1.79.4/node_modules/next/dist/esm/client/components/error-boundary.js <module evaluation>':
+      {
+        id: '[project]/node_modules/.pnpm/next@15.1.7_@babel+core@7.26.9_react-dom@19.0.0_react@19.0.0__react@19.0.0_sass@1.79.4/node_modules/next/dist/client/components/error-boundary.js [app-client] (ecmascript)',
+        name: '*',
+        chunks: ['static/chunks/[project]__5c448f._.js', 'static/chunks/src_app_layout_tsx_7a6aec._.js'],
+        async: false,
+      },
+    '[project]/node_modules/.pnpm/next@15.1.7_@babel+core@7.26.9_react-dom@19.0.0_react@19.0.0__react@19.0.0_sass@1.79.4/node_modules/next/dist/esm/client/components/http-access-fallback/error-boundary.js <module evaluation>':
+      {
+        id: '[project]/node_modules/.pnpm/next@15.1.7_@babel+core@7.26.9_react-dom@19.0.0_react@19.0.0__react@19.0.0_sass@1.79.4/node_modules/next/dist/client/components/http-access-fallback/error-boundary.js [app-client] (ecmascript)',
+        name: '*',
+        chunks: ['static/chunks/[project]__5c448f._.js', 'static/chunks/src_app_layout_tsx_7a6aec._.js'],
+        async: false,
+      },
+    '[project]/apps/web/src/components/Sidebar/sidebar.tsx': {
+      id: '[project]/apps/web/src/components/Sidebar/sidebar.tsx [app-client] (ecmascript)',
+      name: '*',
+      chunks: [
+        'static/chunks/[project]__5c448f._.js',
+        'static/chunks/src_app_layout_tsx_7a6aec._.js',
+        'static/chunks/src_bcbbbf._.js',
+        'static/chunks/f9a8d_next_65155d._.js',
+        'static/chunks/d7b8b_framer-motion_dist_es_dbc675._.js',
+        'static/chunks/036a0_@supabase_auth-js_dist_module_587cb4._.js',
+        'static/chunks/7716c_core-js-pure_c91240._.js',
+        'static/chunks/4646b_xregexp_11bae8._.js',
+        'static/chunks/103c8_@tanstack_query-core_build_modern_ae2f16._.js',
+        'static/chunks/08a98_@phosphor-icons_react_dist_053258._.js',
+        'static/chunks/08b5e__pnpm_4f7db5._.js',
+        'static/chunks/08b5e__pnpm_39a0d0._.js',
+        'static/chunks/src_app_~_layout_tsx_4c7164._.js',
+      ],
+      async: false,
+    },
+    '[project]/node_modules/.pnpm/@tanstack+react-query@5.66.5_react@19.0.0/node_modules/@tanstack/react-query/build/modern/HydrationBoundary.js <module evaluation>':
+      {
+        id: '[project]/node_modules/.pnpm/@tanstack+react-query@5.66.5_react@19.0.0/node_modules/@tanstack/react-query/build/modern/HydrationBoundary.js [app-client] (ecmascript)',
+        name: '*',
+        chunks: [
+          'static/chunks/[project]__5c448f._.js',
+          'static/chunks/src_app_layout_tsx_7a6aec._.js',
+          'static/chunks/src_bcbbbf._.js',
+          'static/chunks/f9a8d_next_65155d._.js',
+          'static/chunks/d7b8b_framer-motion_dist_es_dbc675._.js',
+          'static/chunks/036a0_@supabase_auth-js_dist_module_587cb4._.js',
+          'static/chunks/7716c_core-js-pure_c91240._.js',
+          'static/chunks/4646b_xregexp_11bae8._.js',
+          'static/chunks/103c8_@tanstack_query-core_build_modern_ae2f16._.js',
+          'static/chunks/08a98_@phosphor-icons_react_dist_053258._.js',
+          'static/chunks/08b5e__pnpm_4f7db5._.js',
+          'static/chunks/08b5e__pnpm_39a0d0._.js',
+          'static/chunks/src_app_~_layout_tsx_4c7164._.js',
+        ],
+        async: false,
+      },
+    '[project]/node_modules/.pnpm/@tanstack+react-query@5.66.5_react@19.0.0/node_modules/@tanstack/react-query/build/modern/useQuery.js <module evaluation>':
+      {
+        id: '[project]/node_modules/.pnpm/@tanstack+react-query@5.66.5_react@19.0.0/node_modules/@tanstack/react-query/build/modern/useQuery.js [app-client] (ecmascript)',
+        name: '*',
+        chunks: [
+          'static/chunks/[project]__5c448f._.js',
+          'static/chunks/src_app_layout_tsx_7a6aec._.js',
+          'static/chunks/src_bcbbbf._.js',
+          'static/chunks/f9a8d_next_65155d._.js',
+          'static/chunks/d7b8b_framer-motion_dist_es_dbc675._.js',
+          'static/chunks/036a0_@supabase_auth-js_dist_module_587cb4._.js',
+          'static/chunks/7716c_core-js-pure_c91240._.js',
+          'static/chunks/4646b_xregexp_11bae8._.js',
+          'static/chunks/103c8_@tanstack_query-core_build_modern_ae2f16._.js',
+          'static/chunks/08a98_@phosphor-icons_react_dist_053258._.js',
+          'static/chunks/08b5e__pnpm_4f7db5._.js',
+          'static/chunks/08b5e__pnpm_39a0d0._.js',
+          'static/chunks/src_app_~_layout_tsx_4c7164._.js',
+        ],
+        async: false,
+      },
+    '[project]/node_modules/.pnpm/next@15.1.7_@babel+core@7.26.9_react-dom@19.0.0_react@19.0.0__react@19.0.0_sass@1.79.4/node_modules/next/dist/client/components/error-boundary.js <module evaluation>':
+      {
+        id: '[project]/node_modules/.pnpm/next@15.1.7_@babel+core@7.26.9_react-dom@19.0.0_react@19.0.0__react@19.0.0_sass@1.79.4/node_modules/next/dist/client/components/error-boundary.js [app-client] (ecmascript)',
+        name: '*',
+        chunks: ['static/chunks/[project]__5c448f._.js', 'static/chunks/src_app_layout_tsx_7a6aec._.js'],
+        async: false,
+      },
+    '[project]/apps/web/src/components/ui/sidebar.tsx <module evaluation>': {
+      id: '[project]/apps/web/src/components/ui/sidebar.tsx [app-client] (ecmascript)',
+      name: '*',
+      chunks: [
+        'static/chunks/[project]__5c448f._.js',
+        'static/chunks/src_app_layout_tsx_7a6aec._.js',
+        'static/chunks/src_bcbbbf._.js',
+        'static/chunks/f9a8d_next_65155d._.js',
+        'static/chunks/d7b8b_framer-motion_dist_es_dbc675._.js',
+        'static/chunks/036a0_@supabase_auth-js_dist_module_587cb4._.js',
+        'static/chunks/7716c_core-js-pure_c91240._.js',
+        'static/chunks/4646b_xregexp_11bae8._.js',
+        'static/chunks/103c8_@tanstack_query-core_build_modern_ae2f16._.js',
+        'static/chunks/08a98_@phosphor-icons_react_dist_053258._.js',
+        'static/chunks/08b5e__pnpm_4f7db5._.js',
+        'static/chunks/08b5e__pnpm_39a0d0._.js',
+        'static/chunks/src_app_~_layout_tsx_4c7164._.js',
+      ],
+      async: false,
+    },
+    '[project]/node_modules/.pnpm/@tanstack+react-query@5.66.5_react@19.0.0/node_modules/@tanstack/react-query/build/modern/HydrationBoundary.js':
+      {
+        id: '[project]/node_modules/.pnpm/@tanstack+react-query@5.66.5_react@19.0.0/node_modules/@tanstack/react-query/build/modern/HydrationBoundary.js [app-client] (ecmascript)',
+        name: '*',
+        chunks: [
+          'static/chunks/[project]__5c448f._.js',
+          'static/chunks/src_app_layout_tsx_7a6aec._.js',
+          'static/chunks/src_bcbbbf._.js',
+          'static/chunks/f9a8d_next_65155d._.js',
+          'static/chunks/d7b8b_framer-motion_dist_es_dbc675._.js',
+          'static/chunks/036a0_@supabase_auth-js_dist_module_587cb4._.js',
+          'static/chunks/7716c_core-js-pure_c91240._.js',
+          'static/chunks/4646b_xregexp_11bae8._.js',
+          'static/chunks/103c8_@tanstack_query-core_build_modern_ae2f16._.js',
+          'static/chunks/08a98_@phosphor-icons_react_dist_053258._.js',
+          'static/chunks/08b5e__pnpm_4f7db5._.js',
+          'static/chunks/08b5e__pnpm_39a0d0._.js',
+          'static/chunks/src_app_~_layout_tsx_4c7164._.js',
+        ],
+        async: false,
+      },
+  },
+  ssrModuleMapping: {
+    '[project]/apps/web/src/app/~/clientProviders.tsx [app-client] (ecmascript)': {
+      '*': {
+        id: '[project]/apps/web/src/app/~/clientProviders.tsx [app-ssr] (ecmascript)',
+        name: '*',
+        chunks: [
+          'server/chunks/ssr/08b5e__pnpm_8e5af5._.js',
+          'server/chunks/ssr/[root of the server]__606353._.js',
+          'server/chunks/ssr/[root of the server]__d20022._.js',
+          'server/chunks/ssr/f9a8d_next_f50d05._.js',
+          'server/chunks/ssr/d7b8b_framer-motion_dist_es_8557a2._.js',
+          'server/chunks/ssr/2d5cf_tr46_9fb309._.js',
+          'server/chunks/ssr/036a0_@supabase_auth-js_dist_module_31221f._.js',
+          'server/chunks/ssr/4646b_xregexp_443fc3._.js',
+          'server/chunks/ssr/103c8_@tanstack_query-core_build_modern_0b3e2a._.js',
+          'server/chunks/ssr/08a98_@phosphor-icons_react_dist_b43c00._.js',
+          'server/chunks/ssr/08b5e__pnpm_a275ce._.js',
+          'server/chunks/ssr/08b5e__pnpm_9509a6._.js',
+        ],
+        async: false,
+      },
+    },
+    '[project]/node_modules/.pnpm/@tanstack+react-query@5.66.5_react@19.0.0/node_modules/@tanstack/react-query/build/modern/useQuery.js [app-client] (ecmascript)':
+      {
+        '*': {
+          id: '[project]/node_modules/.pnpm/@tanstack+react-query@5.66.5_react@19.0.0/node_modules/@tanstack/react-query/build/modern/useQuery.js [app-ssr] (ecmascript)',
+          name: '*',
+          chunks: [
+            'server/chunks/ssr/08b5e__pnpm_8e5af5._.js',
+            'server/chunks/ssr/[root of the server]__606353._.js',
+            'server/chunks/ssr/[root of the server]__d20022._.js',
+            'server/chunks/ssr/f9a8d_next_f50d05._.js',
+            'server/chunks/ssr/d7b8b_framer-motion_dist_es_8557a2._.js',
+            'server/chunks/ssr/2d5cf_tr46_9fb309._.js',
+            'server/chunks/ssr/036a0_@supabase_auth-js_dist_module_31221f._.js',
+            'server/chunks/ssr/4646b_xregexp_443fc3._.js',
+            'server/chunks/ssr/103c8_@tanstack_query-core_build_modern_0b3e2a._.js',
+            'server/chunks/ssr/08a98_@phosphor-icons_react_dist_b43c00._.js',
+            'server/chunks/ssr/08b5e__pnpm_a275ce._.js',
+            'server/chunks/ssr/08b5e__pnpm_9509a6._.js',
+          ],
+          async: false,
+        },
+      },
+    '[project]/node_modules/.pnpm/next@15.1.7_@babel+core@7.26.9_react-dom@19.0.0_react@19.0.0__react@19.0.0_sass@1.79.4/node_modules/next/dist/client/components/error-boundary.js [app-client] (ecmascript)':
+      {
+        '*': {
+          id: '[project]/node_modules/.pnpm/next@15.1.7_@babel+core@7.26.9_react-dom@19.0.0_react@19.0.0__react@19.0.0_sass@1.79.4/node_modules/next/dist/client/components/error-boundary.js [app-ssr] (ecmascript)',
+          name: '*',
+          chunks: ['server/chunks/ssr/08b5e__pnpm_8e5af5._.js', 'server/chunks/ssr/[root of the server]__606353._.js'],
+          async: false,
+        },
+      },
+    '[project]/apps/web/src/app/~/page.tsx [app-client] (ecmascript)': {
+      '*': {
+        id: '[project]/apps/web/src/app/~/page.tsx [app-ssr] (ecmascript)',
+        name: '*',
+        chunks: [
+          'server/chunks/ssr/08b5e__pnpm_8e5af5._.js',
+          'server/chunks/ssr/[root of the server]__606353._.js',
+          'server/chunks/ssr/[root of the server]__d20022._.js',
+          'server/chunks/ssr/f9a8d_next_f50d05._.js',
+          'server/chunks/ssr/d7b8b_framer-motion_dist_es_8557a2._.js',
+          'server/chunks/ssr/2d5cf_tr46_9fb309._.js',
+          'server/chunks/ssr/036a0_@supabase_auth-js_dist_module_31221f._.js',
+          'server/chunks/ssr/4646b_xregexp_443fc3._.js',
+          'server/chunks/ssr/103c8_@tanstack_query-core_build_modern_0b3e2a._.js',
+          'server/chunks/ssr/08a98_@phosphor-icons_react_dist_b43c00._.js',
+          'server/chunks/ssr/08b5e__pnpm_a275ce._.js',
+          'server/chunks/ssr/08b5e__pnpm_9509a6._.js',
+          'server/chunks/ssr/52fd0_micromark-core-commonmark_dev_lib_c9482e._.js',
+          'server/chunks/ssr/08b5e__pnpm_488dff._.js',
+          'server/chunks/ssr/[root of the server]__fd332f._.js',
+        ],
+        async: false,
+      },
+    },
+    '[project]/node_modules/.pnpm/next@15.1.7_@babel+core@7.26.9_react-dom@19.0.0_react@19.0.0__react@19.0.0_sass@1.79.4/node_modules/next/dist/client/components/layout-router.js [app-client] (ecmascript)':
+      {
+        '*': {
+          id: '[project]/node_modules/.pnpm/next@15.1.7_@babel+core@7.26.9_react-dom@19.0.0_react@19.0.0__react@19.0.0_sass@1.79.4/node_modules/next/dist/esm/client/components/layout-router.js [app-ssr] (ecmascript)',
+          name: '*',
+          chunks: ['server/chunks/ssr/08b5e__pnpm_8e5af5._.js', 'server/chunks/ssr/[root of the server]__606353._.js'],
+          async: false,
+        },
+      },
+    '[project]/node_modules/.pnpm/@tanstack+react-query@5.66.5_react@19.0.0/node_modules/@tanstack/react-query/build/modern/QueryClientProvider.js [app-client] (ecmascript)':
+      {
+        '*': {
+          id: '[project]/node_modules/.pnpm/@tanstack+react-query@5.66.5_react@19.0.0/node_modules/@tanstack/react-query/build/modern/QueryClientProvider.js [app-ssr] (ecmascript)',
+          name: '*',
+          chunks: [
+            'server/chunks/ssr/08b5e__pnpm_8e5af5._.js',
+            'server/chunks/ssr/[root of the server]__606353._.js',
+            'server/chunks/ssr/[root of the server]__d20022._.js',
+            'server/chunks/ssr/f9a8d_next_f50d05._.js',
+            'server/chunks/ssr/d7b8b_framer-motion_dist_es_8557a2._.js',
+            'server/chunks/ssr/2d5cf_tr46_9fb309._.js',
+            'server/chunks/ssr/036a0_@supabase_auth-js_dist_module_31221f._.js',
+            'server/chunks/ssr/4646b_xregexp_443fc3._.js',
+            'server/chunks/ssr/103c8_@tanstack_query-core_build_modern_0b3e2a._.js',
+            'server/chunks/ssr/08a98_@phosphor-icons_react_dist_b43c00._.js',
+            'server/chunks/ssr/08b5e__pnpm_a275ce._.js',
+            'server/chunks/ssr/08b5e__pnpm_9509a6._.js',
+          ],
+          async: false,
+        },
+      },
+    '[project]/node_modules/.pnpm/@tanstack+react-query@5.66.5_react@19.0.0/node_modules/@tanstack/react-query/build/modern/useMutation.js [app-client] (ecmascript)':
+      {
+        '*': {
+          id: '[project]/node_modules/.pnpm/@tanstack+react-query@5.66.5_react@19.0.0/node_modules/@tanstack/react-query/build/modern/useMutation.js [app-ssr] (ecmascript)',
+          name: '*',
+          chunks: [
+            'server/chunks/ssr/08b5e__pnpm_8e5af5._.js',
+            'server/chunks/ssr/[root of the server]__606353._.js',
+            'server/chunks/ssr/[root of the server]__d20022._.js',
+            'server/chunks/ssr/f9a8d_next_f50d05._.js',
+            'server/chunks/ssr/d7b8b_framer-motion_dist_es_8557a2._.js',
+            'server/chunks/ssr/2d5cf_tr46_9fb309._.js',
+            'server/chunks/ssr/036a0_@supabase_auth-js_dist_module_31221f._.js',
+            'server/chunks/ssr/4646b_xregexp_443fc3._.js',
+            'server/chunks/ssr/103c8_@tanstack_query-core_build_modern_0b3e2a._.js',
+            'server/chunks/ssr/08a98_@phosphor-icons_react_dist_b43c00._.js',
+            'server/chunks/ssr/08b5e__pnpm_a275ce._.js',
+            'server/chunks/ssr/08b5e__pnpm_9509a6._.js',
+          ],
+          async: false,
+        },
+      },
+    '[project]/apps/web/src/app/not-found.tsx [app-client] (ecmascript)': {
+      '*': {
+        id: '[project]/apps/web/src/app/not-found.tsx [app-ssr] (ecmascript)',
+        name: '*',
+        chunks: [
+          'server/chunks/ssr/08b5e__pnpm_8e5af5._.js',
+          'server/chunks/ssr/[root of the server]__606353._.js',
+          'server/chunks/ssr/[project]__faa610._.js',
+        ],
+        async: false,
+      },
+    },
+    '[project]/node_modules/.pnpm/next@15.1.7_@babel+core@7.26.9_react-dom@19.0.0_react@19.0.0__react@19.0.0_sass@1.79.4/node_modules/next/dist/client/components/client-page.js [app-client] (ecmascript)':
+      {
+        '*': {
+          id: '[project]/node_modules/.pnpm/next@15.1.7_@babel+core@7.26.9_react-dom@19.0.0_react@19.0.0__react@19.0.0_sass@1.79.4/node_modules/next/dist/esm/client/components/client-page.js [app-ssr] (ecmascript)',
+          name: '*',
+          chunks: ['server/chunks/ssr/08b5e__pnpm_8e5af5._.js', 'server/chunks/ssr/[root of the server]__606353._.js'],
+          async: false,
+        },
+      },
+    '[project]/apps/web/src/components/Sidebar/sidebar.tsx [app-client] (ecmascript)': {
+      '*': {
+        id: '[project]/apps/web/src/components/Sidebar/sidebar.tsx [app-ssr] (ecmascript)',
+        name: '*',
+        chunks: [
+          'server/chunks/ssr/08b5e__pnpm_8e5af5._.js',
+          'server/chunks/ssr/[root of the server]__606353._.js',
+          'server/chunks/ssr/[root of the server]__d20022._.js',
+          'server/chunks/ssr/f9a8d_next_f50d05._.js',
+          'server/chunks/ssr/d7b8b_framer-motion_dist_es_8557a2._.js',
+          'server/chunks/ssr/2d5cf_tr46_9fb309._.js',
+          'server/chunks/ssr/036a0_@supabase_auth-js_dist_module_31221f._.js',
+          'server/chunks/ssr/4646b_xregexp_443fc3._.js',
+          'server/chunks/ssr/103c8_@tanstack_query-core_build_modern_0b3e2a._.js',
+          'server/chunks/ssr/08a98_@phosphor-icons_react_dist_b43c00._.js',
+          'server/chunks/ssr/08b5e__pnpm_a275ce._.js',
+          'server/chunks/ssr/08b5e__pnpm_9509a6._.js',
+        ],
+        async: false,
+      },
+    },
+    '[project]/node_modules/.pnpm/next@15.1.7_@babel+core@7.26.9_react-dom@19.0.0_react@19.0.0__react@19.0.0_sass@1.79.4/node_modules/next/dist/lib/metadata/metadata-boundary.js [app-client] (ecmascript)':
+      {
+        '*': {
+          id: '[project]/node_modules/.pnpm/next@15.1.7_@babel+core@7.26.9_react-dom@19.0.0_react@19.0.0__react@19.0.0_sass@1.79.4/node_modules/next/dist/esm/lib/metadata/metadata-boundary.js [app-ssr] (ecmascript)',
+          name: '*',
+          chunks: ['server/chunks/ssr/08b5e__pnpm_8e5af5._.js', 'server/chunks/ssr/[root of the server]__606353._.js'],
+          async: false,
+        },
+      },
+    '[project]/apps/web/src/components/ui/sidebar.tsx [app-client] (ecmascript)': {
+      '*': {
+        id: '[project]/apps/web/src/components/ui/sidebar.tsx [app-ssr] (ecmascript)',
+        name: '*',
+        chunks: [
+          'server/chunks/ssr/08b5e__pnpm_8e5af5._.js',
+          'server/chunks/ssr/[root of the server]__606353._.js',
+          'server/chunks/ssr/[root of the server]__d20022._.js',
+          'server/chunks/ssr/f9a8d_next_f50d05._.js',
+          'server/chunks/ssr/d7b8b_framer-motion_dist_es_8557a2._.js',
+          'server/chunks/ssr/2d5cf_tr46_9fb309._.js',
+          'server/chunks/ssr/036a0_@supabase_auth-js_dist_module_31221f._.js',
+          'server/chunks/ssr/4646b_xregexp_443fc3._.js',
+          'server/chunks/ssr/103c8_@tanstack_query-core_build_modern_0b3e2a._.js',
+          'server/chunks/ssr/08a98_@phosphor-icons_react_dist_b43c00._.js',
+          'server/chunks/ssr/08b5e__pnpm_a275ce._.js',
+          'server/chunks/ssr/08b5e__pnpm_9509a6._.js',
+        ],
+        async: false,
+      },
+    },
+    '[project]/node_modules/.pnpm/next@15.1.7_@babel+core@7.26.9_react-dom@19.0.0_react@19.0.0__react@19.0.0_sass@1.79.4/node_modules/next/dist/client/components/http-access-fallback/error-boundary.js [app-client] (ecmascript)':
+      {
+        '*': {
+          id: '[project]/node_modules/.pnpm/next@15.1.7_@babel+core@7.26.9_react-dom@19.0.0_react@19.0.0__react@19.0.0_sass@1.79.4/node_modules/next/dist/esm/client/components/http-access-fallback/error-boundary.js [app-ssr] (ecmascript)',
+          name: '*',
+          chunks: ['server/chunks/ssr/08b5e__pnpm_8e5af5._.js', 'server/chunks/ssr/[root of the server]__606353._.js'],
+          async: false,
+        },
+      },
+    '[project]/node_modules/.pnpm/@tanstack+react-query@5.66.5_react@19.0.0/node_modules/@tanstack/react-query/build/modern/HydrationBoundary.js [app-client] (ecmascript)':
+      {
+        '*': {
+          id: '[project]/node_modules/.pnpm/@tanstack+react-query@5.66.5_react@19.0.0/node_modules/@tanstack/react-query/build/modern/HydrationBoundary.js [app-ssr] (ecmascript)',
+          name: '*',
+          chunks: [
+            'server/chunks/ssr/08b5e__pnpm_8e5af5._.js',
+            'server/chunks/ssr/[root of the server]__606353._.js',
+            'server/chunks/ssr/[root of the server]__d20022._.js',
+            'server/chunks/ssr/f9a8d_next_f50d05._.js',
+            'server/chunks/ssr/d7b8b_framer-motion_dist_es_8557a2._.js',
+            'server/chunks/ssr/2d5cf_tr46_9fb309._.js',
+            'server/chunks/ssr/036a0_@supabase_auth-js_dist_module_31221f._.js',
+            'server/chunks/ssr/4646b_xregexp_443fc3._.js',
+            'server/chunks/ssr/103c8_@tanstack_query-core_build_modern_0b3e2a._.js',
+            'server/chunks/ssr/08a98_@phosphor-icons_react_dist_b43c00._.js',
+            'server/chunks/ssr/08b5e__pnpm_a275ce._.js',
+            'server/chunks/ssr/08b5e__pnpm_9509a6._.js',
+          ],
+          async: false,
+        },
+      },
+    '[project]/node_modules/.pnpm/next@15.1.7_@babel+core@7.26.9_react-dom@19.0.0_react@19.0.0__react@19.0.0_sass@1.79.4/node_modules/next/dist/client/components/client-segment.js [app-client] (ecmascript)':
+      {
+        '*': {
+          id: '[project]/node_modules/.pnpm/next@15.1.7_@babel+core@7.26.9_react-dom@19.0.0_react@19.0.0__react@19.0.0_sass@1.79.4/node_modules/next/dist/esm/client/components/client-segment.js [app-ssr] (ecmascript)',
+          name: '*',
+          chunks: ['server/chunks/ssr/08b5e__pnpm_8e5af5._.js', 'server/chunks/ssr/[root of the server]__606353._.js'],
+          async: false,
+        },
+      },
+    '[project]/node_modules/.pnpm/next@15.1.7_@babel+core@7.26.9_react-dom@19.0.0_react@19.0.0__react@19.0.0_sass@1.79.4/node_modules/next/dist/client/components/render-from-template-context.js [app-client] (ecmascript)':
+      {
+        '*': {
+          id: '[project]/node_modules/.pnpm/next@15.1.7_@babel+core@7.26.9_react-dom@19.0.0_react@19.0.0__react@19.0.0_sass@1.79.4/node_modules/next/dist/esm/client/components/render-from-template-context.js [app-ssr] (ecmascript)',
+          name: '*',
+          chunks: ['server/chunks/ssr/08b5e__pnpm_8e5af5._.js', 'server/chunks/ssr/[root of the server]__606353._.js'],
+          async: false,
+        },
+      },
+  },
+  edgeSSRModuleMapping: {},
+  rscModuleMapping: {
+    '[project]/node_modules/.pnpm/next@15.1.7_@babel+core@7.26.9_react-dom@19.0.0_react@19.0.0__react@19.0.0_sass@1.79.4/node_modules/next/dist/client/components/error-boundary.js [app-client] (ecmascript)':
+      {
+        '*': {
+          id: '[project]/node_modules/.pnpm/next@15.1.7_@babel+core@7.26.9_react-dom@19.0.0_react@19.0.0__react@19.0.0_sass@1.79.4/node_modules/next/dist/client/components/error-boundary.js (client proxy)',
+          name: '*',
+          chunks: ['server/app/~/page.js'],
+          async: false,
+        },
+      },
+    '[project]/node_modules/.pnpm/next@15.1.7_@babel+core@7.26.9_react-dom@19.0.0_react@19.0.0__react@19.0.0_sass@1.79.4/node_modules/next/dist/client/components/client-segment.js [app-client] (ecmascript)':
+      {
+        '*': {
+          id: '[project]/node_modules/.pnpm/next@15.1.7_@babel+core@7.26.9_react-dom@19.0.0_react@19.0.0__react@19.0.0_sass@1.79.4/node_modules/next/dist/esm/client/components/client-segment.js (client proxy)',
+          name: '*',
+          chunks: ['server/app/~/page.js'],
+          async: false,
+        },
+      },
+    '[project]/node_modules/.pnpm/next@15.1.7_@babel+core@7.26.9_react-dom@19.0.0_react@19.0.0__react@19.0.0_sass@1.79.4/node_modules/next/dist/client/components/http-access-fallback/error-boundary.js [app-client] (ecmascript)':
+      {
+        '*': {
+          id: '[project]/node_modules/.pnpm/next@15.1.7_@babel+core@7.26.9_react-dom@19.0.0_react@19.0.0__react@19.0.0_sass@1.79.4/node_modules/next/dist/esm/client/components/http-access-fallback/error-boundary.js (client proxy)',
+          name: '*',
+          chunks: ['server/app/~/page.js'],
+          async: false,
+        },
+      },
+    '[project]/apps/web/src/app/not-found.tsx [app-client] (ecmascript)': {
+      '*': {
+        id: '[project]/apps/web/src/app/not-found.tsx (client proxy)',
+        name: '*',
+        chunks: ['server/app/~/page.js'],
+        async: false,
+      },
+    },
+    '[project]/apps/web/src/app/~/clientProviders.tsx [app-client] (ecmascript)': {
+      '*': {
+        id: '[project]/apps/web/src/app/~/clientProviders.tsx (client proxy)',
+        name: '*',
+        chunks: ['server/app/~/page.js'],
+        async: false,
+      },
+    },
+    '[project]/node_modules/.pnpm/@tanstack+react-query@5.66.5_react@19.0.0/node_modules/@tanstack/react-query/build/modern/useMutation.js [app-client] (ecmascript)':
+      {
+        '*': {
+          id: '[project]/node_modules/.pnpm/@tanstack+react-query@5.66.5_react@19.0.0/node_modules/@tanstack/react-query/build/modern/useMutation.js (client proxy)',
+          name: '*',
+          chunks: ['server/app/~/page.js'],
+          async: false,
+        },
+      },
+    '[project]/node_modules/.pnpm/next@15.1.7_@babel+core@7.26.9_react-dom@19.0.0_react@19.0.0__react@19.0.0_sass@1.79.4/node_modules/next/dist/client/components/render-from-template-context.js [app-client] (ecmascript)':
+      {
+        '*': {
+          id: '[project]/node_modules/.pnpm/next@15.1.7_@babel+core@7.26.9_react-dom@19.0.0_react@19.0.0__react@19.0.0_sass@1.79.4/node_modules/next/dist/esm/client/components/render-from-template-context.js (client proxy)',
+          name: '*',
+          chunks: ['server/app/~/page.js'],
+          async: false,
+        },
+      },
+    '[project]/apps/web/src/app/~/page.tsx [app-client] (ecmascript)': {
+      '*': {
+        id: '[project]/apps/web/src/app/~/page.tsx (client proxy)',
+        name: '*',
+        chunks: ['server/app/~/page.js'],
+        async: false,
+      },
+    },
+    '[project]/apps/web/src/components/ui/sidebar.tsx [app-client] (ecmascript)': {
+      '*': {
+        id: '[project]/apps/web/src/components/ui/sidebar.tsx (client proxy)',
+        name: '*',
+        chunks: ['server/app/~/page.js'],
+        async: false,
+      },
+    },
+    '[project]/apps/web/src/components/Sidebar/sidebar.tsx [app-client] (ecmascript)': {
+      '*': {
+        id: '[project]/apps/web/src/components/Sidebar/sidebar.tsx (client proxy)',
+        name: '*',
+        chunks: ['server/app/~/page.js'],
+        async: false,
+      },
+    },
+    '[project]/node_modules/.pnpm/@tanstack+react-query@5.66.5_react@19.0.0/node_modules/@tanstack/react-query/build/modern/HydrationBoundary.js [app-client] (ecmascript)':
+      {
+        '*': {
+          id: '[project]/node_modules/.pnpm/@tanstack+react-query@5.66.5_react@19.0.0/node_modules/@tanstack/react-query/build/modern/HydrationBoundary.js (client proxy)',
+          name: '*',
+          chunks: ['server/app/~/page.js'],
+          async: false,
+        },
+      },
+    '[project]/node_modules/.pnpm/next@15.1.7_@babel+core@7.26.9_react-dom@19.0.0_react@19.0.0__react@19.0.0_sass@1.79.4/node_modules/next/dist/client/components/client-page.js [app-client] (ecmascript)':
+      {
+        '*': {
+          id: '[project]/node_modules/.pnpm/next@15.1.7_@babel+core@7.26.9_react-dom@19.0.0_react@19.0.0__react@19.0.0_sass@1.79.4/node_modules/next/dist/esm/client/components/client-page.js (client proxy)',
+          name: '*',
+          chunks: ['server/app/~/page.js'],
+          async: false,
+        },
+      },
+    '[project]/node_modules/.pnpm/@tanstack+react-query@5.66.5_react@19.0.0/node_modules/@tanstack/react-query/build/modern/useQuery.js [app-client] (ecmascript)':
+      {
+        '*': {
+          id: '[project]/node_modules/.pnpm/@tanstack+react-query@5.66.5_react@19.0.0/node_modules/@tanstack/react-query/build/modern/useQuery.js (client proxy)',
+          name: '*',
+          chunks: ['server/app/~/page.js'],
+          async: false,
+        },
+      },
+    '[project]/node_modules/.pnpm/next@15.1.7_@babel+core@7.26.9_react-dom@19.0.0_react@19.0.0__react@19.0.0_sass@1.79.4/node_modules/next/dist/client/components/layout-router.js [app-client] (ecmascript)':
+      {
+        '*': {
+          id: '[project]/node_modules/.pnpm/next@15.1.7_@babel+core@7.26.9_react-dom@19.0.0_react@19.0.0__react@19.0.0_sass@1.79.4/node_modules/next/dist/esm/client/components/layout-router.js (client proxy)',
+          name: '*',
+          chunks: ['server/app/~/page.js'],
+          async: false,
+        },
+      },
+    '[project]/node_modules/.pnpm/@tanstack+react-query@5.66.5_react@19.0.0/node_modules/@tanstack/react-query/build/modern/QueryClientProvider.js [app-client] (ecmascript)':
+      {
+        '*': {
+          id: '[project]/node_modules/.pnpm/@tanstack+react-query@5.66.5_react@19.0.0/node_modules/@tanstack/react-query/build/modern/QueryClientProvider.js (client proxy)',
+          name: '*',
+          chunks: ['server/app/~/page.js'],
+          async: false,
+        },
+      },
+    '[project]/node_modules/.pnpm/next@15.1.7_@babel+core@7.26.9_react-dom@19.0.0_react@19.0.0__react@19.0.0_sass@1.79.4/node_modules/next/dist/lib/metadata/metadata-boundary.js [app-client] (ecmascript)':
+      {
+        '*': {
+          id: '[project]/node_modules/.pnpm/next@15.1.7_@babel+core@7.26.9_react-dom@19.0.0_react@19.0.0__react@19.0.0_sass@1.79.4/node_modules/next/dist/esm/lib/metadata/metadata-boundary.js (client proxy)',
+          name: '*',
+          chunks: ['server/app/~/page.js'],
+          async: false,
+        },
+      },
+  },
+  edgeRscModuleMapping: {},
+  entryCSSFiles: {
+    '[project]/apps/web/src/app/~/layout': [
+      { path: 'static/chunks/[root of the server]__7ddb15._.css', inlined: false },
+    ],
+    '[project]/apps/web/src/app/~/page': [{ path: 'static/chunks/[root of the server]__7ddb15._.css', inlined: false }],
+    '[project]/apps/web/src/app/not-found': [],
+    '[project]/apps/web/src/app/layout': [],
+  },
+  entryJSFiles: {
+    '[project]/apps/web/src/app/layout': [
+      'static/chunks/[project]__5c448f._.js',
+      'static/chunks/src_app_layout_tsx_7a6aec._.js',
+    ],
+    '[project]/apps/web/src/app/~/layout': [
+      'static/chunks/[project]__5c448f._.js',
+      'static/chunks/src_app_layout_tsx_7a6aec._.js',
+      'static/chunks/src_bcbbbf._.js',
+      'static/chunks/f9a8d_next_65155d._.js',
+      'static/chunks/d7b8b_framer-motion_dist_es_dbc675._.js',
+      'static/chunks/036a0_@supabase_auth-js_dist_module_587cb4._.js',
+      'static/chunks/7716c_core-js-pure_c91240._.js',
+      'static/chunks/4646b_xregexp_11bae8._.js',
+      'static/chunks/103c8_@tanstack_query-core_build_modern_ae2f16._.js',
+      'static/chunks/08a98_@phosphor-icons_react_dist_053258._.js',
+      'static/chunks/08b5e__pnpm_4f7db5._.js',
+      'static/chunks/08b5e__pnpm_39a0d0._.js',
+      'static/chunks/src_app_~_layout_tsx_4c7164._.js',
+    ],
+    '[project]/apps/web/src/app/not-found': [
+      'static/chunks/[project]__5c448f._.js',
+      'static/chunks/src_app_layout_tsx_7a6aec._.js',
+      'static/chunks/[project]__5d292b._.js',
+      'static/chunks/src_app_not-found_tsx_4c7164._.js',
+    ],
+    '[project]/apps/web/src/app/~/page': [
+      'static/chunks/[project]__5c448f._.js',
+      'static/chunks/src_app_layout_tsx_7a6aec._.js',
+      'static/chunks/src_bcbbbf._.js',
+      'static/chunks/f9a8d_next_65155d._.js',
+      'static/chunks/d7b8b_framer-motion_dist_es_dbc675._.js',
+      'static/chunks/036a0_@supabase_auth-js_dist_module_587cb4._.js',
+      'static/chunks/7716c_core-js-pure_c91240._.js',
+      'static/chunks/4646b_xregexp_11bae8._.js',
+      'static/chunks/103c8_@tanstack_query-core_build_modern_ae2f16._.js',
+      'static/chunks/08a98_@phosphor-icons_react_dist_053258._.js',
+      'static/chunks/08b5e__pnpm_4f7db5._.js',
+      'static/chunks/08b5e__pnpm_39a0d0._.js',
+      'static/chunks/src_app_~_layout_tsx_4c7164._.js',
+      'static/chunks/9aeaa_micromark_dev_lib_b10892._.js',
+      'static/chunks/52fd0_micromark-core-commonmark_dev_lib_276102._.js',
+      'static/chunks/08b5e__pnpm_b9cc46._.js',
+      'static/chunks/src_7898a0._.js',
+      'static/chunks/src_app_~_page_tsx_ac503a._.js',
+    ],
+  },
+};

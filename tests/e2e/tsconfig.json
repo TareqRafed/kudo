@@ -1,5 +1,5 @@
 {
-  "extends": "@extension/tsconfig/utils",
+  "extends": "@kudo/tsconfig/utils",
   "compilerOptions": {
     "moduleResolution": "node",
     "module": "ESNext",
