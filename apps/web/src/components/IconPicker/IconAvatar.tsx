@@ -8,7 +8,7 @@ interface Props extends ComponentPropsWithoutRef<'div'> {
 }
 
 const IconAvatar = ({ name, theme, ...rest }: Props) => {
-  const Icon = icons.find(item => item.name === name)?.component ?? icons[0].component;
+  const Icon = icons.find((item) => item.name === name)?.component ?? icons[0].component;
 
   return (
     <div
@@ -18,7 +18,8 @@ const IconAvatar = ({ name, theme, ...rest }: Props) => {
         background: `linear-gradient(135deg, ${theme ?? colors[0].color}, #000)`,
         borderColor: `${theme ?? colors[0].color}`,
       }}
-      className={cn('size-8 flex border justify-center items-center p-1 rounded', rest.className)}>
+      className={cn('size-8 flex border justify-center items-center p-1 rounded', rest.className)}
+    >
       <Icon className="size-7" weight="fill" />
     </div>
   );

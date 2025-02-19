@@ -33,14 +33,14 @@ export default function useUpdate({
     setUpdateStatus('loading');
 
     return updateFn()
-      .then(res => {
+      .then((res) => {
         setUpdateStatus('success');
         setTimeout(() => {
           setUpdateStatus('ready');
         }, resetDelay);
         return res;
       })
-      .catch(err => {
+      .catch((err) => {
         setUpdateStatus('error');
         throw err;
       });

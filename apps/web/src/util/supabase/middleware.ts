@@ -41,7 +41,7 @@ export async function updateSession(
   if (locale !== 'en') path = [locale, ...path];
 
   const shouldRedirectAuthedUser = REDIRECTED_LOGGEDIN_ROUTES.some(
-    route => path.join('/').startsWith(route) || path.join('/') === '',
+    (route) => path.join('/').startsWith(route) || path.join('/') === '',
   );
 
   if (isLoggedIn && completedProfile && shouldRedirectAuthedUser) {
@@ -50,7 +50,7 @@ export async function updateSession(
     return NextResponse.redirect(url);
   }
 
-  const shouldRedirectUnauthedUser = PROTECTED_ROUTES.some(route => path.join('/').startsWith(route));
+  const shouldRedirectUnauthedUser = PROTECTED_ROUTES.some((route) => path.join('/').startsWith(route));
 
   if (!isLoggedIn && shouldRedirectUnauthedUser) {
     const url = request.nextUrl.clone();

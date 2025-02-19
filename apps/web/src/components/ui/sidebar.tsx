@@ -74,7 +74,7 @@ const SidebarProvider = React.forwardRef<
 
   // Helper to toggle the sidebar.
   const toggleSidebar = React.useCallback(() => {
-    return isMobile ? setOpenMobile(open => !open) : setOpen(open => !open);
+    return isMobile ? setOpenMobile((open) => !open) : setOpen((open) => !open);
   }, [isMobile, setOpen, setOpenMobile]);
 
   // Adds a keyboard shortcut to toggle the sidebar.
@@ -122,7 +122,8 @@ const SidebarProvider = React.forwardRef<
           className,
         )}
         ref={ref}
-        {...props}>
+        {...props}
+      >
         {children}
       </div>
     </SidebarContext.Provider>
@@ -145,7 +146,8 @@ const Sidebar = React.forwardRef<
       <div
         className={cn('flex h-full w-[--sidebar-width] flex-col bg-sidebar text-sidebar-foreground', className)}
         ref={ref}
-        {...props}>
+        {...props}
+      >
         {children}
       </div>
     );
@@ -163,7 +165,8 @@ const Sidebar = React.forwardRef<
               '--sidebar-width': SIDEBAR_WIDTH_MOBILE,
             } as React.CSSProperties
           }
-          side={side}>
+          side={side}
+        >
           <div className="flex h-full w-full flex-col">{children}</div>
         </SheetContent>
       </Sheet>
@@ -177,7 +180,8 @@ const Sidebar = React.forwardRef<
       data-state={state}
       data-collapsible={state === 'collapsed' ? collapsible : ''}
       data-variant={variant}
-      data-side={side}>
+      data-side={side}
+    >
       {/* This is what handles the sidebar gap on desktop */}
       <div
         className={cn(
@@ -201,10 +205,12 @@ const Sidebar = React.forwardRef<
             : 'group-data-[collapsible=icon]:w-[--sidebar-width-icon] group-data-[side=left]:border-r group-data-[side=right]:border-l',
           className,
         )}
-        {...props}>
+        {...props}
+      >
         <div
           data-sidebar="sidebar"
-          className="flex h-full w-full flex-col bg-sidebar group-data-[variant=floating]:rounded-lg group-data-[variant=floating]:border group-data-[variant=floating]:border-sidebar-border group-data-[variant=floating]:shadow">
+          className="flex h-full w-full flex-col bg-sidebar group-data-[variant=floating]:rounded-lg group-data-[variant=floating]:border group-data-[variant=floating]:border-sidebar-border group-data-[variant=floating]:shadow"
+        >
           {children}
         </div>
       </div>
@@ -224,11 +230,12 @@ const SidebarTrigger = React.forwardRef<React.ElementRef<typeof Button>, React.C
         variant="ghost"
         size="icon"
         className={cn('h-7 w-7', className)}
-        onClick={event => {
+        onClick={(event) => {
           onClick?.(event);
           toggleSidebar();
         }}
-        {...props}>
+        {...props}
+      >
         <PanelLeft />
         <span className="sr-only">Toggle Sidebar</span>
       </Button>
@@ -537,7 +544,8 @@ const SidebarMenuSkeleton = React.forwardRef<
       ref={ref}
       data-sidebar="menu-skeleton"
       className={cn('rounded-md h-8 flex gap-2 px-2 items-center', className)}
-      {...props}>
+      {...props}
+    >
       {showIcon && <Skeleton className="size-4 rounded-md" data-sidebar="menu-skeleton-icon" />}
       <Skeleton
         className="h-4 flex-1 max-w-[--skeleton-width]"

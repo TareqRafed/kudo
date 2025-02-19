@@ -104,10 +104,11 @@ const AddMembersDialog = ({ teamId }: { teamId: number }) => {
           <Button
             disabled={inputCount >= 8}
             size={'sm'}
-            onClick={() => setInputCount(prev => (prev >= 8 ? prev : prev + 1))}
+            onClick={() => setInputCount((prev) => (prev >= 8 ? prev : prev + 1))}
             type="button"
             className="w-full"
-            variant={'secondary'}>
+            variant={'secondary'}
+          >
             Invite More
           </Button>
           <DialogFooter>

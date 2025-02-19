@@ -47,7 +47,7 @@ export function TeamSwitcher() {
         { table: 'members_with_metadata' },
         { table: 'rpc/get_current_member_with_metadata' },
       ],
-      onError: e => {
+      onError: (e) => {
         toast({
           description: `Something went wrong ${e}`,
           variant: 'destructive',
@@ -87,7 +87,8 @@ export function TeamSwitcher() {
           <DropdownMenuTrigger asChild>
             <SidebarMenuButton
               size="lg"
-              className="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground">
+              className="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground"
+            >
               <IconAvatar theme={selectedTeam?.theme} name={selectedTeam?.logo} />
               <div className="grid flex-1 text-left text-sm leading-tight">
                 <span className="truncate font-semibold">{selectedTeam?.name}</span>
@@ -100,13 +101,15 @@ export function TeamSwitcher() {
             className="w-[--radix-dropdown-menu-trigger-width] min-w-56 rounded-lg"
             align="start"
             side={isMobile ? 'bottom' : 'right'}
-            sideOffset={4}>
+            sideOffset={4}
+          >
             <DropdownMenuLabel className="text-xs text-muted-foreground">Teams</DropdownMenuLabel>
             {teams?.map(({ teams }, i) => (
               <DropdownMenuItem
                 key={teams?.name}
                 className="gap-2 p-2"
-                onClick={() => updateMember({ id: user.id, selected_team_id: teams.id })}>
+                onClick={() => updateMember({ id: user.id, selected_team_id: teams.id })}
+              >
                 <div className="flex size-6 items-center justify-center">
                   <IconAvatar className="size-5" theme={teams?.theme} name={teams?.logo} />
                 </div>

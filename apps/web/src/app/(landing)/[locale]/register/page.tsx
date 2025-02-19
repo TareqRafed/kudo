@@ -66,7 +66,8 @@ export default function LoginForm() {
               const formData = new FormData();
               formData.append('provider', 'github');
               formAction(formData);
-            }}>
+            }}
+          >
             <span className="flex space-x-5">
               Continue with Google <GoogleLogo className="ml-2" weight="thin" />
             </span>
@@ -79,7 +80,8 @@ export default function LoginForm() {
               const formData = new FormData();
               formData.append('provider', 'github');
               formAction(formData);
-            }}>
+            }}
+          >
             <span className="flex space-x-5">
               Continue with Github <GithubLogo weight="thin" className="ml-2" />
             </span>

@@ -40,7 +40,8 @@ export function URLFormatter({ url, showQuery, showDomain, showBasePath }: URLFo
           className={cn([
             'w-[200px] text-sm overflow-hidden whitespace-nowrap text-ellipsis inline-block m-w-full',
             'group-hover:underline',
-          ])}>
+          ])}
+        >
           /{formattedURL.basePath}
         </Link>
       )}

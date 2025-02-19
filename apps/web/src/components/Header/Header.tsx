@@ -18,7 +18,8 @@ const Header = ({ className }: { className?: string }) => {
 
   return (
     <header
-      className={cn(['pt-1 md:pt-5 w-[100%] md:w-[80%] xl:w-[45%] max-w-[45rem] mx-auto w-full px-3', className])}>
+      className={cn(['pt-1 md:pt-5 w-[100%] md:w-[80%] xl:w-[45%] max-w-[45rem] mx-auto w-full px-3', className])}
+    >
       <div className="flex items-center justify-between w-full">
         <div className="flex items-center">
           <ContextMenu>
@@ -42,7 +43,8 @@ const Header = ({ className }: { className?: string }) => {
             suppressHydrationWarning
             aria-label="Switch theme to light mode"
             pressed={theme == 'light'}
-            onClick={() => setTheme('light')}>
+            onClick={() => setTheme('light')}
+          >
             <Sun />
           </Toggle>
 
@@ -51,7 +53,8 @@ const Header = ({ className }: { className?: string }) => {
             aria-label="Switch theme to dark mode"
             className="mx-1"
             pressed={theme == 'dark'}
-            onClick={() => setTheme('dark')}>
+            onClick={() => setTheme('dark')}
+          >
             <Moon />
           </Toggle>
 
@@ -59,7 +62,8 @@ const Header = ({ className }: { className?: string }) => {
             suppressHydrationWarning
             aria-label="Switch theme to system preference"
             pressed={theme == 'system'}
-            onClick={() => setTheme('system')}>
+            onClick={() => setTheme('system')}
+          >
             <MonitorCog />
           </Toggle>
 
@@ -68,7 +72,8 @@ const Header = ({ className }: { className?: string }) => {
             variant={'secondary'}
             onClick={() => {
               router.push('/login');
-            }}>
+            }}
+          >
             Get Started
           </Button>
         </div>
@@ -78,7 +83,8 @@ const Header = ({ className }: { className?: string }) => {
           aria-label="Switch theme to light mode"
           suppressHydrationWarning
           pressed={theme == 'light'}
-          onClick={() => setTheme('light')}>
+          onClick={() => setTheme('light')}
+        >
           <Sun />{' '}
         </Toggle>
         <Toggle
@@ -86,14 +92,16 @@ const Header = ({ className }: { className?: string }) => {
           suppressHydrationWarning
           className="mx-1"
           pressed={theme == 'dark'}
-          onClick={() => setTheme('dark')}>
+          onClick={() => setTheme('dark')}
+        >
           <Moon />{' '}
         </Toggle>
         <Toggle
           aria-label="Switch theme to system preference"
           suppressHydrationWarning
           pressed={theme == 'system'}
-          onClick={() => setTheme('system')}>
+          onClick={() => setTheme('system')}
+        >
           <MonitorCog />
         </Toggle>
 
@@ -102,7 +110,8 @@ const Header = ({ className }: { className?: string }) => {
           variant={'secondary'}
           onClick={() => {
             router.push('/login');
-          }}>
+          }}
+        >
           Get Started
         </Button>
       </div>

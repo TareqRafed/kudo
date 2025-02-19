@@ -76,7 +76,8 @@ export const Loader = ({ className, size, variant, ...rest }: LoaderProps) => {
       variants={variant === 'dots' ? containerVariants : undefined}
       initial={variant === 'dots' ? 'initial' : false}
       animate={variant === 'dots' ? 'animate' : false}
-      {...rest}>
+      {...rest}
+    >
       {variant === 'dots' ? (
         [...Array(3)].map((_, index) => (
           <motion.div key={index} className="rounded-full bg-white" variants={dotVariants} />

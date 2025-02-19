@@ -24,7 +24,8 @@ export const OptionLink = ({ label, ...rest }: OptionButtonProps) => {
   return (
     <Link
       className="h-full hover:bg-accent py-2 px-2 mx-auto bg-card rounded h-[3rem] hover:opacity-80 w-[98%] flex justify-between items-center"
-      {...rest}>
+      {...rest}
+    >
       <div className="flex flex-col">
         <Label>{label}</Label>
       </div>

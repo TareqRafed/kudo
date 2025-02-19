@@ -14,7 +14,7 @@ export const getInvites = (
 
   if (options?.self) {
     // TODO this is buggy, fix later
-    client.auth.getSession().then(val => {
+    client.auth.getSession().then((val) => {
       const userEmail = val.data.session?.user.email;
       if (userEmail) query.eq('email', userEmail);
     });

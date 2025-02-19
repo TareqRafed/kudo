@@ -72,7 +72,7 @@ const ProfileSettings = () => {
           description: 'Changes saved',
         }),
 
-      onError: e => {
+      onError: (e) => {
         toast({
           variant: 'destructive',
           description: e.message ?? 'Something went wrong',
@@ -84,7 +84,7 @@ const ProfileSettings = () => {
   return (
     <Form
       schema={formSchema}
-      onValidSubmit={async e => {
+      onValidSubmit={async (e) => {
         if (!member?.id) return;
         let newImage: string | null = null;
 
@@ -97,7 +97,8 @@ const ProfileSettings = () => {
           ...(newImage && { profile_picture: newImage }),
           display_name: e.display_name,
         });
-      }}>
+      }}
+    >
       <FormGroup>
         <FormRow
           isLoading={memberLoading}
@@ -117,7 +118,8 @@ const ProfileSettings = () => {
                 className="size-12"
               />
             );
-          }}></FormRow>
+          }}
+        ></FormRow>
         <FormRow isLoading={memberLoading} name="display_name" label="Display Name">
           <Input defaultValue={member?.display_name ?? ''} />
         </FormRow>
@@ -158,7 +160,7 @@ const GithubAccountDetails = () => {
       query.invalidateQueries({ queryKey: ['identities'] });
       toast({ description: 'Identity Unlinked' });
     },
-    onError: e => {
+    onError: (e) => {
       toast({ variant: 'destructive', description: e.message });
     },
   });
@@ -172,12 +174,12 @@ const GithubAccountDetails = () => {
       query.invalidateQueries({ queryKey: ['identities'] });
       toast({ description: 'Identity Linked' });
     },
-    onError: e => {
+    onError: (e) => {
       toast({ variant: 'destructive', description: e.message });
     },
   });
 
-  const githubIdentity = data?.identities.find(id => id.provider === 'github');
+  const githubIdentity = data?.identities.find((id) => id.provider === 'github');
 
   const action = !githubIdentity ? (
     <Button onClick={() => linkIdentity('github')} size={'sm'} variant={'outline'} className="flex">
@@ -191,7 +193,8 @@ const GithubAccountDetails = () => {
       size={'sm'}
       variant={'destructive'}
       onClick={() => unlinkIdentity(githubIdentity)}
-      disabled={data?.identities.length == 1}>
+      disabled={data?.identities.length == 1}
+    >
       <span className="flex items-center justify-center">
         <GithubLogo className="mr-2" />
         Unlink Account
@@ -243,7 +246,7 @@ const EmailAccountDetails = () => {
     onSuccess: () => {
       toast({ description: 'Password Changed Successfully' });
     },
-    onError: e => {
+    onError: (e) => {
       toast({
         variant: 'destructive',
         description: e.message ?? 'Something went wrong',
@@ -251,7 +254,7 @@ const EmailAccountDetails = () => {
     },
   });
 
-  const emailIdentity = identities?.identities.find(id => id.provider === 'email');
+  const emailIdentity = identities?.identities.find((id) => id.provider === 'email');
 
   const error = isIdentityError || isMemberError;
 
@@ -261,7 +264,7 @@ const EmailAccountDetails = () => {
     return (
       <>
         <Subheader title="E-mail" />
-        <Form schema={changePasswordSchema} onValidSubmit={e => changePassword(e.password)}>
+        <Form schema={changePasswordSchema} onValidSubmit={(e) => changePassword(e.password)}>
           <FormGroup>
             <FormRow isLoading={memberLoading} name="email" label="E-mail">
               <Input disabled value={member?.email ?? ''} />
@@ -299,7 +302,7 @@ const DangerZone = () => {
     onSuccess: () => {
       supabase.auth.signOut();
     },
-    onError: e => {
+    onError: (e) => {
       toast({
         variant: 'destructive',
         description: e.message ?? 'Something went wrong',
@@ -315,7 +318,8 @@ const DangerZone = () => {
           <Confirm
             isLoading={deletingUserPending}
             content="This will issue a deleting request of all your data which should take up to 48 hours. if you wish to cancel your request then just login again within 48 hours, note that all teams you have created will be deleted. if your account got deleted nothing can be undone."
-            action={() => deleteUser(supabase)}>
+            action={() => deleteUser(supabase)}
+          >
             <Button size={'sm'} variant={'destructive'}>
               <span className="flex items-center justify-center">
                 <Trash className="mr-2" />
