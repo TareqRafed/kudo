@@ -11,6 +11,7 @@
     "clean": "pnpm clean:turbo && pnpm clean:node_modules"
   },
   "devDependencies": {
+    "@biomejs/biome": "1.9.4",
     "@kudo/tsconfig": "workspace:*",
     "@wdio/cli": "^9.1.2",
     "@wdio/globals": "^9.1.2",

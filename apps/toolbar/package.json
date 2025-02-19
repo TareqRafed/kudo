@@ -41,11 +41,13 @@
     "zustand": "^5.0.3"
   },
   "devDependencies": {
-    "@types/react": "^19.0.0",
+    "@biomejs/biome": "1.9.4",
     "@kudo/hmr": "workspace:*",
     "@kudo/tailwindcss-config": "workspace:*",
     "@kudo/tsconfig": "workspace:*",
     "@kudo/vite-config": "workspace:*",
+    "@kudo/biome-config": "workspace:*",
+    "@types/react": "^19.0.0",
     "@types/webextension-polyfill": "^0.12.1",
     "concurrently": "^9.0.1",
     "cross-env": "^7.0.3",

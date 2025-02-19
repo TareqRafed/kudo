@@ -2,5 +2,8 @@
   "name": "@kudo/tsconfig",
   "version": "0.0.1",
   "description": "kudo - tsconfig",
-  "private": true
+  "private": true,
+  "devDependencies": {
+    "@biomejs/biome": "1.9.4"
+  }
 }
