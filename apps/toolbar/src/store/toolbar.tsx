@@ -23,7 +23,7 @@ type ToolbarStore = {
   reset: () => void;
 };
 
-const useToolbarStore = create<ToolbarStore>(set => ({
+const useToolbarStore = create<ToolbarStore>((set) => ({
   toolbarItems: {
     comment: { inUse: false, enabled: true, visible: true },
     inbox: { inUse: false, enabled: true, visible: true },
@@ -35,8 +35,8 @@ const useToolbarStore = create<ToolbarStore>(set => ({
   /**
    * Disables sets all other item `inUse` to false
    */
-  toggleToolbarItem: id =>
-    set(state => ({
+  toggleToolbarItem: (id) =>
+    set((state) => ({
       toolbarItems: {
         ...state.toolbarItems,
         [id]: { ...state.toolbarItems[id], inUse: !state.toolbarItems[id].inUse },
@@ -44,7 +44,7 @@ const useToolbarStore = create<ToolbarStore>(set => ({
     })),
 
   setDragging: (isDragging: boolean) =>
-    set(state => ({
+    set((state) => ({
       toolbar: {
         ...state.toolbar,
         isDragging,

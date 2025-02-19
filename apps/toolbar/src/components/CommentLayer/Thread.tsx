@@ -69,12 +69,13 @@ const ThreadTag = ({ data, isLoading, isDragging }: ThreadProps) => {
         setShowExtended(true);
       }}
       style={{ position: 'absolute', left: 0, top: 0 }}
-      className={cn([`pointer-events-auto z-max-2 flex flex-col select-none items-start`])}>
+      className={cn([`pointer-events-auto z-max-2 flex flex-col select-none items-start`])}
+    >
       <CommentPin
         ref={commentPinRef}
         isLoading={isLoading}
         content={data.comments.length + 1}
-        usersIds={[...new Set([data.creator.id, ...data.comments?.map(cmnt => cmnt.creator.id)])]}
+        usersIds={[...new Set([data.creator.id, ...data.comments?.map((cmnt) => cmnt.creator.id)])]}
       />
       <AnimatePresence>
         {!isCollapsed && !isDragging && (
@@ -83,7 +84,8 @@ const ThreadTag = ({ data, isLoading, isDragging }: ThreadProps) => {
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 5 }}
               exit={{ opacity: 0, y: 10 }}
-              transition={{ duration: 0.2, delay: 0.2 }}>
+              transition={{ duration: 0.2, delay: 0.2 }}
+            >
               <div className="bg-background dark relative max-h-[450px] overflow-auto rounded-lg border text-white">
                 <ThreadComment
                   minimal={false}
@@ -93,7 +95,7 @@ const ThreadTag = ({ data, isLoading, isDragging }: ThreadProps) => {
                 {showExtended && (
                   <>
                     <div>
-                      {data.comments.map(cmnt => (
+                      {data.comments.map((cmnt) => (
                         <ThreadComment showActions minimal key={cmnt.id} comment={cmnt} />
                       ))}
                     </div>
@@ -123,7 +125,7 @@ const CommentInputMutate = ({ threadId }: { threadId: number }) => {
   return (
     <CommentInput
       className="border-t"
-      onCreate={input => mutate({ target_content: input, target_thread_id: threadId })}
+      onCreate={(input) => mutate({ target_content: input, target_thread_id: threadId })}
     />
   );
 };
@@ -242,7 +244,8 @@ const Comment = ({ comment }: CommentSectionProps) => {
         <button
           aria-label={isExpanded ? 'Show Less' : 'Show More'}
           onClick={toggleText}
-          className="mt-2 text-xs text-blue-500 hover:underline">
+          className="mt-2 text-xs text-blue-500 hover:underline"
+        >
           {isExpanded ? 'Show Less' : 'Show More'}
         </button>
       )}
