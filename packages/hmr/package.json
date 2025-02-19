@@ -4,9 +4,7 @@
   "description": "chrome extension - hot module reload/refresh",
   "private": true,
   "sideEffects": true,
-  "files": [
-    "dist/**"
-  ],
+  "files": ["dist/**"],
   "main": "dist/index.js",
   "module": "dist/index.js",
   "types": "index.ts",
@@ -21,12 +19,13 @@
     "dev": "node dist/lib/initializers/initReloadServer.js",
     "lint": "eslint . --ext .ts,.tsx",
     "lint:fix": "pnpm lint --fix",
-    "prettier": "prettier . --write --ignore-path ../../.prettierignore",
+    "format": "biome format --write",
     "type-check": "tsc --noEmit"
   },
   "devDependencies": {
     "@biomejs/biome": "1.9.4",
     "@kudo/tsconfig": "workspace:*",
+    "@kudo/biome-config": "workspace:*",
     "@rollup/plugin-sucrase": "^5.0.2",
     "@types/ws": "^8.5.12",
     "esm": "^3.2.25",

@@ -29,7 +29,8 @@ const LoadingDots = () => {
         width: '100%',
         height: '100%',
         background: 'transparent', // Transparent background
-      }}>
+      }}
+    >
       {[...Array(3)].map((_, i) => (
         <motion.div
           key={i}

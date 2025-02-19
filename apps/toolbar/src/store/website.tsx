@@ -10,14 +10,14 @@ type WebsiteStore = {
   setWebsiteData: (id: number, hash: string) => void;
 };
 
-const useWebsiteStore = create<WebsiteStore>(set => ({
+const useWebsiteStore = create<WebsiteStore>((set) => ({
   website: {
     id: null,
     hash: null,
   },
 
   setWebsiteData: (id, hash) =>
-    set(prevState => ({
+    set((prevState) => ({
       ...prevState,
       website: {
         hash,

@@ -55,7 +55,7 @@ const removeRootContainer = () => {
 };
 
 const registerListeners = () => {
-  addMessageListener(message => {
+  addMessageListener((message) => {
     if (message.action == 'TOGGLE') {
       toggleConnection();
       return Promise.resolve({ success: true, data: 'Unknown message type' });
