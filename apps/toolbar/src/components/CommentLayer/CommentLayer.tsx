@@ -103,14 +103,14 @@ export const CommentLayer = () => {
     }));
   };
 
-  const spawnThread: MouseEventHandler<HTMLDivElement> = e => {
-    setThreadSpawn(prev => ({ ...prev, active: false }));
+  const spawnThread: MouseEventHandler<HTMLDivElement> = (e) => {
+    setThreadSpawn((prev) => ({ ...prev, active: false }));
     if (!toolbarItems.comment.inUse) return;
     handleThreadSpawn(e.clientX, e.clientY);
     toggleToolbarItem('comment'); // off
   };
 
-  useHotkeys('esc', () => setThreadSpawn(prev => ({ ...prev, active: false })));
+  useHotkeys('esc', () => setThreadSpawn((prev) => ({ ...prev, active: false })));
 
   const threadInitRef = useRef<HTMLDivElement>(null);
 
@@ -125,14 +125,15 @@ export const CommentLayer = () => {
         toolbarItems.comment.inUse && 'comment-cursor',
         'text-white dark fixed inset-0 z-max-2 size-full',
       ])}
-      onClick={spawnThread}>
+      onClick={spawnThread}
+    >
       {pendingThread && pendingThreadData && (
         <span style={{ position: 'absolute', left: pendingThreadData.x, top: pendingThreadData.y }}>
           <CommentPin isLoading usersIds={[]} content="" />
         </span>
       )}
 
-      {(threads?.data?.data ?? []).map(thread => (
+      {(threads?.data?.data ?? []).map((thread) => (
         <MagnifiedTag key={thread.id} layerRef={layerRef} thread={thread} />
       ))}
 
@@ -147,8 +148,8 @@ export const CommentLayer = () => {
             y: threadSpawn.y,
             rect: threadSpawn.rect,
           }}
-          onDrop={e => {
-            setThreadSpawn(prev => ({
+          onDrop={(e) => {
+            setThreadSpawn((prev) => ({
               targetSelector: e.targetSelector,
               x: e.x,
               y: e.y,
@@ -158,11 +159,12 @@ export const CommentLayer = () => {
               windowHeight: e.windowH,
             }));
             setIsDragging(false);
-          }}>
+          }}
+        >
           <div ref={threadInitRef}>
             <ThreadInit
               isDragging={isDragging}
-              onCreate={val => {
+              onCreate={(val) => {
                 const { active: _, targetSelector, windowWidth, windowHeight, ...rest } = threadSpawn;
                 mutate({
                   ...rest,
@@ -173,7 +175,7 @@ export const CommentLayer = () => {
                   website_id: website.id ?? 0,
                 });
 
-                setThreadSpawn(prev => ({ ...prev, active: false }));
+                setThreadSpawn((prev) => ({ ...prev, active: false }));
               }}
             />
           </div>
@@ -220,10 +222,11 @@ const MagnifiedTag = ({ thread, layerRef }: Thread) => {
       onStart={() => setIsDragging(true)}
       layerRef={layerRef}
       initData={{ targetSelector: thread.target_selector ?? undefined, x: thread.x, y: thread.y, rect: thread.rect }}
-      onDrop={e => {
+      onDrop={(e) => {
         setIsDragging(false);
         handleTagDrop(e, thread.id ?? 0);
-      }}>
+      }}
+    >
       <div ref={threadRef}>
         <ThreadTag isDragging={isDragging} data={thread} isLoading={isPending} />
       </div>

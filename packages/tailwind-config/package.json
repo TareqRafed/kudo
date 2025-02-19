@@ -1,7 +1,7 @@
 {
   "name": "@kudo/tailwindcss-config",
   "version": "0.3.4",
-  "description": "chrome extension - tailwindcss configuration",
+  "description": "Chrome Extension - tailwindcss configuration",
   "main": "tailwind.config.ts",
   "private": true,
   "devDependencies": {

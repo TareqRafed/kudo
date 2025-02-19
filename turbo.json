@@ -30,7 +30,7 @@
     "lint:fix": {
       "cache": false
     },
-    "prettier": {
+    "format": {
       "cache": false
     },
     "clean:node_modules": {

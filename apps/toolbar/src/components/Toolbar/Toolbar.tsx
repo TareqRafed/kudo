@@ -50,7 +50,8 @@ const Toolbar = () => {
           style={{ borderRadius: 50 }}
           className={cn([
             'min-h-10 overflow-hidden w-fit bg-background text-white dark pointer-events-auto flex justify-center items-center space-x-1 border p-1',
-          ])}>
+          ])}
+        >
           <AnimatePresence>
             {isLoading ? (
               <motion.span layout className="px-4 py-1">
@@ -80,7 +81,8 @@ const ToolbarOptions = () => {
         disabled={state.isDragging}
         onClick={() => sendMessage({ action: 'REQUEST_LOGIN', payload: '' })}
         tooltipContent="Login in the dashboard"
-        className="flex rounded-full">
+        className="flex rounded-full"
+      >
         <img src={Logo} className="size-5 mr-2" />
         <span className="ml-5 mb-1">Login to Continue</span>
         <ArrowRight className="ml-1 size-4" />
@@ -97,7 +99,8 @@ const ToolbarOptions = () => {
           <>
             Comment <KeyboardShortcut shortcut="C" />
           </>
-        }>
+        }
+      >
         <MessageCircle className={cn(['!size-4'])} />
       </ToolbarItem>
     </motion.span>
@@ -119,7 +122,8 @@ const ToolbarItem = ({ isActive = false, onClick, children, tooltipContent, ...r
           onClick={onClick}
           className={cn(['size-7 p-1 rounded-full', isActive && 'border border-border bg-primary', rest.className])}
           variant={'ghost'}
-          {...rest}>
+          {...rest}
+        >
           <motion.span className="flex justify-center items-center p-1" layout>
             {children}
           </motion.span>

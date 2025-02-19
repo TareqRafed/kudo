@@ -102,7 +102,8 @@ const BounceBoundary = ({ children, targetRef, helper }: BounceBoundaryProps) =>
         left: locationResult.x,
         bottom: locationResult.nearestEdge.vertical == 'bottom' ? locationResult.bottom : 'unset',
         top: locationResult.nearestEdge.vertical == 'top' ? locationResult.y : 'unset',
-      }}>
+      }}
+    >
       {children}
     </div>,
     domHelper.getRoot()!,

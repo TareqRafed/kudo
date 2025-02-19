@@ -19,16 +19,16 @@ function cleanHTMLClone(currentElement: HTMLElement): HTMLElement {
   const clonedElement = currentElement.cloneNode(true) as HTMLElement;
 
   const elementsToRemove = ['meta', 'script', 'style'];
-  elementsToRemove.forEach(tag => {
+  elementsToRemove.forEach((tag) => {
     const elements = clonedElement.querySelectorAll(tag);
-    elements.forEach(element => {
+    elements.forEach((element) => {
       element.remove();
     });
   });
 
   const allElements = clonedElement.querySelectorAll('*');
-  allElements.forEach(element => {
-    Array.from(element.attributes).forEach(attr => {
+  allElements.forEach((element) => {
+    Array.from(element.attributes).forEach((attr) => {
       element.removeAttribute(attr.name);
     });
   });
@@ -61,8 +61,8 @@ export const useRegisterDocument = () => {
         body: JSON.stringify(body),
         headers: { Authorization: `Bearer ${res.data.access_token}` },
       })
-        .then(data => data.json())
-        .then(data => {
+        .then((data) => data.json())
+        .then((data) => {
           if (!data.success && data.error) {
             toast({
               variant: 'destructive',

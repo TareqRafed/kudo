@@ -18,9 +18,10 @@ const ThreadInit = ({ onCreate, isDragging, ...rest }: ThreadInitProps) => {
     <div>
       <div
         aria-hidden
-        onClick={e => e.stopPropagation()}
+        onClick={(e) => e.stopPropagation()}
         style={{ position: 'absolute', left: 0, top: 0 }}
-        className={cn([`pointer-events-auto forth-index bg-transparent items-start flex select-none`])}>
+        className={cn([`pointer-events-auto forth-index bg-transparent items-start flex select-none`])}
+      >
         <pre ref={pointerRef} className="cursor-grab active:cursor-grabbing">
           <CommentPin usersIds={[]} content="+" />
         </pre>
@@ -31,10 +32,11 @@ const ThreadInit = ({ onCreate, isDragging, ...rest }: ThreadInitProps) => {
                 className="dark text-white"
                 initial={{ y: -12, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
-                exit={{ y: 12, opacity: 0 }}>
+                exit={{ y: 12, opacity: 0 }}
+              >
                 <CommentInput
                   className="rounded-md border"
-                  onCreate={comment => {
+                  onCreate={(comment) => {
                     onCreate({
                       comment,
                     });

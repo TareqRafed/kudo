@@ -87,7 +87,7 @@ const Magnet = <T extends HTMLElement>({
     return (
       <Draggable
         nodeRef={draggedRef}
-        onMouseDown={e => e.stopPropagation()}
+        onMouseDown={(e) => e.stopPropagation()}
         defaultClassName="z-max-2 hover:z-max"
         handle="pre"
         {...rest}
@@ -101,7 +101,8 @@ const Magnet = <T extends HTMLElement>({
           const calData = handlePositionUpdate(data.x, data.y, layerRef.current);
           onDrop?.(calData);
         }}
-        enableUserSelectHack>
+        enableUserSelectHack
+      >
         {children}
       </Draggable>
     );

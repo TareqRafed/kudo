@@ -5,9 +5,7 @@
   "type": "module",
   "private": true,
   "sideEffects": true,
-  "files": [
-    "dist/**"
-  ],
+  "files": ["dist/**"],
   "scripts": {
     "clean:bundle": "rimraf dist",
     "clean:node_modules": "pnpx rimraf node_modules",
@@ -19,7 +17,7 @@
     "dev": "pnpm build:tailwindcss && pnpm build:watch",
     "lint": "eslint . --ext .ts,.tsx",
     "lint:fix": "pnpm lint --fix",
-    "prettier": "prettier . --write --ignore-path ../../.prettierignore",
+    "format": "biome format --write",
     "type-check": "tsc --noEmit"
   },
   "dependencies": {

@@ -7,14 +7,14 @@ type EnvStore = {
   setEnvironment: (env: Env) => void;
 };
 
-const useEnvStore = create<EnvStore>(set => ({
+const useEnvStore = create<EnvStore>((set) => ({
   environment: null,
 
   /**
    * Disables sets all other item `inUse` to false
    */
-  setEnvironment: env =>
-    set(state => {
+  setEnvironment: (env) =>
+    set((state) => {
       state.environment = env;
       return state;
     }),
