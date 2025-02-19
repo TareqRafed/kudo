@@ -20,7 +20,7 @@ export default function LanguageSelector() {
   const pathname = usePathname();
 
   return (
-    <Select defaultValue={locale} onValueChange={val => router.replace({ pathname }, { locale: val })}>
+    <Select defaultValue={locale} onValueChange={(val) => router.replace({ pathname }, { locale: val })}>
       <SelectTrigger className="w-[180px]">
         <SelectValue placeholder="Language" />
       </SelectTrigger>

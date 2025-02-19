@@ -48,7 +48,7 @@ const Hero = () => {
     <section className="mx-auto mt-10 flex size-full h-[50vh] max-w-[45rem] flex-col items-center justify-start px-3 text-6xl md:w-4/5 lg:mt-20 lg:justify-center lg:text-5xl xl:w-[45%]">
       <motion.h1 initial={{ y: -10, opacity: 0.8 }} animate={{ y: 0, opacity: 1 }} className="relative font-light">
         {t.rich('title', {
-          power: chunk => (
+          power: (chunk) => (
             <motion.span
               initial={{ textShadow: '0px 0px 5px rgba(255, 255, 255, 0.5)' }}
               animate={{
@@ -69,7 +69,8 @@ const Hero = () => {
                 textAlign: 'center',
                 marginTop: '50px',
               }}
-              className="font-thin">
+              className="font-thin"
+            >
               {chunk}
             </motion.span>
           ),
@@ -137,7 +138,7 @@ export default function Home() {
           <div className="relative col-span-2">
             <h1 className="mb-4 text-2xl font-light font-normal lg:text-4xl">
               {t.rich('section1.title', {
-                power: chunk => <span className="font-thin">{chunk}</span>,
+                power: (chunk) => <span className="font-thin">{chunk}</span>,
               })}
             </h1>
             <span className="text-sm lg:text-xl">{t('section1.content')}</span>
@@ -149,7 +150,7 @@ export default function Home() {
               <>
                 <h1 className="text-4xl font-bold">
                   {t.rich('section2.title', {
-                    power: chunk => (
+                    power: (chunk) => (
                       <span className="mt-1 text-4xl font-thin leading-none md:text-[6rem]">
                         <br />
                         {chunk}
@@ -158,7 +159,8 @@ export default function Home() {
                   })}
                 </h1>
               </>
-            }>
+            }
+          >
             <Thread
               className="z-100 relative left-1/2 top-1/4"
               data={{
@@ -232,7 +234,7 @@ export default function Home() {
           <div className="relative col-span-2 mt-10 content-center lg:mt-0">
             <h1 className="mb-4 text-2xl font-bold lg:text-4xl">
               {t.rich('section3.title', {
-                power: chunk => <span className="font-thin">{chunk}</span>,
+                power: (chunk) => <span className="font-thin">{chunk}</span>,
               })}
             </h1>
             <span className="text-sm lg:text-xl">{t('section3.content')}</span>

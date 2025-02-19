@@ -36,7 +36,8 @@ const DrawerContent = React.forwardRef<
         'overflow-hidden right-2 top-2 bottom-2 fixed outline-none w-[310px] flex  z-50 flex h-auto flex-col rounded-[5px] border bg-background',
         className,
       )}
-      {...props}>
+      {...props}
+    >
       {children}
     </DrawerPrimitive.Content>
   </DrawerPortal>

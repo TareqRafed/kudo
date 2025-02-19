@@ -55,7 +55,8 @@ const UpgradeToProDialog = ({ children, teamId }: { children: ReactNode; teamId:
             `p-6 bg-background text-center lg:flex lg:flex-col lg:justify-center relative`,
             'border-border',
             'flex flex-col',
-          )}>
+          )}
+        >
           <div className="flex-1 flex flex-col">
             <div className="flex items-center justify-center gap-x-2">
               <span className="text-5xl font-thin tracking-tight text-foreground">
@@ -67,7 +68,7 @@ const UpgradeToProDialog = ({ children, teamId }: { children: ReactNode; teamId:
                     minimumFractionDigits: 0,
                     maximumFractionDigits: 0,
                   }}
-                  formatter={value => `$${value}`}
+                  formatter={(value) => `$${value}`}
                   transformTiming={{
                     duration: 500,
                     easing: 'ease-out',

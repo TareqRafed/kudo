@@ -35,7 +35,8 @@ export const ContainerScroll = ({
         className="py-10 w-full relative"
         style={{
           perspective: '1000px',
-        }}>
+        }}
+      >
         <Header translate={translate} titleComponent={titleComponent} />
         <Card rotate={rotate} translate={translate} scale={scale}>
           {children}
@@ -51,7 +52,8 @@ export const Header = ({ translate, titleComponent }: any) => {
       style={{
         translateY: translate,
       }}
-      className="div max-w-5xl mx-auto text-center">
+      className="div max-w-5xl mx-auto text-center"
+    >
       {titleComponent}
     </motion.div>
   );
@@ -75,7 +77,8 @@ export const Card = ({
         rotateX: rotate,
         scale,
       }}
-      className="max-w-5xl -mt-12 mx-auto w-full p-2 md:p-6 ">
+      className="max-w-5xl -mt-12 mx-auto w-full p-2 md:p-6 "
+    >
       <div className=" h-full w-full  rounded-2xl md:p-4 ">{children}</div>
     </motion.div>
   );

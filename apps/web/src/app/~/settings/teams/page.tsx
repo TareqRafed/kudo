@@ -66,7 +66,7 @@ const Teams = () => {
         isLoading={isLoading}
         columns={columns}
         data={data ?? []}
-        onRowClick={row => router.push(`/~/settings/teams/${row.teams?.id}`)}
+        onRowClick={(row) => router.push(`/~/settings/teams/${row.teams?.id}`)}
       />
     </>
   );

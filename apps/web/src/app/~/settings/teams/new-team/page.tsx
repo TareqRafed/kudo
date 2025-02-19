@@ -45,7 +45,7 @@ const NewTeam = () => {
         toast({ description: 'Team Created' });
         router.push('/~/settings/teams');
       },
-      onError: e => {
+      onError: (e) => {
         toast({ variant: 'destructive', description: e.message });
       },
     },
@@ -57,7 +57,8 @@ const NewTeam = () => {
       <Container>
         <Form
           schema={formSchema}
-          onValidSubmit={e => mutate([{ name: e.name, theme: e.icon.theme, logo: e.icon.logo }])}>
+          onValidSubmit={(e) => mutate([{ name: e.name, theme: e.icon.theme, logo: e.icon.logo }])}
+        >
           <FormGroup>
             <FormRow
               render={({ field }) => {

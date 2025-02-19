@@ -27,7 +27,7 @@ import { Button } from './button';
 import { Skeleton } from './skeleton';
 import { cva, VariantProps } from 'class-variance-authority';
 
-const isDirty = <T extends FieldValues>(fields: FormState<T>['dirtyFields']) => Object.values(fields).some(v => v);
+const isDirty = <T extends FieldValues>(fields: FormState<T>['dirtyFields']) => Object.values(fields).some((v) => v);
 
 interface FormProps<T extends z.ZodType> extends ComponentPropsWithoutRef<'form'> {
   schema: T;
@@ -56,7 +56,8 @@ export const Form = <T extends z.ZodType>({
         onSubmit={ctx.handleSubmit((d, e) => {
           onValidSubmit(d, e);
           ctx.reset();
-        }, onInvalidSubmit)}>
+        }, onInvalidSubmit)}
+      >
         {children}
       </form>
     </FormProvider>
@@ -183,7 +184,8 @@ export const FormSubmit = ({ children, ...rest }: FormSubmitProps) => {
       disabled={!dirty || rest.disabled}
       type="submit"
       size={'sm'}
-      {...rest}>
+      {...rest}
+    >
       {children}
     </Button>
   );
@@ -201,7 +203,8 @@ export const FormCancel = ({ children, ...rest }: FormCancelProps) => {
       type="button"
       variant={'secondary'}
       size={'sm'}
-      {...rest}>
+      {...rest}
+    >
       {children}
     </Button>
   );

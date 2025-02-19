@@ -17,7 +17,8 @@ export const KeyboardShortcut: React.FC<KeyboardShortcutProps> = ({ children, cl
         'hover:bg-gray-200 dark:hover:bg-gray-700',
         'focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500',
         className,
-      )}>
+      )}
+    >
       {children}
     </kbd>
   );

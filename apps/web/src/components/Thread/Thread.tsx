@@ -47,11 +47,12 @@ const Thread = ({ data, ...rest }: ThreadProps) => {
         setIsCollapsed(true);
         setShowExtended(false);
       }}
-      className={cn([`w-fit pointer-events-auto z-max-2 flex flex-col select-none items-start`, rest.className])}>
+      className={cn([`w-fit pointer-events-auto z-max-2 flex flex-col select-none items-start`, rest.className])}
+    >
       <CommentPin
         ref={commentPinRef}
         numberOfComments={data.comments.length}
-        usersIds={data.comments?.map(cmnt => cmnt.creator.id)}
+        usersIds={data.comments?.map((cmnt) => cmnt.creator.id)}
       />
       <AnimatePresence>
         {!isCollapsed && (
@@ -60,7 +61,8 @@ const Thread = ({ data, ...rest }: ThreadProps) => {
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 5 }}
               exit={{ opacity: 0, y: 10 }}
-              transition={{ duration: 0.2, delay: 0.2 }}>
+              transition={{ duration: 0.2, delay: 0.2 }}
+            >
               <div className="bg-background dark relative max-h-[450px] overflow-auto rounded-lg border">
                 <ThreadComment minimal={false} comment={data.comments[0]} />
               </div>

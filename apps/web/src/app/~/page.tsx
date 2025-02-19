@@ -30,7 +30,7 @@ export default function Dashboard() {
           <SearchBar
             className="my-5 w-full max-w-full md:my-0 md:max-w-sm"
             placeholder="Search Projects..."
-            onChange={e => {
+            onChange={(e) => {
               setSearchValue(e.target.value);
             }}
           />
@@ -93,9 +93,9 @@ const ProjectsGrid = () => {
 
   const projects = projectsResponse?.pages
     .flat()
-    .map(res => res.data)
+    .map((res) => res.data)
     .flat()
-    .filter(item => item != null);
+    .filter((item) => item != null);
 
   console.log(error);
   if (isError) return <>{JSON.stringify(error.message)}</>;
@@ -131,10 +131,11 @@ const ProjectsGrid = () => {
       <InfiniteScroll
         isLoadingIntial={isLoading}
         isLoadingMore={isFetchingNextPage}
-        loadMore={() => hasNextPage && fetchNextPage()}>
+        loadMore={() => hasNextPage && fetchNextPage()}
+      >
         <GridViewer>
           {projects &&
-            projects.map(item => (
+            projects.map((item) => (
               <div key={item.id} className="w-full overflow-hidden rounded-sm border bg-card shadow-md">
                 <div className="p-4">
                   <div>

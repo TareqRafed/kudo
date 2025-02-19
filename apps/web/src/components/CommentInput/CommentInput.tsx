@@ -24,9 +24,10 @@ const CommentInput = ({ onCreate, ...rest }: Props) => {
           }}
           value={comment}
           placeholder="Leave a comment..."
-          onChange={e => setComment(e.target.value)}
+          onChange={(e) => setComment(e.target.value)}
           className="focus:!outline-none bg-background w-full resize-none px-2 pt-3 text-sm"
-          {...rest}>
+          {...rest}
+        >
           <Toolbar className="!border-none" style={{ border: 0, backgroundColor: 'transparent' }}>
             <div className="w-full bg-background flex flex-row items-center justify-between space-x-1 px-2 pb-2 pt-1">
               <div className="flex space-x-1">
@@ -45,7 +46,8 @@ const CommentInput = ({ onCreate, ...rest }: Props) => {
                   onCreate(comment);
                 }}
                 size={'sm'}
-                variant={'ghost'}>
+                variant={'ghost'}
+              >
                 <Send className="!size-4" />
               </Button>
             </div>

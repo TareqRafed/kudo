@@ -16,7 +16,7 @@ const CommentPin = (
 ) => {
   const [position, setPosition] = useState({ x: 0, y: 0 });
 
-  const handleMouseMove: MouseEventHandler<HTMLDivElement> = e => {
+  const handleMouseMove: MouseEventHandler<HTMLDivElement> = (e) => {
     const { left, top } = e.currentTarget.getBoundingClientRect();
     setPosition({
       x: e.clientX - left,
@@ -39,7 +39,8 @@ const CommentPin = (
             overflow: 'hidden',
             textAlign: 'center',
             color: 'white',
-          }}>
+          }}
+        >
           <span className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 text-xs font-bold">
             {numberOfComments}
           </span>
@@ -64,7 +65,7 @@ const CommentPin = (
         className="flex flex-row -space-x-4 px-1"
         whileHover={{ gap: '0.5rem' }} // Increases gap between avatars on hover
       >
-        {[...new Set(usersIds)].map(id => (
+        {[...new Set(usersIds)].map((id) => (
           <UserAvatar userId={id} key={id} className={cn(['size-7'])} />
         ))}
       </motion.div>

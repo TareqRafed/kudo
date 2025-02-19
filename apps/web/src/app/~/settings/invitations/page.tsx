@@ -98,7 +98,7 @@ const InvitationActions = ({ teamId }: { teamId: number }) => {
       query.invalidateQueries({ queryKey: ['teams'] });
       query.invalidateQueries({ queryKey: ['members_teams'] });
     },
-    onError: e => {
+    onError: (e) => {
       toast({
         variant: 'destructive',
         description: e.message ?? 'Something went wrong',

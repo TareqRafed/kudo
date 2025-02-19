@@ -4,7 +4,7 @@ export const splitURL = (url: string) => {
   const path = rest.join('/');
   const [basePath, queryString] = path.split('?');
   const queryParams = queryString
-    ? queryString.split('&').map(param => {
+    ? queryString.split('&').map((param) => {
         const [key, value] = param.split('=');
         return { key, value };
       })

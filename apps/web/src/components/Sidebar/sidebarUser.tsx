@@ -47,7 +47,8 @@ export function NavUser() {
             <SidebarMenuButton
               disabled={isError}
               size="sm"
-              className="m-0 flex w-fit max-w-[70%] items-center justify-start data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground group-data-[collapsible=icon]:max-w-full group-data-[collapsible=icon]:!p-1">
+              className="m-0 flex w-fit max-w-[70%] items-center justify-start data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground group-data-[collapsible=icon]:max-w-full group-data-[collapsible=icon]:!p-1"
+            >
               <UserAvatar
                 src={user.profile_picture ?? ''}
                 color={user.color}
@@ -69,7 +70,8 @@ export function NavUser() {
             className="w-[--radix-dropdown-menu-trigger-width] min-w-56 rounded-lg"
             side={isMobile ? 'bottom' : 'right'}
             align="end"
-            sideOffset={4}>
+            sideOffset={4}
+          >
             <DropdownMenuLabel className="p-0">
               <div className="flex items-center gap-2 px-1 py-1.5 text-left text-sm">
                 <UserAvatar src={user.profile_picture ?? ''} color={user.color} />
@@ -113,7 +115,8 @@ const NotificationsMenu = () => {
         <SidebarMenuButton
           disabled={notificationsLoading || notificationsError}
           size="sm"
-          className="relative ml-2 w-fit group-data-[collapsible=icon]:hidden">
+          className="relative ml-2 w-fit group-data-[collapsible=icon]:hidden"
+        >
           {!notificationsLoading && !emptyNotifications && !notificationsRes?.[0]?.is_read ? (
             <span className="absolute right-1 top-1 flex size-2">
               <span className="absolute inline-flex size-full animate-ping rounded-full bg-destructive opacity-75"></span>
@@ -127,7 +130,8 @@ const NotificationsMenu = () => {
         className="w-[--radix-dropdown-menu-trigger-width] min-w-56 rounded-lg"
         side={isMobile ? 'bottom' : 'right'}
         align="end"
-        sideOffset={4}>
+        sideOffset={4}
+      >
         {emptyNotifications && <DropdownMenuItem>No Notifications</DropdownMenuItem>}
         {notificationsRes?.map((notification, i) => (
           <Fragment key={notification.id}>
@@ -141,11 +145,12 @@ const NotificationsMenu = () => {
                 onClick={() => {
                   mutate({ id: notification.id, is_read: true });
                   router.replace(notification.link);
-                }}>
+                }}
+              >
                 <DropdownMenuLabel className="text-md m-0 p-0">{notification.title}</DropdownMenuLabel>
                 <span className="text-xs">{notification.content}</span>
                 <Button
-                  onClick={e => {
+                  onClick={(e) => {
                     e.stopPropagation();
                     mutate({
                       id: notification.id,
@@ -154,7 +159,8 @@ const NotificationsMenu = () => {
                   }}
                   variant="link"
                   size={'sm'}
-                  className="m-0 h-auto p-0 text-xs">
+                  className="m-0 h-auto p-0 text-xs"
+                >
                   Mark as {!notification.is_read ? 'Read' : 'Unread'}
                 </Button>
               </DropdownMenuItem>

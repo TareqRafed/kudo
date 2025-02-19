@@ -6,13 +6,13 @@
     "dev": "next dev --turbopack",
     "build": "next build",
     "start": "next start",
-    "format": "pnpm biome --write 'src/**/*.{ts,tsx}'",
+    "format": "pnpm biome format --write 'src/*'",
     "clean:bundle": "rimraf .next",
-    "clean:node_modules": "pnpx rimraf node_modules",
+    "clean:node_modules": "rimraf node_modules",
     "clean:turbo": "rimraf .turbo",
     "clean": "pnpm clean:bundle && pnpm clean:node_modules && pnpm clean:turbo",
     "lint": "pnpm biome lint",
-    "lint:fix": "pnpm biome lint --write",
+    "lint:fix": "pnpm biome lint --write 'src/**'",
     "type-check": "tsc --noEmit"
   },
   "dependencies": {

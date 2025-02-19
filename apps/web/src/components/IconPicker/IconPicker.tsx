@@ -21,10 +21,10 @@ interface Props extends ComponentPropsWithoutRef<typeof Button> {
  * */
 const IconPicker = ({ defaultIcon, defaultColor, onIconChange, ...rest }: Props) => {
   const [selectedIcon, setSelectedIcon] = React.useState<string | null>(defaultIcon ?? null);
-  const [bgColor, setBgColor] = React.useState(colors.find(col => col.color === defaultColor) ?? colors[0]);
+  const [bgColor, setBgColor] = React.useState(colors.find((col) => col.color === defaultColor) ?? colors[0]);
   const [searchTerm, setSearchTerm] = React.useState('');
 
-  const filteredIcons = icons.filter(icon => icon.name.toLowerCase().includes(searchTerm.toLowerCase()));
+  const filteredIcons = icons.filter((icon) => icon.name.toLowerCase().includes(searchTerm.toLowerCase()));
 
   const renderIcon = (IconComponent: React.ComponentType<any>) => {
     return <IconComponent weight="fill" color={'#ffffff'} />;
@@ -32,10 +32,11 @@ const IconPicker = ({ defaultIcon, defaultColor, onIconChange, ...rest }: Props)
 
   return (
     <Select.Root
-      onValueChange={val => {
+      onValueChange={(val) => {
         setSelectedIcon(val);
         onIconChange?.(val, bgColor.color);
-      }}>
+      }}
+    >
       <Select.Trigger asChild>
         <Button
           {...rest}
@@ -46,9 +47,10 @@ const IconPicker = ({ defaultIcon, defaultColor, onIconChange, ...rest }: Props)
           style={{
             background: `linear-gradient(135deg, ${bgColor.color}, #000)`,
             borderColor: `${bgColor.color}`,
-          }}>
+          }}
+        >
           {selectedIcon
-            ? renderIcon(icons.find(i => i.name === selectedIcon)?.component ?? icons[0].component)
+            ? renderIcon(icons.find((i) => i.name === selectedIcon)?.component ?? icons[0].component)
             : renderIcon(ImageSquare)}
         </Button>
       </Select.Trigger>
@@ -59,10 +61,11 @@ const IconPicker = ({ defaultIcon, defaultColor, onIconChange, ...rest }: Props)
           style={{
             borderColor: bgColor.color,
             backgroundColor: bgColor.accentColor,
-          }}>
+          }}
+        >
           <div className="space-y-2">
             <div className="flex gap-1 p-1">
-              {colors.map(color => (
+              {colors.map((color) => (
                 <motion.button
                   key={color.color}
                   whileTap={{ scale: 0.95 }}
@@ -86,12 +89,12 @@ const IconPicker = ({ defaultIcon, defaultColor, onIconChange, ...rest }: Props)
                 className="pl-8 bg-zinc-900 border-zinc-800 text-white"
                 style={{ background: bgColor.accentColor }}
                 value={searchTerm}
-                onChange={e => setSearchTerm(e.target.value)}
+                onChange={(e) => setSearchTerm(e.target.value)}
               />
             </div>
 
             <Select.Viewport className="grid grid-cols-8 overflow-y-auto">
-              {filteredIcons.map(icon => (
+              {filteredIcons.map((icon) => (
                 <Select.Item className="cursor-pointer" key={icon.name} value={icon.name}>
                   <Select.ItemText>
                     <div
@@ -106,7 +109,8 @@ const IconPicker = ({ defaultIcon, defaultColor, onIconChange, ...rest }: Props)
                             ? `linear-gradient(135deg, ${bgColor.color}, #000)`
                             : 'transparent',
                         borderColor: selectedIcon === icon.name ? bgColor.color : 'transparent',
-                      }}>
+                      }}
+                    >
                       {renderIcon(icon.component)}
                     </div>
                   </Select.ItemText>
