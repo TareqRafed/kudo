@@ -10,6 +10,7 @@
     "clean": "pnpm clean:node_modules"
   },
   "devDependencies": {
+    "@biomejs/biome": "1.9.4",
     "@kudo/hmr": "workspace:*",
     "@kudo/tsconfig": "workspace:*",
     "@vitejs/plugin-react-swc": "^3.6.0",

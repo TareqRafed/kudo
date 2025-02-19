@@ -1,6 +1,6 @@
 {
   "name": "@kudo/extension",
-  "version": "0.3.4",
+  "version": "0.0.1",
   "description": "chrome extension - core settings",
   "type": "module",
   "scripts": {
@@ -21,6 +21,7 @@
     "webextension-polyfill": "^0.12.0"
   },
   "devDependencies": {
+    "@biomejs/biome": "1.9.4",
     "@kudo/hmr": "workspace:*",
     "@kudo/tsconfig": "workspace:*",
     "@kudo/vite-config": "workspace:*",

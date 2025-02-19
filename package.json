@@ -1,65 +1,50 @@
 {
-  "name": "Kudo",
-  "version": "0.0.1",
-  "description": "chrome extension boilerplate",
-  "license": "MIT",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/Jonghakseo/chrome-extension-boilerplate-react-vite.git"
-  },
-  "type": "module",
-  "scripts": {
-    "clean:bundle": "rimraf dist && rimraf dist-zip && turbo clean:bundle",
-    "clean:node_modules": "turbo daemon stop && pnpx rimraf node_modules && pnpx turbo clean:node_modules",
-    "clean:turbo": "turbo daemon stop && rimraf .turbo && turbo clean:turbo",
-    "clean": "pnpm clean:bundle && pnpm clean:turbo && pnpm clean:node_modules",
-    "clean:install": "pnpm clean:node_modules && pnpm install --frozen-lockfile",
-    "build": "pnpm clean:bundle && turbo ready && turbo build",
-    "build:firefox": "pnpm clean:bundle && turbo ready && cross-env __FIREFOX__=true turbo build",
-    "zip": "pnpm build && pnpm -F zipper zip",
-    "zip:firefox": "pnpm build:firefox && cross-env __FIREFOX__=true pnpm -F zipper zip",
-    "dev": "turbo ready && cross-env __DEV__=true turbo watch dev --concurrency 20",
-    "dev:firefox": "turbo ready && cross-env __DEV__=true __FIREFOX__=true turbo watch dev --concurrency 20",
-    "e2e": "pnpm build && pnpm zip && turbo e2e",
-    "e2e:firefox": "pnpm build:firefox && pnpm zip:firefox && cross-env __FIREFOX__=true turbo e2e",
-    "type-check": "turbo type-check",
-    "lint": "turbo lint --continue -- --fix --cache --cache-location node_modules/.cache/.eslintcache",
-    "lint:fix": "turbo lint:fix --continue -- --fix --cache --cache-location node_modules/.cache/.eslintcache",
-    "prettier": "turbo prettier --continue -- --cache --cache-location node_modules/.cache/.prettiercache",
-    "prepare": "husky",
-    "update-version": "bash update_version.sh"
-  },
-  "devDependencies": {
-    "@typescript-eslint/eslint-plugin": "^7.18.0",
-    "@typescript-eslint/parser": "^7.18.0",
-    "autoprefixer": "^10.4.20",
-    "cross-env": "^7.0.3",
-    "esbuild": "^0.23.0",
-    "eslint": "^9.19.0",
-    "eslint-config-airbnb-typescript": "18.0.0",
-    "eslint-config-prettier": "^10.0.1",
-    "eslint-plugin-import": "2.29.1",
-    "eslint-plugin-jsx-a11y": "6.9.0",
-    "eslint-plugin-prettier": "5.2.1",
-    "eslint-plugin-react": "7.37.4",
-    "eslint-plugin-react-hooks": "5.1.0",
-    "husky": "^9.1.4",
-    "lint-staged": "^15.2.7",
-    "postcss": "^8.5.1",
-    "prettier": "^3.4.2",
-    "rimraf": "^6.0.1",
-    "syncpack": "^13.0.2",
-    "tslib": "^2.6.3",
-    "turbo": "^2.4.2",
-    "typescript": "^5.7.3"
-  },
-  "lint-staged": {
-    "*.{js,jsx,ts,tsx,json}": [
-      "prettier --write"
-    ]
-  },
-  "packageManager": "pnpm@9.9.0",
-  "engines": {
-    "node": ">=18.19.1"
-  }
+	"name": "Kudo",
+	"version": "0.0.1",
+	"description": "Kudo Toolbar",
+	"license": "MIT",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/"
+	},
+	"type": "module",
+	"scripts": {
+		"clean:bundle": "rimraf dist && rimraf dist-zip && turbo clean:bundle",
+		"clean:node_modules": "turbo daemon stop && pnpx rimraf node_modules && pnpx turbo clean:node_modules",
+		"clean:turbo": "turbo daemon stop && rimraf .turbo && turbo clean:turbo",
+		"clean": "pnpm clean:bundle && pnpm clean:turbo && pnpm clean:node_modules",
+		"clean:install": "pnpm clean:node_modules && pnpm install --frozen-lockfile",
+		"build": "pnpm clean:bundle && turbo ready && turbo build",
+		"build:firefox": "pnpm clean:bundle && turbo ready && cross-env __FIREFOX__=true turbo build",
+		"zip": "pnpm build && pnpm -F zipper zip",
+		"zip:firefox": "pnpm build:firefox && cross-env __FIREFOX__=true pnpm -F zipper zip",
+		"dev": "turbo ready && cross-env __DEV__=true turbo watch dev --concurrency 20",
+		"dev:firefox": "turbo ready && cross-env __DEV__=true __FIREFOX__=true turbo watch dev --concurrency 20",
+		"e2e": "pnpm build && pnpm zip && turbo e2e",
+		"e2e:firefox": "pnpm build:firefox && pnpm zip:firefox && cross-env __FIREFOX__=true turbo e2e",
+		"type-check": "turbo type-check",
+		"lint": "turbo lint --continue -- --fix --cache --cache-location node_modules/.cache/.eslintcache",
+		"lint:fix": "turbo lint:fix --continue -- --fix --cache --cache-location node_modules/.cache/.eslintcache",
+		"prettier": "turbo prettier --continue -- --cache --cache-location node_modules/.cache/.prettiercache",
+		"prepare": "husky"
+	},
+	"devDependencies": {
+		"@kudo/biome-config": "workspace:*",
+		"autoprefixer": "^10.4.20",
+		"cross-env": "^7.0.3",
+		"esbuild": "^0.23.0",
+		"husky": "^9.1.4",
+		"lint-staged": "^15.2.7",
+		"postcss": "^8.5.1",
+		"prettier": "^3.4.2",
+		"rimraf": "^6.0.1",
+		"syncpack": "^13.0.2",
+		"tslib": "^2.6.3",
+		"turbo": "^2.4.2",
+		"typescript": "^5.7.3"
+	},
+	"packageManager": "pnpm@9.9.0",
+	"engines": {
+		"node": ">=18.19.1"
+	}
 }
