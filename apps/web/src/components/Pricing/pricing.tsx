@@ -115,7 +115,8 @@ export function Pricing({
                 : 'z-10',
               index === 0 && 'origin-right',
               index === 2 && 'origin-left',
-            )}>
+            )}
+          >
             {plan.isPopular && (
               <div className="absolute top-0 right-0 bg-primary py-0.5 px-2 rounded-bl-xl rounded-tr-xl flex items-center">
                 <Star className="text-primary-foreground h-4 w-4 fill-current" />
@@ -134,7 +135,7 @@ export function Pricing({
                       minimumFractionDigits: 0,
                       maximumFractionDigits: 0,
                     }}
-                    formatter={value => `$${value}`}
+                    formatter={(value) => `$${value}`}
                     transformTiming={{
                       duration: 500,
                       easing: 'ease-out',
@@ -171,7 +172,8 @@ export function Pricing({
                   }),
                   'group font-thin relative w-full gap-2 overflow-hidden text-lg tracking-tighter',
                   plan.isPopular ? 'bg-primary text-primary-foreground' : 'bg-background text-foreground',
-                )}>
+                )}
+              >
                 {plan.buttonText}
               </Link>
               <p className="mt-6 text-xs leading-5 text-muted-foreground">{plan.description}</p>

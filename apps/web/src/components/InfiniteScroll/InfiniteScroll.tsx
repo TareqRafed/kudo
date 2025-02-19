@@ -17,7 +17,7 @@ function InfiniteScroll(props: Props) {
   useEffect(() => {
     // is element in view?
     function handleIntersection(entries: IntersectionObserverEntry[]) {
-      entries.forEach(entry => {
+      entries.forEach((entry) => {
         if (entry.isIntersecting && (!isLoadingMore || !isLoadingIntial)) {
           loadMore();
         }

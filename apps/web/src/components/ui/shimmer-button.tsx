@@ -44,7 +44,8 @@ const ShimmerButton = React.forwardRef<HTMLButtonElement, ShimmerButtonProps>(
           className,
         )}
         ref={ref}
-        {...props}>
+        {...props}
+      >
         {/* spark container */}
         <div className={cn('-z-30 blur-[2px]', 'absolute inset-0 overflow-visible [container-type:size]')}>
           {/* spark */}

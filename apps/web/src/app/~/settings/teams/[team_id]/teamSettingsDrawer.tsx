@@ -68,7 +68,7 @@ const TeamSettingsDrawer = ({ teamId }: Props) => {
       </DrawerTrigger>
       <DrawerContent asChild>
         <Form
-          onValidSubmit={e => {
+          onValidSubmit={(e) => {
             mutate({
               name: e.name,
               logo: e.icon.logo,
@@ -77,7 +77,8 @@ const TeamSettingsDrawer = ({ teamId }: Props) => {
             });
           }}
           schema={formSchema}
-          className="h-full">
+          className="h-full"
+        >
           <DrawerHeader>
             <DrawerTitle className="flex items-center space-x-2">{data?.name}</DrawerTitle>
             <DrawerDescription>Edit team settings and billing options</DrawerDescription>

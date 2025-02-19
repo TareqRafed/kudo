@@ -45,7 +45,7 @@ export const ThreadComments = ({ threadId }: Props) => {
 
   return (
     <div className="h-full overflow-auto">
-      {data.map(comment => {
+      {data.map((comment) => {
         return (
           <div key={comment.id}>
             <Separator className="mb-2 h-px w-full" />

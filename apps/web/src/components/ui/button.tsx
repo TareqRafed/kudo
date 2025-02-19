@@ -55,7 +55,8 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
         aria-disabled={status !== 'ready'}
         ref={ref}
         {...props}
-        disabled={status !== 'ready' || props.disabled}>
+        disabled={status !== 'ready' || props.disabled}
+      >
         <span className="inline-flex space-x-1">
           {status == 'loading' && <Loader variant={'spinner'} size={'sm'} />}
           <span>{children}</span>

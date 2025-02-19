@@ -40,11 +40,11 @@ const Threads = ({ projectId }: { projectId: string | number }) => {
       <SearchBar
         className="my-5 w-full max-w-full md:my-0 md:max-w-sm"
         placeholder="Search Threads..."
-        onChange={e => {
+        onChange={(e) => {
           setSearchValue(e.target.value);
         }}
       />
-      <Tabs value={tab} onValueChange={e => setTab(e)}>
+      <Tabs value={tab} onValueChange={(e) => setTab(e)}>
         <TabsList className="my-5 w-full">
           <TabsTrigger value="all">
             <MessagesSquare className="mr-1 size-4" /> All
@@ -114,7 +114,7 @@ const ThreadsGrid = ({ projectId, type }: ThreadsGridProps) => {
 
   return (
     <GridViewer>
-      {data?.map(thread => {
+      {data?.map((thread) => {
         return (
           <Drawer key={thread.id} direction="right" fixed>
             <DrawerContent
@@ -123,7 +123,8 @@ const ThreadsGrid = ({ projectId, type }: ThreadsGridProps) => {
                 {
                   '--initial-transform': 'calc(100% + 8px)',
                 } as React.CSSProperties
-              }>
+              }
+            >
               <DrawerHeader>
                 <DrawerTitle>Thread started by {thread.members?.display_name}</DrawerTitle>
                 <DrawerDescription className="italic">
@@ -161,7 +162,7 @@ const ThreadsGrid = ({ projectId, type }: ThreadsGridProps) => {
               <DrawerFooter className="w-full border-t !p-0">
                 <CommentInput
                   disabled={isPending}
-                  onCreate={val => createNewComment([{ thread_id: thread.id, content: val }])}
+                  onCreate={(val) => createNewComment([{ thread_id: thread.id, content: val }])}
                 />
               </DrawerFooter>
             </DrawerContent>
@@ -169,7 +170,8 @@ const ThreadsGrid = ({ projectId, type }: ThreadsGridProps) => {
             <DrawerTrigger asChild>
               <button
                 key={thread.id}
-                className="flex w-96 flex-col justify-start rounded border px-2 py-3 text-left hover:border-accent hover:bg-accent/10">
+                className="flex w-96 flex-col justify-start rounded border px-2 py-3 text-left hover:border-accent hover:bg-accent/10"
+              >
                 <div className="flex w-full items-start justify-start">
                   <UserAvatar src={thread.members?.profile_picture ?? ''} color={thread.members?.color} />
                   <span className="ml-2 flex w-full flex-col">

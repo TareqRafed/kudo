@@ -142,7 +142,7 @@ export function DataTable<TData, TValue>({
   const columnsMemo = useMemo(
     () =>
       isLoading
-        ? columns.map(column => ({
+        ? columns.map((column) => ({
             ...column,
             cell: () => <Skeleton className="h-[21px] rounded-sm" />,
           }))
@@ -164,7 +164,7 @@ export function DataTable<TData, TValue>({
     ...(pagination?.manual && { pageSize: pagination?.pageSize }),
     ...(pagination?.manual && { pageIndex: pagination?.pageIndex }),
     ...(pagination?.onChange && {
-      onPaginationChange: updater => {
+      onPaginationChange: (updater) => {
         if (typeof updater !== 'function') return; // @see https://stackoverflow.com/a/77946625
         const newPageInfo = updater(table.getState().pagination);
         pagination.onChange?.(newPageInfo);
@@ -196,7 +196,7 @@ export function DataTable<TData, TValue>({
     },
 
     ...(sort?.setSort && {
-      onSortingChange: updater => {
+      onSortingChange: (updater) => {
         if (typeof updater !== 'function') return; // @see https://stackoverflow.com/a/77946625
         const newPageInfo = updater(table.getState().sorting);
         sort.setSort?.(newPageInfo);
@@ -226,7 +226,7 @@ export function DataTable<TData, TValue>({
             <Input
               placeholder={filter.placeholder}
               value={(table.getColumn(filter.key as string)?.getFilterValue() as string) ?? ''}
-              onChange={event => table.getColumn(filter.key as string)?.setFilterValue(event.target.value)}
+              onChange={(event) => table.getColumn(filter.key as string)?.setFilterValue(event.target.value)}
               className="max-w-sm"
             />
           </div>
@@ -237,7 +237,7 @@ export function DataTable<TData, TValue>({
             <Input
               placeholder={filter.placeholder}
               defaultValue={filter.value}
-              onChange={event => filter.onChange?.(event.target.value)}
+              onChange={(event) => filter.onChange?.(event.target.value)}
               className="max-w-sm pl-10"
               type="search"
               name="search"
@@ -255,9 +255,9 @@ export function DataTable<TData, TValue>({
       <div className="flex h-full flex-1 flex-col overflow-auto">
         <Table>
           <TableHeader>
-            {table.getHeaderGroups().map(headerGroup => (
+            {table.getHeaderGroups().map((headerGroup) => (
               <TableRow key={headerGroup.id}>
-                {headerGroup.headers.map(header => {
+                {headerGroup.headers.map((header) => {
                   return (
                     <TableHead
                       className={cn([
@@ -269,7 +269,8 @@ export function DataTable<TData, TValue>({
                         width: `${!header.getSize() ? '100%' : header.column.getSize()}px`,
                       }}
                       onClick={header.column.getToggleSortingHandler()}
-                      key={header.id}>
+                      key={header.id}
+                    >
                       {header.isPlaceholder ? null : flexRender(header.column.columnDef.header, header.getContext())}
                       {{
                         asc: <ArrowDown className="inline size-4" />,
@@ -283,20 +284,21 @@ export function DataTable<TData, TValue>({
           </TableHeader>
           <TableBody>
             {table.getRowModel().rows?.length ? (
-              table.getRowModel().rows.map(row => (
+              table.getRowModel().rows.map((row) => (
                 <TableRow
                   key={row.id}
                   data-state={row.getIsSelected() && 'selected'}
                   onClick={() => handleRowClick(row.original)}
-                  className={cn(['h-12 whitespace-nowrap', onRowClick && 'cursor-pointer border-b'])}>
-                  {row.getVisibleCells().map(cell => {
+                  className={cn(['h-12 whitespace-nowrap', onRowClick && 'cursor-pointer border-b'])}
+                >
+                  {row.getVisibleCells().map((cell) => {
                     const isEditing = editingCell.rowIndex === row.index && editingCell.columnId === cell.column.id;
                     const isAppropriateToEdit = typeof cell.getValue() === 'string';
                     if (isEditing && isAppropriateToEdit) {
                       return (
                         <TableCell key={cell.id}>
                           <Input
-                            onBlur={e =>
+                            onBlur={(e) =>
                               handleBlur({
                                 ...row.original,
                                 [cell.column.id]: e.target.value,
@@ -374,12 +376,13 @@ const TablePagination = <TData,>({
       {!staticPageSize && (
         <Select
           value={String(table.getState().pagination.pageSize)}
-          onValueChange={e => table.setPageSize(Number(e) || length)}>
+          onValueChange={(e) => table.setPageSize(Number(e) || length)}
+        >
           <SelectTrigger className="mt-5 w-[80px] lg:mt-0">
             <SelectValue placeholder="Page Count" />
           </SelectTrigger>
           <SelectContent>
-            {pageSizeOptions.map(val => (
+            {pageSizeOptions.map((val) => (
               <SelectItem key={val} value={val.toString()}>
                 {val}
               </SelectItem>
@@ -431,7 +434,7 @@ const TablePagination = <TData,>({
                     <div className="grid grid-cols-3 items-center gap-2">
                       <Label htmlFor="page">#</Label>
                       <Input
-                        onBlur={val => {
+                        onBlur={(val) => {
                           let target = Number(val.target.value);
                           target -= 1;
                           if (target < 0) target = 0;

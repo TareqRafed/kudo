@@ -80,7 +80,7 @@ const RevokeInvitation = ({ teamId, email }: { teamId: number; email: string }) 
       onSuccess: () => {
         toast({ description: 'Invitation revoked' });
       },
-      onError: e => {
+      onError: (e) => {
         toast({
           variant: 'destructive',
           description: e.message,
@@ -102,7 +102,8 @@ const RevokeInvitation = ({ teamId, email }: { teamId: number; email: string }) 
             onClick={handleDelete}
             className="text-destructive"
             variant={'ghost'}
-            size={'icon'}>
+            size={'icon'}
+          >
             <Undo2 />
           </Button>
         </TooltipTrigger>

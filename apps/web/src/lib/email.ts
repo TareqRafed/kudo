@@ -13,11 +13,11 @@ interface TeamInviteEmail {
 
 export const sendTeamInviteEmail = (emails: string[], options: TeamInviteEmail) => {
   const validatedEmails = emails
-    .map(email => z.string().email().safeParse(email).data ?? null)
+    .map((email) => z.string().email().safeParse(email).data ?? null)
     .filter((data): data is string => !!data);
 
   return resend.batch.send(
-    validatedEmails.map(email => ({
+    validatedEmails.map((email) => ({
       from: 'Acme <onboarding@resend.dev>',
       to: email,
       subject: 'world hello',

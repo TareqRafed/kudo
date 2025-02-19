@@ -32,13 +32,14 @@ const WhackAMole = ({ className }: { className?: string }) => {
     <div className={cn(['flex flex-col items-center mt-5', className])}>
       <p className="text-lg mb-4">Score: {score}</p>
       <div className="grid grid-cols-3 gap-4">
-        {holes.map(index => (
+        {holes.map((index) => (
           <div
             key={index}
             className={`w-8 h-8 bg-background border rounded flex items-center justify-center cursor-pointer tab:bg-blue-400 ${
               index === activeMole ? 'bg-primary shadow-md ring-2 ring-blue-500/50' : ''
             }`}
-            onClick={() => whackMole(index)}></div>
+            onClick={() => whackMole(index)}
+          ></div>
         ))}
       </div>
     </div>

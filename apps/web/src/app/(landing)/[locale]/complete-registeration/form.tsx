@@ -35,7 +35,7 @@ const CompleteRegistertaionForm = ({ user }: { user: User }) => {
                   <Label htmlFor="profilePicture">Profile Picture</Label>
                 </div>
               </div>
-              <AvatarUploader id="profilePicture" onImageUpload={img => setProfilePic(img)} src={profilePic} />
+              <AvatarUploader id="profilePicture" onImageUpload={(img) => setProfilePic(img)} src={profilePic} />
             </div>
 
             <div className="grid gap-2">
