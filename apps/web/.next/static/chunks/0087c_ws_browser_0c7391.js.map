@@ -1,7 +1,0 @@
-{
-  "version": 3,
-  "sources": [],
-  "sections": [
-    {"offset": {"line": 6, "column": 0}, "map": {"version":3,"sources":["file:///home/tareq/ab-cursors/cursor-tracker/apps/web/node_modules/.pnpm/ws%408.18.0/node_modules/ws/browser.js"],"sourcesContent":["'use strict';\n\nmodule.exports = function () {\n  throw new Error(\n    'ws does not work in the browser. Browser clients must use the native ' +\n      'WebSocket object'\n  );\n};\n"],"names":[],"mappings":"AAAA;AAEA,OAAO,OAAO,GAAG;IACf,MAAM,IAAI,MACR,0EACE;AAEN","ignoreList":[0]}},
-    {"offset": {"line": 10, "column": 0}, "map": {"version":3,"sources":[],"names":[],"mappings":"A"}}]
-}

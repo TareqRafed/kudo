@@ -1,0 +1,13 @@
+{
+  "name": "@kudo/biome-config",
+  "type": "module",
+  "version": "0.0.1",
+  "description": "Kudo - biome config",
+  "private": true,
+  "devDependencies": {
+    "@biomejs/biome": "1.9.4"
+  },
+  "exports": {
+    "./base": "./base.json"
+  }
+}

@@ -25,6 +25,7 @@
     "type-check": "tsc --noEmit"
   },
   "devDependencies": {
+    "@biomejs/biome": "1.9.4",
     "@kudo/tsconfig": "workspace:*",
     "@rollup/plugin-sucrase": "^5.0.2",
     "@types/ws": "^8.5.12",

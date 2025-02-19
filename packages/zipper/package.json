@@ -23,6 +23,7 @@
     "type-check": "tsc --noEmit"
   },
   "devDependencies": {
+    "@biomejs/biome": "1.9.4",
     "@kudo/tsconfig": "workspace:*",
     "@types/node": "^20.17.16",
     "fflate": "^0.8.2",
