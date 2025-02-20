@@ -97,7 +97,7 @@ const ToolbarOptions = () => {
         onClick={() => toggleToolbarItem('comment')}
         tooltipContent={
           <>
-            Comment <KeyboardShortcut shortcut="C" />
+            Commenx <KeyboardShortcut shortcut="C" />
           </>
         }
       >

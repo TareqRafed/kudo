@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import { Montserrat_Alternates, Mitr } from 'next/font/google';
-import '../globals.css';
+import '@kudo/ui/lib/global.css';
 import { SidebarProvider, SidebarTrigger } from '@/components/ui/sidebar';
 import { AppSidebar } from '@/components/Sidebar/sidebar';
 import { createClient } from '@/util/supabase/server';
