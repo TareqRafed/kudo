@@ -27,7 +27,7 @@
     "@kudo/vite-config": "workspace:*",
     "@laynezh/vite-plugin-lib-assets": "^0.5.23",
     "@types/webextension-polyfill": "^0.12.1",
-    "@types/ws": "^8.5.12",
+    "@types/ws": "^8.5.14",
     "cross-env": "^7.0.3",
     "deepmerge": "^4.3.1",
     "magic-string": "^0.30.10",
