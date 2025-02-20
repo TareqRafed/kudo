@@ -2,8 +2,7 @@
   "extends": "@kudo/tsconfig/utils",
   "compilerOptions": {
     "baseUrl": ".",
-    "outDir": "dist",
-    "types": ["chrome"]
+    "outDir": "dist"
   },
   "exclude": ["lib/injections/**/*"],
   "include": ["lib", "index.ts"]

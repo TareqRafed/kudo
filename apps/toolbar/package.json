@@ -46,6 +46,7 @@
     "@kudo/vite-config": "workspace:*",
     "@kudo/biome-config": "workspace:*",
     "@types/react": "^19.0.0",
+    "@types/react-dom": "^19.0.0",
     "@types/webextension-polyfill": "^0.12.1",
     "concurrently": "^9.0.1",
     "cross-env": "^7.0.3",
