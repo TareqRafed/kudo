@@ -1,6 +1,6 @@
 {
   "name": "@kudo/hmr",
-  "version": "0.3.4",
+  "version": "0.0.1",
   "description": "chrome extension - hot module reload/refresh",
   "private": true,
   "sideEffects": true,
@@ -24,6 +24,7 @@
   },
   "devDependencies": {
     "@biomejs/biome": "1.9.4",
+    "@types/node": "^20.17.16",
     "@kudo/tsconfig": "workspace:*",
     "@kudo/biome-config": "workspace:*",
     "@rollup/plugin-sucrase": "^5.0.2",
@@ -32,6 +33,7 @@
     "fast-glob": "^3.3.2",
     "rollup": "^4.24.0",
     "ts-node": "^10.9.2",
-    "ws": "8.18.0"
+    "ws": "8.18.0",
+    "vite": "^6.1.0"
   }
 }
