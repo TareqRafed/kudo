@@ -1,10 +1,13 @@
 {
-  "name": "@kudo/tailwindcss-config",
-  "version": "0.3.4",
+  "name": "@kudo/tailwind-config",
+  "version": "0.0.1",
   "description": "Chrome Extension - tailwindcss configuration",
   "main": "tailwind.config.ts",
   "private": true,
   "devDependencies": {
     "@biomejs/biome": "1.9.4"
+  },
+  "dependencies": {
+    "tailwindcss": "^3.4.17"
   }
 }
