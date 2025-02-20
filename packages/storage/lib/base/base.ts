@@ -65,7 +65,7 @@ export function createStorage<D = string>(key: string, fallback: D, config?: Sto
   const liveUpdate = config?.liveUpdate ?? false;
 
   const serialize = config?.serialization?.serialize ?? ((v: D) => v);
-  const deserialize = config?.serialization?.deserialize ?? (v => v as D);
+  const deserialize = config?.serialization?.deserialize ?? ((v) => v as D);
 
   // Set global session storage access level for StoryType.Session, only when not already done but needed.
   if (
@@ -78,7 +78,7 @@ export function createStorage<D = string>(key: string, fallback: D, config?: Sto
       .setAccessLevel({
         accessLevel: SessionAccessLevelEnum.ExtensionPagesAndContentScripts,
       })
-      .catch(error => {
+      .catch((error) => {
         console.warn(error);
         console.warn('Please call setAccessLevel into different context, like a background script.');
       });
@@ -98,7 +98,7 @@ export function createStorage<D = string>(key: string, fallback: D, config?: Sto
   };
 
   const _emitChange = () => {
-    listeners.forEach(listener => listener());
+    listeners.forEach((listener) => listener());
   };
 
   const set = async (valueOrUpdate: ValueOrUpdate<D>) => {
@@ -115,7 +115,7 @@ export function createStorage<D = string>(key: string, fallback: D, config?: Sto
     listeners = [...listeners, listener];
 
     return () => {
-      listeners = listeners.filter(l => l !== listener);
+      listeners = listeners.filter((l) => l !== listener);
     };
   };
 
@@ -123,7 +123,7 @@ export function createStorage<D = string>(key: string, fallback: D, config?: Sto
     return cache;
   };
 
-  get().then(data => {
+  get().then((data) => {
     cache = data;
     initedCache = true;
     _emitChange();

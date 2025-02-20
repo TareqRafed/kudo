@@ -38,7 +38,8 @@ type GlobalStateStorage = BaseStorage<GlobalState> & {
   deleteTask: ({ name }: { name: Task }) => Promise<void>;
 };
 
-const storage = createStorage<GlobalState>( // duplicated keys causes
+const storage = createStorage<GlobalState>(
+  // duplicated keys causes
   'global-storage',
   { TabsOnScreen: [], isLoggedIn: false, tasks: { pool: {}, isFree: true } },
   {
@@ -50,22 +51,22 @@ const storage = createStorage<GlobalState>( // duplicated keys causes
 export const GlobalStateStorage: GlobalStateStorage = {
   ...storage,
   async toggleTabOnScreen(id: number) {
-    await storage.set(state => {
+    await storage.set((state) => {
       const newTabs = state.TabsOnScreen.includes(id)
-        ? state.TabsOnScreen.filter(d => d !== id)
+        ? state.TabsOnScreen.filter((d) => d !== id)
         : [...state.TabsOnScreen, id];
       return { ...state, TabsOnScreen: newTabs };
     });
   },
   async toggleIsLoggedIn() {
-    await storage.set(state => {
+    await storage.set((state) => {
       return { ...state, isLoggedIn: !state.isLoggedIn };
     });
   },
 
   async appendTask({ name }) {
     console.log('new task name', name);
-    await storage.set(state => {
+    await storage.set((state) => {
       return {
         ...state,
         tasks: {
@@ -77,10 +78,10 @@ export const GlobalStateStorage: GlobalStateStorage = {
   },
 
   async deleteTask({ name }) {
-    await storage.set(state => {
+    await storage.set((state) => {
       delete state.tasks.pool[name];
       const tasksState = Object.values(state.tasks.pool);
-      const newIsFree = tasksState.length === 0 || tasksState.every(val => !val);
+      const newIsFree = tasksState.length === 0 || tasksState.every((val) => !val);
       return {
         ...state,
         tasks: {

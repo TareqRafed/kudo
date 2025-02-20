@@ -5,7 +5,7 @@ export default function initClient({ id, onUpdate }: { id: string; onUpdate: () 
   const ws = new WebSocket(LOCAL_RELOAD_SOCKET_URL);
 
   ws.onopen = () => {
-    ws.addEventListener('message', event => {
+    ws.addEventListener('message', (event) => {
       const message = MessageInterpreter.receive(String(event.data));
 
       if (message.type === DO_UPDATE && message.id === id) {

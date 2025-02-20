@@ -1,7 +1,6 @@
 {
-  "$schema": "https://turbo.build/schema.json",
+  "$schema": "./node_modules/turbo/schema.json",
   "ui": "tui",
-  "globalEnv": ["__FIREFOX__"],
   "tasks": {
     "ready": {
       "dependsOn": ["^ready"],
@@ -21,18 +20,10 @@
     "e2e": {
       "cache": false
     },
-    "type-check": {
-      "cache": false
-    },
-    "lint": {
-      "cache": false
-    },
-    "lint:fix": {
-      "cache": false
-    },
-    "format": {
-      "cache": false
-    },
+    "type-check": {},
+    "lint": {},
+    "lint:fix": {},
+    "format": {},
     "clean:node_modules": {
       "dependsOn": ["^clean:node_modules"],
       "cache": false
