@@ -4,9 +4,7 @@
   "description": "chrome extension - shared code",
   "private": true,
   "sideEffects": false,
-  "files": [
-    "dist/**"
-  ],
+  "files": ["dist/**"],
   "types": "index.ts",
   "main": "./dist/index.js",
   "scripts": {
@@ -15,9 +13,9 @@
     "clean:turbo": "rimraf .turbo",
     "clean": "pnpm clean:bundle && pnpm clean:node_modules && pnpm clean:turbo",
     "ready": "node build.mjs",
-    "lint": "eslint . --ext .ts,.tsx",
-    "lint:fix": "pnpm lint --fix",
-    "prettier": "prettier . --write --ignore-path ../../.prettierignore",
+    "lint": "biome lint",
+    "lint:fix": "biome lint --write",
+    "prettier": "biome format --write",
     "type-check": "tsc --noEmit"
   },
   "devDependencies": {

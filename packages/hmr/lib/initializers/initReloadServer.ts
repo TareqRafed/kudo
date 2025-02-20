@@ -12,14 +12,14 @@ function initReloadServer() {
     console.log(`[HMR] Server listening at ${LOCAL_RELOAD_SOCKET_URL}`);
   });
 
-  wss.on('connection', ws => {
+  wss.on('connection', (ws) => {
     clientsThatNeedToUpdate.add(ws);
 
     ws.addEventListener('close', () => {
       clientsThatNeedToUpdate.delete(ws);
     });
 
-    ws.addEventListener('message', event => {
+    ws.addEventListener('message', (event) => {
       if (typeof event.data !== 'string') return;
 
       const message = MessageInterpreter.receive(event.data);
@@ -36,7 +36,7 @@ function initReloadServer() {
     });
   });
 
-  wss.on('error', error => {
+  wss.on('error', (error) => {
     console.error(`[HMR] Failed to start server at ${LOCAL_RELOAD_SOCKET_URL}`);
     throw error;
   });

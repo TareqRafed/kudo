@@ -4,9 +4,7 @@
   "description": "chrome extension - zipper",
   "private": true,
   "sideEffects": false,
-  "files": [
-    "dist/**"
-  ],
+  "files": ["dist/**"],
   "main": "dist/index.js",
   "module": "dist/index.js",
   "types": "index.ts",
@@ -17,9 +15,9 @@
     "clean": "pnpm clean:bundle && pnpm clean:node_modules && pnpm clean:turbo",
     "zip": "tsx index.ts",
     "ready": "tsc",
-    "lint": "eslint . --ext .ts,.tsx",
-    "lint:fix": "pnpm lint --fix",
-    "prettier": "prettier . --write --ignore-path ../../.prettierignore",
+    "lint": "biome lint",
+    "lint:fix": "biome lint --write",
+    "format": "biome format --write",
     "type-check": "tsc --noEmit"
   },
   "devDependencies": {
