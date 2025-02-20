@@ -32,12 +32,12 @@ function streamFileToZip(
   zip.add(data);
 
   createReadStream(absPath)
-    .on('data', chunk => {
+    .on('data', (chunk) => {
       const bufferChunk = typeof chunk === 'string' ? Buffer.from(chunk, 'utf8') : chunk;
       data.push(bufferChunk, false);
     })
     .on('end', () => data.push(new Uint8Array(0), true))
-    .on('error', error => {
+    .on('error', (error) => {
       onAbort();
       onError(error);
     });
@@ -107,7 +107,7 @@ export const zipBundle = async (
           aborted = true;
           zip.terminate();
         },
-        error => pReject(`Error reading file ${absPath}: ${error.message}`),
+        (error) => pReject(`Error reading file ${absPath}: ${error.message}`),
       );
     }
 

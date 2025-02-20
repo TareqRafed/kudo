@@ -6,7 +6,7 @@
     "dev": "next dev --turbopack",
     "build": "next build",
     "start": "next start",
-    "format": "pnpm biome format --write 'src/*'",
+    "format": "pnpm biome format --write",
     "clean:bundle": "rimraf .next",
     "clean:node_modules": "rimraf node_modules",
     "clean:turbo": "rimraf .turbo",

@@ -51,7 +51,7 @@ export function makeEntryPointPlugin(): PluginOption {
       }
     },
     closeBundle() {
-      cleanupTargets.forEach(target => {
+      cleanupTargets.forEach((target) => {
         fs.unlinkSync(target);
       });
     },
