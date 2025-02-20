@@ -41,7 +41,7 @@
   "devDependencies": {
     "@biomejs/biome": "1.9.4",
     "@kudo/hmr": "workspace:*",
-    "@kudo/tailwindcss-config": "workspace:*",
+    "@kudo/tailwind-config": "workspace:*",
     "@kudo/tsconfig": "workspace:*",
     "@kudo/vite-config": "workspace:*",
     "@kudo/biome-config": "workspace:*",

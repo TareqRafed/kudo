@@ -1,14 +1,11 @@
 {
   "name": "@kudo/ui",
-  "version": "0.3.4",
-  "description": "chrome extension - ui components",
+  "version": "0.0.1",
+  "description": "Kudo - ui components",
   "private": true,
   "sideEffects": false,
   "type": "module",
-  "files": [
-    "dist/**",
-    "dist/global.css"
-  ],
+  "files": ["dist/**", "dist/global.css"],
   "types": "index.ts",
   "main": "./dist/index.js",
   "scripts": {
@@ -17,15 +14,17 @@
     "clean:turbo": "rimraf .turbo",
     "clean": "pnpm clean:bundle && pnpm clean:node_modules && pnpm clean:turbo",
     "ready": "node build.mjs",
-    "lint": "eslint . --ext .ts,.tsx",
-    "lint:fix": "pnpm lint --fix",
-    "prettier": "prettier . --write",
+    "lint": "biome lint",
+    "lint:fix": "biome lint --write",
+    "format": "biome format --write",
     "type-check": "tsc --noEmit"
   },
   "devDependencies": {
     "@biomejs/biome": "1.9.4",
     "@kudo/tsconfig": "workspace:*",
     "deepmerge": "^4.3.1",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
     "tsc-alias": "^1.8.10"
   },
   "dependencies": {
@@ -38,6 +37,7 @@
     "clsx": "^2.1.1",
     "lucide-react": "0.475.0",
     "react": "^19.0.0",
-    "tailwind-merge": "^2.6.0"
+    "tailwind-merge": "^2.6.0",
+    "tailwindcss": "^3.4.17"
   }
 }
