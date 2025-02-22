@@ -1,12 +1,13 @@
 import type React from 'react';
 import { cn } from '@/lib/utils';
+import type { ReactNode } from 'react';
 
 interface KeyboardShortcutProps {
-  shortcut: string;
+  children: ReactNode;
   className?: string;
 }
 
-export const KeyboardShortcut: React.FC<KeyboardShortcutProps> = ({ shortcut, className }) => {
+export const KeyboardShortcut: React.FC<KeyboardShortcutProps> = ({ children, className }) => {
   return (
     <kbd
       className={cn(
@@ -16,8 +17,9 @@ export const KeyboardShortcut: React.FC<KeyboardShortcutProps> = ({ shortcut, cl
         'hover:bg-gray-200 dark:hover:bg-gray-700',
         'focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500',
         className,
-      )}>
-      {shortcut}
+      )}
+    >
+      {children}
     </kbd>
   );
 };

@@ -33,7 +33,7 @@ const manifest = {
   },
   web_accessible_resources: [
     {
-      resources: ['*.js', '*.css', '*.svg', '*.png', 'icon-128.png', 'icon-34.png'],
+      resources: ['*.js', '*.css', '*.svg', '*.png'],
       matches: ['*://*/*'],
     },
   ],
