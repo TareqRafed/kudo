@@ -11,17 +11,17 @@ import {
   DropdownMenuSeparator,
   DropdownMenuShortcut,
   DropdownMenuTrigger,
-} from '@/components/ui/dropdown-menu';
-import { SidebarMenu, SidebarMenuButton, SidebarMenuItem, useSidebar } from '@/components/ui/sidebar';
+  Skeleton,
+  Loader,
+} from '@kudo/ui';
+import { SidebarMenu, SidebarMenuButton, SidebarMenuItem, useSidebar } from '@/components/Sidebar';
 import { useQuery, useUpdateMutation } from '@supabase-cache-helpers/postgrest-react-query';
 import { getMemberTeams } from '@/queries/teams';
 import useSupabaseBrowser from '@/util/supabase/client';
 import IconAvatar from '@/components/IconPicker/IconAvatar';
 import { useRouter } from 'next/navigation';
 import { useToast } from '@/hooks/use-toast';
-import { Skeleton } from '@/components/ui/skeleton';
 import { getCurrentMemberWithMetadata } from '@/queries/members';
-import { Loader } from '@/components/ui/loader';
 
 export function TeamSwitcher() {
   const { isMobile } = useSidebar();

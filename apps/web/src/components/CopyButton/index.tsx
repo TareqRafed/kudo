@@ -1,6 +1,6 @@
 import useUpdate from '@/hooks/useUpdate';
-import { ComponentPropsWithoutRef, forwardRef } from 'react';
-import { Button } from '../ui/button';
+import { type ComponentPropsWithoutRef, forwardRef } from 'react';
+import { Button } from '@kudo/ui';
 import { Copy } from 'lucide-react';
 
 interface Props extends ComponentPropsWithoutRef<'button'> {

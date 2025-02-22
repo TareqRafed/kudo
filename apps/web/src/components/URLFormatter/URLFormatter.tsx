@@ -1,7 +1,7 @@
 'use client';
 
-import { Tooltip, TooltipContent, TooltipTrigger } from '../ui/tooltip';
-import CopyButton from '../CopyButton/CopyButton';
+import { Tooltip, TooltipContent, TooltipTrigger } from '@kudo/ui';
+import CopyButton from '../CopyButton';
 import { cn } from '@/lib/utils';
 import Link from 'next/link';
 import { splitURL } from '@/util/helpers/url';

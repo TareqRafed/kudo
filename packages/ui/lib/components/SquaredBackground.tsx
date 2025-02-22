@@ -1,6 +1,5 @@
 'use client';
 
-import { useTheme } from 'next-themes';
 import { useRef, useEffect, useState } from 'react';
 
 interface SquaresProps {
@@ -10,27 +9,27 @@ interface SquaresProps {
   squareSize?: number;
   hoverFillColor?: string;
   className?: string;
+  theme?: 'dark' | 'light';
 }
 
-export function Squares({
+export const Squares = ({
+  theme = 'dark',
   direction = 'right',
   speed = 1,
   borderColor = '#333',
   squareSize = 40,
   hoverFillColor = '#222',
   className,
-}: SquaresProps) {
+}: SquaresProps) => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const requestRef = useRef<number>();
-  const numSquaresX = useRef<number>();
-  const numSquaresY = useRef<number>();
+  const requestRef = useRef<number>(null);
+  const numSquaresX = useRef<number>(null);
+  const numSquaresY = useRef<number>(null);
   const gridOffset = useRef({ x: 0, y: 0 });
   const [hoveredSquare, setHoveredSquare] = useState<{
     x: number;
     y: number;
   } | null>(null);
-
-  const { theme, resolvedTheme } = useTheme();
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -85,13 +84,13 @@ export function Squares({
         0,
         canvas.width / 2,
         canvas.height / 2,
-        Math.sqrt(Math.pow(canvas.width, 2) + Math.pow(canvas.height, 2)) / 2,
+        Math.sqrt(canvas.width ** 2 + canvas.height ** 2) / 2,
       );
-      if (theme == 'dark' || resolvedTheme == 'dark') {
+      if (theme == 'dark') {
         gradient.addColorStop(0, 'rgba(6, 6, 6, 0)');
         gradient.addColorStop(1, '#060606');
       }
-      if (theme == 'light' || resolvedTheme == 'light') {
+      if (theme == 'light') {
         gradient.addColorStop(0, 'rgba(255, 255, 255, 0)');
         gradient.addColorStop(1, '#fff');
       }
@@ -165,4 +164,4 @@ export function Squares({
   }, [theme, direction, speed, borderColor, hoverFillColor, hoveredSquare, squareSize]);
 
   return <canvas ref={canvasRef} className={`w-full h-full border-none block ${className}`} />;
-}
+};

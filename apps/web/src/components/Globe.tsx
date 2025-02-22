@@ -1,6 +1,6 @@
 'use client';
 
-import createGlobe, { COBEOptions } from 'cobe';
+import createGlobe, { type COBEOptions } from 'cobe';
 import { useCallback, useEffect, useRef, useState } from 'react';
 
 import { cn } from '@/lib/utils';
@@ -34,22 +34,22 @@ const GLOBE_CONFIG: COBEOptions = {
   ],
 };
 
-export function Globe({ className, config = GLOBE_CONFIG }: { className?: string; config?: COBEOptions }) {
+const Globe = ({ className, config = GLOBE_CONFIG }: { className?: string; config?: COBEOptions }) => {
   let phi = 0;
-  let width = useRef(0);
+  const width = useRef(0);
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const pointerInteracting = useRef(null);
+  const pointerInteracting = useRef<number>(null);
   const pointerInteractionMovement = useRef(0);
   const [r, setR] = useState(0);
 
-  const updatePointerInteraction = (value: any) => {
+  const updatePointerInteraction = (value: number | null) => {
     pointerInteracting.current = value;
     if (canvasRef.current) {
       canvasRef.current.style.cursor = value ? 'grabbing' : 'grab';
     }
   };
 
-  const updateMovement = (clientX: any) => {
+  const updateMovement = (clientX: number) => {
     if (pointerInteracting.current !== null) {
       const delta = clientX - pointerInteracting.current;
       pointerInteractionMovement.current = delta;
@@ -58,13 +58,13 @@ export function Globe({ className, config = GLOBE_CONFIG }: { className?: string
   };
 
   const onRender = useCallback(
-    (state: Record<string, any>) => {
+    (state: Record<string, number>) => {
       if (!pointerInteracting.current) phi += 0.005;
       state.phi = phi + r;
       state.width = width.current * 2;
       state.height = width.current * 2;
     },
-    [r],
+    [r, phi],
   );
 
   const onResize = () => {
@@ -74,11 +74,12 @@ export function Globe({ className, config = GLOBE_CONFIG }: { className?: string
   };
 
   const { theme } = useTheme();
+  // biome-ignore lint/correctness/useExhaustiveDependencies: onResize
   useEffect(() => {
+    if (!canvasRef.current) return;
     window.addEventListener('resize', onResize);
     onResize();
-
-    const globe = createGlobe(canvasRef.current!, {
+    const globe = createGlobe(canvasRef.current, {
       ...config,
       dark: theme === 'light' ? 0 : 1,
       width: width.current * 2,
@@ -86,7 +87,9 @@ export function Globe({ className, config = GLOBE_CONFIG }: { className?: string
       onRender,
     });
 
-    setTimeout(() => (canvasRef.current!.style.opacity = '1'));
+    setTimeout(() => {
+      if (canvasRef.current) canvasRef.current.style.opacity = '1';
+    });
     return () => {
       globe.destroy();
       window.removeEventListener('resize', onResize);
@@ -106,4 +109,6 @@ export function Globe({ className, config = GLOBE_CONFIG }: { className?: string
       />
     </div>
   );
-}
+};
+
+export default Globe;

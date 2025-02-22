@@ -1,9 +1,10 @@
 'use client';
-import React, { useRef } from 'react';
-import { useScroll, useTransform, motion, MotionValue } from 'framer-motion';
+
+import { useRef } from 'react';
+import { useScroll, useTransform, motion, type MotionValue } from 'framer-motion';
 import { useMediaQuery } from '@uidotdev/usehooks';
 
-export const ContainerScroll = ({
+const ContainerScroll = ({
   titleComponent,
   children,
 }: {
@@ -46,7 +47,7 @@ export const ContainerScroll = ({
   );
 };
 
-export const Header = ({ translate, titleComponent }: any) => {
+const Header = ({ translate, titleComponent }: any) => {
   return (
     <motion.div
       style={{
@@ -59,7 +60,7 @@ export const Header = ({ translate, titleComponent }: any) => {
   );
 };
 
-export const Card = ({
+const Card = ({
   rotate,
   scale,
   translate,
@@ -83,3 +84,5 @@ export const Card = ({
     </motion.div>
   );
 };
+
+export default ContainerScroll;

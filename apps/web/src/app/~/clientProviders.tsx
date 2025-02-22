@@ -1,11 +1,10 @@
 'use client';
 
-import { Toaster } from '@/components/ui/toaster';
-import { TooltipProvider } from '@/components/ui/tooltip';
+import { Toaster, TooltipProvider } from '@kudo/ui';
 import useNotifyExtension from '@/hooks/useNotifyExtension';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ThemeProvider } from 'next-themes';
-import { ReactNode } from 'react';
+import type { ReactNode } from 'react';
 import { NuqsAdapter } from 'nuqs/adapters/next/app';
 
 const queryClient = new QueryClient();

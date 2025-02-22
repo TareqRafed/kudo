@@ -2,13 +2,9 @@
 
 import Link from 'next/link';
 
-import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
+import { Button, Card, CardContent, CardDescription, Separator, CardHeader, CardTitle, Input, Label } from '@kudo/ui';
 import { login, loginWithOAuth } from './actions';
 import { useActionState } from 'react';
-import { Separator } from '@/components/ui/separator';
 import { GithubLogo, GoogleLogo } from '@phosphor-icons/react';
 
 export default function LoginForm() {

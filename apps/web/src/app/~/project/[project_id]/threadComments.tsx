@@ -1,7 +1,5 @@
-import { UserAvatar } from '@/components/Avatar/Avatar';
 import { UserComment } from '@/components/Comment/Comment';
-import { Separator } from '@/components/ui/separator';
-import { Skeleton } from '@/components/ui/skeleton';
+import { Separator, Skeleton } from '@kudo/ui';
 import { getComments } from '@/queries/comments';
 import useSupabaseBrowser from '@/util/supabase/client';
 import { useQuery } from '@supabase-cache-helpers/postgrest-react-query';

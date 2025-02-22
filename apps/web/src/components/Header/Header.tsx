@@ -1,16 +1,14 @@
 'use client';
 
 import Image from 'next/image';
-import ImageController from '../ImageController/ImageController';
-import { ContextMenu, ContextMenuContent, ContextMenuTrigger } from '../ui/context-menu';
+import ImageController from '../ImageController';
+import { Toggle, Button, ContextMenu, ContextMenuContent, ContextMenuTrigger } from '@kudo/ui';
 import { useTheme } from 'next-themes';
 import { MonitorCog, Moon, Sun } from 'lucide-react';
 import Logo from '@/assets/icons/logo-icon.png';
 import LogoFilled from '@/assets/icons/logo-filled.png';
 import { cn } from '@/lib/utils';
-import { Toggle } from '../ui/toggle';
 import { Link, useRouter } from '@/i18n/routing';
-import { Button } from '../ui/button';
 
 const Header = ({ className }: { className?: string }) => {
   const { setTheme, theme } = useTheme();
@@ -42,7 +40,7 @@ const Header = ({ className }: { className?: string }) => {
           <Toggle
             suppressHydrationWarning
             aria-label="Switch theme to light mode"
-            pressed={theme == 'light'}
+            pressed={theme === 'light'}
             onClick={() => setTheme('light')}
           >
             <Sun />
@@ -52,7 +50,7 @@ const Header = ({ className }: { className?: string }) => {
             suppressHydrationWarning
             aria-label="Switch theme to dark mode"
             className="mx-1"
-            pressed={theme == 'dark'}
+            pressed={theme === 'dark'}
             onClick={() => setTheme('dark')}
           >
             <Moon />
@@ -61,7 +59,7 @@ const Header = ({ className }: { className?: string }) => {
           <Toggle
             suppressHydrationWarning
             aria-label="Switch theme to system preference"
-            pressed={theme == 'system'}
+            pressed={theme === 'system'}
             onClick={() => setTheme('system')}
           >
             <MonitorCog />
@@ -82,7 +80,7 @@ const Header = ({ className }: { className?: string }) => {
         <Toggle
           aria-label="Switch theme to light mode"
           suppressHydrationWarning
-          pressed={theme == 'light'}
+          pressed={theme === 'light'}
           onClick={() => setTheme('light')}
         >
           <Sun />{' '}
@@ -91,7 +89,7 @@ const Header = ({ className }: { className?: string }) => {
           aria-label="Switch theme to dark mode"
           suppressHydrationWarning
           className="mx-1"
-          pressed={theme == 'dark'}
+          pressed={theme === 'dark'}
           onClick={() => setTheme('dark')}
         >
           <Moon />{' '}
@@ -99,7 +97,7 @@ const Header = ({ className }: { className?: string }) => {
         <Toggle
           aria-label="Switch theme to system preference"
           suppressHydrationWarning
-          pressed={theme == 'system'}
+          pressed={theme === 'system'}
           onClick={() => setTheme('system')}
         >
           <MonitorCog />

@@ -7,7 +7,7 @@ export interface SafariProps extends SVGProps<SVGSVGElement> {
   height?: number;
 }
 
-export function Safari({ src, url, width = 1203, height = 753, ...props }: SafariProps) {
+const Safari = ({ src, url, width = 1203, height = 753, ...props }: SafariProps) => {
   return (
     <svg
       width={width}
@@ -17,6 +17,7 @@ export function Safari({ src, url, width = 1203, height = 753, ...props }: Safar
       xmlns="http://www.w3.org/2000/svg"
       {...props}
     >
+      <title>Safari browser view</title>
       <g className="" clipPath="url(#path0)">
         <path
           d="M0 52H1202V741C1202 747.627 1196.63 753 1190 753H12C5.37258 753 0 747.627 0 741V52Z"
@@ -120,4 +121,6 @@ export function Safari({ src, url, width = 1203, height = 753, ...props }: Safar
       </defs>
     </svg>
   );
-}
+};
+
+export default Safari;
