@@ -1,16 +1,15 @@
 'use client';
 
-import { buttonVariants } from '@/components/ui/button';
-import { Label } from '@/components/ui/label';
-import { Switch } from '@/components/ui/switch';
+import { Label, Switch, buttonVariants } from '@kudo/ui';
 import { cn } from '@/lib/utils';
+import NumberFlow from '@number-flow/react';
+import { useMediaQuery } from '@uidotdev/usehooks';
+import confetti from 'canvas-confetti';
 import { motion } from 'framer-motion';
 import { Check, Star } from 'lucide-react';
 import Link from 'next/link';
-import { useState, useRef } from 'react';
-import confetti from 'canvas-confetti';
-import NumberFlow from '@number-flow/react';
-import { useMediaQuery } from '@uidotdev/usehooks';
+import { useRef, useState } from 'react';
+import { plans } from './plans';
 
 interface PricingPlan {
   name: string;
@@ -73,7 +72,7 @@ export function Pricing({
       <div className="flex justify-center lg:mb-10">
         <label className="relative inline-flex items-center cursor-pointer">
           <Label>
-            <Switch ref={switchRef as any} checked={!isMonthly} onCheckedChange={handleToggle} className="relative" />
+            <Switch ref={switchRef} checked={!isMonthly} onCheckedChange={handleToggle} className="relative" />
           </Label>
         </label>
         <span className="ml-2">
@@ -155,7 +154,7 @@ export function Pricing({
 
               <ul className="mt-5 gap-2 flex flex-col">
                 {plan.features.map((feature, idx) => (
-                  <li key={idx} className="flex items-start gap-2">
+                  <li key={feature} className="flex items-start gap-2">
                     <Check className="h-4 w-4 text-primary mt-1 flex-shrink-0" />
                     <span className="text-left">{feature}</span>
                   </li>
@@ -184,3 +183,17 @@ export function Pricing({
     </div>
   );
 }
+
+function PricingBasic() {
+  return (
+    <div className="mx-auto w-full overflow-y-auto rounded-lg">
+      <Pricing
+        plans={plans}
+        title="Simple, Transparent Pricing"
+        description="Choose the plan that works for you\nAll plans include access to our platform, lead generation tools, and dedicated support."
+      />
+    </div>
+  );
+}
+
+export { PricingBasic };

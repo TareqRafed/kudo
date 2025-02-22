@@ -1,5 +1,5 @@
-import { Card, CardHeader, CardTitle } from '@/components/ui/card';
-import { SidebarMenu, SidebarMenuButton, SidebarMenuItem } from '@/components/ui/sidebar';
+import { Card, CardHeader, CardTitle } from '@kudo/ui';
+import { SidebarMenu, SidebarMenuButton, SidebarMenuItem } from '@/components/Sidebar';
 import Image from 'next/image';
 import ChromeSVG from '@/assets/icons/chrome.svg';
 

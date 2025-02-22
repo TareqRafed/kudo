@@ -1,18 +1,16 @@
 'use client';
 
-import CalButton from '@/components/CalButton/CalButton';
 import { useTranslations } from 'next-intl';
 import { Link } from '@/i18n/routing';
 import { motion } from 'framer-motion';
 import Thread from '@/components/Thread/Thread';
-import { Button } from '@/components/ui/button';
+import { Button } from '@kudo/ui';
 
-import DisplayCards from '@/components/ui/display-cards';
-import { PricingBasic } from './pricing';
-import { Safari } from '@/components/ui/safari';
-import { ContainerScroll } from '@/components/ui/container-scroll-animation';
-import { Globe } from '@/components/ui/globe';
-import { ShimmerButton } from '@/components/ui/shimmer-button';
+import DisplayCards from '@/components/DisplayCards';
+import ContainerScroll from '@/components/ContainerScroll';
+import { PricingBasic } from '@/features/Pricing';
+import Safari from '@/components/Safari';
+import Globe from '@/components/Globe';
 import { ArrowUpRight } from 'lucide-react';
 
 const defaultCards = [
@@ -62,7 +60,7 @@ const Hero = () => {
               }}
               transition={{
                 duration: 2,
-                repeat: Infinity,
+                repeat: Number.POSITIVE_INFINITY,
                 repeatType: 'mirror',
               }}
               style={{
@@ -147,18 +145,16 @@ export default function Home() {
         <section className="mx-auto hidden lg:mt-10 lg:block">
           <ContainerScroll
             titleComponent={
-              <>
-                <h1 className="text-4xl font-bold">
-                  {t.rich('section2.title', {
-                    power: (chunk) => (
-                      <span className="mt-1 text-4xl font-thin leading-none md:text-[6rem]">
-                        <br />
-                        {chunk}
-                      </span>
-                    ),
-                  })}
-                </h1>
-              </>
+              <h1 className="text-4xl font-bold">
+                {t.rich('section2.title', {
+                  power: (chunk) => (
+                    <span className="mt-1 text-4xl font-thin leading-none md:text-[6rem]">
+                      <br />
+                      {chunk}
+                    </span>
+                  ),
+                })}
+              </h1>
             }
           >
             <Thread
@@ -273,14 +269,14 @@ export default function Home() {
             <h1 className="mb-4 text-2xl font-light lg:text-4xl">{t('section4.title')}</h1>
             <span className="text-sm lg:text-xl">{t('section4.content')}</span>
             <span className="mt-10 w-full">
-              <ShimmerButton className="">
+              <Button className="">
                 <span className="w-full whitespace-pre-wrap py-1 text-left text-xl leading-none tracking-tight text-white dark:to-slate-900/10">
                   Get Started
                 </span>
                 <span className="text-white">
                   <ArrowUpRight strokeWidth={0.5} className="size-10" />
                 </span>
-              </ShimmerButton>
+              </Button>
             </span>
           </div>
 

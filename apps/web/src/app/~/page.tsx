@@ -1,25 +1,24 @@
 'use client';
 
-import useSupabaseBrowser from '@/util/supabase/client';
 import { GridViewer } from '@/components/GridViewer/GridViewer';
-import { formatDistanceToNow } from 'date-fns';
-import { URLFormatter } from '@/components/URLFormatter/URLFormatter';
-import Link from 'next/link';
-import { getProjects } from '@/queries/projects';
-import SearchBar from '@/components/SearchBar/SearchBar';
-import { useDebounce } from '@uidotdev/usehooks';
-import { useInfiniteQuery } from '@tanstack/react-query';
-import InfiniteScroll from '@/components/InfiniteScroll/InfiniteScroll';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { Building, ListTodo } from 'lucide-react';
-import { Container } from './settings/layout-ui';
-import Markdown from 'react-markdown';
-import { useQuery } from '@supabase-cache-helpers/postgrest-react-query';
-import { getCurrentMemberWithMetadata } from '@/queries/members';
-import { Loader } from '@/components/ui/loader';
-import { useQueryState } from 'nuqs';
-import { Tabs as TabsIcon } from '@phosphor-icons/react';
 import IconAvatar from '@/components/IconPicker/IconAvatar';
+import InfiniteScroll from '@/components/InfiniteScroll';
+import SearchBar from '@/components/SearchBar/SearchBar';
+import { URLFormatter } from '@/components/URLFormatter/URLFormatter';
+import { getCurrentMemberWithMetadata } from '@/queries/members';
+import { getProjects } from '@/queries/projects';
+import useSupabaseBrowser from '@/util/supabase/client';
+import { Loader, Tabs, TabsContent, TabsList, TabsTrigger } from '@kudo/ui';
+import { Tabs as TabsIcon } from '@phosphor-icons/react';
+import { useQuery } from '@supabase-cache-helpers/postgrest-react-query';
+import { useInfiniteQuery } from '@tanstack/react-query';
+import { useDebounce } from '@uidotdev/usehooks';
+import { formatDistanceToNow } from 'date-fns';
+import { Building, ListTodo } from 'lucide-react';
+import Link from 'next/link';
+import { useQueryState } from 'nuqs';
+import Markdown from 'react-markdown';
+import { Container } from './settings/layout-ui';
 
 export default function Dashboard() {
   const [_, setSearchValue] = useQueryState('search');
@@ -92,12 +91,10 @@ const ProjectsGrid = () => {
   });
 
   const projects = projectsResponse?.pages
-    .flat()
-    .map((res) => res.data)
+    .flatMap((res) => res.data)
     .flat()
     .filter((item) => item != null);
 
-  console.log(error);
   if (isError) return <>{JSON.stringify(error.message)}</>;
   if (isLoading) return <Loader />;
 
@@ -134,28 +131,27 @@ const ProjectsGrid = () => {
         loadMore={() => hasNextPage && fetchNextPage()}
       >
         <GridViewer>
-          {projects &&
-            projects.map((item) => (
-              <div key={item.id} className="w-full overflow-hidden rounded-sm border bg-card shadow-md">
-                <div className="p-4">
+          {projects?.map((item) => (
+            <div key={item.id} className="w-full overflow-hidden rounded-sm border bg-card shadow-md">
+              <div className="p-4">
+                <div>
+                  <URLFormatter showDomain url={item.domain} />
+                </div>
+                <div className="flex items-end justify-between">
                   <div>
-                    <URLFormatter showDomain url={item.domain} />
+                    <p className="text-xs">
+                      {formatDistanceToNow(item?.created_at, {
+                        addSuffix: true,
+                      })}
+                    </p>
                   </div>
-                  <div className="flex items-end justify-between">
-                    <div>
-                      <p className="text-xs">
-                        {formatDistanceToNow(item?.created_at, {
-                          addSuffix: true,
-                        })}
-                      </p>
-                    </div>
-                    <Link href={`~/project/${item.id}`} className="flex items-start text-sm hover:underline">
-                      Show Threads{' '}
-                    </Link>
-                  </div>
+                  <Link href={`~/project/${item.id}`} className="flex items-start text-sm hover:underline">
+                    Show Threads{' '}
+                  </Link>
                 </div>
               </div>
-            ))}
+            </div>
+          ))}
         </GridViewer>
       </InfiniteScroll>
     </div>

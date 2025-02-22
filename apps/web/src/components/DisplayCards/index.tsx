@@ -1,6 +1,6 @@
 'use client';
 
-import { cn } from '@/lib/utils';
+import { cn } from '@kudo/ui';
 import { Sparkles } from 'lucide-react';
 import { UserAvatar } from '../Thread/UserAvatar';
 import Thread, { ThreadComment } from '../Thread/Thread';
