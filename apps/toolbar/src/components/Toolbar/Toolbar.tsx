@@ -83,7 +83,7 @@ const ToolbarOptions = () => {
         tooltipContent="Login in the dashboard"
         className="flex rounded-full"
       >
-        <img src={Logo} className="size-5 mr-2" />
+        <img src={Logo} className="size-5 mr-2" alt="Kudo Logo" />
         <span className="ml-5 mb-1">Login to Continue</span>
         <ArrowRight className="ml-1 size-4" />
       </ToolbarItem>
@@ -97,7 +97,7 @@ const ToolbarOptions = () => {
         onClick={() => toggleToolbarItem('comment')}
         tooltipContent={
           <>
-            Commenx <KeyboardShortcut shortcut="C" />
+            Comment <KeyboardShortcut>C</KeyboardShortcut>
           </>
         }
       >
@@ -130,7 +130,9 @@ const ToolbarItem = ({ isActive = false, onClick, children, tooltipContent, ...r
         </Button>
       </TooltipTrigger>
       <TooltipPortal container={domHelper.getRoot()!}>
-        <TooltipContent side="right">{tooltipContent}</TooltipContent>
+        <TooltipContent className="dark" side="right">
+          {tooltipContent}
+        </TooltipContent>
       </TooltipPortal>
     </Tooltip>
   );

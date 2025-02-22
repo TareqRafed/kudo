@@ -15,6 +15,7 @@ import type { OnDropEvent } from '../Magnet/Magnet';
 import Magnet from '../Magnet/Magnet';
 import CommentPin from './CommentPin';
 import { useHotkeys } from 'react-hotkeys-hook';
+import { getPublic } from '@src/util';
 
 const getCssSelector = (el: Element) => {
   const path = [];
@@ -114,17 +115,19 @@ export const CommentLayer = () => {
 
   const threadInitRef = useRef<HTMLDivElement>(null);
 
+  const addCursorUrl = getPublic('add-comment-cursor.png');
+
   // if (!website.id) throw new Error('Something went wrong');
   return (
     <div
       id="ab-layer"
       ref={layerRef}
       aria-hidden="true"
-      style={{ pointerEvents: toolbarItems.comment.inUse || threadSpawn.active ? 'all' : 'none' }}
-      className={cn([
-        toolbarItems.comment.inUse && 'comment-cursor',
-        'text-white dark fixed inset-0 z-max-2 size-full',
-      ])}
+      style={{
+        pointerEvents: toolbarItems.comment.inUse || threadSpawn.active ? 'all' : 'none',
+        cursor: toolbarItems.comment.inUse ? `url("${addCursorUrl}"), auto` : 'auto',
+      }}
+      className={cn(['text-white dark fixed inset-0 z-max-2 size-full'])}
       onClick={spawnThread}
     >
       {pendingThread && pendingThreadData && (
