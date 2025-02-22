@@ -1,10 +1,10 @@
 'use client';
 
-import { Button } from '../ui/button';
+import { Button } from '@kudo/ui';
 
 import { useTranslations } from 'next-intl';
 import { cn } from '@/lib/utils';
-import { ComponentPropsWithoutRef } from 'react';
+import type { ComponentPropsWithoutRef } from 'react';
 import { GithubLogo } from '@phosphor-icons/react';
 import Link from 'next/link';
 

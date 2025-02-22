@@ -1,4 +1,4 @@
-import { Button } from '@/components/ui/button';
+import { Button } from '@kudo/ui';
 import { ArrowDownToLine, Copy } from 'lucide-react';
 import Image from 'next/image';
 import { saveAs } from 'file-saver';

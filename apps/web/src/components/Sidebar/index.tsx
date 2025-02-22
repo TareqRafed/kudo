@@ -14,7 +14,7 @@ import {
   SidebarMenuSub,
   SidebarRail,
   useSidebar,
-} from '@/components/ui/sidebar';
+} from '@/components/Sidebar';
 import { NavUser } from './sidebarUser';
 import {
   AudioWaveform,

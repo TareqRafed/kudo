@@ -1,7 +1,7 @@
 import { cn } from '@/lib/utils';
-import { ComponentPropsWithoutRef } from 'react';
-import { Avatar, AvatarFallback, AvatarImage } from '../ui/avatar';
-import { cva, VariantProps } from 'class-variance-authority';
+import type { ComponentPropsWithoutRef } from 'react';
+import { Avatar, AvatarFallback, AvatarImage } from '@kudo/ui';
+import { cva, type VariantProps } from 'class-variance-authority';
 
 const userAvatarVariants = cva('rounded-full border-2', {
   variants: {

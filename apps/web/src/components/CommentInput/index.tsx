@@ -1,5 +1,5 @@
 import { cn } from '@/lib/utils';
-import { Button } from '../ui/button';
+import { Button } from '@kudo/ui';
 import { BoldIcon, ItalicIcon, Send } from 'lucide-react';
 import type { ComponentPropsWithoutRef } from 'react';
 import { useState } from 'react';

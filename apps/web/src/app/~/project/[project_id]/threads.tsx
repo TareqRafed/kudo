@@ -2,7 +2,7 @@
 
 import { UserAvatar } from '@/components/Avatar/Avatar';
 import { GridViewer } from '@/components/GridViewer/GridViewer';
-import CommentInput from '@/components/CommentInput/CommentInput';
+import CommentInput from '@/components/CommentInput';
 import {
   Drawer,
   DrawerContent,
@@ -11,7 +11,13 @@ import {
   DrawerHeader,
   DrawerTitle,
   DrawerTrigger,
-} from '@/components/ui/drawer';
+  Separator,
+  Loader,
+  Tabs,
+  TabsList,
+  TabsTrigger,
+  TabsContent,
+} from '@kudo/ui';
 import { getThreads } from '@/queries/threads';
 import useSupabaseBrowser from '@/util/supabase/client';
 import { useInsertMutation, useQuery } from '@supabase-cache-helpers/postgrest-react-query';
@@ -19,11 +25,7 @@ import { formatDistanceToNow } from 'date-fns';
 import { ThreadComments } from './threadComments';
 import { splitURL } from '@/util/helpers/url';
 import { CommentArea, UserComment } from '@/components/Comment/Comment';
-import { Separator } from '@/components/ui/separator';
-import { Loader } from '@/components/ui/loader';
 import SearchBar from '@/components/SearchBar/SearchBar';
-import { Tabs, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { TabsContent } from '@radix-ui/react-tabs';
 import { useQueryState } from 'nuqs';
 import { CircleCheck, CircleEllipsis, MessagesSquare } from 'lucide-react';
 

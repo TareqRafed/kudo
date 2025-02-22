@@ -1,6 +1,6 @@
 import { Search } from 'lucide-react';
-import { Input } from '../ui/input';
-import { ComponentPropsWithoutRef } from 'react';
+import { Input } from '@kudo/ui';
+import type { ComponentPropsWithoutRef } from 'react';
 import { cn } from '@/lib/utils';
 
 interface Props extends ComponentPropsWithoutRef<typeof Input> {}

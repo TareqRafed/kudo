@@ -10,8 +10,8 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from '@/components/ui/dropdown-menu';
-import { SidebarMenu, SidebarMenuButton, SidebarMenuItem, useSidebar } from '@/components/ui/sidebar';
+} from '@kudo/ui';
+import { SidebarMenu, SidebarMenuButton, SidebarMenuItem, useSidebar } from '@/components/Sidebar';
 import { UserAvatar } from '@/components/Avatar/Avatar';
 import useSupabaseBrowser from '@/util/supabase/client';
 import { useQuery, useUpdateMutation } from '@supabase-cache-helpers/postgrest-react-query';
@@ -19,9 +19,9 @@ import { getCurrentMemberWithMetadata } from '@/queries/members';
 import { redirect, useRouter } from 'next/navigation';
 import { getNotifications } from '@/queries/notifications';
 import { cn } from '@/lib/utils';
-import { Button } from '@/components/ui/button';
+import { Button } from '@kudo/ui';
 import { Fragment } from 'react';
-import { Skeleton } from '@/components/ui/skeleton';
+import { Skeleton } from '@kudo/ui';
 
 export function NavUser() {
   const { isMobile } = useSidebar();

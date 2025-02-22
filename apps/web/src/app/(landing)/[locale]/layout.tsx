@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import { Montserrat_Alternates, Mitr, Alexandria, Cairo } from 'next/font/google';
-import '../../globals.css';
+import '@kudo/ui/lib/global.css';
 import { ThemeProvider } from '@/components/ThemeProvider/ThemeProvider';
 import Header from '@/components/Header/Header';
 import Footer from '@/components/Footer/Footer';
@@ -9,9 +9,7 @@ import { NextIntlClientProvider } from 'next-intl';
 import { notFound } from 'next/navigation';
 import { routing } from '@/i18n/routing';
 import { getLangDir } from 'rtl-detect';
-import { Toaster } from '@/components/ui/toaster';
-import { TooltipProvider } from '@/components/ui/tooltip';
-import { Squares } from '@/components/ui/squares-background';
+import { Toaster, TooltipProvider, Squares } from '@kudo/ui';
 
 // Latin
 const MontserratAlternates = Montserrat_Alternates({

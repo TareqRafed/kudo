@@ -3,7 +3,7 @@ import { UserAvatar } from '../Avatar/Avatar';
 import { formatDistanceToNow } from 'date-fns';
 import { useEffect, useRef, useState } from 'react';
 import { cn } from '@/lib/utils';
-import { Skeleton } from '../ui/skeleton';
+import { Skeleton } from '@kudo/ui';
 
 interface Props {
   data: {

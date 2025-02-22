@@ -1,7 +1,7 @@
 'use client';
 
-import React, { useEffect, useRef } from 'react';
-import { Loader } from '../ui/loader';
+import { useEffect, useRef } from 'react';
+import { Loader } from '@kudo/ui';
 
 type Props = {
   isLoadingIntial: boolean;
@@ -41,8 +41,7 @@ function InfiniteScroll(props: Props) {
 
   return (
     <>
-      <>{children}</>
-
+      {children}
       <div ref={observerElement} id="obs">
         {isLoadingMore && !isLoadingIntial && (
           <div className="wrapper flex justify-center items-center h-20">

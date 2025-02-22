@@ -3,13 +3,12 @@
 import { AnimatePresence, motion } from 'framer-motion';
 import { UserAvatar } from './UserAvatar';
 import CommentPin from './CommentPin';
-import { ComponentPropsWithoutRef, useRef, useState } from 'react';
+import { type ComponentPropsWithoutRef, useRef, useState } from 'react';
 import { CheckIcon, Ellipsis, SmilePlus } from 'lucide-react';
 import BounceBoundary from './BounceBoundary';
 import { cn } from '@/lib/utils';
-import { Tooltip, TooltipContent, TooltipTrigger } from '../ui/tooltip';
-import { Button } from '../ui/button';
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '../ui/dropdown-menu';
+import { Button, Tooltip, TooltipContent, TooltipTrigger } from '@kudo/ui';
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '@kudo/ui';
 import { formatRelative } from 'date-fns';
 
 type Comment = {
@@ -47,7 +46,7 @@ const Thread = ({ data, ...rest }: ThreadProps) => {
         setIsCollapsed(true);
         setShowExtended(false);
       }}
-      className={cn([`w-fit pointer-events-auto z-max-2 flex flex-col select-none items-start`, rest.className])}
+      className={cn(['w-fit pointer-events-auto z-max-2 flex flex-col select-none items-start', rest.className])}
     >
       <CommentPin
         ref={commentPinRef}

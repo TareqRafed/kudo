@@ -1,8 +1,8 @@
 import type { Metadata } from 'next';
 import { Montserrat_Alternates, Mitr } from 'next/font/google';
 import '@kudo/ui/lib/global.css';
-import { SidebarProvider, SidebarTrigger } from '@/components/ui/sidebar';
-import { AppSidebar } from '@/components/Sidebar/sidebar';
+import { SidebarProvider, SidebarTrigger } from '@/components/Sidebar';
+import { AppSidebar } from '@/components/Sidebar/index';
 import { createClient } from '@/util/supabase/server';
 import ClientProviders from './clientProviders';
 import { prefetchQuery } from '@supabase-cache-helpers/postgrest-react-query';
