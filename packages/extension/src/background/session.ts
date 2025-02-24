@@ -13,7 +13,7 @@ browser.runtime.onMessageExternal.addListener(async (request, sender) => {
   /**
    * Tab /dashboard is opened which sends the supabase session
    */
-  if (request.action == 'NEW_SESSION') {
+  if (request.action === 'NEW_SESSION') {
     try {
       supabase.auth.setSession(request.payload);
       await updateUserState();

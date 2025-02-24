@@ -1,13 +1,14 @@
 // Interface between background and other components
 import { addMessageListener } from '@kudo/shared';
 import { updateUserState, supabase } from './supabase';
+import browser from 'webextension-polyfill';
 
 const requestLogin = async () => {
   const userLoginState = await updateUserState();
-  if (!userLoginState) chrome.tabs.create({ url: 'http://localhost:3000/en/dashboard' });
+  if (!userLoginState) browser.tabs.create({ url: 'http://localhost:3000/~' });
 };
 
-addMessageListener(async message => {
+addMessageListener(async (message) => {
   if (message.action === 'RPC') {
     const result = await supabase.rpc(message.payload, { ...message.args });
     return { success: !result.error, data: result };
@@ -19,9 +20,9 @@ addMessageListener(async message => {
   }
 
   if (message.action === 'GET_AUTH') {
-    await updateUserState();
+    const isLoggedIn = await updateUserState();
     const session = await supabase.auth.getSession();
-    return { success: true, data: session.data.session };
+    return { success: isLoggedIn, data: session.data.session };
   }
 
   if (message.action === 'PING') {

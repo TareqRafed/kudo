@@ -13,6 +13,7 @@ type ToolbarItemsState = {
 
 type ToolbarState = {
   isDragging: boolean;
+  position: { x: number; y: number };
 };
 
 type ToolbarStore = {
@@ -30,6 +31,7 @@ const useToolbarStore = create<ToolbarStore>((set) => ({
   },
   toolbar: {
     isDragging: false,
+    position: { x: 10, y: 10 },
   },
 
   /**

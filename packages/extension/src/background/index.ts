@@ -3,7 +3,6 @@ import './interface';
 import './supabase';
 import './session';
 
-import { GlobalStateStorage } from '@kudo/storage';
 import { sendMessage } from '@kudo/shared';
 import { isContentOnScreen, ports } from './connect';
 
@@ -17,10 +16,8 @@ const syncAction = async (tabId: number) => {
 };
 
 const toggleKudo = async (tabId: number) => {
-  await GlobalStateStorage.set(ste => ({ ...ste, TabsOnScreen: Object.keys(ports).map(e => Number(e)) }));
-
   try {
-    const alredyContentInjected = (await sendMessage({ action: 'PING' }, { tabId: tabId })).data == 'PONG'; // check if script is injected, might not be connected
+    const alredyContentInjected = (await sendMessage({ action: 'PING' }, { tabId: tabId })).data === 'PONG'; // check if script is injected, might not be connected
     if (alredyContentInjected) {
       await sendMessage({ action: 'TOGGLE', payload: { isOnScreen: !!ports[tabId] } }, { tabId: tabId });
       await syncAction(tabId);
@@ -45,13 +42,13 @@ const handleActionClick = async (tab: browser.Tabs.Tab) => {
 const handleTabUpdate = async (tabId: number) => {
   const onScreen = ports[tabId];
   if (onScreen) {
-    chrome.scripting.executeScript({
+    browser.scripting.executeScript({
       target: { tabId: tabId },
       files: ['kudo/index.iife.js'],
     });
   }
 };
 
-browser.tabs.onActivated.addListener(async activeInfo => syncAction(activeInfo.tabId));
+browser.tabs.onActivated.addListener(async (activeInfo) => syncAction(activeInfo.tabId));
 browser.action.onClicked.addListener(handleActionClick);
 browser.tabs.onUpdated.addListener(handleTabUpdate);
