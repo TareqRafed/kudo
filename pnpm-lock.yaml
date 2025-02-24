@@ -420,9 +420,15 @@ importers:
 
   packages/storage:
     dependencies:
+      '@types/webextension-polyfill':
+        specifier: ^0.12.1
+        version: 0.12.1
       react:
         specifier: ^19.0.0
         version: 19.0.0
+      webextension-polyfill:
+        specifier: ^0.12.0
+        version: 0.12.0
     devDependencies:
       '@biomejs/biome':
         specifier: 1.9.4

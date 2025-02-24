@@ -1,69 +1,74 @@
-import { sendMessage, useStorage } from '@kudo/shared';
-import { Button, cn, Tooltip, TooltipPortal, TooltipContent, TooltipTrigger, KeyboardShortcut } from '@kudo/ui';
+import { sendMessage } from '@kudo/shared';
+import { Button, KeyboardShortcut, Tooltip, TooltipContent, TooltipPortal, TooltipTrigger, cn } from '@kudo/ui';
+import { useSendMessage } from '@src/hooks/useSendMessage';
 import useToolbarStore from '@src/store/toolbar';
-import { AnimatePresence, motion } from 'framer-motion';
-import { ArrowRight, MessageCircle } from 'lucide-react';
-import { useEffect, useRef, useState, type ComponentPropsWithoutRef, type ReactNode } from 'react';
-import { GlobalStateStorage } from '@kudo/storage';
-import LoadingDots from '../LoadingDots/LoadingDots';
-import type { DraggableEventHandler } from 'react-draggable';
-import Draggable from 'react-draggable';
-import { useHotkeys } from 'react-hotkeys-hook';
-import { useDebounceValue } from 'usehooks-ts';
 import { domHelper } from '@src/util';
+import { AnimatePresence, motion, useAnimate } from 'framer-motion';
+import { ArrowRight, MessageCircle } from 'lucide-react';
+import { type ComponentPropsWithoutRef, type ReactNode, useEffect } from 'react';
+import { useHotkeys } from 'react-hotkeys-hook';
 import Logo from '../../../public/logo.svg';
+import LoadingDots from '../LoadingDots/LoadingDots';
+
+const TOOLBAR_DRAG_AREA_PADDING = 10;
 
 const Toolbar = () => {
-  const { tasks } = useStorage(GlobalStateStorage);
+  const { isLoading } = useSendMessage({ action: 'GET_AUTH' });
   const { setDragging } = useToolbarStore();
-  const toolbarRef = useRef<HTMLDivElement>(null);
-  const [isLoading, setIsLoading] = useDebounceValue(true, 500);
 
-  useEffect(() => {
-    setIsLoading(!tasks.isFree);
-  }, [tasks.isFree, setIsLoading]);
+  const [toolbarRef, animate] = useAnimate();
+  const onDrop = ({ x, y }: { x: number; y: number }) => {
+    const screenWidth = window.innerWidth;
+    const screenHeight = window.innerHeight;
+    const toolbarWidth = toolbarRef.current?.offsetWidth || 0;
+    const toolbarHeight = toolbarRef.current?.offsetHeight || 0;
 
-  const [pos, setPos] = useState({ x: 10, y: 10 });
-  const onDrop: DraggableEventHandler = (e, { x, y }) => {
-    setPos({ x: 10, y: Math.min(Math.max(10, y), window.innerHeight - 20) });
+    const newX =
+      x < screenWidth / 2 ? TOOLBAR_DRAG_AREA_PADDING : screenWidth - toolbarWidth - TOOLBAR_DRAG_AREA_PADDING;
+    const newY = Math.min(
+      Math.max(TOOLBAR_DRAG_AREA_PADDING, y),
+      screenHeight - toolbarHeight - TOOLBAR_DRAG_AREA_PADDING,
+    );
+
+    animate(toolbarRef.current, { x: newX, y: newY }, { duration: 0.3 });
     setDragging(false);
   };
 
   return (
-    <Draggable position={pos} onDrag={() => setDragging(true)} onStop={onDrop} nodeRef={toolbarRef}>
-      <span ref={toolbarRef} className="z-max-2 fixed left-0 top-0">
-        <motion.div
-          layout
-          initial={{ scale: 1, y: -10, opacity: 0 }}
-          animate={{
-            y: 0,
-            opacity: 1,
-            transition: { duration: 0.3 },
-          }}
-          whileHover={{
-            scale: 1.1,
-          }}
-          whileTap={{
-            scale: 0.9,
-          }}
-          transition={{ delay: 0, type: 'tween', duration: 0.1 }}
-          style={{ borderRadius: 50 }}
-          className={cn([
-            'min-h-10 overflow-hidden w-fit bg-background text-white dark pointer-events-auto flex justify-center items-center space-x-1 border p-1',
-          ])}
-        >
-          <AnimatePresence>
-            {isLoading ? (
-              <motion.span layout className="px-4 py-1">
-                <LoadingDots />
-              </motion.span>
-            ) : (
-              <ToolbarOptions />
-            )}
-          </AnimatePresence>
-        </motion.div>
-      </span>
-    </Draggable>
+    <span className="z-max-2 fixed left-0 top-0">
+      <motion.div
+        ref={toolbarRef}
+        drag
+        onDragStart={() => setDragging(true)}
+        onDragEnd={(_, info) => onDrop(info.point)}
+        style={{
+          y: TOOLBAR_DRAG_AREA_PADDING,
+          x: TOOLBAR_DRAG_AREA_PADDING,
+          borderRadius: 50,
+        }}
+        whileHover={{
+          scale: 1.1,
+        }}
+        whileDrag={{ scale: 0.9 }}
+        whileTap={{
+          scale: 0.98,
+        }}
+        className={cn([
+          'min-h-10 overflow-hidden w-fit bg-background text-white dark pointer-events-auto flex justify-center items-center space-x-1 border p-1',
+        ])}
+        layout
+      >
+        <AnimatePresence>
+          {isLoading ? (
+            <motion.span layout className="px-4 py-1">
+              <LoadingDots />
+            </motion.span>
+          ) : (
+            <ToolbarOptions />
+          )}
+        </AnimatePresence>
+      </motion.div>
+    </span>
   );
 };
 
@@ -71,10 +76,11 @@ export default Toolbar;
 
 const ToolbarOptions = () => {
   const { toggleToolbarItem, reset, toolbarItems, toolbar: state } = useToolbarStore();
-  const { isLoggedIn } = useStorage(GlobalStateStorage);
+  const { data } = useSendMessage({ action: 'GET_AUTH' });
   useHotkeys('c', () => toggleToolbarItem('comment'));
   useHotkeys('esc', () => reset());
 
+  const isLoggedIn = data?.success;
   if (!isLoggedIn) {
     return (
       <ToolbarItem
