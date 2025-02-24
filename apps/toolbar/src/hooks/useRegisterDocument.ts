@@ -1,7 +1,6 @@
 import { useEffect } from 'react';
 import { useSendMessage } from './useSendMessage';
 import useWebsiteStore from '@src/store/website';
-import { GlobalStateStorage } from '@kudo/storage';
 import { useToast } from '@kudo/ui';
 
 // const responseSchema = z.object({
@@ -49,8 +48,8 @@ export const useRegisterDocument = () => {
   useEffect(() => {
     const registerDocument = async () => {
       if (!res?.data?.access_token) return;
-      console.log(cleanHTMLClone(document.body).innerHTML);
-      await GlobalStateStorage.appendTask({ name: TASK_ID });
+      // console.log(cleanHTMLClone(document.body).innerHTML);
+      // await GlobalStateStorage.appendTask({ name: TASK_ID });
       const body = {
         document: JSON.stringify(cleanHTMLClone(document.body).innerHTML),
         url: document.URL,
@@ -70,9 +69,8 @@ export const useRegisterDocument = () => {
               description: data.error,
             });
           }
-          console.log('website id', data);
           setWebsiteData(data?.data?.id, data?.data?.hash_id);
-          GlobalStateStorage.deleteTask({ name: TASK_ID });
+          // GlobalStateStorage.deleteTask({ name: TASK_ID });
         })
         .catch(() => {
           toast({ description: "Network issue, Kudo couldn't connect to servers" });

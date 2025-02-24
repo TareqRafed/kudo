@@ -1,15 +1,17 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-import { createClient } from '@supabase/supabase-js';
+import { createClient, type User } from '@supabase/supabase-js';
+import browser from 'webextension-polyfill';
 import type { Database } from './database.types';
 
 // To fetch items from storage
-export const getLocalStorage = async (key: string): Promise<any> => (await chrome.storage.local.get(key))[key];
+// biome-ignore lint/suspicious/noExplicitAny:
+export const getLocalStorage = async (key: string): Promise<any> => (await browser.storage.local.get(key))[key];
 
 // To remove storage key from the chrome storage
-export const removeLocalStorage = async (key: string): Promise<void> => await chrome.storage.local.remove(key);
+export const removeLocalStorage = async (key: string): Promise<void> => await browser.storage.local.remove(key);
 
 // For setting storage
-export const setLocalStorage = async (dataObject: any): Promise<void> => await chrome.storage.local.set(dataObject);
+// biome-ignore lint/suspicious/noExplicitAny:
+export const setLocalStorage = async (dataObject: any): Promise<void> => await browser.storage.local.set(dataObject);
 
 const storageAdapter = {
   getItem: async (name: string) => {
@@ -43,3 +45,5 @@ export const initSupabase = () => {
 
   return supabase;
 };
+
+export type { User };
