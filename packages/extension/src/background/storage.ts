@@ -3,7 +3,6 @@ import browser from 'webextension-polyfill';
 
 type Storage = {
   auth: User | null;
-  loading: boolean;
 };
 
 export const setStorage = (key: keyof Storage, value: ValueOf<Storage>) => browser.storage.local.set({ [key]: value });

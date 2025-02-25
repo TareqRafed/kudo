@@ -8,11 +8,11 @@ import { LoaderCircle } from 'lucide-react';
 const CommentPin = (
   {
     isLoading,
-    usersIds,
+    avatars,
     content,
   }: {
     isLoading?: boolean;
-    usersIds: number[];
+    avatars: { profilePicture: string; color: string }[];
     content?: string;
   },
   ref: ForwardedRef<HTMLDivElement>,
@@ -68,8 +68,8 @@ const CommentPin = (
         className="flex flex-row -space-x-4 px-1"
         whileHover={{ gap: '0.5rem' }} // Increases gap between avatars on hover
       >
-        {[...new Set(usersIds)].map((id) => (
-          <UserAvatar userId={id} key={id} className={cn(['size-7'])} />
+        {[...new Set(avatars)].map(({ profilePicture, color }) => (
+          <UserAvatar src={profilePicture} color={color} key={profilePicture} className={cn(['size-7'])} />
         ))}
       </motion.div>
     </div>

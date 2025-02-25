@@ -4,6 +4,7 @@ import CommentInput from './CommentInput';
 import { cn } from '@kudo/ui';
 import BounceBoundary from '../BounceBoundary/BounceBoundary';
 import CommentPin from './CommentPin';
+import { useSendMessage } from '@src/hooks/useSendMessage';
 
 type CallbackCreationParams = { comment: string };
 
@@ -14,6 +15,8 @@ interface ThreadInitProps extends ComponentPropsWithoutRef<'div'> {
 
 const ThreadInit = ({ onCreate, isDragging, ...rest }: ThreadInitProps) => {
   const pointerRef = useRef<HTMLPreElement>(null);
+  const { data } = useSendMessage({ action: 'RPC', payload: 'get_current_member_with_metadata', args: {} });
+  const user = data?.data?.data?.[0];
   return (
     <div>
       <div
@@ -23,7 +26,10 @@ const ThreadInit = ({ onCreate, isDragging, ...rest }: ThreadInitProps) => {
         className={cn([`pointer-events-auto forth-index bg-transparent items-start flex select-none`])}
       >
         <pre ref={pointerRef} className="cursor-grab active:cursor-grabbing">
-          <CommentPin usersIds={[]} content="+" />
+          <CommentPin
+            avatars={[{ profilePicture: user?.profile_picture ?? '', color: user?.color ?? '' }]}
+            content=""
+          />
         </pre>
         <AnimatePresence>
           {!isDragging && (
