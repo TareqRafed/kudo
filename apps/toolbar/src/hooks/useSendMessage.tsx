@@ -2,7 +2,7 @@ import type { Message } from '@kudo/shared';
 import { sendMessage } from '@kudo/shared';
 import { useQuery } from '@tanstack/react-query';
 
-type QueryKeys = ['auth'] | ['thread', number] | ['comments'];
+type QueryKeys = ['auth'] | ['threads', number] | ['comments'];
 
 export const useSendMessage = <T extends Message>(message: T, key: QueryKeys = ['auth']) => {
   const query = useQuery({

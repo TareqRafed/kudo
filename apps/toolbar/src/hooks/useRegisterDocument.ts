@@ -3,17 +3,6 @@ import { useSendMessage } from './useSendMessage';
 import useWebsiteStore from '@src/store/website';
 import { useToast } from '@kudo/ui';
 
-// const responseSchema = z.object({
-//   success: z.boolean(),
-//   data: z.object({
-//     id: z.number(),
-//     created_at: z.string().datetime(),
-//     hash_id: z.string(),
-//     domain: z.string().url(),
-//     board_id: z.number(),
-//   }),
-// });
-
 function cleanHTMLClone(currentElement: HTMLElement): HTMLElement {
   const clonedElement = currentElement.cloneNode(true) as HTMLElement;
 
@@ -34,10 +23,6 @@ function cleanHTMLClone(currentElement: HTMLElement): HTMLElement {
 
   return clonedElement;
 }
-
-// const delay = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));
-
-const TASK_ID = 'register_document';
 
 const edgeFunc = 'https://pfwrdyygogowjxyqcene.supabase.co/functions/v1/register-document';
 export const useRegisterDocument = () => {

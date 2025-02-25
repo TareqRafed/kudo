@@ -21,7 +21,7 @@ const buttonVariants = cva(
       },
       size: {
         default: 'h-9 px-4 py-2',
-        xs: 'h-5 px-3 text-xs',
+        xs: 'h-5 p-1 text-xs',
         sm: 'h-8 px-3 text-xs',
         lg: 'h-10  px-8',
         icon: 'size-9 text-xs',
@@ -58,9 +58,9 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
         disabled={status !== 'ready' || props.disabled}
       >
         <span className="inline-flex space-x-1">
-          {status == 'loading' && <Loader variant={'spinner'} size={'sm'} />}
+          {status === 'loading' && <Loader variant={'spinner'} size={'sm'} />}
           <span>{children}</span>
-          {status == 'success' && <Check className={iconClass} />}
+          {status === 'success' && <Check className={iconClass} />}
         </span>
       </Comp>
     );

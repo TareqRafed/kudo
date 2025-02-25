@@ -136,5 +136,5 @@ export default {
       },
     },
   },
-  plugins: [],
+  plugins: [require('tailwindcss-animate')],
 } as Omit<Config, 'content'>;

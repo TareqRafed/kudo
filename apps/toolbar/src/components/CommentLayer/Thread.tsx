@@ -8,6 +8,7 @@ import {
   Tooltip,
   TooltipContent,
   TooltipTrigger,
+  useToast,
 } from '@kudo/ui';
 import { AnimatePresence, motion } from 'framer-motion';
 import { UserAvatar } from '../UserAvatar';
@@ -16,7 +17,7 @@ import { useEffect, useRef, useState } from 'react';
 import { CheckIcon, Ellipsis, SmilePlus } from 'lucide-react';
 import { sendMessage, type Database } from '@kudo/shared';
 import { formatRelative } from 'date-fns';
-import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { QueryClient, useMutation, useQueryClient } from '@tanstack/react-query';
 import BounceBoundary from '../BounceBoundary/BounceBoundary';
 import CommentInput from './CommentInput';
 import { useClickAway } from '@src/hooks/useClickAway';
@@ -48,6 +49,16 @@ const ThreadTag = ({ data, isLoading, isDragging }: ThreadProps) => {
 
   if (!data.id) return;
 
+  const avatars = [
+    { profilePicture: data.creator.profile_picture, color: data.creator.color },
+    ...data.comments?.map((cmnt) => ({
+      profilePicture: cmnt.creator.profile_picture,
+      color: cmnt.creator.color,
+    })),
+  ];
+
+  const uniqueAvatars = Array.from(new Map(avatars.map((a) => [a.profilePicture, a])).values());
+
   return (
     <div
       aria-expanded={showExtended}
@@ -75,7 +86,7 @@ const ThreadTag = ({ data, isLoading, isDragging }: ThreadProps) => {
         ref={commentPinRef}
         isLoading={isLoading}
         content={data.comments.length + 1}
-        usersIds={[...new Set([data.creator.id, ...data.comments?.map((cmnt) => cmnt.creator.id)])]}
+        avatars={uniqueAvatars}
       />
       <AnimatePresence>
         {!isCollapsed && !isDragging && (
@@ -91,6 +102,7 @@ const ThreadTag = ({ data, isLoading, isDragging }: ThreadProps) => {
                   minimal={false}
                   showActions={showExtended}
                   comment={{ content: data.content, creator: data.creator, created_at: data.created_at }}
+                  threadId={data.id}
                 />
                 {showExtended && (
                   <>
@@ -122,15 +134,11 @@ const CommentInputMutate = ({ threadId }: { threadId: number }) => {
     },
   });
 
-  return (
-    <CommentInput
-      className="border-t"
-      onCreate={(input) => mutate({ target_content: input, target_thread_id: threadId })}
-    />
-  );
+  return <CommentInput onCreate={(input) => mutate({ target_content: input, target_thread_id: threadId })} />;
 };
 
 type CommentSectionProps = {
+  threadId: number;
   comment: {
     id: number;
     content: string;
@@ -152,21 +160,56 @@ type CommentSectionProps = {
 };
 
 type NewCommentArgs = Database['public']['Functions']['create_new_comment']['Args'];
+type UpdateThreadArgs = Database['public']['Functions']['update_record']['Args'];
 
-const ThreadComment = ({ comment, showActions = false, minimal = false }: CommentSectionProps) => {
+const ThreadComment = ({ comment, showActions = false, minimal = false, threadId }: CommentSectionProps) => {
   const modalRef = useRef<HTMLDivElement>(null);
+  const clientQuery = useQueryClient();
+  const { toast } = useToast();
+  const { mutate: mutateThread, isPending } = useMutation({
+    mutationFn: (args: UpdateThreadArgs) => sendMessage({ action: 'RPC', payload: 'update_record', args }),
+    onError: () => {
+      toast({
+        variant: 'destructive',
+        description: "Something wen't wrong, couldn't resolve the thread",
+      });
+    },
+    onSuccess: () => {
+      clientQuery.invalidateQueries({ queryKey: ['threads'] });
+      clientQuery.refetchQueries({ queryKey: ['threads'] });
+    },
+  });
+
+  const { mutate: deleteThread, isPending: isDeletePending } = useMutation({
+    mutationFn: (args: UpdateThreadArgs) => sendMessage({ action: 'RPC', payload: 'update_record', args }),
+    onError: () => {
+      toast({
+        variant: 'destructive',
+        description: "Something wen't wrong, couldn't resolve the thread",
+      });
+    },
+    onSuccess: () => {
+      clientQuery.invalidateQueries({ queryKey: ['threads'] });
+      clientQuery.refetchQueries({ queryKey: ['threads'] });
+    },
+  });
 
   return (
     <div className="w-96 border-b px-2 py-3" ref={modalRef}>
       <div className="mb-3 flex items-start justify-between">
         <div className="flex items-center space-x-2">
-          <UserAvatar userId={comment.creator?.id} className={cn(['size-7'])} />
+          <UserAvatar
+            color={comment.creator?.color}
+            src={comment.creator?.profile_picture}
+            className={cn(['size-7'])}
+          />
           <div className="flex flex-col text-xs">
             <span className="font-bold">{`${comment.creator?.display_name}`}</span>
             <span className="text-[10px]">{formatRelative(comment.created_at || new Date(), new Date())}</span>
           </div>
         </div>
         <div className={cn(['flex space-x-1', !showActions && 'hidden'])}>
+          {/*
           <Tooltip>
             <TooltipTrigger asChild>
               <Button onClick={() => alert('clicked')} variant={'ghost'} size={'xs'}>
@@ -175,28 +218,36 @@ const ThreadComment = ({ comment, showActions = false, minimal = false }: Commen
             </TooltipTrigger>
             <TooltipContent>React</TooltipContent>
           </Tooltip>
+          */}
 
           {!minimal && (
             <>
               <DropdownMenu modal={false}>
-                <DropdownMenuTrigger asChild>
-                  <Tooltip>
-                    <TooltipTrigger asChild>
+                <Tooltip>
+                  <TooltipTrigger asChild>
+                    <DropdownMenuTrigger asChild>
                       <Button size={'xs'} variant={'ghost'}>
                         <Ellipsis className="!size-4" />
                       </Button>
-                    </TooltipTrigger>
-                    <TooltipContent>More</TooltipContent>
-                  </Tooltip>
-                </DropdownMenuTrigger>
-                <DropdownMenuContent container={modalRef.current ?? document.body}>
+                    </DropdownMenuTrigger>
+                  </TooltipTrigger>
+                  <TooltipContent>More</TooltipContent>
+                </Tooltip>
+                <DropdownMenuContent>
                   <DropdownMenuItem className="text-destructive">Delete</DropdownMenuItem>
                 </DropdownMenuContent>
               </DropdownMenu>
 
               <Tooltip>
                 <TooltipTrigger asChild>
-                  <Button onClick={() => alert('clicked')} variant={'ghost'} size={'xs'}>
+                  <Button
+                    status={isPending ? 'loading' : 'ready'}
+                    onClick={() =>
+                      mutateThread({ record_id: threadId, table_name: 'threads', updates: { resolved: true } })
+                    }
+                    variant={'ghost'}
+                    size={'xs'}
+                  >
                     <CheckIcon className="!size-4" />
                   </Button>
                 </TooltipTrigger>

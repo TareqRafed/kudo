@@ -5,6 +5,7 @@ import { addMessageListener, sendMessage } from '@kudo/shared';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { domHelper } from './util';
 import useEnvStore from './store/env';
+// import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 
 const rootId = 'ab-cursor-content-view-root';
 const shadowRootId = 'ab-cursor-shadow-root';

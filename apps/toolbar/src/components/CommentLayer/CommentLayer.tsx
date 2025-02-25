@@ -1,4 +1,4 @@
-import { cn } from '@kudo/ui';
+import { cn, useToast } from '@kudo/ui';
 import useToolbarStore from '@src/store/toolbar';
 import type { MouseEventHandler, RefObject } from 'react';
 import { useRef, useState } from 'react';
@@ -34,7 +34,6 @@ export const CommentLayer = () => {
   const { website } = useWebsiteStore();
   const { toolbarItems, toggleToolbarItem } = useToolbarStore();
 
-  // is Dragging
   const [isDragging, setIsDragging] = useState(false);
 
   const clientQuery = useQueryClient();
@@ -48,6 +47,8 @@ export const CommentLayer = () => {
     },
     ['threads', website.id],
   );
+
+  const { data: user } = useSendMessage({ action: 'RPC', payload: 'get_current_member_with_metadata', args: {} });
 
   const {
     mutate,
@@ -130,19 +131,25 @@ export const CommentLayer = () => {
       className={cn(['text-white dark fixed inset-0 z-max-2 size-full'])}
       onClick={spawnThread}
     >
-      {pendingThread && pendingThreadData && (
-        <span style={{ position: 'absolute', left: pendingThreadData.x, top: pendingThreadData.y }}>
-          <CommentPin isLoading usersIds={[]} content="" />
-        </span>
-      )}
-
       {(threads?.data?.data ?? []).map((thread) => (
         <MagnifiedTag key={thread.id} layerRef={layerRef} thread={thread} />
       ))}
 
+      {pendingThread && pendingThreadData && (
+        <span style={{ position: 'absolute', left: pendingThreadData.x, top: pendingThreadData.y }}>
+          <CommentPin
+            isLoading
+            avatars={[
+              { profilePicture: user?.data?.data?.[0].profile_picture ?? '', color: user?.data?.data?.[0].color ?? '' },
+            ]}
+            content=""
+          />
+        </span>
+      )}
+
       {threadSpawn.active && !toolbarItems.comment.inUse && (
         <Magnet
-          onDrag={() => setIsDragging(true)}
+          onStart={() => setIsDragging(true)}
           layerRef={layerRef}
           draggedRef={threadInitRef}
           initData={{
@@ -199,7 +206,6 @@ const MagnifiedTag = ({ thread, layerRef }: Thread) => {
   const { mutate: mutateThread, isPending } = useMutation({
     mutationFn: (args: UpdateThreadArgs) => sendMessage({ action: 'RPC', payload: 'update_record', args }),
     mutationKey: ['threads'],
-    onError: () => {},
     onSuccess: () => {
       clientQuery.invalidateQueries({ queryKey: ['threads'] });
     },
