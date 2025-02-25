@@ -5,7 +5,8 @@
   "main": "tailwind.config.ts",
   "private": true,
   "devDependencies": {
-    "@biomejs/biome": "1.9.4"
+    "@biomejs/biome": "1.9.4",
+    "tailwindcss-animate": "^1.0.7"
   },
   "dependencies": {
     "tailwindcss": "^3.4.17"

@@ -1,24 +1,17 @@
 import { Avatar, AvatarFallback, AvatarImage, cn } from '@kudo/ui';
-import { useSendMessage } from '@src/hooks/useSendMessage';
 
 interface Props {
-  userId: number | string;
+  src: string;
+  color: string;
   className?: string;
 }
 
-export const UserAvatar = ({ userId, className }: Props) => {
-  const { data: member } = useSendMessage({
-    action: 'RPC',
-    payload: 'get_member_with_metadata',
-    args: { user_id: userId?.toString() },
-  });
-  const ppSrc = member?.data?.data?.[0].profile_picture ?? '';
-  const color = member?.data?.data?.[0].color ?? '#fff';
+export const UserAvatar = ({ color, src, className }: Props) => {
   return (
-    <Avatar style={{ borderColor: color }} className={cn([`dark size-9 border-2`, className])}>
-      <AvatarImage src={ppSrc} />
+    <Avatar style={{ borderColor: color }} className={cn(['size-9 border-2', className])}>
+      <AvatarImage src={src} />
       <AvatarFallback>
-        <div className="size-full" style={{ background: `linear-gradient(135deg, ${color}, #000)` }}></div>
+        <div className="size-full" style={{ background: `linear-gradient(135deg, ${color}, #000)` }} />
       </AvatarFallback>
     </Avatar>
   );

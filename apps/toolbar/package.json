@@ -5,7 +5,9 @@
   "type": "module",
   "private": true,
   "sideEffects": true,
-  "files": ["dist/**"],
+  "files": [
+    "dist/**"
+  ],
   "scripts": {
     "clean:bundle": "rimraf dist",
     "clean:node_modules": "pnpx rimraf node_modules",
@@ -22,9 +24,9 @@
   },
   "dependencies": {
     "@kudo/shared": "workspace:*",
-    "@kudo/storage": "workspace:*",
     "@kudo/ui": "workspace:*",
     "@tanstack/react-query": "^5.65.1",
+    "@tanstack/react-query-devtools": "^5.65.1",
     "date-fns": "^4.1.0",
     "framer-motion": "^11.18.2",
     "lucide-react": "0.475.0",
@@ -40,11 +42,11 @@
   },
   "devDependencies": {
     "@biomejs/biome": "1.9.4",
+    "@kudo/biome-config": "workspace:*",
     "@kudo/hmr": "workspace:*",
     "@kudo/tailwind-config": "workspace:*",
     "@kudo/tsconfig": "workspace:*",
     "@kudo/vite-config": "workspace:*",
-    "@kudo/biome-config": "workspace:*",
     "@types/react": "^19.0.0",
     "@types/react-dom": "^19.0.0",
     "@types/webextension-polyfill": "^0.12.1",

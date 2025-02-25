@@ -53,15 +53,15 @@ importers:
       '@kudo/shared':
         specifier: workspace:*
         version: link:../../packages/shared
-      '@kudo/storage':
-        specifier: workspace:*
-        version: link:../../packages/storage
       '@kudo/ui':
         specifier: workspace:*
         version: link:../../packages/ui
       '@tanstack/react-query':
         specifier: ^5.65.1
         version: 5.66.5(react@19.0.0)
+      '@tanstack/react-query-devtools':
+        specifier: ^5.65.1
+        version: 5.66.5(@tanstack/react-query@5.66.5(react@19.0.0))(react@19.0.0)
       date-fns:
         specifier: ^4.1.0
         version: 4.1.0
@@ -307,9 +307,6 @@ importers:
       '@kudo/shared':
         specifier: workspace:*
         version: link:../shared
-      '@kudo/storage':
-        specifier: workspace:*
-        version: link:../storage
       webextension-polyfill:
         specifier: ^0.12.0
         version: 0.12.0
@@ -405,9 +402,6 @@ importers:
       '@biomejs/biome':
         specifier: 1.9.4
         version: 1.9.4
-      '@kudo/storage':
-        specifier: workspace:*
-        version: link:../storage
       '@kudo/tsconfig':
         specifier: workspace:*
         version: link:../tsconfig
@@ -418,25 +412,6 @@ importers:
         specifier: ^3.24.1
         version: 3.24.1
 
-  packages/storage:
-    dependencies:
-      '@types/webextension-polyfill':
-        specifier: ^0.12.1
-        version: 0.12.1
-      react:
-        specifier: ^19.0.0
-        version: 19.0.0
-      webextension-polyfill:
-        specifier: ^0.12.0
-        version: 0.12.0
-    devDependencies:
-      '@biomejs/biome':
-        specifier: 1.9.4
-        version: 1.9.4
-      '@kudo/tsconfig':
-        specifier: workspace:*
-        version: link:../tsconfig
-
   packages/tailwind-config:
     dependencies:
       tailwindcss:
@@ -446,6 +421,9 @@ importers:
       '@biomejs/biome':
         specifier: 1.9.4
         version: 1.9.4
+      tailwindcss-animate:
+        specifier: ^1.0.7
+        version: 1.0.7(tailwindcss@3.4.17(ts-node@10.9.2(@swc/core@1.7.25(@swc/helpers@0.5.15))(@types/node@22.13.4)(typescript@5.7.3)))
 
   packages/tsconfig:
     devDependencies:
@@ -10526,6 +10504,10 @@ snapshots:
   tailwindcss-animate@1.0.7(tailwindcss@3.4.17(ts-node@10.9.2(@swc/core@1.7.25(@swc/helpers@0.5.15))(@types/node@20.17.19)(typescript@5.7.3))):
     dependencies:
       tailwindcss: 3.4.17(ts-node@10.9.2(@swc/core@1.7.25(@swc/helpers@0.5.15))(@types/node@20.17.19)(typescript@5.7.3))
+
+  tailwindcss-animate@1.0.7(tailwindcss@3.4.17(ts-node@10.9.2(@swc/core@1.7.25(@swc/helpers@0.5.15))(@types/node@22.13.4)(typescript@5.7.3))):
+    dependencies:
+      tailwindcss: 3.4.17(ts-node@10.9.2(@swc/core@1.7.25(@swc/helpers@0.5.15))(@types/node@22.13.4)(typescript@5.7.3))
 
   tailwindcss@3.4.17(ts-node@10.9.2(@swc/core@1.7.25(@swc/helpers@0.5.15))(@types/node@20.17.19)(typescript@5.7.3)):
     dependencies:

@@ -17,7 +17,6 @@
   },
   "dependencies": {
     "@kudo/shared": "workspace:*",
-    "@kudo/storage": "workspace:*",
     "webextension-polyfill": "^0.12.0"
   },
   "devDependencies": {
