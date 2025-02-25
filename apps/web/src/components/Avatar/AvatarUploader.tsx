@@ -1,12 +1,12 @@
 'use client';
 
 import { cn } from '@/lib/utils';
-import { ComponentPropsWithoutRef, useState, useCallback } from 'react';
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
-import { Dialog, DialogContent } from '@/components/ui/dialog';
-import { Button } from '@/components/ui/button';
+import { type ComponentPropsWithoutRef, useState, useCallback } from 'react';
+import { Avatar, AvatarFallback, AvatarImage } from '@kudo/ui';
+import { Dialog, DialogContent } from '@kudo/ui';
+import { Button } from '@kudo/ui';
 import Cropper from 'react-easy-crop';
-import { Area } from 'react-easy-crop';
+import type { Area } from 'react-easy-crop';
 import { DialogTitle } from '@radix-ui/react-dialog';
 
 type InputProps = Omit<ComponentPropsWithoutRef<'input'>, 'value' | 'onChange'>;

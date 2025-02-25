@@ -1,29 +1,28 @@
 'use client';
 
 import {
-  ColumnDef,
-  ColumnFiltersState,
+  type ColumnDef,
+  type ColumnFiltersState,
   flexRender,
   getCoreRowModel,
   getFilteredRowModel,
   getPaginationRowModel,
-  PaginationState,
-  SortingState,
-  Table as TableType,
+  type PaginationState,
+  type SortingState,
+  type Table as TableType,
   useReactTable,
 } from '@tanstack/react-table';
 import { ArrowDown, ArrowUp, Search } from 'lucide-react';
-import { ReactNode, useMemo, useState } from 'react';
+import { type ReactNode, useMemo, useState } from 'react';
 
-import { Input } from '@/components/ui/input';
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
+import { Input } from '@kudo/ui';
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@kudo/ui';
 
-import { Button } from '../ui/button';
-import { Label } from '../ui/label';
-import { Pagination, PaginationContent, PaginationEllipsis, PaginationItem } from '../ui/pagination';
-import { Popover, PopoverContent, PopoverTrigger } from '../ui/popover';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../ui/select';
-import { Skeleton } from '../ui/skeleton';
+import { Button, Label } from '@kudo/ui';
+import { Pagination, PaginationContent, PaginationEllipsis, PaginationItem } from '@kudo/ui';
+import { Popover, PopoverContent, PopoverTrigger } from '@kudo/ui';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@kudo/ui';
+import { Skeleton } from '@kudo/ui';
 import { cn } from '@/lib/utils';
 
 interface DataTableProps<TData, TValue> {

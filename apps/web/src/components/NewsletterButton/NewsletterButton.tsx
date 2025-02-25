@@ -1,6 +1,6 @@
 'use client';
 
-import { Button } from '@/components/ui/button';
+import { Button } from '@kudo/ui';
 import {
   Dialog,
   DialogClose,
@@ -10,13 +10,13 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from '@/components/ui/dialog';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
+} from '@kudo/ui';
+import { Input } from '@kudo/ui';
+import { Label } from '@kudo/ui';
 import { useToast } from '@/hooks/use-toast';
 import { LoaderPinwheel } from 'lucide-react';
 import { useTranslations } from 'next-intl';
-import { ComponentPropsWithoutRef, useState } from 'react';
+import { type ComponentPropsWithoutRef, useState } from 'react';
 import { useForm } from 'react-hook-form';
 
 type Form = {

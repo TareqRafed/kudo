@@ -1,14 +1,5 @@
-import Link from 'next/link';
-
-import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
 import { createClient } from '@/util/supabase/server';
 import React from 'react';
-import { Separator } from '@/components/ui/separator';
-import { Provider } from '@supabase/supabase-js';
-import { loginWithOAuth } from './actions';
 import { redirect } from 'next/navigation';
 import CompleteRegistertaionForm from './form';
 

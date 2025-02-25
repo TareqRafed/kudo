@@ -7,25 +7,25 @@ import {
   BreadcrumbList,
   BreadcrumbPage,
   BreadcrumbSeparator,
-} from '@/components/ui/breadcrumb';
-import { ReactNode, Fragment, useState, createContext, useContext } from 'react';
+} from '@kudo/ui';
+import { Fragment, type ReactNode, createContext, useContext, useState } from 'react';
 
-type BreadcrumbItem = {
+type BreadCrumbState = {
   label: string;
   href?: string;
 };
 
 type BreadcrumbContextType = {
-  items: BreadcrumbItem[];
-  setBreadcrumbs: (items: BreadcrumbItem[]) => void;
+  items: BreadCrumbState[];
+  setBreadcrumbs: (items: BreadCrumbState[]) => void;
 };
 
 const BreadcrumbContext = createContext<BreadcrumbContextType | undefined>(undefined);
 
 function BreadcrumbProvider({ children }: { children: ReactNode }) {
-  const [items, setItems] = useState<BreadcrumbItem[]>([]);
+  const [items, setItems] = useState<BreadCrumbState[]>([]);
 
-  const setBreadcrumbs = (newItems: BreadcrumbItem[]) => {
+  const setBreadcrumbs = (newItems: BreadCrumbState[]) => {
     setItems(newItems);
   };
 
@@ -47,7 +47,7 @@ function DynamicBreadcrumb() {
     <Breadcrumb className="h-[20px]">
       <BreadcrumbList>
         {items.map((item, index) => (
-          <Fragment key={index}>
+          <Fragment key={item.label}>
             <BreadcrumbItem>
               {item.href ? (
                 <BreadcrumbLink href={item.href}>{item.label}</BreadcrumbLink>

@@ -1,7 +1,7 @@
 'use client';
 
 import IconPicker from '@/components/IconPicker/IconPicker';
-import { Button } from '@/components/ui/button';
+import { Button } from '@kudo/ui';
 import {
   Drawer,
   DrawerClose,
@@ -11,17 +11,17 @@ import {
   DrawerHeader,
   DrawerTitle,
   DrawerTrigger,
-} from '@/components/ui/drawer';
-import { Form, FormRow, FormSubmit } from '@/components/ui/form';
-import { Input } from '@/components/ui/input';
-import { Separator } from '@/components/ui/separator';
-import { useToast } from '@/hooks/use-toast';
+} from '@kudo/ui';
+import { Form, FormRow, FormSubmit } from '@kudo/ui';
+import { Input } from '@kudo/ui';
+import { Separator } from '@kudo/ui';
+import { useToast } from '@kudo/ui';
 import { getTeams } from '@/queries/teams';
 import useSupabaseBrowser from '@/util/supabase/client';
 import { useQuery, useUpdateMutation } from '@supabase-cache-helpers/postgrest-react-query';
 import { useQueryClient } from '@tanstack/react-query';
 import { SettingsIcon } from 'lucide-react';
-import { ComponentPropsWithoutRef, useState } from 'react';
+import { type ComponentPropsWithoutRef, useState } from 'react';
 import { z } from 'zod';
 
 const formSchema = z.object({

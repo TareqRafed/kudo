@@ -1,15 +1,15 @@
 'use client';
 
 import IconPicker from '@/components/IconPicker/IconPicker';
-import { Input } from '@/components/ui/input';
+import { Input } from '@kudo/ui';
 import useSupabaseBrowser from '@/util/supabase/client';
 import { Container, Header } from '../../layout-ui';
 import { useEffect } from 'react';
 import { useBreadcrumbs } from '../../layout';
-import { Form, FormFooter, FormGroup, FormRow, FormSeparator, FormSubmit } from '@/components/ui/form';
+import { Form, FormFooter, FormGroup, FormRow, FormSeparator, FormSubmit } from '@kudo/ui';
 import { z } from 'zod';
 import { useInsertMutation } from '@supabase-cache-helpers/postgrest-react-query';
-import { useToast } from '@/hooks/use-toast';
+import { useToast } from '@kudi/ui';
 import { useRouter } from 'next/navigation';
 
 const formSchema = z.object({

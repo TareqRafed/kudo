@@ -1,6 +1,6 @@
 'use client';
 
-import { Button } from '@/components/ui/button';
+import { Button } from '@kudo/ui';
 import {
   Dialog,
   DialogContent,
@@ -9,14 +9,14 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from '@/components/ui/dialog';
-import { ReactNode, useState } from 'react';
+} from '@kudo/ui';
+import { type ReactNode, useState } from 'react';
 import useSupabaseBrowser from '@/util/supabase/client';
 import { useQuery } from '@supabase-cache-helpers/postgrest-react-query';
 import { getTeams } from '@/queries/teams';
 import { cn } from '@/lib/utils';
 import { motion } from 'framer-motion';
-import { plans } from '@/util/plans/plans';
+import { plans } from '@/features/Pricing/plans';
 import NumberFlow from '@number-flow/react';
 import { Check } from 'lucide-react';
 
@@ -52,7 +52,7 @@ const UpgradeToProDialog = ({ children, teamId }: { children: ReactNode; teamId:
             opacity: { duration: 0.5 },
           }}
           className={cn(
-            `p-6 bg-background text-center lg:flex lg:flex-col lg:justify-center relative`,
+            'p-6 bg-background text-center lg:flex lg:flex-col lg:justify-center relative',
             'border-border',
             'flex flex-col',
           )}

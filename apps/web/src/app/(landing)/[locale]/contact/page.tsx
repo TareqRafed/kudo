@@ -2,10 +2,10 @@
 
 import { useForm } from 'react-hook-form';
 
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
-import { Button } from '@/components/ui/button';
-import { Textarea } from '@/components/ui/textarea';
+import { Input } from '@kudo/ui';
+import { Label } from '@kudo/ui';
+import { Button } from '@kudo/ui';
+import { Textarea } from '@kudo/ui';
 import { useTranslations } from 'next-intl';
 import { useToast } from '@/hooks/use-toast';
 import { useState } from 'react';

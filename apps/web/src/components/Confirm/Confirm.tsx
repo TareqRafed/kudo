@@ -7,10 +7,10 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from '@/components/ui/dialog';
+} from '@kudo/ui';
 import { TriangleAlert } from 'lucide-react';
-import { ComponentPropsWithoutRef } from 'react';
-import { Button } from '../ui/button';
+import type { ComponentPropsWithoutRef } from 'react';
+import { Button } from '@kudo/ui';
 
 interface Props extends ComponentPropsWithoutRef<typeof Dialog> {
   action: () => void;

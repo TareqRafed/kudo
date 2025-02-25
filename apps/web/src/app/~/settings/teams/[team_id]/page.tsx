@@ -6,7 +6,7 @@ import { createClient } from '@/util/supabase/server';
 import Table from './table';
 import { getMemberTeams, getTeams } from '@/queries/teams';
 import AddMembersDialog from './addMembersDialog';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@kudo/ui';
 import InvitesTable from './invitesTable';
 import Breadcrumb from './breadcrumb';
 import TeamSettingsDrawer from './teamSettingsDrawer';

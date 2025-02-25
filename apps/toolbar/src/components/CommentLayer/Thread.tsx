@@ -161,6 +161,7 @@ type CommentSectionProps = {
 
 type NewCommentArgs = Database['public']['Functions']['create_new_comment']['Args'];
 type UpdateThreadArgs = Database['public']['Functions']['update_record']['Args'];
+type DeleteThreadArgs = Database['public']['Functions']['delete_record']['Args'];
 
 const ThreadComment = ({ comment, showActions = false, minimal = false, threadId }: CommentSectionProps) => {
   const modalRef = useRef<HTMLDivElement>(null);
@@ -181,14 +182,17 @@ const ThreadComment = ({ comment, showActions = false, minimal = false, threadId
   });
 
   const { mutate: deleteThread, isPending: isDeletePending } = useMutation({
-    mutationFn: (args: UpdateThreadArgs) => sendMessage({ action: 'RPC', payload: 'update_record', args }),
+    mutationFn: (args: DeleteThreadArgs) => sendMessage({ action: 'RPC', payload: 'delete_record', args }),
     onError: () => {
       toast({
         variant: 'destructive',
-        description: "Something wen't wrong, couldn't resolve the thread",
+        description: "Something wen't wrong, couldn't delete this thread",
       });
     },
     onSuccess: () => {
+      toast({
+        description: 'Thread was deleted',
+      });
       clientQuery.invalidateQueries({ queryKey: ['threads'] });
       clientQuery.refetchQueries({ queryKey: ['threads'] });
     },
@@ -234,7 +238,13 @@ const ThreadComment = ({ comment, showActions = false, minimal = false, threadId
                   <TooltipContent>More</TooltipContent>
                 </Tooltip>
                 <DropdownMenuContent>
-                  <DropdownMenuItem className="text-destructive">Delete</DropdownMenuItem>
+                  <DropdownMenuItem
+                    disabled={isDeletePending}
+                    onClick={() => deleteThread({ table_name: 'threads', record_id: threadId })}
+                    className="text-destructive"
+                  >
+                    Delete
+                  </DropdownMenuItem>
                 </DropdownMenuContent>
               </DropdownMenu>
 
