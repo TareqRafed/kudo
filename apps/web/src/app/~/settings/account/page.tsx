@@ -12,7 +12,7 @@ import type { TypedSupabaseClient } from '@/types/typedClientQuery.types';
 import { GithubLogo } from '@phosphor-icons/react';
 import { getCurrentMemberWithMetadata } from '@/queries/members';
 import { Trash } from 'lucide-react';
-import { useToast } from '@/hooks/use-toast';
+import { useToast } from '@kudo/ui';
 import { uploadImage } from '@/util/images/upload';
 import type { Provider, UserIdentity } from '@supabase/supabase-js';
 import Confirm from '@/components/Confirm/Confirm';

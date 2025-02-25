@@ -13,7 +13,7 @@ import {
 } from '@kudo/ui';
 import { Input } from '@kudo/ui';
 import { Label } from '@kudo/ui';
-import { useToast } from '@/hooks/use-toast';
+import { useToast } from '@kudo/ui';
 import { LoaderPinwheel } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 import { type ComponentPropsWithoutRef, useState } from 'react';
