@@ -2,15 +2,14 @@
 
 import { UserAvatar } from '@/components/Avatar/Avatar';
 import { DataTable } from '@/components/DataTable/DataTable';
-import { Button } from '@/components/ui/button';
-import { Tooltip, TooltipTrigger, TooltipContent } from '@/components/ui/tooltip';
+import { Button } from '@kudo/ui';
+import { Tooltip, TooltipTrigger, TooltipContent } from '@kudo/ui';
 import { useToast } from '@/hooks/use-toast';
 import { getInvites } from '@/queries/invites';
 import useSupabaseBrowser from '@/util/supabase/client';
 import { useDeleteMutation, useQuery } from '@supabase-cache-helpers/postgrest-react-query';
-import { QueryData } from '@supabase/supabase-js';
-import { useQueryClient } from '@tanstack/react-query';
-import { ColumnDef } from '@tanstack/react-table';
+import type { QueryData } from '@supabase/supabase-js';
+import type { ColumnDef } from '@tanstack/react-table';
 import { formatDistanceToNow } from 'date-fns';
 import { Undo2 } from 'lucide-react';
 

@@ -3,15 +3,15 @@
 import { DataTable } from '@/components/DataTable/DataTable';
 import useSupabaseBrowser from '@/util/supabase/client';
 import { useQuery, useUpdateMutation } from '@supabase-cache-helpers/postgrest-react-query';
-import { ColumnDef } from '@tanstack/react-table';
+import type { ColumnDef } from '@tanstack/react-table';
 import { useBreadcrumbs } from '../layout';
 import { useEffect } from 'react';
 import { Header } from '../layout-ui';
 import React from 'react';
 import { getInvites } from '@/queries/invites';
-import { QueryData } from '@supabase/supabase-js';
+import type { QueryData } from '@supabase/supabase-js';
 import { Check, X } from 'lucide-react';
-import { Button } from '@/components/ui/button';
+import { Button } from '@kudo/ui';
 import IconAvatar from '@/components/IconPicker/IconAvatar';
 import { UserAvatar } from '@/components/Avatar/Avatar';
 import { useToast } from '@/hooks/use-toast';

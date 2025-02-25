@@ -1,12 +1,12 @@
 'use client';
 
-import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
+import { Button } from '@kudo/ui';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@kudo/ui';
+import { Input } from '@kudo/ui';
+import { Label } from '@kudo/ui';
 import { useActionState, useState } from 'react';
 import React from 'react';
-import { User } from '@supabase/supabase-js';
+import type { User } from '@supabase/supabase-js';
 import { AvatarUploader } from '@/components/Avatar/AvatarUploader';
 import { completeRegisteration } from './actions';
 
