@@ -5,8 +5,8 @@ import { DataTable } from '@/components/DataTable/DataTable';
 import { getMemberTeams } from '@/queries/teams';
 import useSupabaseBrowser from '@/util/supabase/client';
 import { useQuery } from '@supabase-cache-helpers/postgrest-react-query';
-import { QueryData } from '@supabase/supabase-js';
-import { ColumnDef } from '@tanstack/react-table';
+import type { QueryData } from '@supabase/supabase-js';
+import type { ColumnDef } from '@tanstack/react-table';
 
 type Row = QueryData<ReturnType<typeof getMemberTeams>>[0];
 

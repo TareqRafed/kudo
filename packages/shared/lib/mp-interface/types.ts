@@ -15,10 +15,16 @@ export type Message =
   | { action: 'GET_AUTH'; payload?: string }
   | { action: 'PING'; payload?: string };
 
-export type ResponseMessage<T> = {
-  success: boolean;
+export type ResponseMessage<T> = SuccessMessage<T> | UnsuccessMessage;
+
+export type SuccessMessage<T> = {
+  success: true;
   data?: T;
-  error?: string;
+};
+
+export type UnsuccessMessage = {
+  success: false;
+  error: string;
 };
 
 type SupabaseRpcResponse<T> = T extends Functions ? T : Functions;

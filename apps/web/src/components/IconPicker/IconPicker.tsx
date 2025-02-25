@@ -1,9 +1,9 @@
 'use client';
 
-import React, { ComponentPropsWithoutRef } from 'react';
+import React, type { ComponentPropsWithoutRef } from 'react';
 import { motion } from 'framer-motion';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
+import { Button } from '@kudo/ui';
+import { Input } from '@kudo/ui';
 import { Search } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { icons, colors } from './IconsColors';

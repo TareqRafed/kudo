@@ -3,19 +3,18 @@
 import { useQuery, useUpdateMutation } from '@supabase-cache-helpers/postgrest-react-query';
 import { Container, Header, Subheader } from '../layout-ui';
 import { AvatarUploader } from '@/components/Avatar/AvatarUploader';
-import { Form, FormCancel, FormFooter, FormGroup, FormRow, FormSubmit } from '@/components/ui/form';
+import { Form, FormCancel, FormFooter, FormGroup, FormRow, FormSubmit } from '@kudo/ui';
 import * as z from 'zod';
-import { Input } from '@/components/ui/input';
+import { Input, Button } from '@kudo/ui';
 import useSupabaseBrowser from '@/util/supabase/client';
 import { useMutation, useQueryClient, useQuery as useQueryTan } from '@tanstack/react-query';
-import { TypedSupabaseClient } from '@/types/typedClientQuery.types';
+import type { TypedSupabaseClient } from '@/types/typedClientQuery.types';
 import { GithubLogo } from '@phosphor-icons/react';
-import { Button } from '@/components/ui/button';
 import { getCurrentMemberWithMetadata } from '@/queries/members';
 import { Trash } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 import { uploadImage } from '@/util/images/upload';
-import { Provider, UserIdentity } from '@supabase/supabase-js';
+import type { Provider, UserIdentity } from '@supabase/supabase-js';
 import Confirm from '@/components/Confirm/Confirm';
 
 const formSchema = z.object({
@@ -88,7 +87,7 @@ const ProfileSettings = () => {
         if (!member?.id) return;
         let newImage: string | null = null;
 
-        if (e.profile_picture && e.profile_picture.startsWith('data:image/')) {
+        if (e?.profile_picture.startsWith('data:image/')) {
           newImage = await uploadImage(e.profile_picture);
         }
 
@@ -119,7 +118,7 @@ const ProfileSettings = () => {
               />
             );
           }}
-        ></FormRow>
+        />
         <FormRow isLoading={memberLoading} name="display_name" label="Display Name">
           <Input defaultValue={member?.display_name ?? ''} />
         </FormRow>

@@ -1,6 +1,6 @@
 'use client';
 
-import { Button } from '@/components/ui/button';
+import { Button } from '@kudo/ui';
 import {
   Dialog,
   DialogContent,
@@ -9,17 +9,17 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from '@/components/ui/dialog';
-import { Input } from '@/components/ui/input';
+} from '@kudo/ui';
+import { Input } from '@kudo/ui';
 import { useActionState, useEffect, useState } from 'react';
 import { sendInvitations } from './actions';
-import { Alert, AlertDescription } from '@/components/ui/alert';
+import { Alert, AlertDescription } from '@kudo/ui';
 import { AlertCircle } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 import useSupabaseBrowser from '@/util/supabase/client';
 import { useQuery } from '@supabase-cache-helpers/postgrest-react-query';
 import UpgradeToProDialog from '@/components/UpgradeToPro/UpgrateToPro';
-import { Skeleton } from '@/components/ui/skeleton';
+import { Skeleton } from '@kudo/ui';
 import { cn } from '@/lib/utils';
 
 const InputList = ({ count, errors }: { count: number; errors: { [key: `email${number}`]: string[] } }) =>
