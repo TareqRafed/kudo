@@ -1,14 +1,15 @@
 'use server';
 
 import { createResponse } from '@/util/forms/forms';
+import type { FormResponse } from '@/util/forms/types';
 import { createClient } from '@/util/supabase/server';
-import { Provider } from '@supabase/supabase-js';
+import type { Provider } from '@supabase/supabase-js';
 import { redirect } from 'next/navigation';
-import { z, ZodType } from 'zod';
+import { z, type ZodType } from 'zod';
 
 const providerSchema = z.enum(['google', 'github']) satisfies ZodType<Provider>;
 
-export async function loginWithOAuth(_, formData: FormData) {
+export async function loginWithOAuth(_: FormResponse<typeof providerSchema>, formData: FormData) {
   const supabase = await createClient();
   const provider = providerSchema.safeParse(formData.get('provider')).data;
   if (!provider) redirect('/');
@@ -25,4 +26,5 @@ export async function loginWithOAuth(_, formData: FormData) {
   if (data.url) {
     redirect(data.url); // use the redirect API for your server framework
   }
+  return;
 }

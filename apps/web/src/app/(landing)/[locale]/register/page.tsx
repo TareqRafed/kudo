@@ -3,7 +3,7 @@
 import { Button, Card, CardContent, CardDescription, CardHeader, CardTitle, Input, Label, Separator } from '@kudo/ui';
 import { useActionState } from 'react';
 import React from 'react';
-import { loginWithOAuth } from './actions';
+import { loginWithOAuth } from '@/actions/loginWithOAuth';
 import useSupabaseBrowser from '@/util/supabase/client';
 import { GithubLogo, GoogleLogo } from '@phosphor-icons/react';
 import { Link } from '@/i18n/routing';

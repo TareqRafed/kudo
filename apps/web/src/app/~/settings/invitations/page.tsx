@@ -4,7 +4,7 @@ import { DataTable } from '@/components/DataTable/DataTable';
 import useSupabaseBrowser from '@/util/supabase/client';
 import { useQuery, useUpdateMutation } from '@supabase-cache-helpers/postgrest-react-query';
 import type { ColumnDef } from '@tanstack/react-table';
-import { useBreadcrumbs } from '../layout';
+import { useBreadcrumbs } from '@/components/Breadcrumb';
 import { useEffect } from 'react';
 import { Header } from '../layout-ui';
 import React from 'react';
