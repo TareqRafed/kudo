@@ -15,7 +15,7 @@ import { useActionState, useEffect, useState } from 'react';
 import { sendInvitations } from './actions';
 import { Alert, AlertDescription } from '@kudo/ui';
 import { AlertCircle } from 'lucide-react';
-import { useToast } from '@/hooks/use-toast';
+import { useToast } from '@kudo/ui';
 import useSupabaseBrowser from '@/util/supabase/client';
 import { useQuery } from '@supabase-cache-helpers/postgrest-react-query';
 import UpgradeToProDialog from '@/components/UpgradeToPro/UpgrateToPro';

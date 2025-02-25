@@ -20,7 +20,7 @@ import { getMemberTeams } from '@/queries/teams';
 import useSupabaseBrowser from '@/util/supabase/client';
 import IconAvatar from '@/components/IconPicker/IconAvatar';
 import { useRouter } from 'next/navigation';
-import { useToast } from '@/hooks/use-toast';
+import { useToast } from '@kudo/ui';
 import { getCurrentMemberWithMetadata } from '@/queries/members';
 
 export function TeamSwitcher() {
