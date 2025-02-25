@@ -3,7 +3,8 @@
 import Link from 'next/link';
 
 import { Button, Card, CardContent, CardDescription, Separator, CardHeader, CardTitle, Input, Label } from '@kudo/ui';
-import { login, loginWithOAuth } from './actions';
+import { login } from './actions';
+import { loginWithOAuth } from '@/actions/loginWithOAuth';
 import { useActionState } from 'react';
 import { GithubLogo, GoogleLogo } from '@phosphor-icons/react';
 

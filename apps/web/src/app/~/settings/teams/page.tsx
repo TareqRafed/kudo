@@ -5,7 +5,7 @@ import { getMemberTeams } from '@/queries/teams';
 import useSupabaseBrowser from '@/util/supabase/client';
 import { useQuery } from '@supabase-cache-helpers/postgrest-react-query';
 import type { ColumnDef } from '@tanstack/react-table';
-import { useBreadcrumbs } from '../layout';
+import { useBreadcrumbs } from '@/components/Breadcrumb';
 import { useEffect } from 'react';
 import { Button, Badge } from '@kudo/ui';
 import { Header } from '../layout-ui';

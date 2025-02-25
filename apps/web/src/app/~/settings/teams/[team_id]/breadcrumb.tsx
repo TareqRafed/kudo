@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect } from 'react';
-import { useBreadcrumbs } from '../../layout';
+import { useBreadcrumbs } from '@/components/Breadcrumb';
 
 const Breadcrumb = ({ teamName }: { teamName: string }) => {
   const { setBreadcrumbs } = useBreadcrumbs();
