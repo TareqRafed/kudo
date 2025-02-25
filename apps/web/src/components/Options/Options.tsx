@@ -1,6 +1,6 @@
-import { ComponentPropsWithoutRef, ReactNode } from 'react';
-import { Label } from '../ui/label';
-import { Separator } from '../ui/separator';
+import type { ComponentPropsWithoutRef, ReactNode } from 'react';
+import { Label } from '@kudo/ui';
+import { Separator } from '@kudo/ui';
 import { ArrowRight } from 'lucide-react';
 import Link from 'next/link';
 

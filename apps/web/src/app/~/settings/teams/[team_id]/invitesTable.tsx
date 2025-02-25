@@ -4,7 +4,7 @@ import { UserAvatar } from '@/components/Avatar/Avatar';
 import { DataTable } from '@/components/DataTable/DataTable';
 import { Button } from '@kudo/ui';
 import { Tooltip, TooltipTrigger, TooltipContent } from '@kudo/ui';
-import { useToast } from '@/hooks/use-toast';
+import { useToast } from '@kudo/ui';
 import { getInvites } from '@/queries/invites';
 import useSupabaseBrowser from '@/util/supabase/client';
 import { useDeleteMutation, useQuery } from '@supabase-cache-helpers/postgrest-react-query';

@@ -14,7 +14,7 @@ import { Check, X } from 'lucide-react';
 import { Button } from '@kudo/ui';
 import IconAvatar from '@/components/IconPicker/IconAvatar';
 import { UserAvatar } from '@/components/Avatar/Avatar';
-import { useToast } from '@/hooks/use-toast';
+import { useToast } from '@kudo/ui';
 import { useQueryClient } from '@tanstack/react-query';
 import { getCurrentMemberWithMetadata } from '@/queries/members';
 

@@ -7,7 +7,7 @@ import { Label } from '@kudo/ui';
 import { Button } from '@kudo/ui';
 import { Textarea } from '@kudo/ui';
 import { useTranslations } from 'next-intl';
-import { useToast } from '@/hooks/use-toast';
+import { useToast } from '@kudo/ui';
 import { useState } from 'react';
 import { LoaderPinwheel } from 'lucide-react';
 

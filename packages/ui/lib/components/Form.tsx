@@ -1,38 +1,24 @@
 'use client';
 
-import { ComponentPropsWithoutRef, useId } from 'react';
-import { Separator } from './separator';
-import { Label } from './label';
-import {
-  Controller,
-  ControllerFieldState,
-  ControllerRenderProps,
-  FieldPath,
-  FieldValues,
-  FormProvider,
-  FormState,
-  Path,
-  PathValue,
-  SubmitErrorHandler,
-  SubmitHandler,
-  useForm,
-  useFormContext,
-  UseFormStateReturn,
-} from 'react-hook-form';
+import { type ComponentPropsWithoutRef, useId } from 'react';
+import { Separator } from './Separator';
+import { Label } from './Label';
+import * as reactHookForm from 'react-hook-form';
 import * as z from 'zod';
 import { Slot } from '@radix-ui/react-slot';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { cn } from '@/lib/utils';
-import { Button } from './button';
-import { Skeleton } from './skeleton';
-import { cva, VariantProps } from 'class-variance-authority';
+import { Button } from './Button';
+import { Skeleton } from './Skeleton';
+import { cva, type VariantProps } from 'class-variance-authority';
 
-const isDirty = <T extends FieldValues>(fields: FormState<T>['dirtyFields']) => Object.values(fields).some((v) => v);
+const isDirty = <T extends reactHookForm.FieldValues>(fields: reactHookForm.FormState<T>['dirtyFields']) =>
+  Object.values(fields).some((v) => v);
 
 interface FormProps<T extends z.ZodType> extends ComponentPropsWithoutRef<'form'> {
   schema: T;
-  onValidSubmit: SubmitHandler<z.infer<T>>;
-  onInvalidSubmit?: SubmitErrorHandler<z.infer<T>>;
+  onValidSubmit: reactHookForm.SubmitHandler<z.infer<T>>;
+  onInvalidSubmit?: reactHookForm.SubmitErrorHandler<z.infer<T>>;
   defaultValues?: z.infer<T>;
 }
 
@@ -44,13 +30,13 @@ export const Form = <T extends z.ZodType>({
   defaultValues,
   ...rest
 }: FormProps<T>) => {
-  const ctx = useForm<z.infer<T>>({
+  const ctx = reactHookForm.useForm<z.infer<T>>({
     resolver: zodResolver(schema),
     defaultValues,
   });
 
   return (
-    <FormProvider {...ctx}>
+    <reactHookForm.FormProvider {...ctx}>
       <form
         {...rest}
         onSubmit={ctx.handleSubmit((d, e) => {
@@ -60,31 +46,31 @@ export const Form = <T extends z.ZodType>({
       >
         {children}
       </form>
-    </FormProvider>
+    </reactHookForm.FormProvider>
   );
 };
 
-interface FormRowProps<TFieldValues extends FieldValues> extends React.ComponentPropsWithoutRef<'label'> {
+interface FormRowProps<TFieldValues extends reactHookForm.FieldValues> extends React.ComponentPropsWithoutRef<'label'> {
   render?: ({
     field,
     fieldState,
     formState,
   }: {
-    field: ControllerRenderProps<TFieldValues, FieldPath<TFieldValues>>;
-    fieldState: ControllerFieldState;
-    formState: UseFormStateReturn<TFieldValues>;
+    field: reactHookForm.ControllerRenderProps<TFieldValues, reactHookForm.FieldPath<TFieldValues>>;
+    fieldState: reactHookForm.ControllerFieldState;
+    formState: reactHookForm.UseFormStateReturn<TFieldValues>;
   }) => React.ReactElement;
-  name: FieldPath<TFieldValues>;
+  name: reactHookForm.FieldPath<TFieldValues>;
   label: string;
   hint?: string | null;
-  defaultValue?: PathValue<TFieldValues, Path<TFieldValues>>;
+  defaultValue?: reactHookForm.PathValue<TFieldValues, reactHookForm.Path<TFieldValues>>;
   /**
    * Replaces children with skeletion
    */
   isLoading?: boolean;
 }
 
-export const FormRow = <TFieldValues extends FieldValues>({
+export const FormRow = <TFieldValues extends reactHookForm.FieldValues>({
   label,
   render,
   defaultValue,
@@ -95,7 +81,7 @@ export const FormRow = <TFieldValues extends FieldValues>({
   ...rest
 }: FormRowProps<TFieldValues>) => {
   const id = useId();
-  const ctx = useFormContext<TFieldValues>();
+  const ctx = reactHookForm.useFormContext<TFieldValues>();
 
   const { register, control, formState } = ctx || {
     register: null,
@@ -122,7 +108,7 @@ export const FormRow = <TFieldValues extends FieldValues>({
         {!isLoading && (
           <Slot {...props} className="!max-w-[400px] flex-1">
             {render ? (
-              <Controller name={name} defaultValue={defaultValue} control={control} render={render} />
+              <reactHookForm.Controller name={name} defaultValue={defaultValue} control={control} render={render} />
             ) : (
               children
             )}
@@ -175,7 +161,7 @@ export const FormFooter = ({ children, ...rest }: FormFooterProps) => {
 
 interface FormSubmitProps extends ComponentPropsWithoutRef<typeof Button> {}
 export const FormSubmit = ({ children, ...rest }: FormSubmitProps) => {
-  const { formState } = useFormContext();
+  const { formState } = reactHookForm.useFormContext();
 
   const dirty = isDirty(formState.dirtyFields);
   return (
@@ -193,7 +179,7 @@ export const FormSubmit = ({ children, ...rest }: FormSubmitProps) => {
 
 interface FormCancelProps extends ComponentPropsWithoutRef<typeof Button> {}
 export const FormCancel = ({ children, ...rest }: FormCancelProps) => {
-  const { formState, reset } = useFormContext();
+  const { formState, reset } = reactHookForm.useFormContext();
 
   const dirty = isDirty(formState.dirtyFields);
   return (
