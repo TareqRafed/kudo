@@ -1,10 +1,10 @@
 'use server';
 
 import { createClient } from '@/util/supabase/server';
-import { Provider } from '@supabase/supabase-js';
+import type { Provider } from '@supabase/supabase-js';
 import { revalidatePath } from 'next/cache';
 import { redirect } from 'next/navigation';
-import { z, ZodType } from 'zod';
+import { z, type ZodType } from 'zod';
 
 const schema = z.object({
   email: z.string({
@@ -52,26 +52,4 @@ export async function login(prevState: FormResponse, formData: FormData) {
   }
   revalidatePath('/', 'layout');
   redirect('/~');
-}
-
-const providerSchema = z.enum(['google', 'github']) satisfies ZodType<Provider>;
-
-export async function loginWithOAuth(_, formData: FormData) {
-  const supabase = await createClient();
-  const provider = providerSchema.safeParse(formData.get('provider')).data;
-  if (!provider) redirect('/');
-
-  const { data, error } = await supabase.auth.signInWithOAuth({
-    provider,
-    options: {
-      redirectTo: 'http://localhost:3000/api/auth',
-    },
-  });
-
-  if (data.url) {
-    redirect(data.url); // use the redirect API for your server framework
-  }
-  return {
-    message: 'Something went wrong',
-  };
 }

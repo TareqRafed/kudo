@@ -1,6 +1,6 @@
 'use client';
 
-import React, type { ComponentPropsWithoutRef } from 'react';
+import React, { type ComponentPropsWithoutRef } from 'react';
 import { motion } from 'framer-motion';
 import { Button } from '@kudo/ui';
 import { Input } from '@kudo/ui';
@@ -100,7 +100,7 @@ const IconPicker = ({ defaultIcon, defaultColor, onIconChange, ...rest }: Props)
                     <div
                       className={cn([
                         'border-2 rounded flex items-center justify-center size-7 p-0',
-                        `hover:!opactiy-50`,
+                        'hover:!opactiy-50',
                       ])}
                       style={{
                         color: selectedIcon === icon.name ? '#ffffff' : '#A1A1AA',

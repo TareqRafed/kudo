@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect } from 'react';
-import { useBreadcrumbs } from './layout';
+import { useBreadcrumbs } from '@/components/Breadcrumb';
 import { Container, Header } from './layout-ui';
 import { OptionLink, Options, OptionSeparator } from '@/components/Options/Options';
 

@@ -5,11 +5,11 @@ import { Input } from '@kudo/ui';
 import useSupabaseBrowser from '@/util/supabase/client';
 import { Container, Header } from '../../layout-ui';
 import { useEffect } from 'react';
-import { useBreadcrumbs } from '../../layout';
+import { useBreadcrumbs } from '@/components/Breadcrumb';
 import { Form, FormFooter, FormGroup, FormRow, FormSeparator, FormSubmit } from '@kudo/ui';
 import { z } from 'zod';
 import { useInsertMutation } from '@supabase-cache-helpers/postgrest-react-query';
-import { useToast } from '@kudi/ui';
+import { useToast } from '@kudo/ui';
 import { useRouter } from 'next/navigation';
 
 const formSchema = z.object({
