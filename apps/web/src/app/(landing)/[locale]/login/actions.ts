@@ -1,7 +1,6 @@
 'use server';
 
 import { createClient } from '@/util/supabase/server';
-import type { Provider } from '@supabase/supabase-js';
 import { revalidatePath } from 'next/cache';
 import { redirect } from 'next/navigation';
 import { z, type ZodType } from 'zod';
@@ -15,18 +14,16 @@ const schema = z.object({
   }),
 });
 
-export type FormValues = {
-  email: string;
-  password: string;
-};
-
-export type FormResponse = {
+type FormResponse = {
   email: string[];
   password: string[];
   message: string;
 };
 
-export async function login(prevState: FormResponse, formData: FormData) {
+/**
+ * This should cleaned into using createResponse utility
+ */
+export async function login(_: FormResponse | null, formData: FormData): Promise<FormResponse | null> {
   const supabase = await createClient();
 
   const validatedFields = schema.safeParse({
@@ -38,7 +35,7 @@ export async function login(prevState: FormResponse, formData: FormData) {
     return {
       ...validatedFields.error.flatten().fieldErrors,
       message: 'Some fields have issues',
-    };
+    } as FormResponse;
   }
 
   const { error } = await supabase.auth.signInWithPassword(validatedFields.data);

@@ -1,17 +1,28 @@
 'use client';
 
-import { Button, Card, CardContent, CardDescription, CardHeader, CardTitle, Input, Label, Separator } from '@kudo/ui';
+import {
+  Alert,
+  AlertDescription,
+  Button,
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+  Input,
+  Label,
+  Separator,
+} from '@kudo/ui';
 import { useActionState } from 'react';
 import React from 'react';
 import { loginWithOAuth } from '@/actions/loginWithOAuth';
-import useSupabaseBrowser from '@/util/supabase/client';
 import { GithubLogo, GoogleLogo } from '@phosphor-icons/react';
 import { Link } from '@/i18n/routing';
+import { register } from './actions';
 
 export default function LoginForm() {
-  const supabase = useSupabaseBrowser();
-
-  const [state, formAction] = useActionState(loginWithOAuth, null);
+  const [state, action, isPending] = useActionState(register, null);
+  const [_, loginWith0AuthAction] = useActionState(loginWithOAuth, null);
 
   return (
     <Card className="mx-auto mt-40 max-w-sm">
@@ -21,7 +32,12 @@ export default function LoginForm() {
       </CardHeader>
       <CardContent>
         <div className="grid gap-4">
-          <form action={formAction}>
+          <form action={action}>
+            {state?.message && (
+              <Alert className="mb-5">
+                <AlertDescription>{state?.message}</AlertDescription>
+              </Alert>
+            )}
             <div className="grid gap-2">
               <Label htmlFor="email">Email</Label>
               <p aria-live="polite" className="text-xs text-destructive">
@@ -37,14 +53,11 @@ export default function LoginForm() {
                     {state?.password}
                   </p>
                 </div>
-                <Link href="#" className="ml-auto inline-block text-sm underline">
-                  Forgot your password?
-                </Link>
               </div>
               <Input name="password" id="password" type="password" required />
             </div>
-            <Button type="submit" className="w-full">
-              Continue
+            <Button status={isPending ? 'loading' : 'ready'} type="submit" className="w-full">
+              Create Account
             </Button>
           </form>
           <div className="relative">
@@ -60,12 +73,12 @@ export default function LoginForm() {
             className="flex w-full"
             onClick={() => {
               const formData = new FormData();
-              formData.append('provider', 'github');
-              formAction(formData);
+              formData.append('provider', 'google');
+              loginWith0AuthAction(formData);
             }}
           >
-            <span className="flex space-x-5">
-              Continue with Google <GoogleLogo className="ml-2" weight="thin" />
+            <span className="flex items-center justify-center">
+              <GoogleLogo className="mr-2" weight="thin" /> Continue with Google
             </span>
           </Button>
 
@@ -75,11 +88,11 @@ export default function LoginForm() {
             onClick={() => {
               const formData = new FormData();
               formData.append('provider', 'github');
-              formAction(formData);
+              loginWith0AuthAction(formData);
             }}
           >
-            <span className="flex space-x-5">
-              Continue with Github <GithubLogo weight="thin" className="ml-2" />
+            <span className="flex items-center justify-center">
+              <GithubLogo weight="thin" className="mr-2" /> Continue with Github
             </span>
           </Button>
         </div>

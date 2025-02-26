@@ -32,11 +32,12 @@ export async function updateSession(
   } = await supabase.auth.getUser();
 
   const isLoggedIn = !!user;
+  const isConfirmed = !!user?.confirmed_at;
   let completedProfile = false;
   if (isLoggedIn)
     completedProfile = !!(await supabase.from('members').select('id').eq('id', user.id).maybeSingle()).data;
 
-  console.log({ isLoggedIn, completedProfile });
+  console.log({ isLoggedIn, completedProfile, isConfirmed });
   let [, locale, ...path] = request.nextUrl.pathname.split('/');
   if (locale !== 'en') path = [locale, ...path];
 
@@ -46,7 +47,7 @@ export async function updateSession(
 
   if (isLoggedIn && completedProfile && shouldRedirectAuthedUser) {
     const url = request.nextUrl.clone();
-    url.pathname = `/~`;
+    url.pathname = '/~';
     return NextResponse.redirect(url);
   }
 
@@ -54,14 +55,14 @@ export async function updateSession(
 
   if (!isLoggedIn && shouldRedirectUnauthedUser) {
     const url = request.nextUrl.clone();
-    url.pathname = `/login`;
+    url.pathname = '/en/login';
     return NextResponse.redirect(url);
   }
 
   if (isLoggedIn && !completedProfile) {
     const url = request.nextUrl.clone();
-    if (url.pathname !== '/complete-registeration') {
-      url.pathname = `/complete-registeration`; // TODO: will change locale, for now we only have english so it's alright
+    if (url.pathname !== '/en/complete-registeration') {
+      url.pathname = '/en/complete-registeration'; // TODO: will change locale, for now we only have english so it's alright
       return NextResponse.redirect(url);
     }
   }

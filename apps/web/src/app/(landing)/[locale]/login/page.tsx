@@ -1,12 +1,11 @@
 'use client';
 
-import Link from 'next/link';
-
 import { Button, Card, CardContent, CardDescription, Separator, CardHeader, CardTitle, Input, Label } from '@kudo/ui';
 import { login } from './actions';
 import { loginWithOAuth } from '@/actions/loginWithOAuth';
 import { useActionState } from 'react';
 import { GithubLogo, GoogleLogo } from '@phosphor-icons/react';
+import { Link } from '@/i18n/routing';
 
 export default function LoginForm() {
   const [state, formAction] = useActionState(login, null);
@@ -27,8 +26,8 @@ export default function LoginForm() {
               socialAction(formData);
             }}
           >
-            <span className="flex space-x-5">
-              Continue with Google <GoogleLogo className="ml-2" weight="thin" />
+            <span className="flex justify-center items-center space-x-5">
+              <GoogleLogo className="mr-2" weight="thin" /> Continue with Google
             </span>
           </Button>
 
@@ -41,8 +40,8 @@ export default function LoginForm() {
               socialAction(formData);
             }}
           >
-            <span className="flex space-x-5">
-              Continue with Github <GithubLogo weight="thin" className="ml-2" />
+            <span className="flex justify-center items-center space-x-5">
+              <GithubLogo weight="thin" className="mr-2" /> Continue with Github
             </span>
           </Button>
         </div>
@@ -73,7 +72,7 @@ export default function LoginForm() {
                     {state?.password}
                   </p>
                 </div>
-                <Link href="#" className="ml-auto inline-block text-sm underline">
+                <Link href="/forgot-password" className="ml-auto inline-block text-sm underline">
                   Forgot your password?
                 </Link>
               </div>
@@ -86,7 +85,7 @@ export default function LoginForm() {
         </div>
         <div className="mt-4 text-center text-sm">
           Don&apos;t have an account?{' '}
-          <Link href="/en/register" className="underline">
+          <Link href="/register" className="underline">
             Sign up
           </Link>
         </div>
