@@ -75,13 +75,13 @@ p {
     --sidebar-ring: 217.2 91.2% 59.8%;
   }
   .dark {
-    --background: 214 10.3% 4.1%;
+    --background: 214 20.3% 1.1%;
     --background-gradient: 214 10.3% 1.1%;
     --background-gradient2: 214 0% 2%;
     --foreground: 60 9.1% 97.8%;
     --card: 214.2 30% 4.9%;
     --card-foreground: 214 9.1% 97.8%;
-    --popover: 214 14.3% 4.1%;
+    --popover: 214 34.3% 4.1%;
     --popover-foreground: 60 9.1% 97.8%;
     --primary: 214, 82%, 41%;
     --primary-foreground: 214 9.1% 97.8%;
