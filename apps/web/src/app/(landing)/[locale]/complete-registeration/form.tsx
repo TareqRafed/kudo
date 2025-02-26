@@ -1,6 +1,6 @@
 'use client';
 
-import { Button } from '@kudo/ui';
+import { Alert, Button } from '@kudo/ui';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@kudo/ui';
 import { Input } from '@kudo/ui';
 import { Label } from '@kudo/ui';
@@ -18,7 +18,6 @@ const CompleteRegistertaionForm = ({ user }: { user: User }) => {
 
   return (
     <Card className="mt-[10rem] mx-auto max-w-sm">
-      {JSON.stringify(state)}
       <CardHeader>
         <CardTitle className="text-2xl">Continue Registration</CardTitle>
         <CardDescription>
@@ -28,6 +27,7 @@ const CompleteRegistertaionForm = ({ user }: { user: User }) => {
       </CardHeader>
       <CardContent>
         <div className="grid gap-4">
+          {state?.message && <Alert variant={'destructive'}>{state?.message}</Alert>}
           <form action={formAction}>
             <div className="grid gap-2 mb-5">
               <div className="flex items-center">

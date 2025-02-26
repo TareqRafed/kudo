@@ -6,7 +6,7 @@ import { updateSession } from './util/supabase/middleware';
 /**
  * Routes authenticated user is redirected from
  */
-const REDIRECTED_LOGGEDIN_ROUTES = ['login'];
+const REDIRECTED_LOGGEDIN_ROUTES = ['login', 'complete-registeration'];
 
 /**
  * Routes unauthenticated user/uncomplete is redirected from

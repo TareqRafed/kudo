@@ -1,7 +1,7 @@
 'use server';
 
 import { createResponse, validateFormData } from '@/util/forms/forms';
-import { FormResponse } from '@/util/forms/types';
+import type { FormResponse } from '@/util/forms/types';
 import { validateBase64Image } from '@/util/images/image';
 import { createClient } from '@/util/supabase/server';
 import { redirect } from 'next/navigation';
@@ -14,7 +14,10 @@ const schema = z.object({
   profilePicture: z.string().optional(),
 });
 
-export async function completeRegisteration(state: FormResponse<typeof schema>, formData: FormData) {
+export async function completeRegisteration(
+  _: FormResponse<typeof schema> | null,
+  formData: FormData,
+): Promise<FormResponse<typeof schema> | null> {
   const supabase = await createClient();
   const authRes = await supabase.auth.getUser();
   const user = authRes.data.user;
@@ -45,7 +48,7 @@ export async function completeRegisteration(state: FormResponse<typeof schema>, 
     picBucket = res.data?.fullPath ?? null;
   }
 
-  const creationResponse = await supabase
+  const { error, data: member } = await supabase
     .from('members')
     .insert({
       id: user.id,
@@ -57,9 +60,11 @@ export async function completeRegisteration(state: FormResponse<typeof schema>, 
     .returns()
     .maybeSingle();
 
-  if (!creationResponse.error) {
-    redirect('/~');
+  if (error) {
+    return createResponse([], error.message, false);
   }
 
-  return createResponse([], 'Something went wrong', false);
+  if (member) redirect('/~');
+
+  return null;
 }

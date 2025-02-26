@@ -7,7 +7,6 @@ export default async function CompleteRegistration() {
   const supabase = await createClient();
   const userResponse = await supabase.auth.getUser();
   const user = userResponse.data.user;
-  console.log(user, 'this is user');
   if (!user) {
     redirect('/');
   }
