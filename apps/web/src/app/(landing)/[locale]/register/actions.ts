@@ -24,6 +24,9 @@ export async function register(
 
   const { error, data: auth } = await supabase.auth.signUp({
     ...data,
+    options: {
+      emailRedirectTo: 'http://localhost:3000/api/auth',
+    },
   });
   if (error) return createResponse([], error.message, false);
 

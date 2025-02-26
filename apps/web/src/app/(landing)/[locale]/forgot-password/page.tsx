@@ -5,7 +5,6 @@ import {
   Card,
   CardContent,
   CardDescription,
-  Separator,
   CardHeader,
   CardTitle,
   Input,
@@ -18,7 +17,7 @@ import { resetPassword } from './actions';
 import { Link } from '@/i18n/routing';
 
 export default function ResetPasswordForm() {
-  const [state, formAction] = useActionState(resetPassword, null);
+  const [state, formAction, isPending] = useActionState(resetPassword, null);
   return (
     <Card className="mt-[10rem] mx-auto max-w-sm">
       <CardHeader>
@@ -40,7 +39,7 @@ export default function ResetPasswordForm() {
               </p>
               <Input name="email" id="email" type="email" placeholder="m@example.com" required />
             </div>
-            <Button variant={'secondary'} type="submit" className="w-full">
+            <Button status={isPending ? 'loading' : 'ready'} variant={'secondary'} type="submit" className="w-full">
               Send
             </Button>
           </form>

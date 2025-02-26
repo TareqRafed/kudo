@@ -22,7 +22,7 @@ export async function resetPassword(
   if (!data.success) return data;
 
   const { error } = await supabase.auth.resetPasswordForEmail(data.email, {
-    redirectTo: 'https://localhost:3000/update-password',
+    redirectTo: 'http://localhost:3000/api/auth?next=/~/settings/account',
   });
 
   if (error) return createResponse([], error.message, false);
