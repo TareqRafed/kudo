@@ -24,7 +24,7 @@
   },
   "devDependencies": {
     "@biomejs/biome": "1.9.4",
-    "@types/node": "^20.17.16",
+    "@types/node": "^22.13.5",
     "@kudo/tsconfig": "workspace:*",
     "@kudo/biome-config": "workspace:*",
     "@rollup/plugin-sucrase": "^5.0.2",

@@ -63,7 +63,7 @@
     "@tanstack/eslint-plugin-query": "^5.65.0",
     "@tanstack/react-query-devtools": "^5.65.1",
     "@types/file-saver": "^2.0.7",
-    "@types/node": "^20.17.16",
+    "@types/node": "^22.13.5",
     "@types/react": "^19.0.0",
     "@types/react-dom": "^19.0.0",
     "@types/rtl-detect": "^1.0.3",
