@@ -1,14 +1,14 @@
 'use client';
 
-import React, { type ComponentPropsWithoutRef } from 'react';
-import { motion } from 'framer-motion';
+import { cn } from '@/lib/utils';
 import { Button } from '@kudo/ui';
 import { Input } from '@kudo/ui';
-import { Search } from 'lucide-react';
-import { cn } from '@/lib/utils';
-import { icons, colors } from './IconsColors';
 import { ImageSquare } from '@phosphor-icons/react';
 import * as Select from '@radix-ui/react-select';
+import { motion } from 'framer-motion';
+import { Search } from 'lucide-react';
+import React, { type ComponentPropsWithoutRef } from 'react';
+import { colors, icons } from './IconsColors';
 
 interface Props extends ComponentPropsWithoutRef<typeof Button> {
   defaultIcon?: (typeof icons)[number]['name'] | (string & {}) | null;

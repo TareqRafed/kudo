@@ -9,7 +9,7 @@ import { z, type ZodType } from 'zod';
 
 const providerSchema = z.enum(['google', 'github']) satisfies ZodType<Provider>;
 
-export async function loginWithOAuth(_: FormResponse<typeof providerSchema>, formData: FormData) {
+export async function loginWithOAuth(_: FormResponse<typeof providerSchema> | null, formData: FormData) {
   const supabase = await createClient();
   const provider = providerSchema.safeParse(formData.get('provider')).data;
   if (!provider) redirect('/');
@@ -26,5 +26,6 @@ export async function loginWithOAuth(_: FormResponse<typeof providerSchema>, for
   if (data.url) {
     redirect(data.url); // use the redirect API for your server framework
   }
-  return;
+
+  return null;
 }
