@@ -59,7 +59,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
       >
         <span className="inline-flex space-x-1">
           {status === 'loading' && <Loader variant={'spinner'} size={'sm'} />}
-          <span>{children}</span>
+          <span className="items-center inline-flex space-x-1">{children}</span>
           {status === 'success' && <Check className={iconClass} />}
         </span>
       </Comp>

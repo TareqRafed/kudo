@@ -23,7 +23,7 @@ const CopyButton = forwardRef<HTMLButtonElement, Props>(({ copyValue, onClick, c
   };
 
   return (
-    <Button ref={ref} status={copyStatus} onClick={handleCopy} size={'smIcon'} variant={'outline'} {...rest}>
+    <Button ref={ref} status={copyStatus} onClick={handleCopy} size={'textIcon'} variant={'outline'} {...rest}>
       <Copy className="!size-3" />
       {children}
     </Button>

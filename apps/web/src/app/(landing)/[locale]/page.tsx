@@ -1,16 +1,18 @@
 'use client';
 
-import { useTranslations } from 'next-intl';
-import { Link } from '@/i18n/routing';
-import { motion } from 'framer-motion';
 import Thread from '@/components/Thread/Thread';
-import { Button } from '@kudo/ui';
+import { Link } from '@/i18n/routing';
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger, Badge, Button } from '@kudo/ui';
+import { motion } from 'framer-motion';
+import { useTranslations } from 'next-intl';
 
-import DisplayCards from '@/components/DisplayCards';
+import { loginWithOAuth } from '@/actions/loginWithOAuth';
 import ContainerScroll from '@/components/ContainerScroll';
-import { PricingBasic } from '@/features/Pricing';
-import Safari from '@/components/Safari';
+import DisplayCards from '@/components/DisplayCards';
 import Globe from '@/components/Globe';
+import Safari from '@/components/Safari';
+import { PricingBasic } from '@/features/Pricing';
+import { GoogleLogo } from '@phosphor-icons/react';
 import { ArrowUpRight } from 'lucide-react';
 
 const defaultCards = [
@@ -27,6 +29,33 @@ const defaultCards = [
   {
     description: 'Latest updates and features',
     className: '[grid-area:stack] translate-x-24 translate-y-20 hover:translate-y-10',
+  },
+];
+
+const faq = [
+  {
+    question: 'How secure is my data?',
+    answer:
+      'Kudo is open-source, and our software implementation is available in our GitHub repository. We host everything on Vercel and Supabase, both of which offer robust security measures. Your data is encrypted, and we follow best practices to keep it safe. We will never share your data with any third party.',
+  },
+  {
+    question: 'Why not just use issue tracker like Github, Linear or Jira?',
+    answer:
+      'Focus and fast iterations are the keys to any successful project. last thing you want is unnecessary bureaucracy, your team can avoid jumping between multiple applications, private chats and keep important discussions right where they belong.',
+  },
+  {
+    question: 'Can I just selfhost it and have the software for free?',
+    answer:
+      'Yes, you can head into the repo and selfhost it by yourself, or you can contact us and we will configure your server for a fee.',
+  },
+  {
+    question: 'Why would I pay for a subscription when I can selfhost it?',
+    answer:
+      'If you are an individual or a small bussniess, it would be actually better if you just selfhost it yourself, but if you need technical support and the extra features that comes with the pro and enterprise edition. Also, at anypoint of time, you can extract your data and switch to selfhost too',
+  },
+  {
+    question: 'What would I need if I wanted to selfhost it?',
+    answer: 'You just need a running postgres instance, no traditional servers or anything like that',
   },
 ];
 
@@ -79,7 +108,7 @@ const Hero = () => {
             comments: [
               {
                 created_at: new Date().toString(),
-                content: 'test',
+                content: 'on the* Web',
                 id: 1,
                 creator: {
                   id: 'test',
@@ -94,8 +123,11 @@ const Hero = () => {
       </motion.h1>
       <span className="mt-5 px-5 text-center text-sm lg:text-xl">{t('slogan')}</span>
       <div className="mt-20 flex items-center">
-        <Button className="ltr:mr-4 rtl:ml-4">{t('action')}</Button>
-        <Link href={'/contact'} className="text-sm hover:underline">
+        <Button onClick={() => loginWithOAuth()} className="ltr:mr-4 rtl:ml-4">
+          <GoogleLogo weight="duotone" className="mr-2 mb-0.5" />
+          {t('action')}
+        </Button>
+        <Link href={'/login'} className="text-sm hover:underline">
           {t('secondaryAction')}
         </Link>
       </div>
@@ -264,41 +296,32 @@ export default function Home() {
 
         <PricingBasic />
 
-        <section className="mb-5 w-full">
-          <div className="col-span-4 flex flex-col">
+        <section className="grid grid-cols-2 lg:grid-cols-4 mb-5 w-full">
+          <div className="col-span-2 flex flex-col">
             <h1 className="mb-4 text-2xl font-light lg:text-4xl">{t('section4.title')}</h1>
             <span className="text-sm lg:text-xl">{t('section4.content')}</span>
             <span className="mt-10 w-full">
-              <Button className="">
-                <span className="w-full whitespace-pre-wrap py-1 text-left text-xl leading-none tracking-tight text-white dark:to-slate-900/10">
+              <Button>
+                <span className="flex w-full whitespace-pre-wrap py-1 text-left text-xl leading-none tracking-tight text-white dark:to-slate-900/10">
                   Get Started
-                </span>
-                <span className="text-white">
-                  <ArrowUpRight strokeWidth={0.5} className="size-10" />
+                  <span className="text-white">
+                    <ArrowUpRight strokeWidth={0.5} className="size-10" />
+                  </span>
                 </span>
               </Button>
             </span>
           </div>
 
           <div className="relative col-span-2">
-            <Thread
-              className="absolute left-full"
-              data={{
-                comments: [
-                  {
-                    created_at: new Date().toString(),
-                    content: 'Probably needs more decoration',
-                    id: 1,
-                    creator: {
-                      id: 'test',
-                      last_name: '',
-                      first_name: 'You',
-                      profile_picture: '',
-                    },
-                  },
-                ],
-              }}
-            />
+            <Badge>FAQ</Badge>
+            <Accordion type="single" collapsible className="w-full col-span-4">
+              {faq.map(({ question, answer }) => (
+                <AccordionItem value={question} key={question}>
+                  <AccordionTrigger>{question}</AccordionTrigger>
+                  <AccordionContent>{answer}</AccordionContent>
+                </AccordionItem>
+              ))}
+            </Accordion>
           </div>
         </section>
       </main>
