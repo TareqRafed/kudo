@@ -37,5 +37,5 @@ export const Subheader = ({ title, description, className, ...rest }: SubheaderP
 interface ContainerProps extends ComponentPropsWithoutRef<'div'> {}
 
 export const Container = ({ children, ...rest }: ContainerProps) => {
-  return <div className={cn(['w-[40%] mx-auto my-10', rest.className])}>{children}</div>;
+  return <div className={cn(['w-[100%] md:w-[70%] lg:w-[40%] mx-auto my-10', rest.className])}>{children}</div>;
 };

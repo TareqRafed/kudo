@@ -72,11 +72,7 @@ const Invitations = () => {
     enabled: !!user?.email,
   });
 
-  const { setBreadcrumbs } = useBreadcrumbs();
-
-  useEffect(() => {
-    setBreadcrumbs([{ label: 'Home', href: '/~' }, { label: 'Settings', href: '/settings' }, { label: 'Invitations' }]);
-  }, []);
+  useBreadcrumbs([{ label: 'Home', href: '/~' }, { label: 'Settings', href: '/~/settings' }, { label: 'Invitations' }]);
 
   return (
     <>

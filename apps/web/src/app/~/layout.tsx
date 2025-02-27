@@ -10,6 +10,7 @@ import { getTeams } from '@/queries/teams';
 import { dehydrate, HydrationBoundary, QueryClient } from '@tanstack/react-query';
 import { getCurrentMemberWithMetadata, getMembersWithMetadata } from '@/queries/members';
 import { cookies } from 'next/headers';
+import { DynamicBreadcrumb } from '@/components/Breadcrumb';
 
 // Latin
 const MontserratAlternates = Montserrat_Alternates({
@@ -108,7 +109,10 @@ export default async function RootLayout({
               <SidebarProvider defaultOpen={defaultOpen}>
                 <AppSidebar />
                 <main className="w-full">
-                  <SidebarTrigger className="block lg:hidden" />
+                  <div className="mb-5 flex items-center">
+                    <SidebarTrigger className="mr-2 block lg:hidden" />
+                    <DynamicBreadcrumb />
+                  </div>
                   {children}
                 </main>
               </SidebarProvider>

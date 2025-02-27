@@ -6,6 +6,7 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ThemeProvider } from 'next-themes';
 import type { ReactNode } from 'react';
 import { NuqsAdapter } from 'nuqs/adapters/next/app';
+import { BreadcrumbProvider, DynamicBreadcrumb } from '@/components/Breadcrumb';
 
 const queryClient = new QueryClient();
 
@@ -19,7 +20,9 @@ const ClientProviders = ({ children }: { children: ReactNode }) => {
       <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
         <TooltipProvider>
           <Toaster />
-          <NuqsAdapter>{children}</NuqsAdapter>
+          <NuqsAdapter>
+            <BreadcrumbProvider>{children}</BreadcrumbProvider>
+          </NuqsAdapter>
         </TooltipProvider>
       </ThemeProvider>
     </QueryClientProvider>

@@ -21,15 +21,12 @@ const formSchema = z.object({
 });
 
 const NewTeam = () => {
-  const { setBreadcrumbs } = useBreadcrumbs();
-  useEffect(() => {
-    setBreadcrumbs([
-      { label: 'Home', href: '/~' },
-      { label: 'Settings', href: '/~/settings' },
-      { label: 'Teams', href: '/~/settings/teams' },
-      { label: 'Add Team' },
-    ]);
-  }, []);
+  useBreadcrumbs([
+    { label: 'Home', href: '/~' },
+    { label: 'Settings', href: '/~/settings' },
+    { label: 'Teams', href: '/~/settings/teams' },
+    { label: 'Add Team' },
+  ]);
 
   const router = useRouter();
 

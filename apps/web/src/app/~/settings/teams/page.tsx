@@ -45,11 +45,8 @@ const Teams = () => {
   const { data, isLoading, isError, error } = useQuery(getMemberTeams(supabase).eq('member_id', user?.id ?? ''), {
     enabled: !!user?.id,
   });
-  const { setBreadcrumbs } = useBreadcrumbs();
 
-  useEffect(() => {
-    setBreadcrumbs([{ label: 'Home', href: '/~' }, { label: 'Settings', href: '/~/settings' }, { label: 'Teams' }]);
-  }, []);
+  useBreadcrumbs([{ label: 'Home', href: '/~' }, { label: 'Settings', href: '/~/settings' }, { label: 'Teams' }]);
 
   const router = useRouter();
 

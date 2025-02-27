@@ -16,6 +16,7 @@ import { useToast } from '@kudo/ui';
 import { uploadImage } from '@/util/images/upload';
 import type { Provider, UserIdentity } from '@supabase/supabase-js';
 import Confirm from '@/components/Confirm/Confirm';
+import { useBreadcrumbs } from '@/components/Breadcrumb';
 
 const formSchema = z.object({
   profile_picture: z.string().nullable().optional(),
@@ -51,6 +52,8 @@ const Account = () => {
 export default Account;
 
 const ProfileSettings = () => {
+  useBreadcrumbs([{ label: 'Home', href: '/~' }, { label: 'Settings', href: '/~/settings' }, { label: 'Account' }]);
+
   const supabase = useSupabaseBrowser();
   const {
     data: member,

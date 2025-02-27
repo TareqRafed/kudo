@@ -1,8 +1,14 @@
 'use client';
 
 import { UserAvatar } from '@/components/Avatar/Avatar';
-import { GridViewer } from '@/components/GridViewer/GridViewer';
+import { useBreadcrumbs } from '@/components/Breadcrumb';
+import { CommentArea, UserComment } from '@/components/Comment/Comment';
 import CommentInput from '@/components/CommentInput';
+import { GridViewer } from '@/components/GridViewer/GridViewer';
+import SearchBar from '@/components/SearchBar/SearchBar';
+import { getThreads } from '@/queries/threads';
+import { splitURL } from '@/util/helpers/url';
+import useSupabaseBrowser from '@/util/supabase/client';
 import {
   Drawer,
   DrawerContent,
@@ -11,27 +17,26 @@ import {
   DrawerHeader,
   DrawerTitle,
   DrawerTrigger,
-  Separator,
   Loader,
+  Separator,
   Tabs,
+  TabsContent,
   TabsList,
   TabsTrigger,
-  TabsContent,
 } from '@kudo/ui';
-import { getThreads } from '@/queries/threads';
-import useSupabaseBrowser from '@/util/supabase/client';
 import { useInsertMutation, useQuery } from '@supabase-cache-helpers/postgrest-react-query';
 import { formatDistanceToNow } from 'date-fns';
-import { ThreadComments } from './threadComments';
-import { splitURL } from '@/util/helpers/url';
-import { CommentArea, UserComment } from '@/components/Comment/Comment';
-import SearchBar from '@/components/SearchBar/SearchBar';
-import { useQueryState } from 'nuqs';
 import { CircleCheck, CircleEllipsis, MessagesSquare } from 'lucide-react';
+import { useQueryState } from 'nuqs';
+import { ThreadComments } from './threadComments';
 
 type Tabs = 'all' | 'resolved' | 'unresolved';
 
 const Threads = ({ projectId }: { projectId: string | number }) => {
+  useBreadcrumbs([
+    { label: 'Home', href: '/~' },
+    { label: 'Projects', href: '/~/projects' },
+  ]);
   const [_, setSearchValue] = useQueryState('search', {
     defaultValue: '',
   });
