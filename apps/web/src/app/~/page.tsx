@@ -19,8 +19,10 @@ import Link from 'next/link';
 import { useQueryState } from 'nuqs';
 import Markdown from 'react-markdown';
 import { Container } from './settings/layout-ui';
+import { useBreadcrumbs } from '@/components/Breadcrumb';
 
 export default function Dashboard() {
+  useBreadcrumbs([{ label: 'Home', href: '/~' }]);
   const [_, setSearchValue] = useQueryState('search');
   return (
     <>

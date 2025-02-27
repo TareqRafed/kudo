@@ -1,19 +1,14 @@
 'use client';
 
-import { useEffect } from 'react';
 import { useBreadcrumbs } from '@/components/Breadcrumb';
 import { Container, Header } from './layout-ui';
 import { OptionLink, Options, OptionSeparator } from '@/components/Options/Options';
 
 const Settings = () => {
-  const { setBreadcrumbs } = useBreadcrumbs();
-
-  useEffect(() => {
-    setBreadcrumbs([
-      { label: 'Home', href: '/~' },
-      { label: 'Settings', href: '/settings' },
-    ]);
-  }, []);
+  useBreadcrumbs([
+    { label: 'Home', href: '/~' },
+    { label: 'Settings', href: '/settings' },
+  ]);
 
   return (
     <>
