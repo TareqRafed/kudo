@@ -54,7 +54,6 @@ export const metadata: Metadata = {
   robots: 'index, follow',
   viewport: 'width=device-width, initial-scale=1.0',
   keywords: 'AI, sales automation, sale loss, integration, one-click solution',
-  authors: [{ name: 'Mersal Team', url: 'https://usemersal.com' }],
 
   // Favicon and app icons for devices and browsers
   icons: [

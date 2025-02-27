@@ -1,6 +1,6 @@
 'use client';
 
-import { BadgeCheck, Bell, ChevronsUpDown, CreditCard, LogOut, Search, Sparkles } from 'lucide-react';
+import { Bell, ChevronsUpDown, LogOut } from 'lucide-react';
 
 import {
   DropdownMenu,
@@ -74,7 +74,7 @@ export function NavUser() {
           >
             <DropdownMenuLabel className="p-0">
               <div className="flex items-center gap-2 px-1 py-1.5 text-left text-sm">
-                <UserAvatar src={user.profile_picture ?? ''} color={user.color} />
+                <UserAvatar size={'lg'} src={user.profile_picture ?? ''} color={user.color} />
                 <div className="grid flex-1 text-left text-sm leading-tight">
                   <span className="truncate">{user.display_name}</span>
                   <span className="truncate text-xs font-light">{user.email}</span>
@@ -119,8 +119,8 @@ const NotificationsMenu = () => {
         >
           {!notificationsLoading && !emptyNotifications && !notificationsRes?.[0]?.is_read ? (
             <span className="absolute right-1 top-1 flex size-2">
-              <span className="absolute inline-flex size-full animate-ping rounded-full bg-destructive opacity-75"></span>
-              <span className="relative inline-flex size-2 rounded-full bg-destructive"></span>
+              <span className="absolute inline-flex size-full animate-ping rounded-full bg-destructive opacity-75" />
+              <span className="relative inline-flex size-2 rounded-full bg-destructive" />
             </span>
           ) : null}
           <Bell />

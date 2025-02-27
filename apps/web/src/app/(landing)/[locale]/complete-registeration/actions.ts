@@ -48,7 +48,7 @@ export async function completeRegisteration(
     picBucket = res.data?.fullPath ?? null;
   }
 
-  const { error, data: member } = await supabase
+  const { error } = await supabase
     .from('members')
     .insert({
       id: user.id,
@@ -64,7 +64,5 @@ export async function completeRegisteration(
     return createResponse([], error.message, false);
   }
 
-  if (member) redirect('/~');
-
-  return null;
+  redirect('/~');
 }

@@ -28,3 +28,4 @@ export * from './Table';
 export * from './Select';
 export * from './Popover';
 export * from './Pagination';
+export * from './Accordion';

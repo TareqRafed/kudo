@@ -1,12 +1,12 @@
 {
   "HomePage": {
     "title": "Faster Feedback on <power>Web</power>",
-    "slogan": "Leave comments on web elements to collaborate with your teammates",
+    "slogan": "Enhance your workflow and iterate faster by starting and resolving discussions that are right in front of you.",
     "action": "Continue with Google",
     "secondaryAction": "Other Login Options",
     "section1": {
-      "title": "Your <power>thoughts</power> on any webpage.",
-      "content": "Attach comments directly on web elements, the comments that you create tracks the elements that has been attached to. team members can view those just by visiting the website you left your comments on. feedback could be left on any web element."
+      "title": "Your <power>team</power> never waste time.",
+      "content": "All discussions happens where they belong, directly on the site. Kudo allows your team to comment directly on web elements for any website, without any setup, configuration or code."
     },
     "section2": {
       "title": "Feedback Where It <power>Belongs</power>"

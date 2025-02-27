@@ -10,6 +10,8 @@ import { notFound } from 'next/navigation';
 import { routing } from '@/i18n/routing';
 import { getLangDir } from 'rtl-detect';
 import { Toaster, TooltipProvider, Squares } from '@kudo/ui';
+import { useTheme } from 'next-themes';
+import { SquareBackground } from '@/components/SquareBackground';
 
 // Latin
 const MontserratAlternates = Montserrat_Alternates({
@@ -124,16 +126,8 @@ export default async function RootLayout({
               <div className="p-[1rem] min-h-screen bg-background selection:bg-secondary selection:text-primary transition-colors">
                 <Header className="md:hidden flex mb-5 z-20 relative" />
                 <div className="rounded-lg bg-gradient-to-b overflow-hidden from-background-gradient via-background-gradient2 via-50% to-transparent relative z-20">
-                  <Squares
-                    className="w-full h-full absolute left-0 top-0 z-10"
-                    direction="diagonal"
-                    speed={0.5}
-                    squareSize={700}
-                    borderColor="#125CBD"
-                    hoverFillColor="#125CBD"
-                  />
-
                   <Header className="md:flex hidden relative z-20" />
+                  <SquareBackground />
                   <div className="min-h-[100vh] z-20 relative">{children}</div>
                 </div>
               </div>
