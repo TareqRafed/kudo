@@ -5,8 +5,7 @@ import { Button } from '@kudo/ui';
 import { useTranslations } from 'next-intl';
 import { cn } from '@/lib/utils';
 import type { ComponentPropsWithoutRef } from 'react';
-import { GithubLogo } from '@phosphor-icons/react';
-import Link from 'next/link';
+import { Link } from '@/i18n/routing';
 
 interface Props extends ComponentPropsWithoutRef<'footer'> {}
 
@@ -29,9 +28,34 @@ const Footer = ({ ...rest }: Props) => {
           </Button>
           <span className="my-5 mx-2">{t('copyright', { year: new Date().getFullYear() })}</span>
         </div>
-        <Link href={'https://github.com/tareqrafed'} className="flex items-center justify-center">
-          Source <GithubLogo className="ml-2" />
-        </Link>
+        <ul className="flex">
+          <li>
+            <Button asChild variant={'externalLink'}>
+              <Link href={'https://github.com/tareqrafed'}>Github</Link>
+            </Button>
+          </li>
+          <li>
+            <Button asChild variant={'link'}>
+              <Link href={'/privacy'}>
+                <span className="flex">Privacy</span>
+              </Link>
+            </Button>
+          </li>
+          <li>
+            <Button asChild variant={'link'}>
+              <Link href={'/terms'}>
+                <span className="flex">Terms</span>
+              </Link>
+            </Button>
+          </li>
+          <li>
+            <Button asChild variant={'link'}>
+              <Link href={'/contact'}>
+                <span className="flex">Contact</span>
+              </Link>
+            </Button>
+          </li>
+        </ul>
       </div>
     </footer>
   );

@@ -1,15 +1,15 @@
 'use client';
 
-import { Label, Switch, buttonVariants } from '@kudo/ui';
+import { Badge, Button, Label, Switch, buttonVariants } from '@kudo/ui';
 import { cn } from '@/lib/utils';
 import NumberFlow from '@number-flow/react';
 import { useMediaQuery } from '@uidotdev/usehooks';
 import confetti from 'canvas-confetti';
 import { motion } from 'framer-motion';
 import { Check, Star } from 'lucide-react';
-import Link from 'next/link';
 import { useRef, useState } from 'react';
 import { plans } from './plans';
+import { Link } from '@/i18n/routing';
 
 interface PricingPlan {
   name: string;
@@ -31,7 +31,7 @@ interface PricingProps {
 
 export function Pricing({
   plans,
-  title = 'Simple, Transparent Pricing',
+  title = 'Start Free, Upgrade Later',
   description = 'Choose the plan that works for you\nAll plans include access to our platform, lead generation tools, and dedicated support.',
 }: PricingProps) {
   const [isMonthly, setIsMonthly] = useState(true);
@@ -70,11 +70,10 @@ export function Pricing({
       </div>
 
       <div className="flex justify-center lg:mb-10">
-        <label className="relative inline-flex items-center cursor-pointer">
-          <Label>
-            <Switch ref={switchRef} checked={!isMonthly} onCheckedChange={handleToggle} className="relative" />
-          </Label>
-        </label>
+        <Label className="relative inline-flex items-center cursor-pointer">
+          <Switch ref={switchRef} checked={!isMonthly} onCheckedChange={handleToggle} className="relative" />
+        </Label>
+
         <span className="ml-2">
           Annual billing <span className="text-primary">(Save 20%)</span>
         </span>
@@ -105,7 +104,7 @@ export function Pricing({
               opacity: { duration: 0.5 },
             }}
             className={cn(
-              `rounded-2xl border-[1px] p-6 bg-background text-center lg:flex lg:flex-col lg:justify-center relative`,
+              'rounded border-[1px] p-6 backdrop-blur-md bg-gradient-to-r from-card/20 to-accent text-center lg:flex lg:flex-col lg:justify-center relative',
               plan.isPopular ? 'border-primary border' : 'border-border',
               'flex flex-col',
               !plan.isPopular && 'mt-5',
@@ -116,41 +115,45 @@ export function Pricing({
               index === 2 && 'origin-left',
             )}
           >
-            {plan.isPopular && (
-              <div className="absolute top-0 right-0 bg-primary py-0.5 px-2 rounded-bl-xl rounded-tr-xl flex items-center">
-                <Star className="text-primary-foreground h-4 w-4 fill-current" />
-                <span className="text-primary-foreground ml-1 font-sans">Popular</span>
-              </div>
-            )}
             <div className="flex-1 flex flex-col">
-              <p className="text-base text-muted-foreground">{plan.name}</p>
+              <Badge
+                variant={plan.isPopular ? 'default' : 'basic'}
+                className="text-left text-base text-xl bg-transparent hover:bg-transparent border-none"
+              >
+                {plan.name}
+              </Badge>
               <div className="mt-6 flex items-center justify-center gap-x-2">
-                <span className="text-5xl font-thin tracking-tight text-foreground">
-                  <NumberFlow
-                    value={isMonthly ? Number(plan.price) : Number(plan.yearlyPrice)}
-                    format={{
-                      style: 'currency',
-                      currency: 'USD',
-                      minimumFractionDigits: 0,
-                      maximumFractionDigits: 0,
-                    }}
-                    formatter={(value) => `$${value}`}
-                    transformTiming={{
-                      duration: 500,
-                      easing: 'ease-out',
-                    }}
-                    willChange
-                    className="font-variant-numeric: tabular-nums"
-                  />
-                </span>
-                {plan.period !== 'Next 3 months' && (
+                {!plan.price && <p className="text-5xl">Let's Talk</p>}
+                {plan.price && (
+                  <span className="text-5xl font-thin tracking-tight text-foreground">
+                    <NumberFlow
+                      value={isMonthly ? Number(plan.price) : Number(plan.yearlyPrice)}
+                      format={{
+                        style: 'currency',
+                        currency: 'USD',
+                        minimumFractionDigits: 0,
+                        maximumFractionDigits: 0,
+                      }}
+                      formatter={(value) => `$${value}`}
+                      transformTiming={{
+                        duration: 500,
+                        easing: 'ease-out',
+                      }}
+                      willChange
+                      className="font-variant-numeric: tabular-nums"
+                    />
+                  </span>
+                )}
+                {plan.price && plan.period !== 'Next 3 months' && (
                   <span className="text-sm leading-6 tracking-wide text-muted-foreground">/ {plan.period}</span>
                 )}
               </div>
 
-              <p className="text-xs leading-5 text-muted-foreground">
-                {isMonthly ? 'billed monthly' : 'billed annually'}
-              </p>
+              {plan.price && (
+                <p className="text-xs leading-5 text-muted-foreground">
+                  {isMonthly ? 'billed monthly' : 'billed annually'}
+                </p>
+              )}
 
               <ul className="mt-5 gap-2 flex flex-col">
                 {plan.features.map((feature, idx) => (
@@ -163,18 +166,11 @@ export function Pricing({
 
               <hr className="w-full my-4" />
 
-              <Link
-                href={plan.href}
-                className={cn(
-                  buttonVariants({
-                    variant: 'outline',
-                  }),
-                  'group font-thin relative w-full gap-2 overflow-hidden text-lg tracking-tighter',
-                  plan.isPopular ? 'bg-primary text-primary-foreground' : 'bg-background text-foreground',
-                )}
-              >
-                {plan.buttonText}
-              </Link>
+              <Button variant={plan.isPopular ? 'default' : 'secondary'} asChild>
+                <Link className="w-full" href={plan.href}>
+                  {plan.buttonText}
+                </Link>
+              </Button>
               <p className="mt-6 text-xs leading-5 text-muted-foreground">{plan.description}</p>
             </div>
           </motion.div>
@@ -187,11 +183,7 @@ export function Pricing({
 function PricingBasic() {
   return (
     <div className="mx-auto w-full overflow-y-auto rounded-lg">
-      <Pricing
-        plans={plans}
-        title="Simple, Transparent Pricing"
-        description="Choose the plan that works for you\nAll plans include access to our platform, lead generation tools, and dedicated support."
-      />
+      <Pricing plans={plans} description="You can cancel anytime, no credit card required to start." />
     </div>
   );
 }

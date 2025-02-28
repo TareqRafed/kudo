@@ -2,7 +2,7 @@
 
 import Thread from '@/components/Thread/Thread';
 import { Link } from '@/i18n/routing';
-import { Accordion, AccordionContent, AccordionItem, AccordionTrigger, Badge, Button } from '@kudo/ui';
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger, Badge, Button, GradientText } from '@kudo/ui';
 import { motion } from 'framer-motion';
 import { useTranslations } from 'next-intl';
 
@@ -14,21 +14,13 @@ import Safari from '@/components/Safari';
 import { PricingBasic } from '@/features/Pricing';
 import { GoogleLogo } from '@phosphor-icons/react';
 import { ArrowUpRight } from 'lucide-react';
+import { useActionState } from 'react';
 
 const defaultCards = [
   {
-    description: 'Discover amazing content',
+    description: 'We have a reflow issue here',
     className:
-      "[grid-area:stack] hover:-translate-y-10 before:absolute before:w-[100%] before:outline-1 before:rounded-xl before:outline-border before:h-[100%] before:content-[''] before:bg-blend-overlay before:bg-background/50 grayscale-[100%] hover:before:opacity-0 before:transition-opacity before:duration-700 hover:grayscale-0 before:left-0 before:top-0",
-  },
-  {
-    description: 'Trending this week',
-    className:
-      "[grid-area:stack] translate-x-12 translate-y-10 hover:-translate-y-1 before:absolute before:w-[100%] before:outline-1 before:rounded-xl before:outline-border before:h-[100%] before:content-[''] before:bg-blend-overlay before:bg-background/50 grayscale-[100%] hover:before:opacity-0 before:transition-opacity before:duration-700 hover:grayscale-0 before:left-0 before:top-0",
-  },
-  {
-    description: 'Latest updates and features',
-    className: '[grid-area:stack] translate-x-24 translate-y-20 hover:translate-y-10',
+      "[grid-area:stack] hover:-translate-y-5 before:absolute before:w-[100%] before:outline-1 before:rounded-xl before:outline-border before:h-[100%] before:content-[''] before:bg-blend-overlay before:bg-background/50 grayscale-[100%] hover:before:opacity-0 before:transition-opacity before:duration-700 hover:grayscale-0 before:left-0 before:top-0",
   },
 ];
 
@@ -71,59 +63,80 @@ function DisplayCardsView() {
 
 const Hero = () => {
   const t = useTranslations('HomePage');
+  const [_, loginWithOAuthAction, isLoginPending] = useActionState(loginWithOAuth, null);
   return (
-    <section className="mx-auto mt-10 flex size-full h-[50vh] max-w-[45rem] flex-col items-center justify-start px-3 text-6xl md:w-4/5 lg:mt-20 lg:justify-center lg:text-5xl xl:w-[45%]">
-      <motion.h1 initial={{ y: -10, opacity: 0.8 }} animate={{ y: 0, opacity: 1 }} className="relative font-light">
-        {t.rich('title', {
-          power: (chunk) => (
-            <motion.span
-              initial={{ textShadow: '0px 0px 5px rgba(255, 255, 255, 0.5)' }}
-              animate={{
-                textShadow: [
-                  '0px 0px 5px rgba(250, 250, 255, 0.5)',
-                  '0px 0px 10px rgba(250, 250, 255, 1)',
-                  '0px 0px 15px rgba(250, 250, 255, 1)',
-                  '0px 0px 20px rgba(250, 250, 255, 0.5)',
-                  '0px 0px 5px rgba(250, 250, 255, 0.5)',
-                ],
-              }}
-              transition={{
-                duration: 2,
-                repeat: Number.POSITIVE_INFINITY,
-                repeatType: 'mirror',
-              }}
-              style={{
-                textAlign: 'center',
-                marginTop: '50px',
-              }}
-              className="font-thin"
-            >
-              {chunk}
-            </motion.span>
-          ),
-        })}
-        <Thread
+    <section className="mx-auto mt-20 flex size-full h-[50vh] max-w-[45rem] flex-col items-center justify-start px-3 text-6xl md:w-4/5 lg:mt-20 lg:justify-center xl:w-[45%]">
+      <motion.h1
+        initial={{ y: -10, opacity: 0.8 }}
+        animate={{ y: 0, opacity: 1 }}
+        className="relative whitespace-nowrap font-light text-4xl lg:text-6xl"
+      >
+        <GradientText>
+          {t.rich('title', {
+            power: (chunk) => (
+              <motion.span
+                initial={{ textShadow: '0px 0px 5px rgba(255, 255, 255, 0.5)' }}
+                animate={{
+                  textShadow: [
+                    '0px 0px 5px rgba(250, 250, 255, 0.5)',
+                    '0px 0px 10px rgba(250, 250, 255, 1)',
+                    '0px 0px 15px rgba(250, 250, 255, 1)',
+                    '0px 0px 20px rgba(250, 250, 255, 0.5)',
+                    '0px 0px 5px rgba(250, 250, 255, 0.5)',
+                  ],
+                }}
+                transition={{
+                  duration: 2,
+                  repeat: Number.POSITIVE_INFINITY,
+                  repeatType: 'mirror',
+                }}
+                style={{
+                  textAlign: 'center',
+                  marginTop: '50px',
+                }}
+                className="font-thin"
+              >
+                {chunk}
+              </motion.span>
+            ),
+          })}
+        </GradientText>
+        <motion.span
           className="absolute -bottom-1/4 left-full"
-          data={{
-            comments: [
-              {
-                created_at: new Date().toString(),
-                content: 'on the* Web',
-                id: 1,
-                creator: {
-                  id: 'test',
-                  last_name: '',
-                  first_name: 'You',
-                  profile_picture: '',
+          initial={{ x: 100, y: 100, opacity: 0 }}
+          animate={{ x: 0, y: 0, opacity: 1 }}
+          transition={{ duration: 1.2, delay: 1 }}
+        >
+          <Thread
+            data={{
+              comments: [
+                {
+                  created_at: new Date().toString(),
+                  content: 'on the* Web',
+                  id: 1,
+                  creator: {
+                    id: 'test',
+                    last_name: '',
+                    first_name: 'You',
+                    profile_picture: '',
+                  },
                 },
-              },
-            ],
-          }}
-        />
+              ],
+            }}
+          />
+        </motion.span>
       </motion.h1>
       <span className="mt-5 px-5 text-center text-sm lg:text-xl">{t('slogan')}</span>
       <div className="mt-20 flex items-center">
-        <Button onClick={() => loginWithOAuth()} className="ltr:mr-4 rtl:ml-4">
+        <Button
+          onClick={() => {
+            const formData = new FormData();
+            formData.append('provider', 'google');
+            loginWithOAuthAction(formData);
+          }}
+          className="ltr:mr-4 rtl:ml-4"
+          status={isLoginPending ? 'loading' : 'ready'}
+        >
           <GoogleLogo weight="duotone" className="mr-2 mb-0.5" />
           {t('action')}
         </Button>
@@ -142,34 +155,17 @@ export default function Home() {
     <>
       <Hero />
       <main className="relative row-start-2 mx-auto my-10 flex w-full flex-col items-center gap-8 overflow-hidden px-2 sm:items-start md:w-[70%] lg:px-0">
-        <Thread
-          className="relative left-1/2"
-          data={{
-            comments: [
-              {
-                created_at: new Date().toString(),
-                content: 'We should fill this space',
-                id: 1,
-                creator: {
-                  id: 'test',
-                  last_name: '',
-                  first_name: 'You',
-                  profile_picture: '',
-                },
-              },
-            ],
-          }}
-        />
-
         <section className="my-0 grid w-full grid-cols-2 gap-2 lg:my-5 lg:grid-cols-4">
-          <div className="col-span-2 h-[240px] lg:h-auto">
+          <div className="col-span-2 h-[240px] lg:h-auto justify-center flex">
             <DisplayCardsView />
           </div>
           <div className="relative col-span-2">
             <h1 className="mb-4 text-2xl font-light font-normal lg:text-4xl">
-              {t.rich('section1.title', {
-                power: (chunk) => <span className="font-thin">{chunk}</span>,
-              })}
+              <GradientText>
+                {t.rich('section1.title', {
+                  power: (chunk) => <span className="font-thin">{chunk}</span>,
+                })}
+              </GradientText>
             </h1>
             <span className="text-sm lg:text-xl">{t('section1.content')}</span>
           </div>
@@ -189,62 +185,55 @@ export default function Home() {
               </h1>
             }
           >
-            <Thread
-              className="z-100 relative left-1/2 top-1/4"
-              data={{
-                comments: [
-                  {
-                    created_at: new Date().toString(),
-                    content: 'We should fill this space',
-                    id: 1,
-                    creator: {
-                      id: 'test',
-                      last_name: '',
-                      first_name: 'You',
-                      profile_picture: '',
+            <motion.span
+              initial={{ x: 50, y: 50, opacity: 0 }}
+              whileInView={{ x: 0, y: 0, opacity: 1 }}
+              transition={{ duration: 1.2, delay: 1.2 }}
+              className="absolute left-1/2 top-2/4"
+            >
+              <Thread
+                data={{
+                  comments: [
+                    {
+                      created_at: new Date().toString(),
+                      content: 'We should fill this space',
+                      id: 1,
+                      creator: {
+                        id: '1',
+                        last_name: '',
+                        first_name: 'You',
+                        profile_picture: '',
+                      },
                     },
-                  },
-                ],
-              }}
-            />
+                  ],
+                }}
+              />
+            </motion.span>
 
-            <Thread
-              className="relative left-1/3 top-3/4"
-              data={{
-                comments: [
-                  {
-                    created_at: new Date().toString(),
-                    content: 'We should fill this space',
-                    id: 1,
-                    creator: {
-                      id: 'test',
-                      last_name: '',
-                      first_name: 'You',
-                      profile_picture: '',
+            <motion.span
+              initial={{ x: 20, y: 70, opacity: 0 }}
+              whileInView={{ x: 0, y: 0, opacity: 1 }}
+              transition={{ duration: 1.2, delay: 2.2 }}
+              className="absolute left-1/3 top-3/4"
+            >
+              <Thread
+                data={{
+                  comments: [
+                    {
+                      created_at: new Date().toString(),
+                      content: 'Maybe "E-mail" instead of "email"?',
+                      id: 1,
+                      creator: {
+                        id: 'test',
+                        last_name: '',
+                        first_name: 'You',
+                        profile_picture: '',
+                      },
                     },
-                  },
-                ],
-              }}
-            />
-
-            <Thread
-              className="relative left-1/2 top-1/2"
-              data={{
-                comments: [
-                  {
-                    created_at: new Date().toString(),
-                    content: 'We should fill this space',
-                    id: 1,
-                    creator: {
-                      id: 'test',
-                      last_name: '',
-                      first_name: 'You',
-                      profile_picture: '',
-                    },
-                  },
-                ],
-              }}
-            />
+                  ],
+                }}
+              />
+            </motion.span>
 
             <Safari url="anywebsite.com" src="/images/home-1.png" className="size-full" />
           </ContainerScroll>
@@ -261,9 +250,11 @@ export default function Home() {
 
           <div className="relative col-span-2 mt-10 content-center lg:mt-0">
             <h1 className="mb-4 text-2xl font-bold lg:text-4xl">
-              {t.rich('section3.title', {
-                power: (chunk) => <span className="font-thin">{chunk}</span>,
-              })}
+              <GradientText>
+                {t.rich('section3.title', {
+                  power: (chunk) => <span className="font-thin">{chunk}</span>,
+                })}
+              </GradientText>
             </h1>
             <span className="text-sm lg:text-xl">{t('section3.content')}</span>
             <Thread

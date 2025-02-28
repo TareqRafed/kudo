@@ -3,7 +3,7 @@ import { type VariantProps, cva } from 'class-variance-authority';
 import * as React from 'react';
 
 import { cn } from '@/lib/utils';
-import { Check } from 'lucide-react';
+import { ArrowUpRight, Check } from 'lucide-react';
 import { Loader } from './Loader';
 
 const buttonVariants = cva(
@@ -17,7 +17,8 @@ const buttonVariants = cva(
         outline: 'border border-input bg-background shadow-sm hover:bg-accent hover:text-accent-foreground',
         secondary: 'bg-secondary text-secondary-foreground shadow-sm hover:bg-secondary/80',
         ghost: 'hover:bg-accent',
-        link: 'text-primary underline-offset-4 hover:underline',
+        link: 'underline-offset-4 hover:underline',
+        externalLink: 'underline-offset-4 hover:underline',
       },
       size: {
         default: 'h-9 px-4 py-2',
@@ -57,9 +58,14 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
         {...props}
         disabled={status !== 'ready' || props.disabled}
       >
-        <span className="inline-flex space-x-1">
+        <span className="inline-flex w-full space-x-1 group">
           {status === 'loading' && <Loader variant={'spinner'} size={'sm'} />}
-          <span className="items-center inline-flex space-x-1">{children}</span>
+          <span className="w-full items-center justify-center inline-flex">
+            {children}{' '}
+            {variant === 'externalLink' ? (
+              <ArrowUpRight className="-translate-y-1 group-hover:-translate-y-2 transition-all" />
+            ) : null}{' '}
+          </span>
           {status === 'success' && <Check className={iconClass} />}
         </span>
       </Comp>
