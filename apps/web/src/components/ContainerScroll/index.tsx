@@ -1,16 +1,15 @@
 'use client';
 
-import { useRef } from 'react';
+import { type ComponentPropsWithoutRef, useRef } from 'react';
 import { useScroll, useTransform, motion, type MotionValue } from 'framer-motion';
 import { useMediaQuery } from '@uidotdev/usehooks';
 
-const ContainerScroll = ({
-  titleComponent,
-  children,
-}: {
+interface Props extends ComponentPropsWithoutRef<'div'> {
   titleComponent: string | React.ReactNode;
   children: React.ReactNode;
-}) => {
+}
+
+const ContainerScroll = ({ titleComponent, children, ...rest }: Props) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
     target: containerRef,
@@ -31,7 +30,7 @@ const ContainerScroll = ({
   const translate = useTransform(scrollYProgress, [0, 1], translateDimensions());
 
   return (
-    <div className="h-[30rem] md:h-[80rem] flex items-start justify-center relative" ref={containerRef}>
+    <div className="h-[30rem] md:h-[80rem] flex items-start justify-center relative" ref={containerRef} {...rest}>
       <div
         className="py-10 w-full relative"
         style={{
