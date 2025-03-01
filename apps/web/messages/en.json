@@ -5,7 +5,7 @@
     "action": "Continue with Google",
     "secondaryAction": "Other Login Options",
     "section1": {
-      "title": "Your <power>team</power> never waste time.",
+      "title": "Your <power>team</power> never wastes time.",
       "content": "All discussions happens where they belong, directly on the site. Kudo allows your team to comment directly on web elements for any website, without any setup, configuration or code."
     },
     "section2": {
@@ -13,7 +13,7 @@
     },
     "section3": {
       "title": "Privacy is <power>non-negotiable</power>.",
-      "content": "We do not store the content of your webpages, instead we generate fingerprints to track which comments placed on which elements on which web document. Kudo is also an open-source under MIT license project, For now, we do not charge for server hosting, but will be changed soon only for teams that exceeds 3 members.",
+      "content": "Kudo is open-source; our software implementation is accessible to everyone and you can always switch to self-hosted.",
       "decoration": "OPENSOURCE"
     },
     "section4": {

@@ -7,7 +7,7 @@ export const SquareBackground = () => {
   const { theme } = useTheme();
   return (
     <Squares
-      className="w-full h-full absolute left-0 top-0 z-10"
+      className="opacity-50 w-full h-full absolute left-0 top-0 z-10"
       direction="diagonal"
       speed={0.5}
       squareSize={900}
