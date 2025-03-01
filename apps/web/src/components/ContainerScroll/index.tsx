@@ -13,35 +13,26 @@ const ContainerScroll = ({ titleComponent, children, ...rest }: Props) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
     target: containerRef,
+    offset: ['start end', 'end end'],
   });
 
   const isMobile = useMediaQuery('only screen and (max-width : 768px)');
 
   const scaleDimensions = () => {
-    return isMobile ? [0.7, 0.9] : [0.85, 1];
-  };
-
-  const translateDimensions = () => {
-    return isMobile ? [-300, 0] : [0, 300];
+    return isMobile ? [0.7, 0.9] : [0.7, 1];
   };
 
   const rotate = useTransform(scrollYProgress, [0, 0.5], [10, 0]);
   const scale = useTransform(scrollYProgress, [0, 0.6], scaleDimensions());
-  const translate = useTransform(scrollYProgress, [0, 1], translateDimensions());
+  const translate = useTransform(scrollYProgress, [0, 1], ['-10', '0%']);
+  const headerTranslate = useTransform(scrollYProgress, [0, 0.8], ['50%', '0%']);
 
   return (
-    <div className="h-[30rem] md:h-[80rem] flex items-start justify-center relative" ref={containerRef} {...rest}>
-      <div
-        className="py-10 w-full relative"
-        style={{
-          perspective: '1000px',
-        }}
-      >
-        <Header translate={translate} titleComponent={titleComponent} />
-        <Card rotate={rotate} translate={translate} scale={scale}>
-          {children}
-        </Card>
-      </div>
+    <div className="relative" ref={containerRef} {...rest}>
+      <Header translate={headerTranslate} titleComponent={titleComponent} />
+      <Card rotate={rotate} translate={translate} scale={scale}>
+        {children}
+      </Card>
     </div>
   );
 };
@@ -52,7 +43,7 @@ const Header = ({ translate, titleComponent }: any) => {
       style={{
         translateY: translate,
       }}
-      className="div max-w-5xl mx-auto text-center"
+      className="mx-auto text-center"
     >
       {titleComponent}
     </motion.div>
@@ -67,7 +58,7 @@ const Card = ({
 }: {
   rotate: MotionValue<number>;
   scale: MotionValue<number>;
-  translate: MotionValue<number>;
+  translate: MotionValue<string>;
   children: React.ReactNode;
 }) => {
   return (
@@ -77,7 +68,7 @@ const Card = ({
         rotateX: rotate,
         scale,
       }}
-      className="max-w-5xl -mt-12 mx-auto w-full p-2 md:p-6 "
+      className="mx-auto w-full"
     >
       <div className=" h-full w-full  rounded-2xl md:p-4 ">{children}</div>
     </motion.div>

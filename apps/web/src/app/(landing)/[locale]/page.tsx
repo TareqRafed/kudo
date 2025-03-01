@@ -69,20 +69,20 @@ const Hero = () => {
       <motion.h1
         initial={{ y: -10, opacity: 0.8 }}
         animate={{ y: 0, opacity: 1 }}
-        className="relative whitespace-nowrap font-light text-4xl lg:text-6xl"
+        className="relative whitespace-nowrap font-light text-2xl lg:text-6xl"
       >
         <GradientText>
           {t.rich('title', {
             power: (chunk) => (
               <motion.span
-                initial={{ textShadow: '0px 0px 5px rgba(255, 255, 255, 0.5)' }}
+                initial={{ textShadow: '0px 0px 5px rgba(18, 92, 189, 0.5)' }}
                 animate={{
                   textShadow: [
-                    '0px 0px 5px rgba(250, 250, 255, 0.5)',
-                    '0px 0px 10px rgba(250, 250, 255, 1)',
-                    '0px 0px 15px rgba(250, 250, 255, 1)',
-                    '0px 0px 20px rgba(250, 250, 255, 0.5)',
-                    '0px 0px 5px rgba(250, 250, 255, 0.5)',
+                    '0px 0px 5px rgba(18, 92, 189, 0.5)',
+                    '0px 0px 10px rgba(18, 92, 189, 1)',
+                    '0px 0px 15px rgba(18, 92, 189, 1)',
+                    '0px 0px 20px rgba(18, 92, 189, 0.5)',
+                    '0px 0px 5px rgba(18, 92, 189, 0.5)',
                   ],
                 }}
                 transition={{
@@ -115,7 +115,7 @@ const Hero = () => {
                   content: 'on the* Web',
                   id: 1,
                   creator: {
-                    id: 'test',
+                    id: '1',
                     last_name: '',
                     first_name: 'You',
                     profile_picture: '',
@@ -127,14 +127,13 @@ const Hero = () => {
         </motion.span>
       </motion.h1>
       <span className="mt-5 px-5 text-center text-sm lg:text-xl">{t('slogan')}</span>
-      <div className="mt-20 flex items-center">
+      <div className="mt-20 space-y-5 lg:space-x-2 flex flex-col md:flex-row items-center">
         <Button
           onClick={() => {
             const formData = new FormData();
             formData.append('provider', 'google');
             loginWithOAuthAction(formData);
           }}
-          className="ltr:mr-4 rtl:ml-4"
           status={isLoginPending ? 'loading' : 'ready'}
         >
           <GoogleLogo weight="duotone" className="mr-2 mb-0.5" />
@@ -154,7 +153,7 @@ export default function Home() {
   return (
     <>
       <Hero />
-      <main className="relative row-start-2 mx-auto my-10 flex w-full flex-col items-center gap-8 overflow-hidden px-2 sm:items-start md:w-[70%] lg:px-0">
+      <div className="relative mx-auto space-y-40 pb-20 pt-0 md:py-20 flex w-full flex-col items-center gap-8 px-2 sm:items-start md:w-[70%] lg:px-0">
         <section className="my-0 grid w-full grid-cols-2 gap-2 lg:my-5 lg:grid-cols-4">
           <div className="col-span-2 h-[240px] lg:h-auto justify-center flex">
             <DisplayCardsView />
@@ -224,7 +223,7 @@ export default function Home() {
                       content: 'Maybe "E-mail" instead of "email"?',
                       id: 1,
                       creator: {
-                        id: 'test',
+                        id: '1',
                         last_name: '',
                         first_name: 'You',
                         profile_picture: '',
@@ -239,7 +238,7 @@ export default function Home() {
           </ContainerScroll>
         </section>
 
-        <section className="relative grid h-[600px] w-full grid-cols-2 content-center gap-2 lg:grid-cols-4">
+        <section className="relative grid w-full grid-cols-2 content-center gap-2 lg:grid-cols-4">
           <div className="relative col-span-2 mx-auto block flex size-full max-w-lg items-center justify-center overflow-hidden rounded-lg border bg-background px-40 pb-40 pt-8 md:pb-60 md:shadow-xl lg:hidden">
             <span className="pointer-events-none absolute left-1/2 top-5 -translate-x-1/2 whitespace-pre-wrap bg-gradient-to-b from-black to-primary bg-clip-text text-center text-6xl leading-none text-transparent dark:from-white dark:to-primary">
               {t('section3.decoration')}
@@ -257,24 +256,6 @@ export default function Home() {
               </GradientText>
             </h1>
             <span className="text-sm lg:text-xl">{t('section3.content')}</span>
-            <Thread
-              className="absolute left-full"
-              data={{
-                comments: [
-                  {
-                    created_at: new Date().toString(),
-                    content: 'test',
-                    id: 1,
-                    creator: {
-                      id: 'test',
-                      last_name: '',
-                      first_name: 'You',
-                      profile_picture: '',
-                    },
-                  },
-                ],
-              }}
-            />
           </div>
           <div className="relative col-span-2 mx-auto flex hidden size-full max-w-lg items-center justify-center overflow-hidden rounded-lg border bg-background px-40 pb-40 pt-8 md:pb-60 md:shadow-xl lg:block">
             <span className="pointer-events-none absolute left-1/2 top-5 -translate-x-1/2 whitespace-pre-wrap bg-gradient-to-b from-black to-primary bg-clip-text text-center text-[4vw] leading-none text-transparent dark:from-white dark:to-primary">
@@ -287,25 +268,29 @@ export default function Home() {
 
         <PricingBasic />
 
-        <section className="grid grid-cols-2 lg:grid-cols-4 mb-5 w-full">
+        <section className="grid grid-cols-2 lg:grid-cols-4 mb-5 w-full gap-20">
           <div className="col-span-2 flex flex-col">
             <h1 className="mb-4 text-2xl font-light lg:text-4xl">{t('section4.title')}</h1>
             <span className="text-sm lg:text-xl">{t('section4.content')}</span>
             <span className="mt-10 w-full">
               <Button>
-                <span className="flex w-full whitespace-pre-wrap py-1 text-left text-xl leading-none tracking-tight text-white dark:to-slate-900/10">
-                  Get Started
-                  <span className="text-white">
-                    <ArrowUpRight strokeWidth={0.5} className="size-10" />
-                  </span>
+                Get Started
+                <span className="text-white">
+                  <ArrowUpRight strokeWidth={0.5} className="size-10" />
                 </span>
               </Button>
             </span>
           </div>
 
-          <div className="relative col-span-2">
-            <Badge>FAQ</Badge>
-            <Accordion type="single" collapsible className="w-full col-span-4">
+          <div className="relative col-span-2 space-y-10">
+            <GradientText from="from-primary" to="to-accent" className="text-5xl">
+              FAQ
+            </GradientText>
+            <Accordion
+              type="single"
+              collapsible
+              className="bg-accent/30 backdrop-blur-md rounded px-5 py-2 w-full col-span-4"
+            >
               {faq.map(({ question, answer }) => (
                 <AccordionItem value={question} key={question}>
                   <AccordionTrigger>{question}</AccordionTrigger>
@@ -315,7 +300,7 @@ export default function Home() {
             </Accordion>
           </div>
         </section>
-      </main>
+      </div>
     </>
   );
 }
