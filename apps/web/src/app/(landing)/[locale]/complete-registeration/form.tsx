@@ -59,7 +59,7 @@ const CompleteRegistertaionForm = ({ user }: { user: User }) => {
                     Last Name <span className="text-destructive">*</span>
                   </Label>
                   <p aria-live="polite" className="text-xs text-destructive">
-                    {state?.password}
+                    {state?.lastName}
                   </p>
                 </div>
               </div>

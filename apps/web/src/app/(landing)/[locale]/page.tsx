@@ -102,7 +102,7 @@ const Hero = () => {
           })}
         </GradientText>
         <motion.span
-          className="absolute -bottom-1/4 left-full"
+          className="absolute -bottom-3/4 left-[85%] md:-bottom-1/4 md:left-full"
           initial={{ x: 100, y: 100, opacity: 0 }}
           animate={{ x: 0, y: 0, opacity: 1 }}
           transition={{ duration: 1.2, delay: 1 }}
@@ -139,9 +139,9 @@ const Hero = () => {
           <GoogleLogo weight="duotone" className="mr-2 mb-0.5" />
           {t('action')}
         </Button>
-        <Link href={'/login'} className="text-sm hover:underline">
-          {t('secondaryAction')}
-        </Link>
+        <Button variant={'link'} asChild>
+          <Link href={'/login'}>{t('secondaryAction')}</Link>
+        </Button>
       </div>
     </section>
   );
@@ -188,14 +188,14 @@ export default function Home() {
               initial={{ x: 50, y: 50, opacity: 0 }}
               whileInView={{ x: 0, y: 0, opacity: 1 }}
               transition={{ duration: 1.2, delay: 1.2 }}
-              className="absolute left-1/2 top-2/4"
+              className="absolute left-[55%] top-[70%]"
             >
               <Thread
                 data={{
                   comments: [
                     {
                       created_at: new Date().toString(),
-                      content: 'We should fill this space',
+                      content: 'Maybe more horizontal padding?',
                       id: 1,
                       creator: {
                         id: '1',
@@ -213,14 +213,14 @@ export default function Home() {
               initial={{ x: 20, y: 70, opacity: 0 }}
               whileInView={{ x: 0, y: 0, opacity: 1 }}
               transition={{ duration: 1.2, delay: 2.2 }}
-              className="absolute left-1/3 top-3/4"
+              className="absolute left-[47%] top-[55%]"
             >
               <Thread
                 data={{
                   comments: [
                     {
                       created_at: new Date().toString(),
-                      content: 'Maybe "E-mail" instead of "email"?',
+                      content: 'Logo seems a bit off?',
                       id: 1,
                       creator: {
                         id: '1',
