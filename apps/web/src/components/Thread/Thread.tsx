@@ -10,6 +10,7 @@ import { cn } from '@/lib/utils';
 import { Button, Tooltip, TooltipContent, TooltipTrigger } from '@kudo/ui';
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '@kudo/ui';
 import { formatRelative } from 'date-fns';
+import { useMediaQuery } from '@uidotdev/usehooks';
 
 type Comment = {
   id: string | number;
@@ -37,6 +38,8 @@ const Thread = ({ data, ...rest }: ThreadProps) => {
 
   const commentPinRef = useRef<HTMLDivElement>(null);
 
+  const isMobile = useMediaQuery('only screen and (max-width : 768px)');
+
   return (
     <div
       aria-expanded={showExtended}
@@ -46,7 +49,7 @@ const Thread = ({ data, ...rest }: ThreadProps) => {
         setIsCollapsed(true);
         setShowExtended(false);
       }}
-      className={cn(['w-fit pointer-events-auto z-max-2 flex flex-col select-none items-start', rest.className])}
+      className={cn(['dark w-fit pointer-events-auto z-max-2 flex flex-col select-none items-start', rest.className])}
     >
       <CommentPin
         ref={commentPinRef}
@@ -55,7 +58,7 @@ const Thread = ({ data, ...rest }: ThreadProps) => {
       />
       <AnimatePresence>
         {!isCollapsed && (
-          <BounceBoundary helper={{ width: 420, height: 100 }} targetRef={commentPinRef}>
+          <BounceBoundary helper={{ width: isMobile ? 240 : 420, height: 100 }} targetRef={commentPinRef}>
             <motion.div
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 5 }}
@@ -88,7 +91,7 @@ type CommentSectionProps = {
 export const ThreadComment = ({ comment, showActions = false, minimal = false }: CommentSectionProps) => {
   const modalRef = useRef<HTMLDivElement>(null);
   return (
-    <div className="w-96 border-b px-2 py-3" ref={modalRef}>
+    <div className="dark text-foreground w-64 md:w-96 border-b px-2 py-3" ref={modalRef}>
       <div className="mb-3 flex items-start justify-between">
         <div className="flex items-center space-x-2">
           <UserAvatar className={cn(['size-7'])} />

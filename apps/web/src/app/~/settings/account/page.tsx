@@ -90,7 +90,7 @@ const ProfileSettings = () => {
         if (!member?.id) return;
         let newImage: string | null = null;
 
-        if (e?.profile_picture.startsWith('data:image/')) {
+        if (e?.profile_picture?.startsWith('data:image/')) {
           newImage = await uploadImage(e.profile_picture);
         }
 
