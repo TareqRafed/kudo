@@ -1,4 +1,4 @@
-import { ComponentPropsWithoutRef } from 'react';
+import type { ComponentPropsWithoutRef } from 'react';
 import { icons, colors } from './IconsColors';
 import { cn } from '@/lib/utils';
 
@@ -18,7 +18,7 @@ const IconAvatar = ({ name, theme, ...rest }: Props) => {
         background: `linear-gradient(135deg, ${theme ?? colors[0].color}, #000)`,
         borderColor: `${theme ?? colors[0].color}`,
       }}
-      className={cn('size-8 flex border justify-center items-center p-1 rounded', rest.className)}
+      className={cn('text-white size-8 flex border justify-center items-center p-1 rounded', rest.className)}
     >
       <Icon className="size-7" weight="fill" />
     </div>

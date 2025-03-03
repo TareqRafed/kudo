@@ -9,6 +9,7 @@ import Logo from '@/assets/icons/logo-icon.png';
 import LogoFilled from '@/assets/icons/logo-filled.png';
 import { cn } from '@/lib/utils';
 import { Link, useRouter } from '@/i18n/routing';
+import ThemeToggler from '../ThemeToggler';
 
 const Header = ({ className }: { className?: string }) => {
   const { setTheme, theme } = useTheme();
@@ -36,37 +37,9 @@ const Header = ({ className }: { className?: string }) => {
             </ContextMenuContent>
           </ContextMenu>
         </div>
-        <div className="items-center md:flex hidden">
-          <Toggle
-            suppressHydrationWarning
-            aria-label="Switch theme to light mode"
-            pressed={theme === 'light'}
-            onClick={() => setTheme('light')}
-          >
-            <Sun />
-          </Toggle>
-
-          <Toggle
-            suppressHydrationWarning
-            aria-label="Switch theme to dark mode"
-            className="mx-1"
-            pressed={theme === 'dark'}
-            onClick={() => setTheme('dark')}
-          >
-            <Moon />
-          </Toggle>
-
-          <Toggle
-            suppressHydrationWarning
-            aria-label="Switch theme to system preference"
-            pressed={theme === 'system'}
-            onClick={() => setTheme('system')}
-          >
-            <MonitorCog />
-          </Toggle>
-
+        <div className="md:flex space-x-5 hidden">
+          <ThemeToggler />
           <Button
-            className="ml-5"
             variant={'secondary'}
             onClick={() => {
               router.push('/login');
@@ -76,35 +49,9 @@ const Header = ({ className }: { className?: string }) => {
           </Button>
         </div>
       </div>
-      <div className="rtl:left-5 ltr:right-5 rounded items-center md:hidden flex">
-        <Toggle
-          aria-label="Switch theme to light mode"
-          suppressHydrationWarning
-          pressed={theme === 'light'}
-          onClick={() => setTheme('light')}
-        >
-          <Sun />{' '}
-        </Toggle>
-        <Toggle
-          aria-label="Switch theme to dark mode"
-          suppressHydrationWarning
-          className="mx-1"
-          pressed={theme === 'dark'}
-          onClick={() => setTheme('dark')}
-        >
-          <Moon />{' '}
-        </Toggle>
-        <Toggle
-          aria-label="Switch theme to system preference"
-          suppressHydrationWarning
-          pressed={theme === 'system'}
-          onClick={() => setTheme('system')}
-        >
-          <MonitorCog />
-        </Toggle>
-
+      <div className="space-x-5 rounded items-center md:hidden flex">
+        <ThemeToggler />
         <Button
-          className="ml-5"
           variant={'secondary'}
           onClick={() => {
             router.push('/login');

@@ -36,27 +36,28 @@ p {
 }
 
 @layer base {
+
   :root {
-    --background: 0 0% 100%;
-    --background-gradient: 0 0% 100%;
-    --background-gradient2: 0 0% 100%;
-    --foreground: 20 14.3% 4.1%;
-    --card: 0 0% 100%;
+    --background: 212 35.3% 100%;
+    --background-gradient: 214 90% 100%;
+    --background-gradient2: 214 20% 86%;
+    --foreground: 214 20.3% 4.1%;
+    --card: 214 81% 90%;
     --card-foreground: 20 14.3% 4.1%;
     --popover: 0 0% 100%;
     --popover-foreground: 20 14.3% 4.1%;
     --primary: 212, 100%, 44%;
     --primary-foreground: 212 9.1% 97.8%;
-    --secondary: 212 4.8% 95.9%;
+    --secondary: 214 20.8% 90.9%;
     --secondary-foreground: 212 9.8% 10%;
-    --muted: 60 4.8% 95.9%;
+    --muted: 214 4.8% 95.9%;
     --muted-foreground: 25 5.3% 44.7%;
-    --accent: 212 4.8% 95.9%;
+    --accent: 212 80.8% 92.9%;
     --accent-foreground: 212 9.8% 10%;
     --destructive: 0 84.2% 60.2%;
     --warning: 48 100% 44%;
     --destructive-foreground: 60 9.1% 97.8%;
-    --border: 20 5.9% 90%;
+    --border: 214 50.9% 72%;
     --input: 20 5.9% 90%;
     --ring: 212, 100%, 44%;
     --chart-1: 12 76% 61%;
@@ -64,7 +65,7 @@ p {
     --chart-3: 197 37% 24%;
     --chart-4: 43 74% 66%;
     --chart-5: 27 87% 67%;
-    --radius: 0.5rem;
+    --radius: .5rem;
     --sidebar-background: 0 0% 98%;
     --sidebar-foreground: 240 5.3% 26.1%;
     --sidebar-primary: 240 5.9% 10%;
