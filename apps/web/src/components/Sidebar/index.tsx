@@ -7,31 +7,27 @@ import {
   SidebarGroup,
   SidebarGroupLabel,
   SidebarHeader,
-  SidebarMenuAction,
-  SidebarMenuBadge,
-  SidebarMenuButton,
-  SidebarMenuItem,
-  SidebarMenuSub,
   SidebarRail,
   useSidebar,
 } from '@/components/Sidebar';
-import { NavUser } from './sidebarUser';
 import {
   AudioWaveform,
   BookOpen,
-  Map,
   Bot,
   Command,
   Frame,
   GalleryVerticalEnd,
+  Home,
+  Map,
   PieChart,
   Settings2,
   SquareTerminal,
-  Home,
 } from 'lucide-react';
-import { TeamSwitcher } from './sidebarTeamSwitcher';
-import { NavMain } from './sidebarMain';
 import SidebarBanner from './sidebarBanner';
+import { NavMain } from './sidebarMain';
+import { TeamSwitcher } from './sidebarTeamSwitcher';
+import { NavUser } from './sidebarUser';
+import { SidebarSublinks } from './sidebarSublinks';
 
 const data = {
   navMain: [
@@ -91,6 +87,7 @@ export function AppSidebar() {
       </SidebarContent>
       <SidebarFooter>
         <SidebarBanner />
+        <SidebarSublinks />
         <TeamSwitcher />
       </SidebarFooter>
       <SidebarRail />

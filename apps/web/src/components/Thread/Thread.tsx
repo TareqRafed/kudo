@@ -146,7 +146,9 @@ export const ThreadComment = ({ comment, showActions = false, minimal = false }:
 };
 
 const Comment = ({ comment }: CommentSectionProps) => {
-  return <div className={cn(['truncate overflow-hidden break-words text-wrap text-sm w-full'])}>{comment.content}</div>;
+  return (
+    <div className={cn(['dark truncate overflow-hidden break-words text-wrap text-sm w-full'])}>{comment.content}</div>
+  );
 };
 
 export default Thread;
