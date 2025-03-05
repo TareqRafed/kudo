@@ -9,7 +9,7 @@ import { Input, Button } from '@kudo/ui';
 import useSupabaseBrowser from '@/util/supabase/client';
 import { useMutation, useQueryClient, useQuery as useQueryTan } from '@tanstack/react-query';
 import type { TypedSupabaseClient } from '@/types/typedClientQuery.types';
-import { GithubLogo } from '@phosphor-icons/react';
+import { GithubLogo, GoogleLogo } from '@phosphor-icons/react';
 import { getCurrentMemberWithMetadata } from '@/queries/members';
 import { Trash } from 'lucide-react';
 import { useToast } from '@kudo/ui';
@@ -139,6 +139,7 @@ const IdentitiesSettings = () => {
     <>
       <EmailAccountDetails />
       <GithubAccountDetails />
+      <GoogleAccountDetails />
     </>
   );
 };
@@ -211,6 +212,86 @@ const GithubAccountDetails = () => {
       <Subheader title="Github" />
       <FormGroup>
         <FormRow isLoading={isLoading} name="github" label="Account">
+          {action}
+        </FormRow>
+      </FormGroup>
+    </>
+  );
+};
+
+const GoogleAccountDetails = () => {
+  const supabase = useSupabaseBrowser();
+  const { data, isLoading, isError } = useQueryTan({
+    queryFn: () => getIdentities(supabase),
+    queryKey: ['identities', supabase],
+  });
+
+  const { toast } = useToast();
+
+  const query = useQueryClient();
+  const { mutate: unlinkIdentity } = useMutation({
+    mutationFn: async (identity: UserIdentity) => {
+      return supabase.auth.unlinkIdentity(identity);
+    },
+    mutationKey: ['identities'],
+    onSuccess: () => {
+      query.invalidateQueries({ queryKey: ['identities'] });
+      toast({ description: 'Identity Unlinked' });
+    },
+    onError: (e) => {
+      toast({ variant: 'destructive', description: e.message });
+    },
+  });
+
+  const { mutate: linkIdentity } = useMutation({
+    mutationFn: async (provider: Provider) => {
+      return supabase.auth.linkIdentity({ provider });
+    },
+    mutationKey: ['identities'],
+    onSuccess: () => {
+      query.invalidateQueries({ queryKey: ['identities'] });
+      toast({ description: 'Identity Linked' });
+    },
+    onError: (e) => {
+      toast({ variant: 'destructive', description: e.message });
+    },
+  });
+
+  const googleIdentity = data?.identities.find((id) => id.provider === 'google');
+
+  const action = !googleIdentity ? (
+    <Button
+      onClick={() => linkIdentity('google')}
+      size={'sm'}
+      variant={'outline'}
+      className="text-white bg-blue-600 flex"
+    >
+      <span className="flex items-center justify-center">
+        <GoogleLogo className="mr-2" />
+        Link Account
+      </span>
+    </Button>
+  ) : (
+    <Button
+      size={'sm'}
+      variant={'destructive'}
+      onClick={() => unlinkIdentity(googleIdentity)}
+      disabled={data?.identities.length === 1}
+    >
+      <span className="flex items-center justify-center">
+        <GoogleLogo className="mr-2" />
+        Unlink Account
+      </span>
+    </Button>
+  );
+
+  if (isError) return <>Something went wrong</>;
+
+  return (
+    <>
+      <Subheader title="Google" />
+      <FormGroup>
+        <FormRow isLoading={isLoading} name="google" label="Account">
           {action}
         </FormRow>
       </FormGroup>
