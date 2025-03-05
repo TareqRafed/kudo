@@ -110,7 +110,7 @@ export const AvatarUploader = ({ id, src, color = '#fff', className, onImageUplo
             accept=".png,.jpg,.jpeg"
             onChange={handleFileChange}
           />
-          <span className="text-[10px] text-white">Choose Image</span>
+          <span className="text-[10px]">Choose Image</span>
         </label>
       </Button>
       <Avatar style={{ borderColor: color }} className={cn(['border-2', className])}>

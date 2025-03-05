@@ -2,9 +2,8 @@
 
 import Image from 'next/image';
 import ImageController from '../ImageController';
-import { Toggle, Button, ContextMenu, ContextMenuContent, ContextMenuTrigger } from '@kudo/ui';
+import { Button, ContextMenu, ContextMenuContent, ContextMenuTrigger } from '@kudo/ui';
 import { useTheme } from 'next-themes';
-import { MonitorCog, Moon, Sun } from 'lucide-react';
 import Logo from '@/assets/icons/logo-icon.png';
 import LogoFilled from '@/assets/icons/logo-filled.png';
 import { cn } from '@/lib/utils';
@@ -12,7 +11,6 @@ import { Link, useRouter } from '@/i18n/routing';
 import ThemeToggler from '../ThemeToggler';
 
 const Header = ({ className }: { className?: string }) => {
-  const { setTheme, theme } = useTheme();
   const router = useRouter();
 
   return (
