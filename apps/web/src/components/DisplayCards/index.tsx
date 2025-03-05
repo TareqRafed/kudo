@@ -52,7 +52,7 @@ export default function DisplayCards({ cards }: DisplayCardsProps) {
   return (
     <div className="grid [grid-template-areas:'stack'] place-items-center opacity-100 animate-in fade-in-0 duration-700">
       {displayCards.map((cardProps) => (
-        <DisplayCard key={cardProps.title} {...cardProps} />
+        <DisplayCard key={cardProps.description} {...cardProps} />
       ))}
     </div>
   );

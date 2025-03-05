@@ -1,22 +1,25 @@
 'use client';
 
-import Thread from '@/components/Thread/Thread';
-import { Link } from '@/i18n/routing';
-import { Accordion, AccordionContent, AccordionItem, AccordionTrigger, Badge, Button, GradientText } from '@kudo/ui';
-import { motion } from 'framer-motion';
 import { useTranslations } from 'next-intl';
+import { motion } from 'framer-motion';
+import { useActionState } from 'react';
+import { useTheme } from 'next-themes';
+import { GoogleLogo } from '@phosphor-icons/react';
+import { ArrowUpRight } from 'lucide-react';
 
+import { Link } from '@/i18n/routing';
+import Thread from '@/components/Thread/Thread';
 import { loginWithOAuth } from '@/actions/loginWithOAuth';
 import ContainerScroll from '@/components/ContainerScroll';
 import DisplayCards from '@/components/DisplayCards';
 import Globe from '@/components/Globe';
 import Safari from '@/components/Safari';
 import { PricingBasic } from '@/features/Pricing';
-import { GoogleLogo } from '@phosphor-icons/react';
-import { ArrowUpRight } from 'lucide-react';
-import { useActionState } from 'react';
 
-const defaultCards = [
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger, Button, GradientText } from '@kudo/ui';
+
+// Constants for reusable data
+const DISPLAY_CARDS = [
   {
     description: 'We have a reflow issue here',
     className:
@@ -24,7 +27,7 @@ const defaultCards = [
   },
 ];
 
-const faq = [
+const FAQ_ITEMS = [
   {
     question: 'How secure is my data?',
     answer:
@@ -51,19 +54,26 @@ const faq = [
   },
 ];
 
-function DisplayCardsView() {
-  return (
-    <div className="flex w-full items-center justify-center">
-      <div className="w-full max-w-3xl">
-        <DisplayCards cards={defaultCards} />
-      </div>
+// Component for displaying cards
+const DisplayCardsView = () => (
+  <div className="flex w-full items-center justify-center">
+    <div className="w-full max-w-3xl">
+      <DisplayCards cards={DISPLAY_CARDS} />
     </div>
-  );
-}
+  </div>
+);
 
+// Hero section component
 const Hero = () => {
   const t = useTranslations('HomePage');
   const [_, loginWithOAuthAction, isLoginPending] = useActionState(loginWithOAuth, null);
+
+  const handleGoogleLogin = () => {
+    const formData = new FormData();
+    formData.append('provider', 'google');
+    loginWithOAuthAction(formData);
+  };
+
   return (
     <section className="mx-auto mt-20 flex size-full h-[50vh] max-w-[45rem] flex-col items-center justify-start px-3 text-6xl md:w-4/5 lg:mt-20 lg:justify-center xl:w-[45%]">
       <motion.h1
@@ -126,34 +136,52 @@ const Hero = () => {
           />
         </motion.span>
       </motion.h1>
+
       <span className="mt-5 px-5 text-center text-sm lg:text-xl">{t('slogan')}</span>
-      <div className="mt-20 space-y-5 lg:space-x-2 flex flex-col md:flex-row items-center">
-        <Button
-          onClick={() => {
-            const formData = new FormData();
-            formData.append('provider', 'google');
-            loginWithOAuthAction(formData);
-          }}
-          status={isLoginPending ? 'loading' : 'ready'}
-        >
-          <GoogleLogo weight="duotone" className="mr-2 mb-0.5" />
+
+      <div className="mt-20 space-y-5 md:space-y-0 lg:space-x-2 flex flex-col md:flex-row items-center">
+        <Button onClick={handleGoogleLogin} status={isLoginPending ? 'loading' : 'ready'}>
+          <GoogleLogo weight="duotone" className="mb-0.5" />
           {t('action')}
         </Button>
-        <Button variant={'link'} asChild>
-          <Link href={'/login'}>{t('secondaryAction')}</Link>
+        <Button variant="link" asChild>
+          <Link href="/login">{t('secondaryAction')}</Link>
         </Button>
       </div>
     </section>
   );
 };
 
+// Thread comment factory helper function
+const createThreadComment = (content: string) => ({
+  data: {
+    comments: [
+      {
+        created_at: new Date().toString(),
+        content,
+        id: 1,
+        creator: {
+          id: '1',
+          last_name: '',
+          first_name: 'You',
+          profile_picture: '',
+        },
+      },
+    ],
+  },
+});
+
+// Main Home component
 export default function Home() {
   const t = useTranslations('HomePage');
+  const { resolvedTheme } = useTheme();
 
   return (
     <>
       <Hero />
+
       <div className="relative mx-auto space-y-40 pb-20 pt-0 md:py-20 flex w-full flex-col items-center gap-8 px-2 sm:items-start md:w-[70%] lg:px-0">
+        {/* Feature section 1 */}
         <section className="my-0 grid w-full grid-cols-2 gap-2 lg:my-5 lg:grid-cols-4">
           <div className="col-span-2 h-[240px] lg:h-auto justify-center flex">
             <DisplayCardsView />
@@ -169,6 +197,8 @@ export default function Home() {
             <span className="text-sm lg:text-xl">{t('section1.content')}</span>
           </div>
         </section>
+
+        {/* Feature section 2 - Container Scroll */}
         <section className="mx-auto hidden lg:mt-10 lg:block">
           <ContainerScroll
             titleComponent={
@@ -190,23 +220,7 @@ export default function Home() {
               transition={{ duration: 1.2, delay: 1.2 }}
               className="absolute left-[55%] top-[70%]"
             >
-              <Thread
-                data={{
-                  comments: [
-                    {
-                      created_at: new Date().toString(),
-                      content: 'Maybe more horizontal padding?',
-                      id: 1,
-                      creator: {
-                        id: '1',
-                        last_name: '',
-                        first_name: 'You',
-                        profile_picture: '',
-                      },
-                    },
-                  ],
-                }}
-              />
+              <Thread data={createThreadComment('Maybe more horizontal padding?').data} />
             </motion.span>
 
             <motion.span
@@ -215,30 +229,20 @@ export default function Home() {
               transition={{ duration: 1.2, delay: 2.2 }}
               className="absolute left-[47%] top-[55%]"
             >
-              <Thread
-                data={{
-                  comments: [
-                    {
-                      created_at: new Date().toString(),
-                      content: 'Logo seems a bit off?',
-                      id: 1,
-                      creator: {
-                        id: '1',
-                        last_name: '',
-                        first_name: 'You',
-                        profile_picture: '',
-                      },
-                    },
-                  ],
-                }}
-              />
+              <Thread data={createThreadComment('Logo seems a bit off?').data} />
             </motion.span>
 
-            <Safari url="anywebsite.com" src="/images/home-1.png" className="size-full" />
+            <Safari
+              url="anywebsite.com"
+              src={resolvedTheme === 'dark' ? '/images/home-1-dark.png' : '/images/home-1.png'}
+              className="size-full"
+            />
           </ContainerScroll>
         </section>
 
+        {/* Feature section 3 - Global collaboration */}
         <section className="relative grid w-full grid-cols-2 content-center gap-2 lg:grid-cols-4">
+          {/* Mobile globe */}
           <div className="relative col-span-2 mx-auto block flex size-full max-w-lg items-center justify-center overflow-hidden rounded-lg border bg-background px-40 pb-40 pt-8 md:pb-60 md:shadow-xl lg:hidden">
             <span className="pointer-events-none absolute left-1/2 top-5 -translate-x-1/2 whitespace-pre-wrap bg-gradient-to-b from-black to-primary bg-clip-text text-center text-6xl leading-none text-transparent dark:from-white dark:to-primary">
               {t('section3.decoration')}
@@ -247,6 +251,7 @@ export default function Home() {
             <div className="pointer-events-none absolute inset-0 h-full bg-[radial-gradient(circle_at_50%_200%,rgba(0,0,0,0.2),rgba(255,255,255,0))]" />
           </div>
 
+          {/* Content */}
           <div className="relative col-span-2 mt-10 content-center lg:mt-0">
             <h1 className="mb-4 text-2xl font-bold lg:text-4xl">
               <GradientText>
@@ -257,6 +262,8 @@ export default function Home() {
             </h1>
             <span className="text-sm lg:text-xl">{t('section3.content')}</span>
           </div>
+
+          {/* Desktop globe */}
           <div className="relative col-span-2 mx-auto flex hidden size-full max-w-lg items-center justify-center overflow-hidden rounded-lg border bg-background px-40 pb-40 pt-8 md:pb-60 md:shadow-xl lg:block">
             <span className="pointer-events-none absolute left-1/2 top-5 -translate-x-1/2 whitespace-pre-wrap bg-gradient-to-b from-black to-primary bg-clip-text text-center text-[4vw] leading-none text-transparent dark:from-white dark:to-primary">
               {t('section3.decoration')}
@@ -266,8 +273,10 @@ export default function Home() {
           </div>
         </section>
 
+        {/* Pricing section */}
         <PricingBasic />
 
+        {/* CTA and FAQ section */}
         <section className="grid grid-cols-2 lg:grid-cols-4 mb-5 w-full gap-20">
           <div className="col-span-2 flex flex-col">
             <h1 className="mb-4 text-2xl font-light lg:text-4xl">{t('section4.title')}</h1>
@@ -291,7 +300,7 @@ export default function Home() {
               collapsible
               className="bg-accent/30 backdrop-blur-md rounded px-5 py-2 w-full col-span-4"
             >
-              {faq.map(({ question, answer }) => (
+              {FAQ_ITEMS.map(({ question, answer }) => (
                 <AccordionItem value={question} key={question}>
                   <AccordionTrigger>{question}</AccordionTrigger>
                   <AccordionContent>{answer}</AccordionContent>
