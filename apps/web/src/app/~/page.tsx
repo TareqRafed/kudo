@@ -148,7 +148,7 @@ const ProjectsGrid = () => {
                     </p>
                   </div>
                   <Link href={`~/project/${item.id}`} className="flex items-start text-sm hover:underline">
-                    Show Threads{' '}
+                    Show Threads
                   </Link>
                 </div>
               </div>

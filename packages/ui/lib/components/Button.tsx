@@ -57,7 +57,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
         {...props}
         disabled={status !== 'ready' || props.disabled}
       >
-        <span>
+        <span className="flex justify-center">
           {status === 'loading' && <Loader variant={'spinner'} size={'sm'} />}
           <span className={cn('gap-2 inline-flex items-center justify-center w-full')}>
             {children}

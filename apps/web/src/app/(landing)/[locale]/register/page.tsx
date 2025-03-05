@@ -60,13 +60,10 @@ export default function LoginForm() {
               Create Account
             </Button>
           </form>
-          <div className="relative">
-            <div className="absolute inset-0 flex items-center">
-              <Separator className="w-full" />
-            </div>
-            <div className="relative flex justify-center text-xs uppercase">
-              <span className="bg-background px-2 text-muted-foreground">or</span>
-            </div>
+          <div className="relative py-5 flex items-center w-full">
+            <Separator className="flex-1" />
+            <span className="px-2 uppercase text-xs text-muted-foreground">or</span>
+            <Separator className="flex-1" />
           </div>
           <Button
             variant={'secondary'}
