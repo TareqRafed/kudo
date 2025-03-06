@@ -18,6 +18,7 @@ import {
   Frame,
   GalleryVerticalEnd,
   Home,
+  Mail,
   Map,
   PieChart,
   Settings2,
@@ -28,50 +29,49 @@ import { NavMain } from './sidebarMain';
 import { TeamSwitcher } from './sidebarTeamSwitcher';
 import { NavUser } from './sidebarUser';
 import { SidebarSublinks } from './sidebarSublinks';
+import { KeyboardShortcut, TooltipContent } from '@kudo/ui';
+import { Children } from 'react';
 
 const data = {
   navMain: [
     {
-      title: 'Home',
+      title: 'Projects',
       url: '/~',
+      tooltip: {
+        children: (
+          <>
+            <KeyboardShortcut>G</KeyboardShortcut>o <KeyboardShortcut>P</KeyboardShortcut>rojects
+          </>
+        ),
+      },
+
       icon: Home,
       isActive: true,
-      items: [
-        {
-          title: 'Projects',
-          url: '/~',
-        },
-      ],
     },
     {
-      title: 'Integrations',
-      url: '#',
-      icon: Bot,
-      items: [
-        {
-          title: 'Comming Soon',
-          url: '#',
-        },
-      ],
+      title: 'Invitations',
+      url: '/~/settings/invitations',
+      tooltip: {
+        children: (
+          <>
+            <KeyboardShortcut>G</KeyboardShortcut>o <KeyboardShortcut>I</KeyboardShortcut>nvitations
+          </>
+        ),
+      },
+      icon: Mail,
     },
     {
       title: 'Settings',
       url: '/~/settings',
+      tooltip: {
+        children: (
+          <>
+            <KeyboardShortcut>G</KeyboardShortcut>o <KeyboardShortcut>S</KeyboardShortcut>ettings
+          </>
+        ),
+      },
+
       icon: Settings2,
-      items: [
-        {
-          title: 'Teams',
-          url: '/~/settings/teams',
-        },
-        {
-          title: 'Account',
-          url: '/~/settings/account',
-        },
-        {
-          title: 'Invitations',
-          url: '/~/settings/invitations',
-        },
-      ],
     },
   ],
 };

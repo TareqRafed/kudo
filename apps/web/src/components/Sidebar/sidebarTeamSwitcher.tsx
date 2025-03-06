@@ -121,12 +121,12 @@ export function TeamSwitcher() {
                   <IconAvatar className="size-5" theme={teams?.theme} name={teams?.logo} />
                 </div>
                 {teams?.name}
-                <DropdownMenuShortcut>t + {i + 1}</DropdownMenuShortcut>
+                <DropdownMenuShortcut>t then {i + 1}</DropdownMenuShortcut>
               </DropdownMenuItem>
             ))}
             <DropdownMenuSeparator />
             <DropdownMenuItem onClick={() => router.push('/~/settings/teams/new-team')} className="gap-2 p-2">
-              <div className="flex size-6 items-center justify-center rounded-md border bg-background">
+              <div className="flex size-6 items-center justify-center rounded border">
                 <Plus className="size-4" />
               </div>
               <div className="text-muted-foreground">Add team</div>
