@@ -1,8 +1,14 @@
 'use client';
 
-import * as React from 'react';
 import { ChevronsUpDown, Plus } from 'lucide-react';
+import { useEffect } from 'react';
 
+import IconAvatar from '@/components/IconPicker/IconAvatar';
+import { SidebarMenu, SidebarMenuButton, SidebarMenuItem, useSidebar } from '@/components/Sidebar';
+import { addMotion } from '@/hooks/useMotions';
+import { getCurrentMemberWithMetadata } from '@/queries/members';
+import { getMemberTeams } from '@/queries/teams';
+import useSupabaseBrowser from '@/util/supabase/client';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -11,17 +17,12 @@ import {
   DropdownMenuSeparator,
   DropdownMenuShortcut,
   DropdownMenuTrigger,
-  Skeleton,
   Loader,
+  Skeleton,
 } from '@kudo/ui';
-import { SidebarMenu, SidebarMenuButton, SidebarMenuItem, useSidebar } from '@/components/Sidebar';
-import { useQuery, useUpdateMutation } from '@supabase-cache-helpers/postgrest-react-query';
-import { getMemberTeams } from '@/queries/teams';
-import useSupabaseBrowser from '@/util/supabase/client';
-import IconAvatar from '@/components/IconPicker/IconAvatar';
-import { useRouter } from 'next/navigation';
 import { useToast } from '@kudo/ui';
-import { getCurrentMemberWithMetadata } from '@/queries/members';
+import { useQuery, useUpdateMutation } from '@supabase-cache-helpers/postgrest-react-query';
+import { useRouter } from 'next/navigation';
 
 export function TeamSwitcher() {
   const { isMobile } = useSidebar();
@@ -56,6 +57,17 @@ export function TeamSwitcher() {
     },
   );
 
+  const teams = data;
+  const selectedTeam = teams?.find(
+    ({ teams, members_with_metadata: members }) => teams?.id == members?.selected_team_id,
+  )?.teams; // TODO: clean this
+
+  useEffect(() => {
+    teams?.map(({ teams }, i) => {
+      addMotion(['t', (i + 1).toString()], () => updateMember({ id: user?.id, selected_team_id: teams.id }));
+    });
+  }, [teams, user?.id, updateMember]);
+
   if (isError)
     return (
       <div className="mt-2 flex h-10 w-full items-center justify-center rounded bg-destructive p-1 text-xs group-data-[collapsible=icon]:hidden">
@@ -74,11 +86,6 @@ export function TeamSwitcher() {
         </div>
       </div>
     );
-
-  const teams = data;
-  const selectedTeam = teams?.find(
-    ({ teams, members_with_metadata: members }) => teams?.id == members?.selected_team_id,
-  )?.teams; // TODO: clean this
 
   return (
     <SidebarMenu>
@@ -108,7 +115,7 @@ export function TeamSwitcher() {
               <DropdownMenuItem
                 key={teams?.name}
                 className="gap-2 p-2"
-                onClick={() => updateMember({ id: user.id, selected_team_id: teams.id })}
+                onClick={() => updateMember({ id: user?.id, selected_team_id: teams.id })}
               >
                 <div className="flex size-6 items-center justify-center">
                   <IconAvatar className="size-5" theme={teams?.theme} name={teams?.logo} />
