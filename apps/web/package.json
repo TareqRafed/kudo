@@ -17,6 +17,7 @@
   },
   "dependencies": {
     "@hookform/resolvers": "^3.10.0",
+    "react-hotkeys-hook": "^4.6.1",
     "@kudo/shared": "workspace:*",
     "@kudo/ui": "workspace:*",
     "@next/third-parties": "^15.1.6",
