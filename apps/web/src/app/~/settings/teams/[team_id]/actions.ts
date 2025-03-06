@@ -21,13 +21,14 @@ export async function sendInvitations(team_id: number, _: FormResponse<typeof em
   const supabase = await createClient();
   const authRes = await supabase.auth.getUser();
   const user = authRes.data.user;
+  const team = await supabase.from('teams').select('name').eq('id', team_id).single();
 
   if (!user) return createResponse<typeof emailSchema>([], 'User not found', false);
+  if (!team.data) return createResponse<typeof emailSchema>([], 'Team not found', false);
 
   const data = validateFormData(formData, emailSchema);
   if (!data.success) return data;
 
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const { success: __, message: ___, ...emails } = data;
 
   const filteredEmails = Object.fromEntries(
@@ -43,12 +44,12 @@ export async function sendInvitations(team_id: number, _: FormResponse<typeof em
       .maybeSingle();
     if (invitation.data) invitations.push(invitation.data);
     // TODO: clean this
-    if (invitation.error?.code == '23505')
+    if (invitation.error?.code === '23505')
       invitationErrors.push({
         field: emailNum as EmailKey,
         error: 'User already invited',
       });
-    if (invitation.status == 403)
+    if (invitation.status === 403)
       invitationErrors.push({
         field: emailNum as EmailKey,
         error: 'User already invited',
@@ -60,20 +61,17 @@ export async function sendInvitations(team_id: number, _: FormResponse<typeof em
       });
   }
 
-  console.log(invitations, invitationErrors);
   if (invitations.length)
     await sendTeamInviteEmail(
       invitations.map((em) => em.email),
       {
-        options: {
-          from: 'Acme <onboarding@resend.dev>',
-          team_id,
-          invite_from: invitations[0].name,
-        },
+        from: 'Acme <onboarding@resend.dev>',
+        team: team.data?.name,
+        invite_from: invitations[0].name,
       },
     );
 
-  let feedbackMessage;
+  let feedbackMessage: string;
   let resSuccess = false;
   if (invitations.length === 0) {
     feedbackMessage = 'Failed to send invitations';

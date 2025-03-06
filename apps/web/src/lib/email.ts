@@ -4,11 +4,9 @@ import { z } from 'zod';
 const resend = new Resend(process.env.RESEND_API_KEY);
 
 interface TeamInviteEmail {
-  options: {
-    from: 'Acme <onboarding@resend.dev>';
-    invite_from: string | null;
-    team_id: number | string;
-  };
+  from: 'Acme <onboarding@resend.dev>';
+  invite_from: string | null;
+  team: string;
 }
 
 export const sendTeamInviteEmail = (emails: string[], options: TeamInviteEmail) => {
@@ -20,8 +18,11 @@ export const sendTeamInviteEmail = (emails: string[], options: TeamInviteEmail) 
     validatedEmails.map((email) => ({
       from: 'Acme <onboarding@resend.dev>',
       to: email,
-      subject: 'world hello',
-      html: '<p>it works!</p>',
+      subject: `You were invited to ${options.team} by ${options.invite_from}`,
+      html: `<div>
+<p>You were invited to ${options.team} by ${options.invite_from}!</p>
+Use the following link to login <a>https://trykudo.com</a>
+</div>`,
     })),
   );
 };
