@@ -18,11 +18,14 @@ import { AlertCircle } from 'lucide-react';
 import { useToast } from '@kudo/ui';
 import useSupabaseBrowser from '@/util/supabase/client';
 import { useQuery } from '@supabase-cache-helpers/postgrest-react-query';
-import UpgradeToProDialog from '@/components/UpgradeToPro/UpgrateToPro';
+import UpgradeToProDialog from '@/components/UpgradeToPro/UpgradeToPro';
 import { Skeleton } from '@kudo/ui';
 import { cn } from '@/lib/utils';
 
-const InputList = ({ count, errors }: { count: number; errors: { [key: `email${number}`]: string[] } }) =>
+const InputList = ({
+  count,
+  errors,
+}: { count: number; errors?: { [key: `email${number}`]: string | string[] } | null }) =>
   Array.from({ length: count }, (_, i) => (
     <Input
       className={cn([errors?.[`email${i + 1}`] && 'border-destructive'])}
@@ -30,6 +33,7 @@ const InputList = ({ count, errors }: { count: number; errors: { [key: `email${n
       type="email"
       name={`email${i + 1}`}
       id={`email${i + 1}`}
+      // biome-ignore lint/suspicious/noArrayIndexKey: <explanation>
       key={i}
       autoComplete="off"
     />
@@ -61,7 +65,7 @@ const AddMembersDialog = ({ teamId }: { teamId: number }) => {
     if (state.success) {
       setDialog(false);
     }
-  }, [state]);
+  }, [state, toast]);
 
   const [dialog, setDialog] = useState(false);
   if (teamSummaryLoading || teamSummaryError) return <Skeleton className="h-9 w-36" />;

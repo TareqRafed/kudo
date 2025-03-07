@@ -1,4 +1,4 @@
-import { TypedSupabaseClient } from '@/types/typedClientQuery.types';
+import type { TypedSupabaseClient } from '@/types/typedClientQuery.types';
 
 export const getInvites = (
   client: TypedSupabaseClient,
@@ -33,7 +33,7 @@ export const actionInvite = (
   const query = client
     .from('teams_invitations')
     .update({ status: options.accept ? 'positive' : 'negative' })
-    .eq('team_id', options.team_id);
+    .eq('team_id', Number(options.team_id));
 
   return query.throwOnError();
 };

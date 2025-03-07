@@ -41,7 +41,7 @@ interface Props extends ComponentPropsWithoutRef<typeof DrawerContent> {
 
 const TeamSettingsDrawer = ({ teamId }: Props) => {
   const supabase = useSupabaseBrowser();
-  const { data, isLoading, isError } = useQuery(getTeams(supabase).eq('id', teamId).maybeSingle());
+  const { data, isLoading, isError } = useQuery(getTeams(supabase).eq('id', Number(teamId)).maybeSingle());
   const {
     data: teamSummary,
     isLoading: teamSummaryLoading,
@@ -111,11 +111,11 @@ const TeamSettingsDrawer = ({ teamId }: Props) => {
                 </FormRow>
               )}
               <FormRow name="tier" label="Tier" hint={data?.tiers?.name}>
-                <Button disabled={data?.tiers?.name != 'Free'} size={'sm'} variant={'outline'}>
+                <Button disabled={data?.tiers?.name !== 'Free'} size={'sm'} variant={'outline'}>
                   Upgrade to Pro
                 </Button>
               </FormRow>
-              <Button disabled={data?.tiers?.name == 'Free'} size={'sm'} className="w-full" variant={'destructive'}>
+              <Button disabled={data?.tiers?.name === 'Free'} size={'sm'} className="w-full" variant={'destructive'}>
                 Cancel Subscription
               </Button>
             </div>

@@ -6,15 +6,15 @@ import NumberFlow from '@number-flow/react';
 import { useMediaQuery } from '@uidotdev/usehooks';
 import confetti from 'canvas-confetti';
 import { motion } from 'framer-motion';
-import { Check, Star } from 'lucide-react';
+import { Check } from 'lucide-react';
 import { useRef, useState } from 'react';
 import { plans } from './plans';
 import { Link } from '@/i18n/routing';
 
 interface PricingPlan {
   name: string;
-  price: string;
-  yearlyPrice: string;
+  price?: string;
+  yearlyPrice?: string;
   period: string;
   features: string[];
   description: string;
@@ -82,7 +82,7 @@ export function Pricing({
       <div className="grid grid-cols-1 md:grid-cols-3 sm:2 gap-4">
         {plans.map((plan, index) => (
           <motion.div
-            key={index}
+            key={plan.name}
             initial={{ y: 50, opacity: 1 }}
             whileInView={
               isDesktop
@@ -134,7 +134,6 @@ export function Pricing({
                         minimumFractionDigits: 0,
                         maximumFractionDigits: 0,
                       }}
-                      formatter={(value) => `$${value}`}
                       transformTiming={{
                         duration: 500,
                         easing: 'ease-out',

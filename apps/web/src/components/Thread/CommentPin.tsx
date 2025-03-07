@@ -66,7 +66,7 @@ const CommentPin = (
         whileHover={{ gap: '0.5rem' }} // Increases gap between avatars on hover
       >
         {[...new Set(usersIds)].map((id) => (
-          <UserAvatar userId={id} key={id} className={cn(['size-7'])} />
+          <UserAvatar key={id} className={cn(['size-7'])} />
         ))}
       </motion.div>
     </div>

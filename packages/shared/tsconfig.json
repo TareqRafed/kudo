@@ -3,7 +3,7 @@
   "compilerOptions": {
     "baseUrl": ".",
     "outDir": "dist",
-    "types": ["chrome"]
+    "strictNullChecks": true
   },
   "include": ["index.ts", "lib"]
 }

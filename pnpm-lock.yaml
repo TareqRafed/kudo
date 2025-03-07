@@ -246,6 +246,9 @@ importers:
       tailwindcss-animate:
         specifier: ^1.0.7
         version: 1.0.7(tailwindcss@3.4.17(ts-node@10.9.2(@swc/core@1.7.25(@swc/helpers@0.5.15))(@types/node@20.17.19)(typescript@5.7.3)))
+      webextension-polyfill:
+        specifier: ^0.12.0
+        version: 0.12.0
       zod:
         specifier: ^3.24.1
         version: 3.24.1
@@ -274,6 +277,9 @@ importers:
       '@tanstack/react-query-devtools':
         specifier: ^5.65.1
         version: 5.66.5(@tanstack/react-query@5.66.5(react@19.0.0))(react@19.0.0)
+      '@types/canvas-confetti':
+        specifier: ^1.9.0
+        version: 1.9.0
       '@types/file-saver':
         specifier: ^2.0.7
         version: 2.0.7
@@ -289,6 +295,9 @@ importers:
       '@types/rtl-detect':
         specifier: ^1.0.3
         version: 1.0.3
+      '@types/webextension-polyfill':
+        specifier: ^0.12.1
+        version: 0.12.1
       postcss:
         specifier: ^8.5.1
         version: 8.5.2
@@ -298,6 +307,9 @@ importers:
       tailwindcss:
         specifier: ^3.4.17
         version: 3.4.17(ts-node@10.9.2(@swc/core@1.7.25(@swc/helpers@0.5.15))(@types/node@20.17.19)(typescript@5.7.3))
+      type-fest:
+        specifier: ^4.37.0
+        version: 4.37.0
       typescript:
         specifier: ^5.7.3
         version: 5.7.3
@@ -401,6 +413,9 @@ importers:
       react:
         specifier: ^19.0.0
         version: 19.0.0
+      type-fest:
+        specifier: ^4.37.0
+        version: 4.37.0
       webextension-polyfill:
         specifier: ^0.12.0
         version: 0.12.0
@@ -2325,6 +2340,9 @@ packages:
 
   '@tsconfig/node16@1.0.4':
     resolution: {integrity: sha512-vxhUy4J8lyeyinH7Azl1pdd43GJhZH/tP2weN8TntQblOY+A0XbT8DJk1/oCPuOOyg/Ja757rG0CgHcWC8OfMA==}
+
+  '@types/canvas-confetti@1.9.0':
+    resolution: {integrity: sha512-aBGj/dULrimR1XDZLtG9JwxX1b4HPRF6CX9Yfwh3NvstZEm1ZL7RBnel4keCPSqs1ANRu1u2Aoz9R+VmtjYuTg==}
 
   '@types/cookie@0.6.0':
     resolution: {integrity: sha512-4Kh9a6B2bQciAhf7FSuMRRkUWecJgJu9nPnx3yzpsfXX/c50REIqpHY4C82bXP90qrLtXtkDxTZosYO3UpOwlA==}
@@ -5399,8 +5417,8 @@ packages:
     resolution: {integrity: sha512-tLq3bSNx+xSpwvAJnzrK0Ep5CLNWjvFTOp71URMaAEWBfRb9nnJiBoUe0tF8bI4ZFO3omgBR6NvnbzVUT3Ly4g==}
     engines: {node: '>=14.16'}
 
-  type-fest@4.26.1:
-    resolution: {integrity: sha512-yOGpmOAL7CkKe/91I5O3gPICmJNLJ1G4zFYVAsRHg7M64biSnPtRj0WNQt++bRkjYOqjWXrhnUw1utzmVErAdg==}
+  type-fest@4.37.0:
+    resolution: {integrity: sha512-S/5/0kFftkq27FPNye0XM1e2NsnoD/3FS+pBmbjmmtLT6I+i344KoOf7pvXreaFsDamWeaJX55nczA1m5PsBDg==}
     engines: {node: '>=16'}
 
   typescript@5.7.3:
@@ -7256,6 +7274,8 @@ snapshots:
   '@tsconfig/node14@1.0.3': {}
 
   '@tsconfig/node16@1.0.4': {}
+
+  '@types/canvas-confetti@1.9.0': {}
 
   '@types/cookie@0.6.0': {}
 
@@ -10102,14 +10122,14 @@ snapshots:
     dependencies:
       find-up: 6.3.0
       read-pkg: 8.1.0
-      type-fest: 4.26.1
+      type-fest: 4.37.0
 
   read-pkg@8.1.0:
     dependencies:
       '@types/normalize-package-data': 2.4.4
       normalize-package-data: 6.0.2
       parse-json: 7.1.1
-      type-fest: 4.26.1
+      type-fest: 4.37.0
 
   read-yaml-file@2.1.0:
     dependencies:
@@ -10799,7 +10819,7 @@ snapshots:
 
   type-fest@3.13.1: {}
 
-  type-fest@4.26.1: {}
+  type-fest@4.37.0: {}
 
   typescript@5.7.3: {}
 
