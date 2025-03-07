@@ -804,6 +804,13 @@ export type Database = {
         Args: Record<PropertyKey, never>;
         Returns: boolean;
       };
+      delete_record: {
+        Args: {
+          table_name: string;
+          record_id: number;
+        };
+        Returns: Json;
+      };
       get_current_member_with_metadata: {
         Args: Record<PropertyKey, never>;
         Returns: {

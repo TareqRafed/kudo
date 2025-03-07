@@ -1,5 +1,9 @@
 'use client';
 
+import { plans } from '@/features/Pricing/plans';
+import { cn } from '@/lib/utils';
+import { getTeams } from '@/queries/teams';
+import useSupabaseBrowser from '@/util/supabase/client';
 import { Button } from '@kudo/ui';
 import {
   Dialog,
@@ -10,15 +14,11 @@ import {
   DialogTitle,
   DialogTrigger,
 } from '@kudo/ui';
-import { type ReactNode, useState } from 'react';
-import useSupabaseBrowser from '@/util/supabase/client';
-import { useQuery } from '@supabase-cache-helpers/postgrest-react-query';
-import { getTeams } from '@/queries/teams';
-import { cn } from '@/lib/utils';
-import { motion } from 'framer-motion';
-import { plans } from '@/features/Pricing/plans';
 import NumberFlow from '@number-flow/react';
+import { useQuery } from '@supabase-cache-helpers/postgrest-react-query';
+import { motion } from 'framer-motion';
 import { Check } from 'lucide-react';
+import { type ReactNode, useState } from 'react';
 
 /**
  * children should be {@link DialogTrigger}
@@ -68,7 +68,6 @@ const UpgradeToProDialog = ({ children, teamId }: { children: ReactNode; teamId:
                     minimumFractionDigits: 0,
                     maximumFractionDigits: 0,
                   }}
-                  formatter={(value) => `$${value}`}
                   transformTiming={{
                     duration: 500,
                     easing: 'ease-out',
@@ -87,8 +86,8 @@ const UpgradeToProDialog = ({ children, teamId }: { children: ReactNode; teamId:
             </p>
 
             <ul className="mt-5 gap-2 flex flex-col">
-              {plan.features.map((feature, idx) => (
-                <li key={idx} className="flex items-start gap-2">
+              {plan.features.map((feature) => (
+                <li key={feature} className="flex items-start gap-2">
                   <Check className="h-4 w-4 text-primary mt-1 flex-shrink-0" />
                   <span className="text-left">{feature}</span>
                 </li>

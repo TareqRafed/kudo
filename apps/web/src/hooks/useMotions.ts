@@ -52,21 +52,22 @@ export const useMotions = () => {
     const controller = new AbortController();
     const { signal } = controller;
 
-    const handler = (event) => {
+    const handler = (event: KeyboardEvent) => {
       console.log({ buffer, motions });
-      if (typeof buffer?.[event.key] === 'function') {
-        buffer?.[event.key]?.();
+      if (typeof buffer[event.key] === 'function') {
+        const currentBuffer = buffer[event.key] as () => void;
+        currentBuffer();
         cleanBuffer();
         return;
       }
 
       if (bufferKeys.has(event.key)) {
         cleanBuffer();
-        buffer = motions[event.key];
+        buffer = motions[event.key] as Motion; // Function guard was used
       }
 
-      if (buffer?.[event.key]) {
-        buffer = buffer?.[event.key];
+      if (buffer[event.key]) {
+        buffer = buffer[event.key] as Motion;
         return;
       }
     };

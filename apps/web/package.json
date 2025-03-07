@@ -17,7 +17,6 @@
   },
   "dependencies": {
     "@hookform/resolvers": "^3.10.0",
-    "react-hotkeys-hook": "^4.6.1",
     "@kudo/shared": "workspace:*",
     "@kudo/ui": "workspace:*",
     "@next/third-parties": "^15.1.6",
@@ -45,6 +44,7 @@
     "react-dom": "^19.0.0",
     "react-easy-crop": "^5.2.0",
     "react-hook-form": "^7.54.2",
+    "react-hotkeys-hook": "^4.6.1",
     "react-markdown": "^9.0.3",
     "react-simple-wysiwyg": "^3.2.0",
     "resend": "^4.1.1",
@@ -52,17 +52,20 @@
     "sharp": "^0.33.5",
     "tailwind-merge": "^2.6.0",
     "tailwindcss-animate": "^1.0.7",
-    "zod": "^3.24.1"
+    "zod": "^3.24.1",
+    "webextension-polyfill": "^0.12.0"
   },
   "devDependencies": {
+    "@types/webextension-polyfill": "^0.12.1",
     "@biomejs/biome": "1.9.4",
+    "@kudo/biome-config": "workspace:*",
+    "@kudo/tailwind-config": "workspace:*",
+    "@kudo/tsconfig": "workspace:*",
     "@radix-ui/react-select": "^2.1.5",
     "@radix-ui/react-slot": "^1.1.1",
-    "@kudo/biome-config": "workspace:*",
-    "@kudo/tsconfig": "workspace:*",
-    "@kudo/tailwind-config": "workspace:*",
     "@tanstack/eslint-plugin-query": "^5.65.0",
     "@tanstack/react-query-devtools": "^5.65.1",
+    "@types/canvas-confetti": "^1.9.0",
     "@types/file-saver": "^2.0.7",
     "@types/node": "^20.17.16",
     "@types/react": "^19.0.0",
@@ -71,6 +74,7 @@
     "postcss": "^8.5.1",
     "prettier": "^3.4.2",
     "tailwindcss": "^3.4.17",
+    "type-fest": "^4.37.0",
     "typescript": "^5.7.3"
   }
 }

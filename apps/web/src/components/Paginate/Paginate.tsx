@@ -1,4 +1,3 @@
-import { useEffect } from 'react';
 import {
   Pagination,
   PaginationContent,
@@ -7,7 +6,7 @@ import {
   PaginationLink,
   PaginationNext,
   PaginationPrevious,
-} from '../ui/pagination';
+} from '@kudo/ui';
 
 interface Props {
   count: number;
@@ -34,6 +33,7 @@ const Paginate = ({ count, size, currentPage, onChange, disabled }: Props) => {
                 return false;
               }
               onChange(currentPage - 1);
+              return;
             }}
             href="#"
           />
@@ -54,6 +54,7 @@ const Paginate = ({ count, size, currentPage, onChange, disabled }: Props) => {
                 return false;
               }
               onChange(currentPage + 1);
+              return;
             }}
             href="#"
           />

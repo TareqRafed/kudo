@@ -37,9 +37,11 @@ export async function sendInvitations(team_id: number, _: FormResponse<typeof em
   const invitations = [];
   const invitationErrors = [];
   for (const emailNum in filteredEmails) {
+    const email = emails[emailNum as keyof typeof emails];
+    if (!email) continue;
     const invitation = await supabase
       .from('teams_invitations')
-      .insert({ email: emails[emailNum]! as string, team_id })
+      .insert({ email, team_id })
       .select('email, ...teams(name)')
       .maybeSingle();
     if (invitation.data) invitations.push(invitation.data);

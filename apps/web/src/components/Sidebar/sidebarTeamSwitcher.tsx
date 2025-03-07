@@ -59,12 +59,19 @@ export function TeamSwitcher() {
 
   const teams = data;
   const selectedTeam = teams?.find(
-    ({ teams, members_with_metadata: members }) => teams?.id == members?.selected_team_id,
+    ({ teams, members_with_metadata: members }) => teams?.id === members?.selected_team_id,
   )?.teams; // TODO: clean this
 
+  const updateSelectedTeam = (teamId: number) => {
+    if (!user?.id) return;
+    return updateMember({ id: user?.id, selected_team_id: teamId });
+  };
+
   useEffect(() => {
+    if (!user?.id) return;
+    const id = user.id;
     teams?.map(({ teams }, i) => {
-      addMotion(['t', (i + 1).toString()], () => updateMember({ id: user?.id, selected_team_id: teams.id }));
+      addMotion(['t', (i + 1).toString()], () => updateMember({ id, selected_team_id: teams.id }));
     });
   }, [teams, user?.id, updateMember]);
 
@@ -112,11 +119,7 @@ export function TeamSwitcher() {
           >
             <DropdownMenuLabel className="text-xs text-muted-foreground">Teams</DropdownMenuLabel>
             {teams?.map(({ teams }, i) => (
-              <DropdownMenuItem
-                key={teams?.name}
-                className="gap-2 p-2"
-                onClick={() => updateMember({ id: user?.id, selected_team_id: teams.id })}
-              >
+              <DropdownMenuItem key={teams?.name} className="gap-2 p-2" onClick={() => updateSelectedTeam(teams.id)}>
                 <div className="flex size-6 items-center justify-center">
                   <IconAvatar className="size-5" theme={teams?.theme} name={teams?.logo} />
                 </div>

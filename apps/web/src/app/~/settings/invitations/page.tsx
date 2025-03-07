@@ -5,7 +5,6 @@ import useSupabaseBrowser from '@/util/supabase/client';
 import { useQuery, useUpdateMutation } from '@supabase-cache-helpers/postgrest-react-query';
 import type { ColumnDef } from '@tanstack/react-table';
 import { useBreadcrumbs } from '@/components/Breadcrumb';
-import { useEffect } from 'react';
 import { Header } from '../layout-ui';
 import React from 'react';
 import { getInvites } from '@/queries/invites';
@@ -52,7 +51,7 @@ const columns: ColumnDef<Row>[] = [
     header: 'State',
     size: 0,
     cell: ({ row }) => {
-      const state = row.original.status == 'neutral' ? 'Pending' : '';
+      const state = row.original.status === 'neutral' ? 'Pending' : '';
 
       return state;
     },
@@ -68,9 +67,14 @@ const columns: ColumnDef<Row>[] = [
 const Invitations = () => {
   const supabase = useSupabaseBrowser();
   const { data: user } = useQuery(getCurrentMemberWithMetadata(supabase));
-  const { data, isLoading, isError } = useQuery(getInvites(supabase).eq('status', 'neutral').eq('email', user?.email), {
-    enabled: !!user?.email,
-  });
+  const { data, isLoading, isError } = useQuery(
+    getInvites(supabase)
+      .eq('status', 'neutral')
+      .eq('email', user?.email ?? ''),
+    {
+      enabled: !!user?.email,
+    },
+  );
 
   useBreadcrumbs([{ label: 'Home', href: '/~' }, { label: 'Settings', href: '/~/settings' }, { label: 'Invitations' }]);
 

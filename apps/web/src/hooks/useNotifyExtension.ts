@@ -1,16 +1,20 @@
+import { env } from '@/lib/env';
 import useSupabaseBrowser from '@/util/supabase/client';
 import { useEffect } from 'react';
+import browser from 'webextension-polyfill';
+
+const extensionId = env.NEXT_PUBLIC_EXTENSION_ID;
 
 const useNotifyExtension = () => {
   const supabase = useSupabaseBrowser();
 
+  // biome-ignore lint/correctness/useExhaustiveDependencies: Unnecessary
   useEffect(() => {
     const notifyExtension = async () => {
-      const editorExtensionId = 'hahbjmnjmbgijbfmeojncnkddjfeomec';
       await supabase.auth.getUser();
       const session = await supabase.auth.getSession();
-      if (chrome?.runtime?.sendMessage && session.data)
-        chrome.runtime.sendMessage(editorExtensionId, {
+      if (session.data)
+        browser.runtime.sendMessage(extensionId, {
           action: 'NEW_SESSION',
           payload: session.data.session,
         });

@@ -26,6 +26,7 @@
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.48.1",
+    "type-fest": "^4.37.0",
     "react": "^19.0.0",
     "webextension-polyfill": "^0.12.0"
   }

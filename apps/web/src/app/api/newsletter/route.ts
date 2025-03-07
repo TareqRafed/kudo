@@ -1,4 +1,5 @@
-import { NextRequest, NextResponse } from 'next/server';
+import { env } from '@/lib/env';
+import { type NextRequest, NextResponse } from 'next/server';
 
 export async function POST(req: NextRequest) {
   try {
@@ -8,8 +9,8 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: 'Email is required' }, { status: 400 });
     }
 
-    const apiKey = process.env.BEEHIIV_API_KEY;
-    const publicationId = process.env.BEEHIIV_PUBLICATION_ID;
+    const apiKey = env.BEEHIIV_API_KEY;
+    const publicationId = env.BEEHIIV_PUBLICATION_ID;
 
     if (!apiKey || !publicationId) {
       return NextResponse.json({ error: 'Missing API key or publication ID' }, { status: 500 });
