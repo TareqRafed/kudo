@@ -1,48 +1,55 @@
 import { z } from 'zod';
 
-/**
- * Schema for environment variables
- */
-const envSchema = z.object({
-  // Server-side variables (only available on the server)
+// Server-side schema
+const serverEnvSchema = z.object({
   RESEND_API_KEY: z.string().min(1),
   BEEHIIV_API_KEY: z.string().min(1),
   BEEHIIV_PUBLICATION_ID: z.string().min(1),
   NODE_ENV: z.enum(['development', 'production']),
-
-  // Public variables (available in the browser)
   NEXT_PUBLIC_SUPABASE_URL: z.string().url(),
   NEXT_PUBLIC_SUPABASE_ANON_KEY: z.string().min(1),
   NEXT_PUBLIC_EXTENSION_ID: z.string().min(1),
   NEXT_PUBLIC_BASE_URL: z.string().url(),
 });
 
-/**
- * Define a type based on the schema
- */
-export type Env = z.infer<typeof envSchema>;
+// Client-side schema (only NEXT_PUBLIC_ vars)
+const clientEnvSchema = z.object({
+  NEXT_PUBLIC_SUPABASE_URL: z.string().url(),
+  NEXT_PUBLIC_SUPABASE_ANON_KEY: z.string().min(1),
+  NEXT_PUBLIC_EXTENSION_ID: z.string().min(1),
+  NEXT_PUBLIC_BASE_URL: z.string().url(),
+});
 
-/**
- * Parse and validate the environment variables
- */
-function getEnv(): Env {
-  // For server-side environment variables
-  if (typeof process.env !== 'undefined') {
-    const parsed = envSchema.safeParse(process.env);
+export type ServerEnv = z.infer<typeof serverEnvSchema>;
+export type ClientEnv = z.infer<typeof clientEnvSchema>;
 
+function getEnv() {
+  // Check if we're running on the server
+  const isServer = typeof window === 'undefined';
+
+  if (isServer) {
+    // Server-side validation
+    const parsed = serverEnvSchema.safeParse(process.env);
     if (!parsed.success) {
-      console.error('❌ Invalid environment variables:', JSON.stringify(parsed.error.format(), null, 2));
-      throw new Error('Invalid environment variables');
+      console.error('❌ Invalid server environment variables:', JSON.stringify(parsed.error.format(), null, 2));
+      throw new Error('Invalid server environment variables');
     }
-
     return parsed.data;
   }
+  // Client-side validation (only NEXT_PUBLIC_ vars)
+  const clientEnv = {
+    NEXT_PUBLIC_SUPABASE_URL: process.env.NEXT_PUBLIC_SUPABASE_URL,
+    NEXT_PUBLIC_SUPABASE_ANON_KEY: process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY,
+    NEXT_PUBLIC_EXTENSION_ID: process.env.NEXT_PUBLIC_EXTENSION_ID,
+    NEXT_PUBLIC_BASE_URL: process.env.NEXT_PUBLIC_BASE_URL,
+  };
 
-  // For client-side, only include NEXT_PUBLIC_ variables
-  throw new Error('Unable to access environment variables');
+  const parsed = clientEnvSchema.safeParse(clientEnv);
+  if (!parsed.success) {
+    console.error('❌ Invalid client environment variables:', JSON.stringify(parsed.error.format(), null, 2));
+    throw new Error('Invalid client environment variables');
+  }
+  return parsed.data;
 }
 
-/**
- * Export the validated environment variables
- */
 export const env = getEnv();

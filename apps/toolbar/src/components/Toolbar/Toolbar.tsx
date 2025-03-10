@@ -13,7 +13,8 @@ import LoadingDots from '../LoadingDots/LoadingDots';
 const TOOLBAR_DRAG_AREA_PADDING = 10;
 
 const Toolbar = () => {
-  const { isLoading } = useSendMessage({ action: 'GET_AUTH' });
+  const { isLoading, data } = useSendMessage({ action: 'GET_AUTH' });
+  console.log(isLoading, data);
   const { setDragging } = useToolbarStore();
 
   const [toolbarRef, animate] = useAnimate();

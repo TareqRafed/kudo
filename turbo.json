@@ -7,13 +7,13 @@
       "outputs": ["dist/**", "build/**"]
     },
     "dev": {
+      "inputs": ["$TURBO_DEFAULT$", ".env"],
       "dependsOn": ["ready"],
       "outputs": ["dist/**", "build/**"],
-      "cache": false,
-      "persistent": true
+      "cache": false
     },
     "build": {
-      "env": ["NEXT_PUBLIC_*", "RESEND_API_KEY", "BEEHIIV_API_KEY", "BEEHIIV_PUBLICATION_ID"],
+      "env": ["!NEXT_PUBLIC_*", "RESEND_API_KEY", "BEEHIIV_API_KEY", "BEEHIIV_PUBLICATION_ID"],
       "dependsOn": ["^build", "^ready"],
       "outputs": ["../../dist/**", "dist/**", "build/**"],
       "cache": false
