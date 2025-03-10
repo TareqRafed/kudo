@@ -1,5 +1,6 @@
 'use server';
 
+import { env } from '@/lib/env';
 import { createResponse } from '@/util/forms/forms';
 import type { FormResponse } from '@/util/forms/types';
 import { createClient } from '@/util/supabase/server';
@@ -17,7 +18,7 @@ export async function loginWithOAuth(_: FormResponse<typeof providerSchema> | nu
   const { data, error } = await supabase.auth.signInWithOAuth({
     provider,
     options: {
-      redirectTo: 'http://localhost:3000/api/auth',
+      redirectTo: `${env.NEXT_PUBLIC_BASE_URL}/api/auth`,
     },
   });
 
