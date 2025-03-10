@@ -144,9 +144,6 @@ importers:
       '@kudo/shared':
         specifier: workspace:*
         version: link:../../packages/shared
-      '@kudo/tailwind-config':
-        specifier: workspace:*
-        version: link:../../packages/tailwind-config
       '@kudo/ui':
         specifier: workspace:*
         version: link:../../packages/ui
