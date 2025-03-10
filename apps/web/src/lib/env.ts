@@ -8,12 +8,12 @@ const envSchema = z.object({
   RESEND_API_KEY: z.string().min(1),
   BEEHIIV_API_KEY: z.string().min(1),
   BEEHIIV_PUBLICATION_ID: z.string().min(1),
+  NODE_ENV: z.enum(['development', 'production']),
 
   // Public variables (available in the browser)
   NEXT_PUBLIC_SUPABASE_URL: z.string().url(),
   NEXT_PUBLIC_SUPABASE_ANON_KEY: z.string().min(1),
   NEXT_PUBLIC_EXTENSION_ID: z.string().min(1),
-  NEXT_PUBLIC_NODE_ENV: z.enum(['development', 'production']),
 });
 
 /**

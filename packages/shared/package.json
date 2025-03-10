@@ -1,7 +1,7 @@
 {
   "name": "@kudo/shared",
-  "version": "0.3.4",
-  "description": "chrome extension - shared code",
+  "version": "0.0.1",
+  "description": "Shared libraries",
   "private": true,
   "sideEffects": false,
   "files": ["dist/**"],
@@ -22,10 +22,14 @@
     "@biomejs/biome": "1.9.4",
     "@kudo/tsconfig": "workspace:*",
     "@types/webextension-polyfill": "^0.12.1",
+    "@types/node": "^20.17.16",
+    "@types/react": "^19.0.0",
+    "@types/react-dom": "^19.0.0",
     "zod": "^3.24.1"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.48.1",
+    "react-dom": "^19.0.0",
     "type-fest": "^4.37.0",
     "react": "^19.0.0",
     "webextension-polyfill": "^0.12.0"

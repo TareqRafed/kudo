@@ -29,4 +29,5 @@ await replaceTscAliasPaths({
   declarationDir: 'dist',
 });
 
-fs.copyFileSync(resolve('lib', 'global.css'), resolve('dist', 'global.css'));
+fs.copyFileSync(resolve('lib', 'global.css'), resolve('dist', 'lib', 'global.css'));
+fs.copyFileSync(resolve('tailwind.config.ts'), resolve('dist', 'tailwind.config.ts'));

@@ -9,7 +9,7 @@ import { NextIntlClientProvider } from 'next-intl';
 import { notFound } from 'next/navigation';
 import { routing } from '@/i18n/routing';
 import { getLangDir } from 'rtl-detect';
-import { Toaster, TooltipProvider, Squares } from '@kudo/ui';
+import { Toaster, TooltipProvider } from '@kudo/ui';
 import { useTheme } from 'next-themes';
 import { SquareBackground } from '@/components/SquareBackground';
 
