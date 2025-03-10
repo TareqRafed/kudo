@@ -1,9 +1,9 @@
 import { cva, type VariantProps } from 'class-variance-authority';
-import { motion } from 'framer-motion';
+import { motion, type Variants } from 'framer-motion';
 import { cn } from '@/lib/utils';
-import { ComponentPropsWithoutRef } from 'react';
+import type { ComponentPropsWithoutRef } from 'react';
 
-const containerVariants = {
+const containerVariants: Variants = {
   initial: {},
   animate: {
     transition: {
@@ -12,12 +12,12 @@ const containerVariants = {
   },
 };
 
-const dotVariants = {
+const dotVariants: Variants = {
   initial: { y: '0%' },
   animate: {
     y: '100%',
     transition: {
-      repeat: Infinity,
+      repeat: Number.POSITIVE_INFINITY,
       repeatType: 'reverse',
       duration: 0.6,
       ease: 'easeInOut',
@@ -69,6 +69,7 @@ interface LoaderProps extends ComponentPropsWithoutRef<typeof motion.div>, Varia
 export const Loader = ({ className, size, variant, ...rest }: LoaderProps) => {
   return (
     <motion.div
+      // biome-ignore lint/a11y/useSemanticElements: No output element in motion
       role="status"
       aria-live="polite"
       aria-label="Loading, please wait"
@@ -79,9 +80,7 @@ export const Loader = ({ className, size, variant, ...rest }: LoaderProps) => {
       {...rest}
     >
       {variant === 'dots' ? (
-        [...Array(3)].map((_, index) => (
-          <motion.div key={index} className="rounded-full bg-white" variants={dotVariants} />
-        ))
+        [1, 2, 3].map((key) => <motion.div key={key} className="rounded-full bg-white" variants={dotVariants} />)
       ) : (
         <motion.div
           className={cn(
@@ -90,7 +89,7 @@ export const Loader = ({ className, size, variant, ...rest }: LoaderProps) => {
           )}
           animate={{ rotate: 360 }}
           transition={{
-            repeat: Infinity,
+            repeat: Number.POSITIVE_INFINITY,
             duration: 1,
             ease: 'linear',
           }}

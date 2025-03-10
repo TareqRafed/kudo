@@ -2,8 +2,9 @@
   "extends": "@kudo/tsconfig/utils",
   "compilerOptions": {
     "outDir": "dist",
+    "declaration": true,
+    "declarationDir": "./dist",
     "baseUrl": ".",
-    "types": ["chrome"],
     "paths": {
       "@/*": ["./*"]
     }

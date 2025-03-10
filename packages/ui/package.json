@@ -5,7 +5,6 @@
   "private": true,
   "sideEffects": false,
   "type": "module",
-  "files": ["dist/**", "dist/global.css"],
   "types": "index.ts",
   "main": "./dist/index.js",
   "scripts": {
@@ -24,7 +23,8 @@
     "@kudo/tsconfig": "workspace:*",
     "deepmerge": "^4.3.1",
     "framer-motion": "^11.18.2",
-    "tsc-alias": "^1.8.10"
+    "tsc-alias": "^1.8.10",
+    "tailwindcss-animate": "^1.0.7"
   },
   "dependencies": {
     "@radix-ui/react-avatar": "^1.1.2",
@@ -48,6 +48,8 @@
     "@radix-ui/react-tabs": "^1.1.2",
     "@radix-ui/react-toggle": "^1.1.1",
     "@types/react": "^19.0.0",
+    "@types/react-dom": "^19.0.0",
+    "@types/node": "^20.17.16",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "lucide-react": "0.475.0",

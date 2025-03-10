@@ -1,9 +1,12 @@
 {
   "name": "@kudo/tailwind-config",
   "version": "0.0.1",
-  "description": "Chrome Extension - tailwindcss configuration",
-  "main": "tailwind.config.ts",
-  "private": true,
+  "description": "tailwindcss configuration",
+  "type": "module",
+  "exports": {
+    ".": "./tailwind.config.ts",
+    "./global.css": "./global.css"
+  },
   "devDependencies": {
     "@biomejs/biome": "1.9.4",
     "tailwindcss-animate": "^1.0.7"

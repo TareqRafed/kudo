@@ -110,5 +110,4 @@ export {
   ToastDescription,
   ToastClose,
   ToastAction,
-  ToastPortal,
 };

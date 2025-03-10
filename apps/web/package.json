@@ -53,13 +53,13 @@
     "tailwind-merge": "^2.6.0",
     "tailwindcss-animate": "^1.0.7",
     "zod": "^3.24.1",
+    "@kudo/tailwind-config": "workspace:*",
     "webextension-polyfill": "^0.12.0"
   },
   "devDependencies": {
     "@types/webextension-polyfill": "^0.12.1",
     "@biomejs/biome": "1.9.4",
     "@kudo/biome-config": "workspace:*",
-    "@kudo/tailwind-config": "workspace:*",
     "@kudo/tsconfig": "workspace:*",
     "@radix-ui/react-select": "^2.1.5",
     "@radix-ui/react-slot": "^1.1.1",
