@@ -17,6 +17,9 @@
       "outputs": ["../../dist/**", "dist/**", "build/**"],
       "cache": false
     },
+    "build#web": {
+      "env": ["NEXT_PUBLIC_*", "RESEND_API", "BEEHIIV_API_KEY", "BEEHIIV_PUBLICATION_ID"]
+    },
     "e2e": {
       "cache": false
     },
