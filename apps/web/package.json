@@ -28,6 +28,7 @@
     "@tanstack/react-query": "^5.65.1",
     "@tanstack/react-table": "^8.20.6",
     "@uidotdev/usehooks": "^2.4.1",
+    "@vercel/analytics": "^1.5.0",
     "canvas-confetti": "^1.9.3",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
@@ -52,11 +53,10 @@
     "sharp": "^0.33.5",
     "tailwind-merge": "^2.6.0",
     "tailwindcss-animate": "^1.0.7",
-    "zod": "^3.24.1",
-    "webextension-polyfill": "^0.12.0"
+    "webextension-polyfill": "^0.12.0",
+    "zod": "^3.24.1"
   },
   "devDependencies": {
-    "@types/webextension-polyfill": "^0.12.1",
     "@biomejs/biome": "1.9.4",
     "@kudo/biome-config": "workspace:*",
     "@kudo/tsconfig": "workspace:*",
@@ -70,6 +70,7 @@
     "@types/react": "^19.0.0",
     "@types/react-dom": "^19.0.0",
     "@types/rtl-detect": "^1.0.3",
+    "@types/webextension-polyfill": "^0.12.1",
     "postcss": "^8.5.1",
     "prettier": "^3.4.2",
     "tailwindcss": "^3.4.17",
