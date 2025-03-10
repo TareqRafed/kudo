@@ -1,5 +1,6 @@
 'use server';
 
+import { env } from '@/lib/env';
 import { createResponse, validateFormData } from '@/util/forms/forms';
 import type { FormResponse } from '@/util/forms/types';
 import { createClient } from '@/util/supabase/server';
@@ -25,7 +26,7 @@ export async function register(
   const { error, data: auth } = await supabase.auth.signUp({
     ...data,
     options: {
-      emailRedirectTo: 'http://localhost:3000/api/auth',
+      emailRedirectTo: `${env.NEXT_PUBLIC_BASE_URL}/api/auth`,
     },
   });
   if (error) return createResponse([], error.message, false);
