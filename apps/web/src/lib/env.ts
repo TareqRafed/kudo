@@ -23,7 +23,7 @@ const clientEnvSchema = z.object({
 export type ServerEnv = z.infer<typeof serverEnvSchema>;
 export type ClientEnv = z.infer<typeof clientEnvSchema>;
 
-function getEnv() {
+function getEnv(): ServerEnv {
   // Check if we're running on the server
   const isServer = typeof window === 'undefined';
 
@@ -49,7 +49,7 @@ function getEnv() {
     console.error('❌ Invalid client environment variables:', JSON.stringify(parsed.error.format(), null, 2));
     throw new Error('Invalid client environment variables');
   }
-  return parsed.data;
+  return parsed.data as ServerEnv;
 }
 
 export const env = getEnv();
