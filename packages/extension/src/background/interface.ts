@@ -11,7 +11,8 @@ const requestLogin = async () => {
 addMessageListener(async (message) => {
   if (message.action === 'RPC') {
     const result = await supabase.rpc(message.payload, { ...message.args });
-    return { success: !result.error, data: result };
+    if (result.error) return { success: false, error: result.error.message || 'Unknown error' };
+    return { success: true, data: result };
   }
 
   if (message.action === 'REQUEST_LOGIN') {
@@ -22,7 +23,9 @@ addMessageListener(async (message) => {
   if (message.action === 'GET_AUTH') {
     const isLoggedIn = await updateUserState();
     const session = await supabase.auth.getSession();
-    return { success: isLoggedIn, data: session.data.session };
+    if (isLoggedIn) return { success: true, data: session.data.session };
+
+    return { success: false, error: session.error?.message || 'Unknown error' };
   }
 
   if (message.action === 'PING') {

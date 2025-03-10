@@ -5,7 +5,7 @@ import { addMessageListener, sendMessage } from '@kudo/shared';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { domHelper } from './util';
 import useEnvStore from './store/env';
-// import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 
 const rootId = 'ab-cursor-content-view-root';
 const shadowRootId = 'ab-cursor-shadow-root';
@@ -57,11 +57,11 @@ const removeRootContainer = () => {
 
 const registerListeners = () => {
   addMessageListener((message) => {
-    if (message.action == 'TOGGLE') {
+    if (message.action === 'TOGGLE') {
       toggleConnection();
       return Promise.resolve({ success: true, data: 'Unknown message type' });
     }
-    if (message.action == 'PING') {
+    if (message.action === 'PING') {
       return Promise.resolve({ success: true, data: 'PONG' });
     }
     return Promise.resolve({ success: false, error: 'Unknown message type' });

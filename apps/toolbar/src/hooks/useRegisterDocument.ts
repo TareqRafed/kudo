@@ -26,7 +26,7 @@ function cleanHTMLClone(currentElement: HTMLElement): HTMLElement {
 
 const edgeFunc = 'https://pfwrdyygogowjxyqcene.supabase.co/functions/v1/register-document';
 export const useRegisterDocument = () => {
-  const { data: res } = useSendMessage({ action: 'GET_AUTH', payload: '' });
+  const { data: res } = useSendMessage({ action: 'GET_AUTH' });
   const { setWebsiteData } = useWebsiteStore();
 
   const { toast } = useToast();
