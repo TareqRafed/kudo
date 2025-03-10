@@ -5,9 +5,7 @@
   "type": "module",
   "private": true,
   "sideEffects": true,
-  "files": [
-    "dist/**"
-  ],
+  "files": ["dist/**"],
   "scripts": {
     "clean:bundle": "rimraf dist",
     "clean:node_modules": "pnpx rimraf node_modules",
@@ -44,7 +42,6 @@
     "@biomejs/biome": "1.9.4",
     "@kudo/biome-config": "workspace:*",
     "@kudo/hmr": "workspace:*",
-    "@kudo/tailwind-config": "workspace:*",
     "@kudo/tsconfig": "workspace:*",
     "@kudo/vite-config": "workspace:*",
     "@types/react": "^19.0.0",
