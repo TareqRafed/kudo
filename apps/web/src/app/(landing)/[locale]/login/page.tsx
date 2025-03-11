@@ -22,7 +22,7 @@ export default function LoginForm() {
             className="w-full flex"
             onClick={() => {
               const formData = new FormData();
-              formData.append('provider', 'github');
+              formData.append('provider', 'google');
               socialAction(formData);
             }}
           >
