@@ -16,6 +16,7 @@ import Magnet from '../Magnet/Magnet';
 import CommentPin from './CommentPin';
 import { useHotkeys } from 'react-hotkeys-hook';
 import { getPublic } from '@src/util';
+import { useRegisterDocument } from '@src/hooks/useRegisterDocument';
 
 const getCssSelector = (el: Element) => {
   const path = [];
@@ -31,6 +32,8 @@ type NewThreadArgs = Extract<Message, { action: 'RPC'; payload: 'create_new_thre
 type UpdateThreadArgs = Extract<Message, { action: 'RPC'; payload: 'update_record' }>['args'];
 
 export const CommentLayer = () => {
+  useRegisterDocument();
+
   const { website } = useWebsiteStore();
   const { toolbarItems, toggleToolbarItem } = useToolbarStore();
 
