@@ -15,10 +15,12 @@ const externalMessageSchema = z.object({
   }),
 });
 
-const whiteListedWebApps = ['http://localhost:3000/~'];
+const BASE_URL = import.meta.env.VITE_PLATFORM_URL;
+const whiteListedWebApps = [`${BASE_URL}`];
 browser.runtime.onMessageExternal.addListener(async (request, sender) => {
-  // if (!whiteListedWebApps.includes(sender.url || '')) return;
-
+  const senderHost = new URL(sender.url || '').host;
+  const isValid = whiteListedWebApps.some((url) => senderHost.includes(new URL(url).host));
+  if (!isValid) return;
   const requestValidated = externalMessageSchema.safeParse(request).data;
   if (!requestValidated) return;
   /**

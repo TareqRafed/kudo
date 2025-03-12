@@ -2,6 +2,7 @@
   "extends": "@kudo/tsconfig/app",
   "compilerOptions": {
     "baseUrl": ".",
+    "types": ["vite/client"],
     "paths": {
       "@src/*": ["src/*"]
     }
