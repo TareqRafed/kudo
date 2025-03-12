@@ -13,7 +13,7 @@
       "cache": false
     },
     "build": {
-      "env": ["!NEXT_PUBLIC_*", "RESEND_API_KEY", "BEEHIIV_API_KEY", "BEEHIIV_PUBLICATION_ID"],
+      "env": ["!VITE_*", "!NEXT_PUBLIC_*", "!RESEND_*", "!BEEHIIV_*"],
       "dependsOn": ["^build", "^ready"],
       "outputs": ["../../dist/**", "dist/**", "build/**"],
       "cache": false
