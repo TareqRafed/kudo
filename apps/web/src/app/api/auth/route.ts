@@ -1,5 +1,4 @@
 import { NextResponse } from 'next/server';
-// The client you created from the Server-Side Auth instructions
 import { createClient } from '@/util/supabase/server';
 import { env } from '@/lib/env';
 
