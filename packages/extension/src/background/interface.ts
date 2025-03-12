@@ -5,7 +5,7 @@ import browser from 'webextension-polyfill';
 
 const requestLogin = async () => {
   const userLoginState = await updateUserState();
-  if (!userLoginState) browser.tabs.create({ url: 'http://localhost:3000/~' });
+  if (!userLoginState) browser.tabs.create({ url: import.meta.env.VITE_PLATFORM_URL });
 };
 
 addMessageListener(async (message) => {

@@ -17,7 +17,6 @@ import Safari from '@/components/Safari';
 import { PricingBasic } from '@/features/Pricing';
 
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger, Button, GradientText } from '@kudo/ui';
-import useNotifyExtension from '@/hooks/useNotifyExtension';
 
 // Constants for reusable data
 const DISPLAY_CARDS = [
