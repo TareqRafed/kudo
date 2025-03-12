@@ -1,5 +1,10 @@
+import { env } from '@/lib/env';
 import useSupabaseBrowser from '@/util/supabase/client';
 import { useEffect } from 'react';
+
+const browser = window.browser || window.chrome;
+
+const extensionId = env.NEXT_PUBLIC_EXTENSION_ID;
 
 const useNotifyExtension = () => {
   const supabase = useSupabaseBrowser();
@@ -10,13 +15,10 @@ const useNotifyExtension = () => {
       await supabase.auth.getUser();
       const session = await supabase.auth.getSession();
       if (session.data)
-        window.postMessage(
-          {
-            action: 'NEW_SESSION',
-            payload: session.data.session,
-          },
-          '*',
-        );
+        browser.runtime.sendMessage(extensionId, {
+          action: 'NEW_SESSION',
+          payload: session.data.session,
+        });
     };
     notifyExtension();
   }, []);

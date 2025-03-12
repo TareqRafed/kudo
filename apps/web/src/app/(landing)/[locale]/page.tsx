@@ -2,7 +2,7 @@
 
 import { useTranslations } from 'next-intl';
 import { motion } from 'framer-motion';
-import { useActionState } from 'react';
+import { useActionState, useEffect } from 'react';
 import { useTheme } from 'next-themes';
 import { GoogleLogo } from '@phosphor-icons/react';
 import { ArrowUpRight } from 'lucide-react';
@@ -17,6 +17,7 @@ import Safari from '@/components/Safari';
 import { PricingBasic } from '@/features/Pricing';
 
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger, Button, GradientText } from '@kudo/ui';
+import useNotifyExtension from '@/hooks/useNotifyExtension';
 
 // Constants for reusable data
 const DISPLAY_CARDS = [
