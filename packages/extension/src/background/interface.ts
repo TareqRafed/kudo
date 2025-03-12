@@ -9,6 +9,7 @@ const requestLogin = async () => {
 };
 
 addMessageListener(async (message) => {
+  console.log('background got message', message);
   if (message.action === 'RPC') {
     const result = await supabase.rpc(message.payload, { ...message.args });
     if (result.error) return { success: false, error: result.error.message || 'Unknown error' };

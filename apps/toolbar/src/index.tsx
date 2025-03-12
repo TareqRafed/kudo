@@ -2,14 +2,11 @@ import { createRoot } from 'react-dom/client';
 import App from '@src/App';
 import tailwindcssOutput from '../dist/tailwind-output.css?inline';
 import { addMessageListener, sendMessage } from '@kudo/shared';
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { domHelper } from './util';
 import useEnvStore from './store/env';
-import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 
 const rootId = 'ab-cursor-content-view-root';
 const shadowRootId = 'ab-cursor-shadow-root';
-const queryClient = new QueryClient();
 
 let lastUrl = window.location.href;
 setInterval(() => {
@@ -23,7 +20,7 @@ const createRootContainer = () => {
   chrome.runtime.connect();
   const root = domHelper.createElement('div', { parent: document.body, id: rootId });
   const rootIntoShadow = domHelper.createElement('div', { parent: root, root: true, id: shadowRootId });
-  const shadowRoot = root.attachShadow({ mode: 'closed', delegatesFocus: true });
+  const shadowRoot = root.attachShadow({ mode: 'open', delegatesFocus: true });
 
   if (navigator.userAgent.includes('Firefox')) {
     /**
@@ -43,11 +40,7 @@ const createRootContainer = () => {
   }
 
   shadowRoot.appendChild(rootIntoShadow);
-  createRoot(rootIntoShadow).render(
-    <QueryClientProvider client={queryClient}>
-      <App />
-    </QueryClientProvider>,
-  );
+  createRoot(rootIntoShadow).render(<App />);
 };
 
 const removeRootContainer = () => {

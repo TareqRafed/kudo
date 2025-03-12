@@ -13,8 +13,7 @@ import LoadingDots from '../LoadingDots/LoadingDots';
 const TOOLBAR_DRAG_AREA_PADDING = 10;
 
 const Toolbar = () => {
-  const { isLoading, data } = useSendMessage({ action: 'GET_AUTH' });
-  console.log(isLoading, data);
+  const { isLoading, isFetched } = useSendMessage({ action: 'GET_AUTH' });
   const { setDragging } = useToolbarStore();
 
   const [toolbarRef, animate] = useAnimate();
@@ -60,7 +59,7 @@ const Toolbar = () => {
         layout
       >
         <AnimatePresence>
-          {isLoading ? (
+          {isLoading && !isFetched ? (
             <motion.span layout className="px-4 py-1">
               <LoadingDots />
             </motion.span>
