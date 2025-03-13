@@ -1,12 +1,14 @@
+'use client';
+
 import { env } from '@/lib/env';
 import useSupabaseBrowser from '@/util/supabase/client';
 import { useEffect } from 'react';
 
-const browser = window.browser || window.chrome;
-
 const extensionId = env.NEXT_PUBLIC_EXTENSION_ID;
 
 const useNotifyExtension = () => {
+  if (!window) return;
+  const browser = window.browser || window.chrome;
   const supabase = useSupabaseBrowser();
 
   // biome-ignore lint/correctness/useExhaustiveDependencies: Unnecessary
