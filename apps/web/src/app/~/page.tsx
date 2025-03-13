@@ -8,18 +8,31 @@ import { URLFormatter } from '@/components/URLFormatter/URLFormatter';
 import { getCurrentMemberWithMetadata } from '@/queries/members';
 import { getProjects } from '@/queries/projects';
 import useSupabaseBrowser from '@/util/supabase/client';
-import { Loader, Tabs, TabsContent, TabsList, TabsTrigger } from '@kudo/ui';
+import {
+  Button,
+  Loader,
+  Separator,
+  Tabs,
+  TabsContent,
+  TabsList,
+  TabsTrigger,
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger,
+} from '@kudo/ui';
 import { Tabs as TabsIcon } from '@phosphor-icons/react';
 import { useQuery } from '@supabase-cache-helpers/postgrest-react-query';
 import { useInfiniteQuery } from '@tanstack/react-query';
 import { useDebounce } from '@uidotdev/usehooks';
 import { formatDistanceToNow } from 'date-fns';
-import { Building, ListTodo } from 'lucide-react';
+import { Building, ListTodo, MessageCircle } from 'lucide-react';
 import Link from 'next/link';
 import { useQueryState } from 'nuqs';
-import Markdown from 'react-markdown';
 import { Container } from './settings/layout-ui';
 import { useBreadcrumbs } from '@/components/Breadcrumb';
+import JavaScriptIcon from '@/assets/icons/javascript.svg';
+import ChromeIcon from '@/assets/icons/chrome.svg';
+import Image from 'next/image';
 
 export default function Dashboard() {
   useBreadcrumbs([{ label: 'Home', href: '/~' }]);
@@ -49,8 +62,8 @@ export default function Dashboard() {
           <ProjectsGrid />
         </TabsContent>
         <TabsContent value="invites">
-          <Container className="rounded-sm border bg-muted">
-            <Markdown className={'p-5'}>{md}</Markdown>
+          <Container className="my-0 rounded-sm border bg-card">
+            <Borading />
           </Container>
         </TabsContent>
       </Tabs>
@@ -160,61 +173,123 @@ const ProjectsGrid = () => {
   );
 };
 
-const md = `
-# Setting Up Your Extension Monitoring
+const Borading = () => {
+  return (
+    <div className="px-4 py-6 overflow-auto">
+      <h1 className="text-2xl text-primary">Setting Up Your Project</h1>
+      <Separator className="my-5 w-full" />
+      <p className="my-5">
+        For any questions or issues, feel free to reach out to us at{' '}
+        <Link href={'mailto:t@trykudo.com'} className="text-primary inline-block">
+          t@trykudo.com
+        </Link>{' '}
+        (we do check our emails)
+      </p>
 
-For any questions or issues, feel free to reach out to us at **support@yourtool.dev** (yes, we actually check it) or join our thriving Discord community at **yourtool.dev/chat** (where everyone is somehow an expert).
+      <Separator className="w-full opacity-50" />
 
----
+      <Tabs defaultValue="extension">
+        <div className="my-5">
+          <h2 className="text-xl text-primary">Platform</h2>
+          <TabsList className="border-none h-full flex justify-center items-center space-x-2">
+            <TabsTrigger value="extension" asChild>
+              <Button className="p-1 h-20 w-20" variant={'secondary'}>
+                <span className="flex flex-col items-center  space-y-1">
+                  <Image className="size-9" alt="Google Chrome Logo" src={ChromeIcon} />
+                  <span>Extesnion</span>
+                </span>
+              </Button>
+            </TabsTrigger>
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <span>
+                  <TabsTrigger disabled value="web" asChild>
+                    <Button className="p-1 h-20 w-20" variant={'secondary'}>
+                      <span className="flex flex-col items-center  space-y-1">
+                        <Image className="size-9" alt="JavaScript Logo" src={JavaScriptIcon} />
+                        <span>Web</span>
+                      </span>
+                    </Button>
+                  </TabsTrigger>
+                </span>
+              </TooltipTrigger>
+              <TooltipContent>Soon</TooltipContent>
+            </Tooltip>
+          </TabsList>
+        </div>
 
+        <Separator className="w-full opacity-50" />
+        <TabsContent value="extension">
+          <Extension />
+        </TabsContent>
+        <TabsContent value="web">
+          <Javascript />
+        </TabsContent>
+      </Tabs>
 
-## 1. Install the Extension
+      <Separator className="w-full" />
 
-Before anything else, install the extension. Currently, it’s available only on **Chrome** (because Firefox can wait, apparently).
+      <p className="mt-4 text-primary">🚀🚀🚀</p>
+    </div>
+  );
+};
 
-1. Go to the [Chrome Web Store](https://chrome.google.com/webstore) and search for **"YourTool"** (or just click the link—we know you’re going to).
-2. Click the **"Add to Chrome"** button.
-3. Accept the permissions (it’s fine, we’re not stealing your data… probably).
+const Extension = () => {
+  return (
+    <>
+      <h2 className="text-xl text-primary mt-4 mb-2">1. Install the Extension</h2>
+      <p>
+        Before anything else, install the extension. Currently, it&apos;s available only on{' '}
+        <span className="text-accent-foreground">Chrome</span>. Very soon, we will an NPM package. So you can integrate
+        with any project internally.
+      </p>
+      <ul className="list-disc pl-6 space-y-1 my-3">
+        <li>
+          Go to the{' '}
+          <a
+            href="https://chrome.google.com/webstore"
+            target="_blank"
+            className="text-accent-foreground underline"
+            rel="noreferrer"
+          >
+            Chrome Web Store
+          </a>{' '}
+        </li>
+        <li>
+          Click the <span className="">&quot;Add to Chrome&quot;</span> button.
+        </li>
+        <li>Pin the extension for easy access.</li>
+      </ul>
 
----
+      <Separator className="w-full opacity-50" />
 
-## 2. Open the Extension
-After installation, click the little puzzle piece icon in the top-right corner of your browser (yes, it’s hidden—blame Chrome).
+      <h2 className="text-xl text-primary mt-4 mb-2">2. Open the Extension</h2>
+      <p>After installation, click on the extension icone to get the toolbar.</p>
+      <ul className="list-disc pl-6 space-y-1 my-3">
+        <li>
+          Click on <MessageCircle className="inline-block" /> to start a thread.
+        </li>
+        <li>The threads will stick to the elements where they were created, your team can always see those threads.</li>
+        <li>If the toolbar is active, you will be able to see your team threads.</li>
+      </ul>
 
-1. Pin the extension for easy access (if you can figure out how).
-2. Click the extension whenever you want to:
-- Add a comment.
-- View threads.
-- Marvel at how much better your app is than everyone else’s.
+      <Separator className="w-full opacity-50" />
 
----
+      <h2 className="text-xl text-primary mt-4 mb-2">Pro Tips</h2>
+      <ul className="list-disc pl-6 space-y-1 my-3">
+        <li>
+          <span className="text-primary">Stay Updated:</span> We&apos;re constantly improving, so keep an eye out for
+          extension updates.
+        </li>
+        <li>
+          <span className="text-primary">Report Bugs:</span> If something doesn&apos;t work, it&apos;s not your fault
+          (probably). Let us know!
+        </li>
+      </ul>
+    </>
+  );
+};
 
-## 3. Add Your API Key (Don’t Worry, It’s Safe)
-To use the extension, you’ll need an API key. Think of it as your VIP pass to the tool.
-
-1. Open the extension.
-2. Paste your API key into the setup box (because typing it out is too much work).
-3. Click **Save** (and watch the magic happen).
-
-If you don’t have an API key yet, generate one from your account dashboard at **yourtool.dev/dashboard**.
-
----
-
-
-## 4. Start Using the Extension
-That’s it! You’re all set up. To:
-- **Add a Comment:** Highlight any text, click the extension, and write your masterpiece.
-- **View Threads:** Click the extension, navigate through the threads, and enjoy the drama.
-
----
-
-## Pro Tips
-- **Stay Updated:** We’re constantly improving, so keep an eye out for extension updates (or don’t and miss all the cool stuff).
-- **Report Bugs:** If something doesn’t work, it’s not your fault (probably). Let us know!
-
----
-
-Happy commenting! 🚀
-
-
-`;
+const Javascript = () => {
+  return <></>;
+};
