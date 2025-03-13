@@ -1,4 +1,5 @@
 import browser from 'webextension-polyfill';
+import { hideToolbar, injectContentScript } from './actions';
 
 /**
  * Stores which tabs is connected to the bg script
@@ -10,8 +11,18 @@ export const ports: Record<number, browser.Runtime.Port> = {};
  */
 export const abortSchedule: Record<number, NodeJS.Timeout> = {};
 
+/**
+ * Just check if toolbar on screen or not, you may want to use isToolbarActive to check if the toolbar is active
+ */
 export const isContentOnScreen = (tabId: number) => {
   return !!ports[tabId] && !abortSchedule[tabId];
+};
+
+/**
+ * Checks if the toolbar is active, may not be on screen because of tab refreshing
+ */
+export const isToolbarActive = (tabId: number) => {
+  return !!ports[tabId];
 };
 
 const abortDelete = (id: number) => {
@@ -27,13 +38,14 @@ const scheduleDelete = (id: number) => {
 
   const to = setTimeout(() => {
     if (id) delete ports[id];
+    hideToolbar(id);
   }, 2000);
 
   abortSchedule[id] = to;
 };
 
 browser.runtime.onConnect.addListener((port) => {
-  console.log('Connected:', port.name);
+  console.log('Connected:', ports);
 
   // Check if it's a tab connection
   if (port?.sender?.tab?.id) {
@@ -53,3 +65,11 @@ browser.runtime.onConnect.addListener((port) => {
     });
   }
 });
+
+const handleTabUpdate = async (tabId: number, changeInfo: browser.Tabs.OnUpdatedChangeInfoType) => {
+  const onScreen = ports[tabId];
+  if (onScreen && changeInfo.status === 'complete') {
+    await injectContentScript(tabId);
+  }
+};
+browser.tabs.onUpdated.addListener(handleTabUpdate);

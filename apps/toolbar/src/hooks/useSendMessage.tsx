@@ -1,15 +1,16 @@
 import type { Message } from '@kudo/shared';
 import { sendMessage } from '@kudo/shared';
-import { useQuery, type UseQueryOptions } from '@tanstack/react-query';
+import { useQuery } from '@tanstack/react-query';
 
-export const useSendMessage = <T extends Message>(message: T, options?: UseQueryOptions) => {
+type QueryKeys = ['auth'] | ['threads', number] | ['comments'];
+
+export const useSendMessage = <T extends Message>(message: T, key: QueryKeys = ['auth']) => {
   const query = useQuery({
-    queryKey: [message],
+    queryKey: key,
     queryFn: async () => {
       // const _key = key[0];
-      console.log(message.action);
       const res = await sendMessage(message);
-      if (!res.success) throw new Error('Something went bad');
+      console.log();
       return res;
     },
   });

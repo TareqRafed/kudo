@@ -13,6 +13,7 @@ export type Message =
   | { action: 'TOGGLE'; payload: { isOnScreen: boolean } }
   | { action: 'REQUEST_LOGIN'; payload: string }
   | { action: 'GET_AUTH'; payload?: string }
+  | { action: 'END_AUTH'; payload?: string }
   | { action: 'PING'; payload?: string };
 
 export type ResponseMessage<T> = SuccessMessage<T> | UnsuccessMessage;
@@ -34,6 +35,7 @@ export type MessageResponseMap<T extends Message> = {
   TOGGLE: { isOnScreen: boolean };
   REQUEST_LOGIN: boolean;
   GET_AUTH: Session | null;
+  END_AUTH: 'OK';
   PING: 'PONG';
 };
 
