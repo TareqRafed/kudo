@@ -45,8 +45,6 @@ const scheduleDelete = (id: number) => {
 };
 
 browser.runtime.onConnect.addListener((port) => {
-  console.log('Connected:', ports);
-
   // Check if it's a tab connection
   if (port?.sender?.tab?.id) {
     const tabId = port.sender.tab.id;
