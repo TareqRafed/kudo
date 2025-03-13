@@ -36,3 +36,9 @@ const handleActionClick = async (tab: browser.Tabs.Tab) => {
 
 browser.tabs.onActivated.addListener(async (activeInfo) => syncAction(activeInfo.tabId));
 browser.action.onClicked.addListener(handleActionClick);
+
+browser.runtime.onInstalled.addListener((details) => {
+  if (details.reason === 'install') {
+    browser.tabs.create({ url: import.meta.env.VITE_PLATFORM_URL });
+  }
+});
