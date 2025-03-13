@@ -1,5 +1,3 @@
-'use client';
-
 import {
   Sidebar,
   SidebarContent,
@@ -8,89 +6,43 @@ import {
   SidebarGroupLabel,
   SidebarHeader,
   SidebarRail,
-  useSidebar,
 } from '@/components/Sidebar';
-import {
-  AudioWaveform,
-  BookOpen,
-  Bot,
-  Command,
-  Frame,
-  GalleryVerticalEnd,
-  Home,
-  Mail,
-  Map,
-  PieChart,
-  Settings2,
-  SquareTerminal,
-} from 'lucide-react';
+import { Home, Mail, Settings2 } from 'lucide-react';
 import SidebarBanner from './sidebarBanner';
 import { NavMain } from './sidebarMain';
 import { TeamSwitcher } from './sidebarTeamSwitcher';
 import { NavUser } from './sidebarUser';
 import { SidebarSublinks } from './sidebarSublinks';
-import { KeyboardShortcut, TooltipContent } from '@kudo/ui';
-import { Children } from 'react';
+import { KeyboardShortcut } from '@kudo/ui';
+import { createClient } from '@/util/supabase/server';
+import { prefetchQuery } from '@supabase-cache-helpers/postgrest-react-query';
+import { getCurrentMemberWithMetadata, getMembersWithMetadata } from '@/queries/members';
+import { getTeams } from '@/queries/teams';
+import { dehydrate, HydrationBoundary, QueryClient } from '@tanstack/react-query';
 
-const data = {
-  navMain: [
-    {
-      title: 'Projects',
-      url: '/~',
-      tooltip: {
-        children: (
-          <>
-            <KeyboardShortcut>G</KeyboardShortcut>o <KeyboardShortcut>P</KeyboardShortcut>rojects
-          </>
-        ),
-      },
+export async function AppSidebar() {
+  const supabase = await createClient();
+  const queryClient = new QueryClient();
+  await prefetchQuery(queryClient, getMembersWithMetadata(supabase));
+  await prefetchQuery(queryClient, getTeams(supabase));
+  await prefetchQuery(queryClient, getCurrentMemberWithMetadata(supabase));
 
-      icon: Home,
-      isActive: true,
-    },
-    {
-      title: 'Invitations',
-      url: '/~/settings/invitations',
-      tooltip: {
-        children: (
-          <>
-            <KeyboardShortcut>G</KeyboardShortcut>o <KeyboardShortcut>I</KeyboardShortcut>nvitations
-          </>
-        ),
-      },
-      icon: Mail,
-    },
-    {
-      title: 'Settings',
-      url: '/~/settings',
-      tooltip: {
-        children: (
-          <>
-            <KeyboardShortcut>G</KeyboardShortcut>o <KeyboardShortcut>S</KeyboardShortcut>ettings
-          </>
-        ),
-      },
-
-      icon: Settings2,
-    },
-  ],
-};
-
-export function AppSidebar() {
   return (
-    <Sidebar collapsible="icon">
-      <SidebarHeader>
-        <NavUser />
-      </SidebarHeader>
-      <SidebarContent>
-        <NavMain items={data.navMain} />
-      </SidebarContent>
-      <SidebarFooter>
-        <SidebarBanner />
-        <SidebarSublinks />
-        <TeamSwitcher />
-      </SidebarFooter>
-      <SidebarRail />
-    </Sidebar>
+    <HydrationBoundary state={dehydrate(queryClient)}>
+      <Sidebar collapsible="icon">
+        <SidebarHeader>
+          <NavUser />
+        </SidebarHeader>
+        <SidebarContent>
+          <NavMain />
+        </SidebarContent>
+        <SidebarFooter>
+          <SidebarBanner />
+          <SidebarSublinks />
+          <TeamSwitcher />
+        </SidebarFooter>
+        <SidebarRail />
+      </Sidebar>
+    </HydrationBoundary>
   );
 }

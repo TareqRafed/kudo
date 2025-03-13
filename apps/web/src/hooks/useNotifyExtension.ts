@@ -15,7 +15,7 @@ const useNotifyExtension = () => {
     const notifyExtension = async () => {
       await supabase.auth.getUser();
       const session = await supabase.auth.getSession();
-      if (session.data)
+      if (browser.runtime?.sendMessage && session.data)
         browser.runtime.sendMessage(extensionId, {
           action: 'NEW_SESSION',
           payload: session.data.session,

@@ -30,8 +30,6 @@ export function NavUser() {
 
   const router = useRouter();
 
-  if (!user) redirect('/');
-
   if (isLoading) return <Skeleton className="h-8 w-full" />;
 
   const logOut = async () => {
