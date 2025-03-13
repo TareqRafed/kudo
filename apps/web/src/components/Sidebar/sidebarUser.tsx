@@ -16,7 +16,7 @@ import { UserAvatar } from '@/components/Avatar/Avatar';
 import useSupabaseBrowser from '@/util/supabase/client';
 import { useQuery, useUpdateMutation } from '@supabase-cache-helpers/postgrest-react-query';
 import { getCurrentMemberWithMetadata } from '@/queries/members';
-import { redirect, useRouter } from 'next/navigation';
+import { useRouter } from 'next/navigation';
 import { getNotifications } from '@/queries/notifications';
 import { cn } from '@/lib/utils';
 import { Button } from '@kudo/ui';
@@ -30,13 +30,15 @@ export function NavUser() {
 
   const router = useRouter();
 
-  if (isLoading) return <Skeleton className="h-8 w-full" />;
-
   const logOut = async () => {
     await supabase.auth.signOut();
     router.replace('/');
   };
 
+  if (isLoading) return <Skeleton className="h-8 w-full" />;
+  if (isError) return 'Something went wrong';
+
+  if (!user) return "Couldn't retrieve user";
   return (
     <SidebarMenu>
       <SidebarMenuItem className="flex items-center justify-between">
