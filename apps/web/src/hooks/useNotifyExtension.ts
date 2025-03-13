@@ -7,12 +7,11 @@ import { useEffect } from 'react';
 const extensionId = env.NEXT_PUBLIC_EXTENSION_ID;
 
 const useNotifyExtension = () => {
-  if (!window) return;
-  const browser = window.browser || window.chrome;
   const supabase = useSupabaseBrowser();
 
   // biome-ignore lint/correctness/useExhaustiveDependencies: Unnecessary
   useEffect(() => {
+    const browser = window.browser || window.chrome;
     const notifyExtension = async () => {
       await supabase.auth.getUser();
       const session = await supabase.auth.getSession();
