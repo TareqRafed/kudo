@@ -15,11 +15,11 @@ const manifest = {
    */
   name: 'Kudo',
   version: packageJson.version,
-  description: 'Collaboration for developers on any webpage - Kudo',
-  host_permissions: ['<all_urls>'],
-  permissions: ['storage', 'scripting', 'tabs', 'notifications'],
+  description: 'Collaboration on any webpage - Kudo',
+  // host_permissions: ['<all_urls>'],
+  permissions: ['storage', 'scripting', 'tabs'],
   externally_connectable: {
-    matches: ['http://localhost:3000/*'],
+    matches: ['https://trykudo.com/*'],
   },
   background: {
     service_worker: 'background.iife.js',

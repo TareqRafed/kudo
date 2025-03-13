@@ -3,26 +3,9 @@ import { Montserrat_Alternates, Mitr } from 'next/font/google';
 import '@kudo/ui/lib/global.css';
 import { SidebarProvider, SidebarTrigger } from '@/components/Sidebar';
 import { AppSidebar } from '@/components/Sidebar/index';
-import { createClient } from '@/util/supabase/server';
 import ClientProviders from './clientProviders';
-import { prefetchQuery } from '@supabase-cache-helpers/postgrest-react-query';
-import { getTeams } from '@/queries/teams';
-import { dehydrate, HydrationBoundary, QueryClient } from '@tanstack/react-query';
-import { getCurrentMemberWithMetadata, getMembersWithMetadata } from '@/queries/members';
 import { cookies } from 'next/headers';
 import { DynamicBreadcrumb } from '@/components/Breadcrumb';
-
-// Latin
-const MontserratAlternates = Montserrat_Alternates({
-  subsets: ['latin'],
-  weight: ['100', '200', '300', '400', '500', '600'],
-  variable: '--montserrat',
-});
-const mitr = Mitr({
-  subsets: ['latin'],
-  weight: ['200', '300', '400', '500', '600'],
-  variable: '--mitr',
-});
 
 export const metadata: Metadata = {
   title: 'Kudo - Never miss a Sale',
@@ -89,37 +72,29 @@ export default async function RootLayout({
   children: React.ReactNode;
   params: { locale: string };
 }>) {
-  const supabase = await createClient();
-  const queryClient = new QueryClient();
-  await prefetchQuery(queryClient, getMembersWithMetadata(supabase));
-  await prefetchQuery(queryClient, getTeams(supabase));
-  await prefetchQuery(queryClient, getCurrentMemberWithMetadata(supabase));
-
-  const fontUsed = `${MontserratAlternates.variable} ${mitr.variable}`;
+  // const supabase = await createClient();
+  // const queryClient = new QueryClient();
+  // await prefetchQuery(queryClient, getMembersWithMetadata(supabase));
+  // await prefetchQuery(queryClient, getTeams(supabase));
+  // await prefetchQuery(queryClient, getCurrentMemberWithMetadata(supabase));
 
   const cookieStore = await cookies();
   const defaultOpen = cookieStore.get('sidebar:state')?.value === 'true';
 
   return (
-    <html lang={'en'} suppressHydrationWarning>
-      <body className={`${fontUsed} antialiased`}>
-        <ClientProviders>
-          <HydrationBoundary state={dehydrate(queryClient)}>
-            <div className="min-h-screen bg-background p-4 transition-colors selection:bg-secondary selection:text-primary">
-              <SidebarProvider defaultOpen={defaultOpen}>
-                <AppSidebar />
-                <main className="w-full">
-                  <div className="mb-5 flex items-center">
-                    <SidebarTrigger className="mr-2 block lg:hidden" />
-                    <DynamicBreadcrumb />
-                  </div>
-                  {children}
-                </main>
-              </SidebarProvider>
+    <ClientProviders>
+      <div className="min-h-screen bg-background p-4 transition-colors selection:bg-secondary selection:text-primary">
+        <SidebarProvider defaultOpen={defaultOpen}>
+          <AppSidebar />
+          <main className="w-full">
+            <div className="mb-5 flex items-center">
+              <SidebarTrigger className="mr-2 block lg:hidden" />
+              <DynamicBreadcrumb />
             </div>
-          </HydrationBoundary>
-        </ClientProviders>
-      </body>
-    </html>
+            {children}
+          </main>
+        </SidebarProvider>
+      </div>
+    </ClientProviders>
   );
 }

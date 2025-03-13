@@ -1,5 +1,4 @@
 import type { Metadata } from 'next';
-import { Montserrat_Alternates, Mitr, Alexandria, Cairo } from 'next/font/google';
 import '@kudo/ui/lib/global.css';
 import { ThemeProvider } from '@/components/ThemeProvider/ThemeProvider';
 import Header from '@/components/Header/Header';
@@ -8,34 +7,9 @@ import { getMessages } from 'next-intl/server';
 import { NextIntlClientProvider } from 'next-intl';
 import { notFound } from 'next/navigation';
 import { routing } from '@/i18n/routing';
-import { getLangDir } from 'rtl-detect';
+// import { getLangDir } from 'rtl-detect';
 import { Toaster, TooltipProvider } from '@kudo/ui';
-import { useTheme } from 'next-themes';
 import { SquareBackground } from '@/components/SquareBackground';
-
-// Latin
-const MontserratAlternates = Montserrat_Alternates({
-  subsets: ['latin'],
-  weight: ['100', '200', '300', '400', '500', '600'],
-  variable: '--montserrat',
-});
-const mitr = Mitr({
-  subsets: ['latin'],
-  weight: ['200', '300', '400', '500', '600'],
-  variable: '--mitr',
-});
-
-// Arabic
-const alexandria = Alexandria({
-  subsets: ['latin'],
-  weight: ['100', '200', '300', '400', '500', '600'],
-  variable: '--alexandria',
-});
-const cairo = Cairo({
-  subsets: ['latin'],
-  weight: ['200', '300', '400', '500', '600'],
-  variable: '--cairo',
-});
 
 export const metadata: Metadata = {
   title: 'Collaborate on any webpage',
@@ -104,7 +78,7 @@ export default async function RootLayout({
   params: { locale: string };
 }>) {
   const { locale } = await params;
-  if (!routing.locales.includes(locale as any)) {
+  if (!routing.locales.includes(locale as 'en')) {
     notFound();
   }
 
@@ -112,30 +86,24 @@ export default async function RootLayout({
   // side is the easiest way to get started
   const messages = await getMessages();
 
-  const direction = getLangDir(locale);
-
-  const fontUsed = `${MontserratAlternates.variable} ${mitr.variable}`;
+  //  const direction = getLangDir(locale);
 
   return (
-    <html lang={locale} dir={direction} suppressHydrationWarning>
-      <body className={`${fontUsed} antialiased`}>
-        <NextIntlClientProvider messages={messages}>
-          <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
-            <TooltipProvider>
-              <Toaster />
-              <div className="p-[1rem] min-h-screen bg-background selection:bg-secondary selection:text-primary transition-colors">
-                <Header className="md:hidden flex mb-5 z-20 relative" />
-                <div className="rounded-lg bg-gradient-to-b overflow-hidden from-background-gradient via-background-gradient2 via-50% to-transparent relative z-20">
-                  <Header className="md:flex hidden relative z-20" />
-                  <SquareBackground />
-                  <div className="min-h-[100vh] z-20 relative">{children}</div>
-                </div>
-              </div>
-            </TooltipProvider>
-            <Footer className="relative z-20" />
-          </ThemeProvider>
-        </NextIntlClientProvider>
-      </body>
-    </html>
+    <NextIntlClientProvider messages={messages}>
+      <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
+        <TooltipProvider>
+          <Toaster />
+          <div className="p-[1rem] min-h-screen bg-background selection:bg-secondary selection:text-primary transition-colors">
+            <Header className="md:hidden flex mb-5 z-20 relative" />
+            <div className="rounded-lg bg-gradient-to-b overflow-hidden from-background-gradient via-background-gradient2 via-50% to-transparent relative z-20">
+              <Header className="md:flex hidden relative z-20" />
+              <SquareBackground />
+              <div className="min-h-[100vh] z-20 relative">{children}</div>
+            </div>
+          </div>
+        </TooltipProvider>
+        <Footer className="relative z-20" />
+      </ThemeProvider>
+    </NextIntlClientProvider>
   );
 }

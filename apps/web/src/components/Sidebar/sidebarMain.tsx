@@ -1,30 +1,64 @@
 'use client';
 
-import type { LucideIcon } from 'lucide-react';
+import { Home, Mail, Settings2, type LucideIcon } from 'lucide-react';
 
-import { Collapsible, CollapsibleTrigger, type TooltipContent } from '@kudo/ui';
+import { Collapsible, CollapsibleTrigger, KeyboardShortcut, type TooltipContent } from '@kudo/ui';
 import { SidebarGroup, SidebarGroupLabel, SidebarMenu, SidebarMenuButton, SidebarMenuItem } from '@/components/Sidebar';
 import Link from 'next/link';
 import { cn } from '@/lib/utils';
 import { usePathname } from 'next/navigation';
 
-export function NavMain({
-  items,
-}: {
-  items: {
-    title: string;
-    tooltip?: string | React.ComponentProps<typeof TooltipContent>;
-    url: string;
-    icon?: LucideIcon;
-    isActive?: boolean;
-  }[];
-}) {
+const data = {
+  navMain: [
+    {
+      title: 'Projects',
+      url: '/~',
+      tooltip: {
+        children: (
+          <>
+            <KeyboardShortcut>G</KeyboardShortcut>o <KeyboardShortcut>P</KeyboardShortcut>rojects
+          </>
+        ),
+      },
+
+      icon: Home,
+      isActive: true,
+    },
+    {
+      title: 'Invitations',
+      url: '/~/settings/invitations',
+      tooltip: {
+        children: (
+          <>
+            <KeyboardShortcut>G</KeyboardShortcut>o <KeyboardShortcut>I</KeyboardShortcut>nvitations
+          </>
+        ),
+      },
+      icon: Mail,
+    },
+    {
+      title: 'Settings',
+      url: '/~/settings',
+      tooltip: {
+        children: (
+          <>
+            <KeyboardShortcut>G</KeyboardShortcut>o <KeyboardShortcut>S</KeyboardShortcut>ettings
+          </>
+        ),
+      },
+
+      icon: Settings2,
+    },
+  ],
+};
+
+export function NavMain() {
   const path = usePathname();
   return (
     <SidebarGroup>
       <SidebarGroupLabel>Platform</SidebarGroupLabel>
       <SidebarMenu>
-        {items.map((item) => (
+        {data.navMain.map((item) => (
           <Collapsible key={item.title} asChild defaultOpen={item.isActive} className="group/collapsible">
             <SidebarMenuItem>
               <SidebarMenuButton
