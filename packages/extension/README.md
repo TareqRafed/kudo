@@ -1,5 +1,5 @@
 ## Extension
 
 * Acts as a wrapper for `@kudo/toolbar`.
-* Toolbar is independet, should be injectable from as extension or script.
+* The toolbar is independent and should be injectable as an extension or script.
 
