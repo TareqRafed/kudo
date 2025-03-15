@@ -16,6 +16,9 @@ export default defineConfig(({ mode }) => {
   const isProduction = mode === 'production';
 
   return {
+    define: {
+      'process.env.NODE_ENV': isDev ? '"development"' : '"production"',
+    },
     resolve: {
       alias: {
         '@root': rootDir,
@@ -26,7 +29,7 @@ export default defineConfig(({ mode }) => {
     plugins: [
       react(),
       watchPublicPlugin(),
-      isDev && watchRebuildPlugin({ reload: true }),
+      isDev && watchRebuildPlugin({ refresh: true }),
       isDev && makeEntryPointPlugin(),
     ],
     build: {
