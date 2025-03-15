@@ -1,7 +1,7 @@
 {
   "name": "@kudo/extension",
   "version": "0.0.1",
-  "description": "chrome extension - core settings",
+  "description": "Extension - Kudo",
   "type": "module",
   "scripts": {
     "clean:node_modules": "pnpx rimraf node_modules",

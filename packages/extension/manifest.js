@@ -15,7 +15,7 @@ const manifest = {
    */
   name: 'Kudo',
   version: packageJson.version,
-  description: 'Collaboration on any webpage - Kudo',
+  description: 'The comment layer for the web - Kudo',
   // host_permissions: ['<all_urls>'],
   permissions: ['storage', 'scripting', 'tabs', 'activeTab'],
   externally_connectable: {
