@@ -13,9 +13,9 @@
     "clean": "pnpm clean:bundle && pnpm clean:node_modules && pnpm clean:turbo",
     "build:tailwindcss": "pnpm tailwindcss -i ./src/tailwind-input.css -o ./dist/tailwind-output.css -m",
     "build": "pnpm build:tailwindcss && vite build",
-    "build:watch": "concurrently \"cross-env __DEV__=true vite build --mode development\" \"pnpm build:tailwindcss -- -w\"",
+    "build:watch": "concurrently \"vite build --mode development\" \"pnpm build:tailwindcss -- -w\"",
     "dev": "pnpm build:tailwindcss && pnpm build:watch",
-    "lint": "eslint . --ext .ts,.tsx",
+    "lint": "pnpm lint",
     "lint:fix": "pnpm lint --fix",
     "format": "biome format --write",
     "type-check": "tsc --noEmit"
@@ -38,12 +38,13 @@
     "zustand": "^5.0.3"
   },
   "devDependencies": {
+    "@vitejs/plugin-react-swc": "^3.6.0",
     "@tanstack/react-query-devtools": "^5.67.3",
     "@biomejs/biome": "1.9.4",
     "@kudo/biome-config": "workspace:*",
     "@kudo/hmr": "workspace:*",
     "@kudo/tsconfig": "workspace:*",
-    "@kudo/vite-config": "workspace:*",
+    "@types/node": "^20.17.16",
     "@types/react": "^19.0.0",
     "@types/react-dom": "^19.0.0",
     "@types/webextension-polyfill": "^0.12.1",
