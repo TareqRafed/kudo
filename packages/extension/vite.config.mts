@@ -3,7 +3,6 @@ import { defineConfig, type PluginOption } from 'vite';
 import libAssetsPlugin from '@laynezh/vite-plugin-lib-assets';
 import makeManifestPlugin from './utils/plugins/make-manifest-plugin';
 import { watchPublicPlugin, watchRebuildPlugin } from '@kudo/hmr';
-import { watchOption } from '@kudo/vite-config';
 
 const rootDir = resolve(__dirname);
 const srcDir = resolve(rootDir, 'src');
@@ -43,7 +42,6 @@ export default defineConfig(({ mode }) => {
       sourcemap: isDev,
       minify: isProduction,
       reportCompressedSize: isProduction,
-      watch: watchOption,
 
       rollupOptions: {
         external: ['chrome'],

@@ -22,9 +22,9 @@
   },
   "devDependencies": {
     "@biomejs/biome": "1.9.4",
+    "@types/node": "^20.17.16",
     "@kudo/hmr": "workspace:*",
     "@kudo/tsconfig": "workspace:*",
-    "@kudo/vite-config": "workspace:*",
     "@laynezh/vite-plugin-lib-assets": "^0.5.23",
     "@types/webextension-polyfill": "^0.12.1",
     "@types/ws": "^8.5.12",
