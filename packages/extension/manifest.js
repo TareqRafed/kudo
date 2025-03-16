@@ -13,7 +13,7 @@ const manifest = {
    * if you want to support multiple languages, you can use the following reference
    * https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/Internationalization
    */
-  name: 'Kudo',
+  name: 'Start Discussions on Any Website - Kudo',
   version: packageJson.version,
   description: 'The comment layer for the web - Kudo',
   // host_permissions: ['<all_urls>'],
