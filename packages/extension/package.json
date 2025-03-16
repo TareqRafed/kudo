@@ -17,6 +17,7 @@
   },
   "dependencies": {
     "@kudo/shared": "workspace:*",
+    "@kudo/toolbar": "workspace:*",
     "zod": "^3.24.1",
     "webextension-polyfill": "^0.12.0"
   },

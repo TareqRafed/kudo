@@ -18,6 +18,11 @@
       "outputs": ["../../dist/**", "dist/**", "build/**"],
       "cache": false
     },
+    "zip": {
+      "env": ["!VITE_*", "!NEXT_PUBLIC_*", "RESEND_API_KEY", "BEEHIIV_API_KEY", "BEEHIIV_PUBLICATION_ID"],
+      "dependsOn": ["^build", "^ready"]
+    },
+
     "e2e": {
       "cache": false
     },
