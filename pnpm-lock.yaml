@@ -325,6 +325,9 @@ importers:
       '@kudo/shared':
         specifier: workspace:*
         version: link:../shared
+      '@kudo/toolbar':
+        specifier: workspace:*
+        version: link:../../apps/toolbar
       webextension-polyfill:
         specifier: ^0.12.0
         version: 0.12.0

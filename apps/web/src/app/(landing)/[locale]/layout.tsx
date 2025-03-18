@@ -11,65 +11,6 @@ import { routing } from '@/i18n/routing';
 import { Toaster, TooltipProvider } from '@kudo/ui';
 import { SquareBackground } from '@/components/SquareBackground';
 
-export const metadata: Metadata = {
-  title: 'Collaborate on any webpage',
-  description: 'Better Feedback From Your Team',
-
-  openGraph: {
-    type: 'website',
-    title: 'Kudo - Better Feedback From Your Team',
-    description: 'Kudo is an AI-powered one-click integration to limit your sale loss dramatically',
-    url: 'https://usekudo.com', // Add your actual site URL here
-    siteName: 'Kudo',
-    images: [
-      {
-        url: '/og.png', // Your custom Open Graph image
-        width: 1200,
-        height: 630,
-        alt: 'Mersal - Never miss a Sale',
-      },
-    ],
-  },
-
-  // Twitter Card metadata for Twitter sharing
-  twitter: {
-    card: 'summary_large_image', // Large image Twitter card
-    title: 'Collaborate on any webpage',
-    description: 'Kudo helps you to collaborate with other web developers',
-    images: '/favicon/twitter-image.jpg', // Your custom Twitter image
-  },
-
-  robots: 'index, follow',
-  viewport: 'width=device-width, initial-scale=1.0',
-  keywords: 'Kudo, comment, collaborate, web, software',
-  authors: [{ name: 'Kudo', url: 'https://trykudo.com' }],
-
-  // Favicon and app icons for devices and browsers
-  icons: [
-    {
-      rel: 'icon',
-      url: '/favicon/favicon.ico', // Your favicon file
-    },
-    {
-      rel: 'apple-touch-icon',
-      url: '/favicon/apple-touch-icon.png', // Your Apple touch icon
-      sizes: '180x180',
-    },
-    {
-      rel: 'icon',
-      url: '/favicon/favicon-32x32.png', // Your 32x32 favicon
-      type: 'image/png',
-      sizes: '32x32',
-    },
-    {
-      rel: 'icon',
-      url: '/favicon/favicon-16x16.png', // Your 16x16 favicon
-      type: 'image/png',
-      sizes: '16x16',
-    },
-  ],
-};
-
 export default async function RootLayout({
   children,
   params,
