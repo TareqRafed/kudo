@@ -25,6 +25,8 @@
     "@types/node": "^20.17.16",
     "@types/react": "^19.0.0",
     "@types/react-dom": "^19.0.0",
+    "@types/chrome": "^0.0.309",
+    "@types/firefox-webext-browser": "^120.0.4",
     "zod": "^3.24.1"
   },
   "dependencies": {

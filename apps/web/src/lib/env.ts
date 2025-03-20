@@ -3,6 +3,7 @@ import { z } from 'zod';
 // Server-side schema
 const serverEnvSchema = z.object({
   RESEND_API_KEY: z.string().min(1),
+  STRIPE_API_KEY: z.string().min(1),
   BEEHIIV_API_KEY: z.string().min(1),
   BEEHIIV_PUBLICATION_ID: z.string().min(1),
   NODE_ENV: z.enum(['development', 'production']),
@@ -10,6 +11,7 @@ const serverEnvSchema = z.object({
   NEXT_PUBLIC_SUPABASE_ANON_KEY: z.string().min(1),
   NEXT_PUBLIC_EXTENSION_ID: z.string().min(1),
   NEXT_PUBLIC_BASE_URL: z.string().url(),
+  NEXT_PUBLIC_CHROME_WEBSTORE_URL: z.string().url(),
 });
 
 // Client-side schema (only NEXT_PUBLIC_ vars)
@@ -18,6 +20,7 @@ const clientEnvSchema = z.object({
   NEXT_PUBLIC_SUPABASE_ANON_KEY: z.string().min(1),
   NEXT_PUBLIC_EXTENSION_ID: z.string().min(1),
   NEXT_PUBLIC_BASE_URL: z.string().url(),
+  NEXT_PUBLIC_CHROME_WEBSTORE_URL: z.string().url(),
 });
 
 export type ServerEnv = z.infer<typeof serverEnvSchema>;

@@ -1,8 +1,8 @@
 'use client';
 
 import { BreadcrumbProvider } from '@/components/Breadcrumb';
+import { ExtensionProvider } from '@/hooks/useExtension';
 import { useMotions } from '@/hooks/useMotions';
-import useNotifyExtension from '@/hooks/useNotifyExtension';
 import { Toaster, TooltipProvider } from '@kudo/ui';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ThemeProvider } from 'next-themes';
@@ -16,7 +16,6 @@ const queryClient = new QueryClient();
  * Client side providers
  */
 const ClientProviders = ({ children }: { children: ReactNode }) => {
-  useNotifyExtension();
   useMotions();
   useNavigationMotions();
   return (
@@ -25,7 +24,9 @@ const ClientProviders = ({ children }: { children: ReactNode }) => {
         <TooltipProvider>
           <Toaster />
           <NuqsAdapter>
-            <BreadcrumbProvider>{children}</BreadcrumbProvider>
+            <ExtensionProvider>
+              <BreadcrumbProvider>{children}</BreadcrumbProvider>
+            </ExtensionProvider>
           </NuqsAdapter>
         </TooltipProvider>
       </ThemeProvider>
