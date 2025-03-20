@@ -52,6 +52,7 @@
     "resend": "^4.1.1",
     "rtl-detect": "^1.1.2",
     "sharp": "^0.33.5",
+    "stripe": "^17.7.0",
     "tailwind-merge": "^2.6.0",
     "tailwindcss-animate": "^1.0.7",
     "zod": "^3.24.1"
@@ -64,8 +65,8 @@
     "@radix-ui/react-slot": "^1.1.1",
     "@tanstack/react-query-devtools": "^5.67.3",
     "@types/canvas-confetti": "^1.9.0",
-    "@types/chrome": "^0.0.309",
     "@types/file-saver": "^2.0.7",
+    "@types/chrome": "^0.0.309",
     "@types/firefox-webext-browser": "^120.0.4",
     "@types/node": "^20.17.16",
     "@types/react": "^19.0.0",
