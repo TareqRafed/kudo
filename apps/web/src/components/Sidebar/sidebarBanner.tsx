@@ -8,7 +8,7 @@ import useExtension from '@/hooks/useExtension';
 import Link from 'next/link';
 import { env } from '@/lib/env';
 
-const chromeWebStoreDownloadLink = env.NEXT_PUBLIC_CHROME_WEBSTORE_LINK;
+const chromeWebStoreDownloadLink = env.NEXT_PUBLIC_CHROME_WEBSTORE_URL;
 
 const SidebarBanner = () => {
   const { isInstalled } = useExtension();
