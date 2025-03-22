@@ -2,7 +2,7 @@
 
 import { type ComponentPropsWithoutRef, useRef } from 'react';
 import { useScroll, useTransform, motion, type MotionValue } from 'framer-motion';
-import { useMediaQuery } from '@uidotdev/usehooks';
+import { useIsMobile } from '@/hooks/use-mobile';
 
 interface Props extends ComponentPropsWithoutRef<'div'> {
   titleComponent: string | React.ReactNode;
@@ -16,7 +16,7 @@ const ContainerScroll = ({ titleComponent, children, ...rest }: Props) => {
     offset: ['start end', 'end end'],
   });
 
-  const isMobile = useMediaQuery('only screen and (max-width : 768px)');
+  const isMobile = useIsMobile();
 
   const scaleDimensions = () => {
     return isMobile ? [0.7, 0.9] : [0.7, 1];

@@ -10,7 +10,7 @@ import { cn } from '@/lib/utils';
 import { Button, Tooltip, TooltipContent, TooltipTrigger } from '@kudo/ui';
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '@kudo/ui';
 import { formatRelative } from 'date-fns';
-import { useMediaQuery } from '@uidotdev/usehooks';
+import { useIsMobile } from '@/hooks/use-mobile';
 
 type Comment = {
   id: string | number;
@@ -38,7 +38,7 @@ const Thread = ({ data, ...rest }: ThreadProps) => {
 
   const commentPinRef = useRef<HTMLDivElement>(null);
 
-  const isMobile = useMediaQuery('only screen and (max-width : 768px)');
+  const isMobile = useIsMobile();
 
   return (
     <div

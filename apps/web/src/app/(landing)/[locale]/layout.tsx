@@ -31,20 +31,18 @@ export default async function RootLayout({
 
   return (
     <NextIntlClientProvider messages={messages}>
-      <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
-        <TooltipProvider>
-          <Toaster />
-          <div className="p-[1rem] min-h-screen bg-background selection:bg-secondary selection:text-primary transition-colors">
-            <Header className="md:hidden flex mb-5 z-20 relative" />
-            <div className="rounded-lg bg-gradient-to-b overflow-hidden from-background-gradient via-background-gradient2 via-50% to-transparent relative z-20">
-              <Header className="md:flex hidden relative z-20" />
-              <SquareBackground />
-              <div className="min-h-[100vh] z-20 relative">{children}</div>
-            </div>
+      <TooltipProvider>
+        <Toaster />
+        <div className="p-[1rem] min-h-screen bg-background selection:bg-secondary selection:text-primary transition-colors">
+          <Header className="md:hidden flex mb-5 z-20 relative" />
+          <div className="rounded-lg bg-gradient-to-b overflow-hidden from-background-gradient via-background-gradient2 via-50% to-transparent relative z-20">
+            <Header className="md:flex hidden relative z-20" />
+            <SquareBackground />
+            <div className="min-h-[100vh] z-20 relative">{children}</div>
           </div>
-        </TooltipProvider>
-        <Footer className="relative z-20" />
-      </ThemeProvider>
+        </div>
+      </TooltipProvider>
+      <Footer className="relative z-20" />
     </NextIntlClientProvider>
   );
 }
