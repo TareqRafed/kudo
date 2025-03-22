@@ -5,6 +5,11 @@ import { headers } from 'next/headers';
 import type { Stripe } from 'stripe';
 import { env } from '@/lib/env';
 
+/**
+ * License MIT
+ * https://github.com/t3dotgg/stripe-recommendations?tab=readme-ov-file
+ */
+
 const allowedEvents: Stripe.Event.Type[] = [
   'checkout.session.completed',
   'customer.subscription.created',
@@ -26,47 +31,7 @@ const allowedEvents: Stripe.Event.Type[] = [
   'payment_intent.canceled',
 ];
 
-// The contents of this function should probably be wrapped in a try/catch
-export async function syncStripeDataToKV(customerId: string) {
-  // Fetch latest subscription data from Stripe
-  const subscriptions = await stripe.subscriptions.list({
-    customer: customerId,
-    limit: 1,
-    status: 'all',
-    expand: ['data.default_payment_method'],
-  });
-
-  if (subscriptions.data.length === 0) {
-    const subData = { status: 'none' };
-    await kv.set(`stripe:customer:${customerId}`, subData);
-    return subData;
-  }
-
-  // If a user can have multiple subscriptions, that's your problem
-  const subscription = subscriptions.data[0];
-
-  // Store complete subscription state
-  const subData = {
-    customerId: customerId,
-    subscriptionId: subscription.id,
-    status: subscription.status,
-    priceId: subscription.items.data[0].price.id,
-    currentPeriodEnd: subscription.current_period_end,
-    currentPeriodStart: subscription.current_period_start,
-    cancelAtPeriodEnd: subscription.cancel_at_period_end,
-    paymentMethod:
-      subscription.default_payment_method && typeof subscription.default_payment_method !== 'string'
-        ? {
-            brand: subscription.default_payment_method.card?.brand ?? null,
-            last4: subscription.default_payment_method.card?.last4 ?? null,
-          }
-        : null,
-  };
-
-  // Store the data in your KV
-  await kv.set(`stripe:customer:${customerId}`, subData);
-  return subData;
-}
+const ProPlanId = (plan: string) => plan === 'prod_RwWVg1elNcyYBl' || plan === 'prod_RzJW0zcb376qcX';
 
 export async function POST(req: Request) {
   const body = await req.text();
@@ -90,10 +55,37 @@ export async function POST(req: Request) {
     throw new Error(`[STRIPE HOOK][CANCER] ID isn't string.\nEvent type: ${event.type}`);
   }
 
-  const { error } = await syncStripeDataToKV(customerId);
+  async function processEvent(customerId: string) {
+    const subscriptions = await stripe.subscriptions.list({
+      customer: customerId,
+      limit: 1,
+      status: 'all',
+      expand: ['data.default_payment_method'],
+    });
 
-  if (error) {
+    const supabase = await createClient();
+
+    const subscription = subscriptions.data[0];
+
+    const subData = {
+      customer_id: customerId,
+      subscription_id: subscription.id,
+      status: subscription.status,
+      price_id: subscription.items.data[0].price.id,
+      current_period_end: subscription.current_period_end?.toString(),
+      current_period_start: subscription.current_period_start?.toString(),
+      cancel_at_period_end: subscription.cancel_at_period_end ? 'true' : 'false',
+      tier_id: ProPlanId(subscription.items.data[0].price.id) ? 3 : 2,
+    };
+
+    await supabase.from('subscriptions').upsert(subData);
+  }
+
+  try {
+    await processEvent(customerId);
+  } catch (error) {
     console.error('[STRIPE HOOK] Error processing event', error);
+    throw new Error(`[STRIPE HOOK] Error processing event: ${event}, Error: ${error}`);
   }
 
   return NextResponse.json({ received: true });
