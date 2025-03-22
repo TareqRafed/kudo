@@ -109,17 +109,17 @@ export type Database = {
       customers: {
         Row: {
           created_at: string
-          customer_id: number
+          customer_id: string
           team_id: number
         }
         Insert: {
           created_at?: string
-          customer_id?: number
+          customer_id: string
           team_id: number
         }
         Update: {
           created_at?: string
-          customer_id?: number
+          customer_id?: string
           team_id?: number
         }
         Relationships: [
@@ -324,73 +324,6 @@ export type Database = {
           },
         ]
       }
-      payments: {
-        Row: {
-          created_at: string
-          id: number
-          team_id: number
-          tier_id: number
-          user_id: string
-        }
-        Insert: {
-          created_at?: string
-          id?: number
-          team_id: number
-          tier_id: number
-          user_id: string
-        }
-        Update: {
-          created_at?: string
-          id?: number
-          team_id?: number
-          tier_id?: number
-          user_id?: string
-        }
-        Relationships: [
-          {
-            foreignKeyName: "payments_team_id_fkey"
-            columns: ["team_id"]
-            isOneToOne: false
-            referencedRelation: "teams"
-            referencedColumns: ["id"]
-          },
-          {
-            foreignKeyName: "payments_tier_id_fkey"
-            columns: ["tier_id"]
-            isOneToOne: false
-            referencedRelation: "tiers"
-            referencedColumns: ["id"]
-          },
-          {
-            foreignKeyName: "payments_user_id_fkey"
-            columns: ["user_id"]
-            isOneToOne: false
-            referencedRelation: "members"
-            referencedColumns: ["id"]
-          },
-          {
-            foreignKeyName: "payments_user_id_fkey"
-            columns: ["user_id"]
-            isOneToOne: false
-            referencedRelation: "members_with_board"
-            referencedColumns: ["id"]
-          },
-          {
-            foreignKeyName: "payments_user_id_fkey"
-            columns: ["user_id"]
-            isOneToOne: false
-            referencedRelation: "members_with_boards"
-            referencedColumns: ["id"]
-          },
-          {
-            foreignKeyName: "payments_user_id_fkey"
-            columns: ["user_id"]
-            isOneToOne: false
-            referencedRelation: "members_with_metadata"
-            referencedColumns: ["id"]
-          },
-        ]
-      }
       projects: {
         Row: {
           created_at: string
@@ -420,12 +353,59 @@ export type Database = {
           },
         ]
       }
+      subscriptions: {
+        Row: {
+          cancel_at_period_end: string | null
+          created_at: string
+          current_period_end: string | null
+          current_period_start: string | null
+          customer_id: string
+          price_id: string
+          status: string | null
+          subscription_id: string
+          tier_id: number
+          updated_at: string | null
+        }
+        Insert: {
+          cancel_at_period_end?: string | null
+          created_at?: string
+          current_period_end?: string | null
+          current_period_start?: string | null
+          customer_id: string
+          price_id: string
+          status?: string | null
+          subscription_id: string
+          tier_id: number
+          updated_at?: string | null
+        }
+        Update: {
+          cancel_at_period_end?: string | null
+          created_at?: string
+          current_period_end?: string | null
+          current_period_start?: string | null
+          customer_id?: string
+          price_id?: string
+          status?: string | null
+          subscription_id?: string
+          tier_id?: number
+          updated_at?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "subscriptions_customer_id_fkey"
+            columns: ["customer_id"]
+            isOneToOne: true
+            referencedRelation: "customers"
+            referencedColumns: ["customer_id"]
+          },
+        ]
+      }
       teams: {
         Row: {
           board_id: number | null
           created_at: string
           created_by: string
-          customer_id: number | null
+          customer_id: string | null
           id: number
           logo: string | null
           name: string
@@ -436,7 +416,7 @@ export type Database = {
           board_id?: number | null
           created_at?: string
           created_by?: string
-          customer_id?: number | null
+          customer_id?: string | null
           id?: number
           logo?: string | null
           name: string
@@ -447,7 +427,7 @@ export type Database = {
           board_id?: number | null
           created_at?: string
           created_by?: string
-          customer_id?: number | null
+          customer_id?: string | null
           id?: number
           logo?: string | null
           name?: string
