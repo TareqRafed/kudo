@@ -12,7 +12,7 @@ const chromeWebStoreDownloadLink = env.NEXT_PUBLIC_CHROME_WEBSTORE_URL;
 
 const SidebarBanner = () => {
   const { isInstalled } = useExtension();
-  if (isInstalled)
+  if (!isInstalled)
     return (
       <SidebarMenu className="relative">
         <SidebarMenuItem>

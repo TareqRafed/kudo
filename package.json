@@ -36,17 +36,20 @@
     "cross-env": "^7.0.3",
     "esbuild": "^0.23.0",
     "husky": "^9.1.4",
-    "lint-staged": "^15.2.7",
     "postcss": "^8.5.1",
-    "prettier": "^3.4.2",
     "rimraf": "^6.0.1",
     "syncpack": "^13.0.2",
     "tslib": "^2.6.3",
     "turbo": "^2.4.2",
     "typescript": "^5.7.3"
   },
-  "packageManager": "pnpm@10.4.1",
+  "packageManager": "pnpm@10.6.5",
   "engines": {
-    "node": ">=20.17.16"
+    "node": ">=22.3.0"
+  },
+  "pnpm": {
+    "overrides": {
+      "whatwg-url": "13.0.0"
+    }
   }
 }

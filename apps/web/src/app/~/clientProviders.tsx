@@ -20,16 +20,14 @@ const ClientProviders = ({ children }: { children: ReactNode }) => {
   useNavigationMotions();
   return (
     <QueryClientProvider client={queryClient}>
-      <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
-        <TooltipProvider>
-          <Toaster />
-          <NuqsAdapter>
-            <ExtensionProvider>
-              <BreadcrumbProvider>{children}</BreadcrumbProvider>
-            </ExtensionProvider>
-          </NuqsAdapter>
-        </TooltipProvider>
-      </ThemeProvider>
+      <TooltipProvider>
+        <Toaster />
+        <NuqsAdapter>
+          <ExtensionProvider>
+            <BreadcrumbProvider>{children}</BreadcrumbProvider>
+          </ExtensionProvider>
+        </NuqsAdapter>
+      </TooltipProvider>
     </QueryClientProvider>
   );
 };

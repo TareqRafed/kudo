@@ -13,13 +13,13 @@
       "cache": false
     },
     "build": {
-      "env": ["!VITE_*", "!NEXT_PUBLIC_*", "RESEND_API_KEY", "BEEHIIV_API_KEY", "BEEHIIV_PUBLICATION_ID"],
+      "env": ["!VITE_*", "!STRIPE_*", "!NEXT_PUBLIC_*", "RESEND_API_KEY", "BEEHIIV_API_KEY", "BEEHIIV_PUBLICATION_ID"],
       "dependsOn": ["^build", "^ready"],
       "outputs": ["../../dist/**", "dist/**", "build/**"],
       "cache": false
     },
     "zip": {
-      "env": ["!VITE_*", "!NEXT_PUBLIC_*", "RESEND_API_KEY", "BEEHIIV_API_KEY", "BEEHIIV_PUBLICATION_ID"],
+      "env": ["!VITE_*", "!STRIPE_*", "!NEXT_PUBLIC_*", "RESEND_API_KEY", "BEEHIIV_API_KEY", "BEEHIIV_PUBLICATION_ID"],
       "dependsOn": ["^build", "^ready"]
     },
 

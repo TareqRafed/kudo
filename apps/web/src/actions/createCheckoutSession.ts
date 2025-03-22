@@ -7,29 +7,38 @@ import { createClient } from '@/util/supabase/server';
 import type { Provider } from '@supabase/supabase-js';
 import { redirect } from 'next/navigation';
 import { z, type ZodType } from 'zod';
-import Stripe from 'stripe';
 import { stripe } from '@/lib/stripe';
 
-const providerSchema = z.enum(['google', 'github']) satisfies ZodType<Provider>;
+const schema = z.object({
+  teamId: z.string().min(1),
+});
 
-export async function loginWithOAuth(_: FormResponse<typeof providerSchema> | null, formData: FormData) {
+export async function createCheckoutSession(_: null, formData: FormData) {
   // stripe.customers.create
   const supabase = await createClient();
-  const provider = providerSchema.safeParse(formData.get('provider')).data;
-  if (!provider) redirect('/');
+  const { data: userInstance, error: authError } = await supabase.auth.getUser();
+  const user = userInstance.user;
+  if (!user) return; // TODO
+  const { data: team } = await supabase.from('teams').select('id, customer_id').maybeSingle();
+  if (!team) return; // TODO
 
-  const { data, error } = await supabase.auth.signInWithOAuth({
-    provider,
-    options: {
-      redirectTo: `${env.NEXT_PUBLIC_BASE_URL}/api/auth`,
-    },
-  });
-
-  if (error) return createResponse<typeof providerSchema>([], "Something went wrong, we couldn't register you", false);
-
-  if (data.url) {
-    redirect(data.url); // use the redirect API for your server framework
+  let customerId = team.customer_id;
+  if (!customerId) {
+    const newCustomer = await stripe.customers.create({
+      email: user.email,
+      metadata: {
+        userId: user.id,
+        teamId: team.id,
+      },
+    });
+    const { error } = await supabase.from('customers').upsert({ customer_id: newCustomer.id, team_id: team.id });
+    customerId = newCustomer.id;
   }
+
+  const data = await stripe.checkout.sessions.create({
+    customer: customerId,
+    success_url: 'https://trykudo.com/success',
+  });
 
   return null;
 }

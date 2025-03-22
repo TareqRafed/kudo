@@ -3,13 +3,13 @@
 import { Badge, Button, Label, Switch, buttonVariants } from '@kudo/ui';
 import { cn } from '@/lib/utils';
 import NumberFlow from '@number-flow/react';
-import { useMediaQuery } from '@uidotdev/usehooks';
 import confetti from 'canvas-confetti';
 import { motion } from 'framer-motion';
 import { Check } from 'lucide-react';
 import { useRef, useState } from 'react';
 import { plans } from './plans';
 import { Link } from '@/i18n/routing';
+import { useIsMobile } from '@/hooks/use-mobile';
 
 interface PricingPlan {
   name: string;
@@ -35,7 +35,7 @@ export function Pricing({
   description = 'Choose the plan that works for you\nAll plans include access to our platform, lead generation tools, and dedicated support.',
 }: PricingProps) {
   const [isMonthly, setIsMonthly] = useState(true);
-  const isDesktop = useMediaQuery('(min-width: 768px)');
+  const isDesktop = !useIsMobile();
   const switchRef = useRef<HTMLButtonElement>(null);
 
   const handleToggle = (checked: boolean) => {

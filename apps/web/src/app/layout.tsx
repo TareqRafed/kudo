@@ -2,6 +2,9 @@ import { Mitr, Montserrat_Alternates } from 'next/font/google';
 import type { ReactNode } from 'react';
 import { TelemetryProvider } from './telemetryProvider';
 import type { Metadata } from 'next';
+import { env } from '@/lib/env';
+import { ThemeProvider } from '@/components/ThemeProvider/ThemeProvider';
+import dynamic from 'next/dynamic';
 
 // Latin
 const MontserratAlternates = Montserrat_Alternates({
@@ -18,6 +21,7 @@ const mitr = Mitr({
 export const metadata: Metadata = {
   title: 'Collaborate on any webpage',
   description: 'Better Feedback From Your Team',
+  metadataBase: new URL(env.NEXT_PUBLIC_BASE_URL),
 
   openGraph: {
     type: 'website',
@@ -40,11 +44,10 @@ export const metadata: Metadata = {
     card: 'summary_large_image', // Large image Twitter card
     title: 'Collaborate on any webpage',
     description: 'Kudo helps you to collaborate with other web developers',
-    images: '/favicon/twitter-image.jpg', // Your custom Twitter image
+    images: '/og.png', // Your custom Twitter image
   },
 
   robots: 'index, follow',
-  viewport: 'width=device-width, initial-scale=1.0',
   keywords: 'Kudo, bugs, track, jira, linear, comment, collaborate, web, software',
   authors: [{ name: 'Kudo', url: 'https://trykudo.com' }],
 
@@ -78,10 +81,12 @@ export default function RootLayout({ children }: { children: ReactNode }) {
   const fontUsed = `${MontserratAlternates.variable} ${mitr.variable}`;
 
   return (
-    <html lang={'en'} suppressHydrationWarning>
+    <html lang={'en'}>
       <body className={`${fontUsed} antialiased`}>
         <TelemetryProvider />
-        {children}
+        <ThemeProvider attribute="class" defaultTheme="dark" enableSystem disableTransitionOnChange>
+          {children}
+        </ThemeProvider>
       </body>
     </html>
   );
