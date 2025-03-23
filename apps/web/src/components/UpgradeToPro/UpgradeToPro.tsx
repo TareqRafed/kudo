@@ -1,10 +1,11 @@
 'use client';
 
+import { createCheckoutSession } from '@/actions/createCheckoutSession';
 import { plans } from '@/features/Pricing/plans';
 import { cn } from '@/lib/utils';
 import { getTeams } from '@/queries/teams';
 import useSupabaseBrowser from '@/util/supabase/client';
-import { Button } from '@kudo/ui';
+import { Button, Label, Switch } from '@kudo/ui';
 import {
   Dialog,
   DialogContent,
@@ -18,7 +19,7 @@ import NumberFlow from '@number-flow/react';
 import { useQuery } from '@supabase-cache-helpers/postgrest-react-query';
 import { motion } from 'framer-motion';
 import { Check } from 'lucide-react';
-import { type ReactNode, useState } from 'react';
+import { type ReactNode, startTransition, useActionState, useState } from 'react';
 
 /**
  * children should be {@link DialogTrigger}
@@ -28,7 +29,9 @@ const UpgradeToProDialog = ({ children, teamId }: { children: ReactNode; teamId:
   const supabase = useSupabaseBrowser();
   const { data, isLoading, isError } = useQuery(getTeams(supabase).eq('id', teamId).maybeSingle());
 
-  const isMonthly = true;
+  const [isMonthly, setIsMonthly] = useState(true);
+
+  const [checkoutRequestState, createCheckout, isCheckoutPending] = useActionState(createCheckoutSession, null);
 
   const plan = plans[1];
 
@@ -37,9 +40,10 @@ const UpgradeToProDialog = ({ children, teamId }: { children: ReactNode; teamId:
     <Dialog onOpenChange={setDialog} open={dialog}>
       {children}
       <DialogContent className="sm:max-w-[425px]">
+        {JSON.stringify(checkoutRequestState)}
         <DialogHeader>
           <DialogTitle>Upgrade {data?.name} To Pro</DialogTitle>
-          <DialogDescription>Upgrade your team to Pro in order to add more members</DialogDescription>
+          <DialogDescription>Keep the early-adopter pricing forever!</DialogDescription>
         </DialogHeader>
         <motion.div
           viewport={{ once: true }}
@@ -52,7 +56,7 @@ const UpgradeToProDialog = ({ children, teamId }: { children: ReactNode; teamId:
             opacity: { duration: 0.5 },
           }}
           className={cn(
-            'p-6 bg-background text-center lg:flex lg:flex-col lg:justify-center relative',
+            'px-6 bg-background text-center lg:flex lg:flex-col lg:justify-center relative',
             'border-border',
             'flex flex-col',
           )}
@@ -65,9 +69,8 @@ const UpgradeToProDialog = ({ children, teamId }: { children: ReactNode; teamId:
                   format={{
                     style: 'currency',
                     currency: 'USD',
-                    minimumFractionDigits: 0,
-                    maximumFractionDigits: 0,
                   }}
+                  locales={'en-US'}
                   transformTiming={{
                     duration: 500,
                     easing: 'ease-out',
@@ -95,12 +98,48 @@ const UpgradeToProDialog = ({ children, teamId }: { children: ReactNode; teamId:
             </ul>
 
             <hr className="w-full my-4" />
-            <p className="mt-6 text-xs leading-5 text-muted-foreground">{plan.description}</p>
+            <span className="flex justify-center items-center space-x-2">
+              <Label htmlFor="annual">Annual?</Label>
+              <Switch
+                id="annual"
+                checked={!isMonthly}
+                onCheckedChange={(checked) => setIsMonthly(!checked)}
+                className="relative"
+              />
+            </span>
           </div>
         </motion.div>
 
         <DialogFooter>
-          <Button className="w-full">Get Pro</Button>
+          <Button
+            type="button"
+            status={isCheckoutPending ? 'loading' : 'ready'}
+            onClick={() => {
+              const fmData = new FormData();
+              fmData.set('teamId', teamId.toString());
+              fmData.set('isMonthly', String(isMonthly));
+              startTransition(() => {
+                createCheckout(fmData);
+              });
+            }}
+            className="w-full"
+          >
+            Get Pro for{' '}
+            <NumberFlow
+              value={isMonthly ? Number(plan.price) : Number(plan.yearlyPrice)}
+              format={{
+                style: 'currency',
+                currency: 'USD',
+              }}
+              locales={'en-US'}
+              transformTiming={{
+                duration: 500,
+                easing: 'ease-out',
+              }}
+              willChange
+              className="font-variant-numeric: tabular-nums"
+            />
+          </Button>
         </DialogFooter>
       </DialogContent>
     </Dialog>

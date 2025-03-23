@@ -12,8 +12,8 @@ export const plans = [
   },
   {
     name: 'PROFESSIONAL',
-    price: '10',
-    yearlyPrice: '100',
+    price: '9.99',
+    yearlyPrice: '5.99',
     period: 'per user / month',
     features: [
       'Everything in Starter',

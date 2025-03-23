@@ -4,7 +4,6 @@ import IconPicker from '@/components/IconPicker/IconPicker';
 import { Input } from '@kudo/ui';
 import useSupabaseBrowser from '@/util/supabase/client';
 import { Container, Header } from '../../layout-ui';
-import { useEffect } from 'react';
 import { useBreadcrumbs } from '@/components/Breadcrumb';
 import { Form, FormFooter, FormGroup, FormRow, FormSeparator, FormSubmit } from '@kudo/ui';
 import { z } from 'zod';

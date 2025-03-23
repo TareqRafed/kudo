@@ -5,6 +5,7 @@ const serverEnvSchema = z.object({
   RESEND_API_KEY: z.string().min(1),
   STRIPE_API_KEY: z.string().min(1),
   BEEHIIV_API_KEY: z.string().min(1),
+  SUPABASE_API_KEY: z.string().min(1),
   BEEHIIV_PUBLICATION_ID: z.string().min(1),
   STRIPE_WEBHOOK_SECRET: z.string().min(1),
   NODE_ENV: z.enum(['development', 'production']),
