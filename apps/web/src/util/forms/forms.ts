@@ -1,5 +1,5 @@
 import type { FormResponse, FieldsFeedback, ValidationResponse, Messages } from './types';
-import { ZodType } from 'zod';
+import type { ZodType } from 'zod';
 
 /**
  * Converts FormData into a plain object and validates it against a Zod schema

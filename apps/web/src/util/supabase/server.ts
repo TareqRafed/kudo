@@ -1,4 +1,5 @@
 import { createServerClient } from '@supabase/ssr';
+import { createClient as jsCreateClient } from '@supabase/supabase-js';
 import { cookies } from 'next/headers';
 import type { Database } from '@kudo/shared';
 import { env } from '@/lib/env';
@@ -22,6 +23,15 @@ export async function createClient() {
           // user sessions.
         }
       },
+    },
+  });
+}
+
+export async function createServiceRoleClient() {
+  return jsCreateClient<Database>(env.NEXT_PUBLIC_SUPABASE_URL, env.SUPABASE_API_KEY, {
+    auth: {
+      autoRefreshToken: false,
+      persistSession: false,
     },
   });
 }
