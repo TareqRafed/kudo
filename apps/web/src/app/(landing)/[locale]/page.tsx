@@ -17,6 +17,7 @@ import Safari from '@/components/Safari';
 import { PricingBasic } from '@/features/Pricing';
 
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger, Button, GradientText } from '@kudo/ui';
+import posthog from 'posthog-js';
 
 // Constants for reusable data
 const DISPLAY_CARDS = [
@@ -69,6 +70,7 @@ const Hero = () => {
   const [_, loginWithOAuthAction, isLoginPending] = useActionState(loginWithOAuth, null);
 
   const handleGoogleLogin = () => {
+    posthog.capture('Continue with Google', { url: '/' });
     const formData = new FormData();
     formData.append('provider', 'google');
     loginWithOAuthAction(formData);
@@ -144,7 +146,7 @@ const Hero = () => {
           <GoogleLogo weight="duotone" className="mb-0.5" />
           {t('action')}
         </Button>
-        <Button variant="link" asChild>
+        <Button onClick={() => posthog.capture('Continue with other options', { url: '/' })} variant="link" asChild>
           <Link href="/login">{t('secondaryAction')}</Link>
         </Button>
       </div>
@@ -301,7 +303,11 @@ export default function Home() {
               className="bg-accent/30 backdrop-blur-md rounded px-5 py-2 w-full col-span-4"
             >
               {FAQ_ITEMS.map(({ question, answer }) => (
-                <AccordionItem value={question} key={question}>
+                <AccordionItem
+                  onClick={() => posthog.capture('FAQ', { url: '/', question, answer })}
+                  value={question}
+                  key={question}
+                >
                   <AccordionTrigger>{question}</AccordionTrigger>
                   <AccordionContent>{answer}</AccordionContent>
                 </AccordionItem>
