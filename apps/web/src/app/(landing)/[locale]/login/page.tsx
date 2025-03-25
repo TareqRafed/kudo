@@ -6,6 +6,7 @@ import { loginWithOAuth } from '@/actions/loginWithOAuth';
 import { useActionState } from 'react';
 import { GithubLogo, GoogleLogo } from '@phosphor-icons/react';
 import { Link } from '@/i18n/routing';
+import posthog from 'posthog-js';
 
 export default function LoginForm() {
   const [state, formAction] = useActionState(login, null);
@@ -21,6 +22,7 @@ export default function LoginForm() {
           <Button
             className="w-full flex"
             onClick={() => {
+              posthog.capture('Continue with Google', { url: '/login' });
               const formData = new FormData();
               formData.append('provider', 'google');
               socialAction(formData);
@@ -35,6 +37,7 @@ export default function LoginForm() {
             variant="secondary"
             className="w-full"
             onClick={() => {
+              posthog.capture('Continue with Github', { url: '/login' });
               const formData = new FormData();
               formData.append('provider', 'github');
               socialAction(formData);

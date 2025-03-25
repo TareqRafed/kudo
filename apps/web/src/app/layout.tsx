@@ -83,10 +83,11 @@ export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang={'en'}>
       <body className={`${fontUsed} antialiased`}>
-        <TelemetryProvider />
-        <ThemeProvider attribute="class" defaultTheme="dark" enableSystem disableTransitionOnChange>
-          {children}
-        </ThemeProvider>
+        <TelemetryProvider>
+          <ThemeProvider attribute="class" defaultTheme="dark" enableSystem disableTransitionOnChange>
+            {children}
+          </ThemeProvider>
+        </TelemetryProvider>
       </body>
     </html>
   );

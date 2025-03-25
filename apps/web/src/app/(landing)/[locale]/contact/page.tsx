@@ -10,6 +10,7 @@ import { useTranslations } from 'next-intl';
 import { useToast } from '@kudo/ui';
 import { useState } from 'react';
 import { LoaderPinwheel } from 'lucide-react';
+import posthog from 'posthog-js';
 
 type FormData = {
   name: string;
@@ -30,6 +31,7 @@ const Contact = () => {
   const [isLoading, setIsLoading] = useState(false);
 
   const onSubmit = async (data: FormData) => {
+    posthog.capture('Contact Form Submit', { ...data });
     setIsLoading(true);
     try {
       const response = await fetch('/api/contact', {

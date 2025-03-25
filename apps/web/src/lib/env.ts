@@ -14,6 +14,8 @@ const serverEnvSchema = z.object({
   NEXT_PUBLIC_EXTENSION_ID: z.string().min(1),
   NEXT_PUBLIC_BASE_URL: z.string().url(),
   NEXT_PUBLIC_CHROME_WEBSTORE_URL: z.string().url(),
+  NEXT_PUBLIC_POSTHOG_KEY: z.string().min(1),
+  NEXT_PUBLIC_POSTHOG_HOST: z.string().url(),
 });
 
 // Client-side schema (only NEXT_PUBLIC_ vars)
@@ -23,6 +25,8 @@ const clientEnvSchema = z.object({
   NEXT_PUBLIC_EXTENSION_ID: z.string().min(1),
   NEXT_PUBLIC_BASE_URL: z.string().url(),
   NEXT_PUBLIC_CHROME_WEBSTORE_URL: z.string().url(),
+  NEXT_PUBLIC_POSTHOG_KEY: z.string().min(1),
+  NEXT_PUBLIC_POSTHOG_HOST: z.string().url(),
 });
 
 export type ServerEnv = z.infer<typeof serverEnvSchema>;
@@ -48,6 +52,8 @@ function getEnv(): ServerEnv {
     NEXT_PUBLIC_EXTENSION_ID: process.env.NEXT_PUBLIC_EXTENSION_ID,
     NEXT_PUBLIC_BASE_URL: process.env.NEXT_PUBLIC_BASE_URL,
     NEXT_PUBLIC_CHROME_WEBSTORE_URL: process.env.NEXT_PUBLIC_CHROME_WEBSTORE_URL,
+    NEXT_PUBLIC_POSTHOG_KEY: process.env.NEXT_PUBLIC_POSTHOG_KEY,
+    NEXT_PUBLIC_POSTHOG_HOST: process.env.NEXT_PUBLIC_POSTHOG_HOST,
   };
 
   const parsed = clientEnvSchema.safeParse(clientEnv);

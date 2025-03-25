@@ -171,12 +171,6 @@ importers:
       '@uidotdev/usehooks':
         specifier: ^2.4.1
         version: 2.4.1(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
-      '@vercel/analytics':
-        specifier: ^1.5.0
-        version: 1.5.0(next@15.1.7(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(sass@1.79.4))(react@19.0.0)
-      '@vercel/speed-insights':
-        specifier: ^1.2.0
-        version: 1.2.0(next@15.1.7(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(sass@1.79.4))(react@19.0.0)
       canvas-confetti:
         specifier: ^1.9.3
         version: 1.9.3
@@ -213,6 +207,9 @@ importers:
       nuqs:
         specifier: ^2.3.2
         version: 2.4.0(next@15.1.7(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(sass@1.79.4))(react@19.0.0)
+      posthog-js:
+        specifier: ^1.232.7
+        version: 1.232.7
       react:
         specifier: ^19.0.0
         version: 19.0.0
@@ -716,6 +713,7 @@ packages:
 
   '@effect/schema@0.75.5':
     resolution: {integrity: sha512-TQInulTVCuF+9EIbJpyLP6dvxbQJMphrnRqgexm/Ze39rSjfhJuufF7XvU3SxTgg3HnL7B/kpORTJbHhlE6thw==}
+    deprecated: this package has been merged into the main effect package
     peerDependencies:
       effect: ^3.9.2
 
@@ -2403,55 +2401,6 @@ packages:
   '@ungap/structured-clone@1.2.0':
     resolution: {integrity: sha512-zuVdFrMJiuCDQUMCzQaD6KL28MjnqqN8XnAqiEq9PNm/hCPTSGfrXCOfwj1ow4LFb/tNymJPwsNbVePc1xFqrQ==}
 
-  '@vercel/analytics@1.5.0':
-    resolution: {integrity: sha512-MYsBzfPki4gthY5HnYN7jgInhAZ7Ac1cYDoRWFomwGHWEX7odTEzbtg9kf/QSo7XEsEAqlQugA6gJ2WS2DEa3g==}
-    peerDependencies:
-      '@remix-run/react': ^2
-      '@sveltejs/kit': ^1 || ^2
-      next: '>= 13'
-      react: ^18 || ^19 || ^19.0.0-rc
-      svelte: '>= 4'
-      vue: ^3
-      vue-router: ^4
-    peerDependenciesMeta:
-      '@remix-run/react':
-        optional: true
-      '@sveltejs/kit':
-        optional: true
-      next:
-        optional: true
-      react:
-        optional: true
-      svelte:
-        optional: true
-      vue:
-        optional: true
-      vue-router:
-        optional: true
-
-  '@vercel/speed-insights@1.2.0':
-    resolution: {integrity: sha512-y9GVzrUJ2xmgtQlzFP2KhVRoCglwfRQgjyfY607aU0hh0Un6d0OUyrJkjuAlsV18qR4zfoFPs/BiIj9YDS6Wzw==}
-    peerDependencies:
-      '@sveltejs/kit': ^1 || ^2
-      next: '>= 13'
-      react: ^18 || ^19 || ^19.0.0-rc
-      svelte: '>= 4'
-      vue: ^3
-      vue-router: ^4
-    peerDependenciesMeta:
-      '@sveltejs/kit':
-        optional: true
-      next:
-        optional: true
-      react:
-        optional: true
-      svelte:
-        optional: true
-      vue:
-        optional: true
-      vue-router:
-        optional: true
-
   '@vitejs/plugin-react-swc@3.7.0':
     resolution: {integrity: sha512-yrknSb3Dci6svCd/qhHqhFPDSw0QtjumcqdKMoNNzmOl5lMXTTiqzjWtG4Qask2HdvvzaNgSunbQGet8/GrKdA==}
     peerDependencies:
@@ -3001,6 +2950,9 @@ packages:
   core-js-pure@3.40.0:
     resolution: {integrity: sha512-AtDzVIgRrmRKQai62yuSIN5vNiQjcJakJb4fbhVw3ehxx7Lohphvw9SGNWKhLFqSxC4ilD0g/L1huAYFQU3Q6A==}
 
+  core-js@3.41.0:
+    resolution: {integrity: sha512-SJ4/EHwS36QMJd6h/Rg+GyR4A5xE0FSI3eZ+iBVpfqf1x0eTSg1smWLHrA+2jQThZSh97fmSgFSU8B61nxosxA==}
+
   core-util-is@1.0.3:
     resolution: {integrity: sha512-ZQBvi1DcpJ4GDqanjucZ2Hj3wEO5pZDS89BWbkcrvdxksJorwUDDZamX9ldFkp9aw2lmBDLgkObEA4DWNJ9FYQ==}
 
@@ -3401,6 +3353,9 @@ packages:
   fetch-blob@3.2.0:
     resolution: {integrity: sha512-7yAQpD2UMJzLi1Dqv7qFYnPbaPx7ZfFK6PiIxQ4PfkGPyNyl2Ugx+a/umUonmKqjhM4DnfbMvdX6otXq83soQQ==}
     engines: {node: ^12.20 || >= 14.13}
+
+  fflate@0.4.8:
+    resolution: {integrity: sha512-FJqqoDBR00Mdj9ppamLa/Y7vxm+PRmNWA67N846RvsoYVMKB4q3y/de5PA7gUmRMYK/8CMz2GDZQmCRN1wBcWA==}
 
   fflate@0.8.2:
     resolution: {integrity: sha512-cPJU47OaAoCbg0pBvzsgpTPhmhqI5eJjh/JIu8tPj5q+T7iLvW/JAYUqmE7KOB4R1ZyEhzBaIQpQpardBF5z8A==}
@@ -4554,6 +4509,20 @@ packages:
     resolution: {integrity: sha512-MjOadfU3Ys9KYoX0AdkBlFEF1Vx37uCCeN4ZHnmwm9FfpbsGWMZeBLMmmpY+6Ocqod7mkdZ0DT31OlbsFrLlkA==}
     engines: {node: ^10 || ^12 || >=14}
 
+  posthog-js@1.232.7:
+    resolution: {integrity: sha512-9Hqdam80bf41mj30O3ZLgdfDtZqR9TXNpTh7EkJo6C/emerFQEnW7X+E3yyE81KIPON4amSqTj5BL0gg+qZ28w==}
+    peerDependencies:
+      '@rrweb/types': 2.0.0-alpha.17
+      rrweb-snapshot: 2.0.0-alpha.17
+    peerDependenciesMeta:
+      '@rrweb/types':
+        optional: true
+      rrweb-snapshot:
+        optional: true
+
+  preact@10.26.4:
+    resolution: {integrity: sha512-KJhO7LBFTjP71d83trW+Ilnjbo+ySsaAgCfXOXUlmGzJ4ygYPWmysm77yg4emwfmoz3b22yvH5IsVFHbhUaH5w==}
+
   prettier@3.5.1:
     resolution: {integrity: sha512-hPpFQvHwL3Qv5AdRvBFMhnKo4tYxp0ReXiPn2bxkiohEX6mBeBwEpBSQTkD458RaaDKQMYSp4hX4UtfUTA5wDw==}
     engines: {node: '>=14'}
@@ -5454,6 +5423,9 @@ packages:
   web-streams-polyfill@3.3.3:
     resolution: {integrity: sha512-d2JWLCivmZYTSIoge9MsgFCZrt571BikcWGYkjC1khllbTeDlGqZ2D8vD8E/lJa8WGWbb7Plm8/XJYV7IJHZZw==}
     engines: {node: '>= 8'}
+
+  web-vitals@4.2.4:
+    resolution: {integrity: sha512-r4DIlprAGwJ7YM11VZp4R884m0Vmgr6EAKe3P+kO0PPj3Unqyvv59rczf6UiGcb9Z8QxZVcqKNwv/g0WNdWwsw==}
 
   webdriver@9.1.2:
     resolution: {integrity: sha512-NjeYVTCSMwQrd+EDpSSB8YnSNzYeEPU2IoJhvjaXUwTEhoaIvz6x6fM4UqCbm/ph8lZ1uWux43fqIcfDzFQl5Q==}
@@ -7175,16 +7147,6 @@ snapshots:
 
   '@ungap/structured-clone@1.2.0': {}
 
-  '@vercel/analytics@1.5.0(next@15.1.7(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(sass@1.79.4))(react@19.0.0)':
-    optionalDependencies:
-      next: 15.1.7(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(sass@1.79.4)
-      react: 19.0.0
-
-  '@vercel/speed-insights@1.2.0(next@15.1.7(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(sass@1.79.4))(react@19.0.0)':
-    optionalDependencies:
-      next: 15.1.7(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(sass@1.79.4)
-      react: 19.0.0
-
   '@vitejs/plugin-react-swc@3.7.0(@swc/helpers@0.5.15)(vite@6.1.0(@types/node@20.17.19)(jiti@2.4.2)(lightningcss@1.29.1)(sass@1.79.4)(terser@5.39.0)(tsx@4.19.1)(yaml@2.5.1))':
     dependencies:
       '@swc/core': 1.7.25(@swc/helpers@0.5.15)
@@ -7872,6 +7834,8 @@ snapshots:
 
   core-js-pure@3.40.0: {}
 
+  core-js@3.41.0: {}
+
   core-util-is@1.0.3: {}
 
   cosmiconfig@9.0.0(typescript@5.7.3):
@@ -8293,6 +8257,8 @@ snapshots:
     dependencies:
       node-domexception: 1.0.0
       web-streams-polyfill: 3.3.3
+
+  fflate@0.4.8: {}
 
   fflate@0.8.2: {}
 
@@ -9572,6 +9538,15 @@ snapshots:
       picocolors: 1.1.1
       source-map-js: 1.2.1
 
+  posthog-js@1.232.7:
+    dependencies:
+      core-js: 3.41.0
+      fflate: 0.4.8
+      preact: 10.26.4
+      web-vitals: 4.2.4
+
+  preact@10.26.4: {}
+
   prettier@3.5.1: {}
 
   pretty-format@29.7.0:
@@ -10559,6 +10534,8 @@ snapshots:
     optional: true
 
   web-streams-polyfill@3.3.3: {}
+
+  web-vitals@4.2.4: {}
 
   webdriver@9.1.2:
     dependencies:
