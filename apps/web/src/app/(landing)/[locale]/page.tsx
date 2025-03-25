@@ -277,7 +277,7 @@ export default function Home() {
         <PricingBasic />
 
         {/* CTA and FAQ section */}
-        <section className="grid grid-cols-2 lg:grid-cols-4 mb-5 w-full gap-20">
+        <section className="grid grid-cols-2 lg:grid-cols-4 mb-10 w-full gap-20">
           <div className="col-span-2 flex flex-col">
             <h1 className="mb-4 text-2xl font-light lg:text-4xl">{t('section4.title')}</h1>
             <span className="text-sm lg:text-xl">{t('section4.content')}</span>

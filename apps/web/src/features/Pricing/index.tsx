@@ -131,13 +131,12 @@ export function Pricing({
                       format={{
                         style: 'currency',
                         currency: 'USD',
-                        minimumFractionDigits: 0,
-                        maximumFractionDigits: 0,
                       }}
                       transformTiming={{
                         duration: 500,
                         easing: 'ease-out',
                       }}
+                      locales="en-US"
                       willChange
                       className="font-variant-numeric: tabular-nums"
                     />
