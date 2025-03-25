@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import { createClient } from '@/util/supabase/server';
+import { createServiceRoleClient } from '@/util/supabase/server';
 import { stripe } from '@/lib/stripe';
 import { headers } from 'next/headers';
 import type { Stripe } from 'stripe';
@@ -31,8 +31,6 @@ const allowedEvents: Stripe.Event.Type[] = [
   'payment_intent.canceled',
 ];
 
-const ProPlanId = (plan: string) => plan === 'prod_RwWVg1elNcyYBl' || plan === 'prod_RzJW0zcb376qcX';
-
 export async function POST(req: Request) {
   const body = await req.text();
   const signature = (await headers()).get('Stripe-Signature');
@@ -45,14 +43,14 @@ export async function POST(req: Request) {
 
   const event = stripe.webhooks.constructEvent(body, signature, env.STRIPE_WEBHOOK_SECRET);
 
-  if (!allowedEvents.includes(event.type)) return;
+  if (!allowedEvents.includes(event.type)) return NextResponse.json({}, { status: 200 }); // 200, otherwise stripe will spam
 
   const { customer: customerId } = event?.data?.object as {
     customer: string;
   };
 
   if (typeof customerId !== 'string') {
-    throw new Error(`[STRIPE HOOK][CANCER] ID isn't string.\nEvent type: ${event.type}`);
+    throw new Error(`[STRIPE HOOK][CANCER] ID isn't string.\nEvent: ${JSON.stringify(event)}`);
   }
 
   async function processEvent(customerId: string) {
@@ -63,7 +61,7 @@ export async function POST(req: Request) {
       expand: ['data.default_payment_method'],
     });
 
-    const supabase = await createClient();
+    const supabase = await createServiceRoleClient();
 
     const subscription = subscriptions.data[0];
 
@@ -75,10 +73,15 @@ export async function POST(req: Request) {
       current_period_end: subscription.current_period_end?.toString(),
       current_period_start: subscription.current_period_start?.toString(),
       cancel_at_period_end: subscription.cancel_at_period_end ? 'true' : 'false',
-      tier_id: ProPlanId(subscription.items.data[0].price.id) ? 3 : 2,
+      quantity: subscription.items.data[0].quantity,
     };
 
-    await supabase.from('subscriptions').upsert(subData);
+    await supabase.from('subscriptions').upsert(subData).throwOnError();
+    await supabase
+      .from('teams')
+      .update({ tier_id: subscription.status === 'active' ? 3 : 2 })
+      .eq('customer_id', customerId)
+      .throwOnError();
   }
 
   try {
