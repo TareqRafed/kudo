@@ -39,17 +39,17 @@ const FAQ_ITEMS = [
       'Focus and fast iterations are the keys to any successful project. last thing you want is unnecessary bureaucracy, your team can avoid jumping between multiple applications, private chats and keep important discussions right where they belong.',
   },
   {
-    question: 'Can I just selfhost it and have the software for free?',
+    question: 'Can I just self-host it and have the software for free?',
     answer:
-      'Yes, you can head into the repo and selfhost it by yourself, or you can contact us and we will configure your server for a fee.',
+      'Yes, you can go into the repo and self-host it, or you can contact us, and we’ll configure your server for a fee.',
   },
   {
-    question: 'Why would I pay for a subscription when I can selfhost it?',
+    question: 'Why would I pay for a subscription when I can self-host it?',
     answer:
-      'If you are an individual or a small bussniess, it would be actually better if you just selfhost it yourself, but if you need technical support and the extra features that comes with the pro and enterprise edition. Also, at anypoint of time, you can extract your data and switch to selfhost too',
+      "If you're an individual or a small business, it's actually better to self-host it yourself. However, if you need technical support and the extra features that come with the Pro and Enterprise editions, we offer those as well. Additionally, at any time, you can extract your data and switch to self-hosting.",
   },
   {
-    question: 'What would I need if I wanted to selfhost it?',
+    question: 'What would I need if I wanted to self-host it?',
     answer: 'You just need a running postgres instance, no traditional servers or anything like that',
   },
 ];
