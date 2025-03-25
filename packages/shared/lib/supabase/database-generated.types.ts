@@ -361,9 +361,9 @@ export type Database = {
           current_period_start: string | null
           customer_id: string
           price_id: string
+          quantity: number | null
           status: string | null
           subscription_id: string
-          tier_id: number
           updated_at: string | null
         }
         Insert: {
@@ -373,9 +373,9 @@ export type Database = {
           current_period_start?: string | null
           customer_id: string
           price_id: string
+          quantity?: number | null
           status?: string | null
           subscription_id: string
-          tier_id: number
           updated_at?: string | null
         }
         Update: {
@@ -385,9 +385,9 @@ export type Database = {
           current_period_start?: string | null
           customer_id?: string
           price_id?: string
+          quantity?: number | null
           status?: string | null
           subscription_id?: string
-          tier_id?: number
           updated_at?: string | null
         }
         Relationships: [

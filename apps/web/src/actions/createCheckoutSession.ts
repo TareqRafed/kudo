@@ -2,16 +2,11 @@
 
 import { createClient, createServiceRoleClient } from '@/util/supabase/server';
 import { z } from 'zod';
-import { stripe } from '@/lib/stripe';
+import { productsCatalogue, stripe } from '@/lib/stripe';
 import type { FormResponse } from '@/util/forms/types';
 import { createResponse, validateFormData } from '@/util/forms/forms';
 import { redirect } from 'next/navigation';
 import { env } from '@/lib/env';
-
-const catalogue = {
-  monthlyPro: env.NODE_ENV === 'production' ? 'price_1R2dSJIGjRTzW5c6lqie5s9M' : 'price_1R5KtvIGjRTzW5c6MEOG4yqK',
-  annualPro: env.NODE_ENV === 'production' ? 'price_1R5mzJIGjRTzW5c6HXcb5EZW' : 'price_1R5mwOIGjRTzW5c6lLz9T4Li',
-};
 
 const schema = z.object({
   teamId: z.string().min(1),
@@ -62,7 +57,9 @@ export async function createCheckoutSession(_: FormResponse<typeof schema> | nul
         },
       });
       const supabase = await createServiceRoleClient();
-      const { error } = await supabase.from('customers').upsert({ customer_id: newCustomer.id, team_id: team.id });
+      const { error: e1 } = await supabase.from('customers').upsert({ customer_id: newCustomer.id, team_id: team.id });
+      const { error: e2 } = await supabase.from('teams').update({ customer_id: newCustomer.id }).eq('id', team.id);
+      const error = e1 || e2;
       if (error) {
         console.error('[CREATE CHECKOUT SESSION]: Supabase error: ', error);
         return createResponse<typeof schema>(
@@ -86,7 +83,7 @@ export async function createCheckoutSession(_: FormResponse<typeof schema> | nul
     line_items: [
       {
         quantity: numberOfMembers,
-        price: data.isMonthly ? catalogue.monthlyPro : catalogue.annualPro,
+        price: data.isMonthly ? productsCatalogue.pro.monthly : productsCatalogue.pro.annual,
       },
     ],
   });
