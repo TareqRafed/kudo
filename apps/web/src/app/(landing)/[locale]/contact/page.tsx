@@ -134,7 +134,7 @@ const Contact = () => {
         <p className="text-center text-sm text-muted-foreground md:text-left md:rtl:text-right">
           {t('action')} <br />{' '}
           <a href="mailto:info@mersal-app.com" className="text-primary">
-            contact@usemersal.com
+            t@trykudo.com
           </a>
         </p>
       </div>
