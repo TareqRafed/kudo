@@ -27,7 +27,7 @@ export const metadata: Metadata = {
     type: 'website',
     title: 'Kudo – Supercharge Your Workflow',
     description: 'Streamline collaboration with Kudo. Add comments, track bugs, and discuss directly on any webpage.',
-    url: 'https://usekudo.com',
+    url: 'https://trykudo.com',
     siteName: 'Kudo',
     images: [
       {
@@ -58,21 +58,19 @@ export const metadata: Metadata = {
       url: '/favicon/favicon.ico', // Your favicon file
     },
     {
+      rel: 'icon',
+      url: '/favicon/favicon.svg', // Your favicon file
+    },
+    {
       rel: 'apple-touch-icon',
       url: '/favicon/apple-touch-icon.png', // Your Apple touch icon
       sizes: '180x180',
     },
     {
       rel: 'icon',
-      url: '/favicon/favicon-32x32.png', // Your 32x32 favicon
+      url: '/favicon/favicon-96x96.png', // Your 16x16 favicon
       type: 'image/png',
-      sizes: '32x32',
-    },
-    {
-      rel: 'icon',
-      url: '/favicon/favicon-16x16.png', // Your 16x16 favicon
-      type: 'image/png',
-      sizes: '16x16',
+      sizes: '96x96',
     },
   ],
 };

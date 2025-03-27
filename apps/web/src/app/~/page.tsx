@@ -33,6 +33,7 @@ import { useBreadcrumbs } from '@/components/Breadcrumb';
 import JavaScriptIcon from '@/assets/icons/javascript.svg';
 import ChromeIcon from '@/assets/icons/chrome.svg';
 import Image from 'next/image';
+import { env } from '@/lib/env';
 
 export default function Dashboard() {
   useBreadcrumbs([{ label: 'Home', href: '/~' }]);
@@ -240,14 +241,14 @@ const Extension = () => {
       <h2 className="text-xl text-primary mt-4 mb-2">1. Install the Extension</h2>
       <p>
         Before anything else, install the extension. Currently, it&apos;s available only on{' '}
-        <span className="text-accent-foreground">Chrome</span>. Very soon, we will an NPM package. So you can integrate
-        with any project internally.
+        <span className="text-accent-foreground">Chrome</span>. Very soon, we will ship NPM package. So you can
+        integrate with any project internally.
       </p>
       <ul className="list-disc pl-6 space-y-1 my-3">
         <li>
           Go to the{' '}
           <a
-            href="https://chrome.google.com/webstore"
+            href={env.NEXT_PUBLIC_CHROME_WEBSTORE_URL}
             target="_blank"
             className="text-accent-foreground underline"
             rel="noreferrer"
