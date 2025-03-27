@@ -2,7 +2,7 @@
 
 import { useTranslations } from 'next-intl';
 import { motion } from 'framer-motion';
-import { useActionState, useEffect } from 'react';
+import { useActionState } from 'react';
 import { useTheme } from 'next-themes';
 import { GoogleLogo } from '@phosphor-icons/react';
 import { ArrowUpRight } from 'lucide-react';
@@ -13,6 +13,7 @@ import { loginWithOAuth } from '@/actions/loginWithOAuth';
 import ContainerScroll from '@/components/ContainerScroll';
 import DisplayCards from '@/components/DisplayCards';
 import Globe from '@/components/Globe';
+
 import Safari from '@/components/Safari';
 import { PricingBasic } from '@/features/Pricing';
 

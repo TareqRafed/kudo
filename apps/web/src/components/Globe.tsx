@@ -57,15 +57,12 @@ const Globe = ({ className, config = GLOBE_CONFIG }: { className?: string; confi
     }
   };
 
-  const onRender = useCallback(
-    (state: Record<string, number>) => {
-      if (!pointerInteracting.current) phi += 0.005;
-      state.phi = phi + r;
-      state.width = width.current * 2;
-      state.height = width.current * 2;
-    },
-    [r, phi],
-  );
+  const onRender = (state: Record<string, number>) => {
+    if (!pointerInteracting.current) phi += 0.005;
+    state.phi = phi + r;
+    state.width = width.current * 2;
+    state.height = width.current * 2;
+  };
 
   const onResize = () => {
     if (canvasRef.current) {
