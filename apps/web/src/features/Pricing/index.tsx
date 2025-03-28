@@ -1,6 +1,6 @@
 'use client';
 
-import { Badge, Button, Label, Switch, buttonVariants } from '@kudo/ui';
+import { Badge, Button, Label, Switch } from '@kudo/ui';
 import { cn } from '@/lib/utils';
 import NumberFlow from '@number-flow/react';
 import confetti from 'canvas-confetti';
@@ -75,7 +75,7 @@ export function Pricing({
         </Label>
 
         <span className="ml-2">
-          Annual billing <span className="text-primary">(Save 20%)</span>
+          Annual billing <span className="text-primary">(Save 40%)</span>
         </span>
       </div>
 

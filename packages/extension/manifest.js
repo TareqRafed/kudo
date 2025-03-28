@@ -19,7 +19,7 @@ const manifest = {
   // host_permissions: ['<all_urls>'],
   permissions: ['storage', 'scripting', 'tabs', 'activeTab'],
   externally_connectable: {
-    matches: ['http://localhost:3000/*', 'https://trykudo.com/*'],
+    matches: ['http://localhost:3000/*', 'https://trykudo.com/*', 'https://*.trykudo.com/*'],
   },
   background: {
     service_worker: 'background.iife.js',
