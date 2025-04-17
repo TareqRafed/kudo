@@ -17,23 +17,23 @@
     "build:rollup": "rollup --config rollup.config.mjs",
     "ready": "pnpm run build:tsc && pnpm run build:rollup",
     "dev": "node dist/lib/initializers/initReloadServer.js",
-    "lint": "eslint . --ext .ts,.tsx",
+    "lint": "pnpm lint",
     "lint:fix": "pnpm lint --fix",
     "format": "biome format --write",
     "type-check": "tsc --noEmit"
   },
   "devDependencies": {
     "@biomejs/biome": "1.9.4",
-    "@types/node": "^20.17.16",
-    "@kudo/tsconfig": "workspace:*",
     "@kudo/biome-config": "workspace:*",
+    "@kudo/tsconfig": "workspace:*",
     "@rollup/plugin-sucrase": "^5.0.2",
+    "@types/node": "^22.13.14",
     "@types/ws": "^8.5.12",
     "esm": "^3.2.25",
     "fast-glob": "^3.3.2",
     "rollup": "^4.24.0",
     "ts-node": "^10.9.2",
-    "ws": "8.18.0",
-    "vite": "^6.1.0"
+    "vite": "^6.1.0",
+    "ws": "8.18.0"
   }
 }

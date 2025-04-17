@@ -37,10 +37,5 @@ Nobody enjoys juggling multiple platforms for feedback and updates. keep your te
 
 Please follow the [contribution guides](https://trykudo.com) and the `README.md` files inside `packages` and `apps` directories
 
-## Special Thanks To
-
-* [Jonghakseo](https://github.com/Jonghakseo): Alot was of their code was directly and undirectly taken to ease the extension development
-* [Vercel](https://vercel.com/docs/workflow-collaboration/vercel-toolbar): alot was inspired from vercel toolbar
-
 ## License
 Kudo is MIT-licensed open-source software.

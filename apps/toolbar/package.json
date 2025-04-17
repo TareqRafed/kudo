@@ -38,16 +38,15 @@
     "zustand": "^5.0.3"
   },
   "devDependencies": {
-    "@vitejs/plugin-react-swc": "^3.6.0",
-    "@tanstack/react-query-devtools": "^5.67.3",
     "@biomejs/biome": "1.9.4",
     "@kudo/biome-config": "workspace:*",
     "@kudo/hmr": "workspace:*",
     "@kudo/tsconfig": "workspace:*",
-    "@types/node": "^20.17.16",
+    "@tanstack/react-query-devtools": "^5.67.3",
     "@types/react": "^19.0.0",
     "@types/react-dom": "^19.0.0",
     "@types/webextension-polyfill": "^0.12.1",
+    "@vitejs/plugin-react-swc": "^3.6.0",
     "concurrently": "^9.0.1",
     "cross-env": "^7.0.3",
     "vite": "^6.1.0"
