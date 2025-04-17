@@ -10,7 +10,7 @@
     "build": "vite build",
     "dev": "vite build --mode development",
     "test": "vitest run",
-    "lint": "eslint ./ --ext .ts,.js,.tsx,.jsx",
+    "lint": "pnpm lint",
     "lint:fix": "pnpm lint --fix",
     "prettier": "prettier . --write --ignore-path ../.prettierignore",
     "type-check": "tsc --noEmit"
@@ -18,12 +18,11 @@
   "dependencies": {
     "@kudo/shared": "workspace:*",
     "@kudo/toolbar": "workspace:*",
-    "zod": "^3.24.1",
-    "webextension-polyfill": "^0.12.0"
+    "webextension-polyfill": "^0.12.0",
+    "zod": "^3.24.1"
   },
   "devDependencies": {
     "@biomejs/biome": "1.9.4",
-    "@types/node": "^20.17.16",
     "@kudo/hmr": "workspace:*",
     "@kudo/tsconfig": "workspace:*",
     "@laynezh/vite-plugin-lib-assets": "^0.5.23",

@@ -5,7 +5,7 @@
     "module": "ESNext",
     "target": "es2022",
     "lib": ["es2022", "dom"],
-    "types": ["node", "@wdio/globals/types", "@wdio/mocha-framework"],
+    "types": ["node"],
     "resolveJsonModule": true,
     "isolatedModules": true,
     "strict": true,
@@ -13,5 +13,6 @@
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true
   },
-  "include": ["specs", "config", "helpers"]
+  "include": ["./tests", "./fixtures"]
 }
+

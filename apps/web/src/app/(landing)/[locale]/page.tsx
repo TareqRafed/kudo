@@ -286,7 +286,7 @@ export default function Home() {
             <span className="text-sm lg:text-xl">{t('section4.content')}</span>
             <span className="mt-10 w-full">
               <Button>
-                Get Started
+                Try it
                 <span className="text-white">
                   <ArrowUpRight strokeWidth={0.5} className="size-10" />
                 </span>

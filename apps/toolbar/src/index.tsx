@@ -96,4 +96,10 @@ const init = async () => {
   }
 };
 
+globalThis.chrome = {
+  runtime: {
+    id: 'your-extension-id', // You can set this to any value
+  },
+};
+
 init();
