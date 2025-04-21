@@ -16,17 +16,17 @@ export type Message =
   | { action: 'END_AUTH'; payload?: string }
   | { action: 'PING'; payload?: string };
 
-export type ResponseMessage<T> = SuccessMessage<T> | UnsuccessMessage;
-
-export type SuccessMessage<T> = {
-  success: true;
-  data?: T;
-};
-
-export type UnsuccessMessage = {
-  success: false;
-  error: string;
-};
+export type ResponseMessage<T> =
+  | {
+      success: true;
+      data: T;
+      error?: never;
+    }
+  | {
+      success: false;
+      data?: never;
+      error: string;
+    };
 
 type SupabaseRpcResponse<T> = T extends Functions ? T : Functions;
 

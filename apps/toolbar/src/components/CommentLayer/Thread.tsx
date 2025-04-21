@@ -14,19 +14,16 @@ import { AnimatePresence, motion } from 'framer-motion';
 import { UserAvatar } from '../UserAvatar';
 import CommentPin from './CommentPin';
 import { useEffect, useRef, useState } from 'react';
-import { CheckIcon, Ellipsis, SmilePlus } from 'lucide-react';
-import { sendMessage, type Database } from '@kudo/shared';
+import { CheckIcon, Ellipsis } from 'lucide-react';
+import { type Functions, sendMessage, type FunctionsArgs } from '@kudo/shared';
 import { formatRelative } from 'date-fns';
-import { QueryClient, useMutation, useQueryClient } from '@tanstack/react-query';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import BounceBoundary from '../BounceBoundary/BounceBoundary';
 import CommentInput from './CommentInput';
 import { useClickAway } from '@src/hooks/useClickAway';
 import { Editor, EditorProvider } from 'react-simple-wysiwyg';
 
-export type ThreadData = Database['public']['Functions']['get_threads_for_website_id']['Returns'] extends (infer U)[]
-  ? U
-  : never;
-
+export type ThreadData = Functions<'get_threads_for_website_id'>;
 type ThreadProps = {
   data: ThreadData;
   isLoading?: boolean;
@@ -42,7 +39,7 @@ const ThreadTag = ({ data, isLoading, isDragging }: ThreadProps) => {
 
   const commentPinRef = useRef<HTMLDivElement>(null);
 
-  const [ref, event] = useClickAway<HTMLDivElement>(() => {
+  const [ref, event] = useClickAway<HTMLButtonElement>(() => {
     setIsCollapsed(true);
     setShowExtended(false);
   });
@@ -51,7 +48,8 @@ const ThreadTag = ({ data, isLoading, isDragging }: ThreadProps) => {
 
   const avatars = [
     { profilePicture: data.creator.profile_picture, color: data.creator.color },
-    ...data.comments?.map((cmnt) => ({
+
+    ...data.comments.map((cmnt) => ({
       profilePicture: cmnt.creator.profile_picture,
       color: cmnt.creator.color,
     })),
@@ -60,10 +58,9 @@ const ThreadTag = ({ data, isLoading, isDragging }: ThreadProps) => {
   const uniqueAvatars = Array.from(new Map(avatars.map((a) => [a.profilePicture, a])).values());
 
   return (
-    <div
+    <button
+      type="button"
       aria-expanded={showExtended}
-      tabIndex={0}
-      role="button"
       key={data.id}
       aria-label="Expand Comments"
       id={`${data.id} ${data.creator_id} ${data.created_at}`}
@@ -80,12 +77,12 @@ const ThreadTag = ({ data, isLoading, isDragging }: ThreadProps) => {
         setShowExtended(true);
       }}
       style={{ position: 'absolute', left: 0, top: 0 }}
-      className={cn([`pointer-events-auto z-max-2 flex flex-col select-none items-start`])}
+      className={cn(['pointer-events-auto z-max-2 flex flex-col select-none items-start'])}
     >
       <CommentPin
         ref={commentPinRef}
         isLoading={isLoading}
-        content={data.comments.length + 1}
+        content={String(data.comments.length + 1)}
         avatars={uniqueAvatars}
       />
       <AnimatePresence>
@@ -108,7 +105,7 @@ const ThreadTag = ({ data, isLoading, isDragging }: ThreadProps) => {
                   <>
                     <div>
                       {data.comments.map((cmnt) => (
-                        <ThreadComment showActions minimal key={cmnt.id} comment={cmnt} />
+                        <ThreadComment showActions minimal threadId={data.id} key={cmnt.id} comment={cmnt} />
                       ))}
                     </div>
                     <CommentInputMutate threadId={data.id} />
@@ -119,7 +116,7 @@ const ThreadTag = ({ data, isLoading, isDragging }: ThreadProps) => {
           </BounceBoundary>
         )}
       </AnimatePresence>
-    </div>
+    </button>
   );
 };
 
@@ -140,14 +137,14 @@ const CommentInputMutate = ({ threadId }: { threadId: number }) => {
 type CommentSectionProps = {
   threadId: number;
   comment: {
-    id: number;
-    content: string;
+    content: string | null;
     created_at: string;
     creator: {
       id: string;
       display_name: string;
       profile_picture: string | null;
-    } | null;
+      color: string;
+    };
   };
   /**
    * Shows all actions toolbar, if false minimal is ignored
@@ -159,9 +156,9 @@ type CommentSectionProps = {
   minimal?: boolean;
 };
 
-type NewCommentArgs = Database['public']['Functions']['create_new_comment']['Args'];
-type UpdateThreadArgs = Database['public']['Functions']['update_record']['Args'];
-type DeleteThreadArgs = Database['public']['Functions']['delete_record']['Args'];
+type NewCommentArgs = FunctionsArgs<'create_new_comment'>;
+type UpdateThreadArgs = FunctionsArgs<'update_record'>;
+type DeleteThreadArgs = FunctionsArgs<'delete_record'>;
 
 const ThreadComment = ({ comment, showActions = false, minimal = false, threadId }: CommentSectionProps) => {
   const modalRef = useRef<HTMLDivElement>(null);
@@ -267,12 +264,12 @@ const ThreadComment = ({ comment, showActions = false, minimal = false, threadId
           )}
         </div>
       </div>
-      <Comment comment={comment} />
+      <Comment content={comment.content ?? ''} />
     </div>
   );
 };
 
-const Comment = ({ comment }: CommentSectionProps) => {
+const Comment = ({ content }: { content: string }) => {
   const [isExpanded, setIsExpanded] = useState(false);
   const [isTruncated, setIsTruncated] = useState(false);
   const textRef = useRef<HTMLParagraphElement>(null);
@@ -297,12 +294,13 @@ const Comment = ({ comment }: CommentSectionProps) => {
             isExpanded ? '' : 'line-clamp-2',
           ])}
           disabled
-          value={comment.content}
+          value={content}
           ref={textRef}
         />
       </EditorProvider>
       {isTruncated && (
         <button
+          type="button"
           aria-label={isExpanded ? 'Show Less' : 'Show More'}
           onClick={toggleText}
           className="mt-2 text-xs text-blue-500 hover:underline"

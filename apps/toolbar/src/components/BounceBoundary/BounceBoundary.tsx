@@ -40,19 +40,19 @@ const calculateOverflowPosition = (
 
   const targetRect = targetElement.getBoundingClientRect();
 
-  if (position.nearestEdge.horizontal == 'left') {
+  if (position.nearestEdge.horizontal === 'left') {
     position.x += targetRect.width + padding;
   }
 
-  if (position.nearestEdge.horizontal == 'right') {
+  if (position.nearestEdge.horizontal === 'right') {
     position.x -= padding + elementWidth;
   }
 
-  if (position.nearestEdge.vertical == 'top') {
+  if (position.nearestEdge.vertical === 'top') {
     position.y += targetRect.height + padding;
   }
 
-  if (position.nearestEdge.vertical == 'bottom') {
+  if (position.nearestEdge.vertical === 'bottom') {
     position.y -= padding + elementHeight;
   }
 
@@ -63,7 +63,7 @@ const calculateOverflowPosition = (
 
 type BounceBoundaryProps = {
   children: React.ReactNode;
-  targetRef: RefObject<HTMLElement>;
+  targetRef: RefObject<HTMLElement | null>;
   helper: {
     width: number;
     height: number;
@@ -88,9 +88,7 @@ const BounceBoundary = ({ children, targetRef, helper }: BounceBoundaryProps) =>
       window.removeEventListener('scroll', handlePositionChange);
       window.removeEventListener('resize', handlePositionChange);
     };
-  }, [targetRef.current]);
-
-  console.log(targetRef, helper, locationResult, 'location');
+  }, [targetRef.current, helper.width, helper.height]);
 
   if (!locationResult) return <></>;
 
@@ -100,13 +98,13 @@ const BounceBoundary = ({ children, targetRef, helper }: BounceBoundaryProps) =>
       style={{
         position: 'fixed',
         left: locationResult.x,
-        bottom: locationResult.nearestEdge.vertical == 'bottom' ? locationResult.bottom : 'unset',
-        top: locationResult.nearestEdge.vertical == 'top' ? locationResult.y : 'unset',
+        bottom: locationResult.nearestEdge.vertical === 'bottom' ? locationResult.bottom : 'unset',
+        top: locationResult.nearestEdge.vertical === 'top' ? locationResult.y : 'unset',
       }}
     >
       {children}
     </div>,
-    domHelper.getRoot()!,
+    domHelper.getRoot(),
   );
 };
 

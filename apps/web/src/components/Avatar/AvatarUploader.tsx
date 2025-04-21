@@ -1,7 +1,7 @@
 'use client';
 
 import { cn } from '@/lib/utils';
-import { type ComponentPropsWithoutRef, useState, useCallback } from 'react';
+import { type ComponentPropsWithoutRef, useState } from 'react';
 import { Avatar, AvatarFallback, AvatarImage } from '@kudo/ui';
 import { DialogTitle, Dialog, DialogContent } from '@kudo/ui';
 import { Button } from '@kudo/ui';
@@ -25,9 +25,9 @@ export const AvatarUploader = ({ id, src, color = '#fff', className, onImageUplo
   const [zoom, setZoom] = useState(1);
   const [croppedAreaPixels, setCroppedAreaPixels] = useState<Area | null>(null);
 
-  const onCropComplete = useCallback((croppedArea: Area, croppedAreaPixels: Area) => {
+  const onCropComplete = (_: Area, croppedAreaPixels: Area) => {
     setCroppedAreaPixels(croppedAreaPixels);
-  }, []);
+  };
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files.length > 0) {
@@ -83,7 +83,7 @@ export const AvatarUploader = ({ id, src, color = '#fff', className, onImageUplo
     return canvas.toDataURL(mimeType);
   };
 
-  const handleCropConfirm = useCallback(async () => {
+  const handleCropConfirm = async () => {
     if (image && croppedAreaPixels) {
       try {
         const croppedImage = await getCroppedImg(image, croppedAreaPixels);
@@ -96,7 +96,7 @@ export const AvatarUploader = ({ id, src, color = '#fff', className, onImageUplo
         console.error(e);
       }
     }
-  }, [image, croppedAreaPixels, onImageUpload]);
+  };
 
   return (
     <div className="flex items-center relative size-fit rounded-full">

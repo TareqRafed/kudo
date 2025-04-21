@@ -262,7 +262,7 @@ export function DataTable<TData, TValue>({
                       className={cn([
                         'whitespace-nowrap sticky top-0 z-10',
                         sort && header.column.getCanSort() && 'cursor-pointer',
-                        ``,
+                        '',
                       ])}
                       style={{
                         width: `${!header.getSize() ? '100%' : header.column.getSize()}px`,

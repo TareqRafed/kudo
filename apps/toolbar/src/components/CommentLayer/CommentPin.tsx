@@ -12,7 +12,7 @@ const CommentPin = (
     content,
   }: {
     isLoading?: boolean;
-    avatars: { profilePicture: string; color: string }[];
+    avatars: { profilePicture: string | null; color: string }[];
     content?: string;
   },
   ref: ForwardedRef<HTMLDivElement>,

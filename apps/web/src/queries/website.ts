@@ -1,5 +1,5 @@
-import { TypedSupabaseClient } from '@/types/typedClientQuery.types';
-import { Options } from './util/types';
+import type { TypedSupabaseClient } from '@/types/typedClientQuery.types';
+import type { Options } from './util/types';
 import { getPagination } from './util/pagination';
 
 export const getWebsites = (client: TypedSupabaseClient, options: Options = {}) => {

@@ -49,7 +49,10 @@ export const createResponse = <T extends ZodType>(
   message: string,
   success: boolean,
 ): FormResponse<T> => {
-  const errs: FieldsFeedback<T> = messages.reduce((prev, err) => ({ ...prev, [err.field]: err.messages }), {});
+  const errs: FieldsFeedback<T> = {};
+  for (const err of messages) {
+    errs[err.field] = err.messages;
+  }
 
   return {
     ...errs,

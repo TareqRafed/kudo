@@ -1,4 +1,4 @@
-import { z, ZodType } from 'zod';
+import type { z, ZodType } from 'zod';
 
 export type FieldsFeedback<T extends ZodType> = {
   [K in keyof z.infer<T>]?: string[];

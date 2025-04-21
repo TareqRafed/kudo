@@ -30,7 +30,7 @@ import { CircleCheck, CircleEllipsis, MessagesSquare } from 'lucide-react';
 import { useQueryState } from 'nuqs';
 import { ThreadComments } from './threadComments';
 
-type Tabs = 'all' | 'resolved' | 'unresolved';
+type TabOptions = 'all' | 'resolved' | 'unresolved';
 
 const Threads = ({ projectId }: { projectId: string | number }) => {
   useBreadcrumbs([
@@ -82,7 +82,7 @@ export default Threads;
 
 interface ThreadsGridProps {
   projectId: number | string;
-  type: Tabs;
+  type: TabOptions;
 }
 
 const ThreadsGrid = ({ projectId, type }: ThreadsGridProps) => {
@@ -176,6 +176,7 @@ const ThreadsGrid = ({ projectId, type }: ThreadsGridProps) => {
 
             <DrawerTrigger asChild>
               <button
+                type="button"
                 key={thread.id}
                 className="flex w-96 flex-col justify-start rounded border px-2 py-3 text-left hover:border-accent hover:bg-accent/10"
               >

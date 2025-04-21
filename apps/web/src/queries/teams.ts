@@ -1,4 +1,4 @@
-import { TypedSupabaseClient } from '@/types/typedClientQuery.types';
+import type { TypedSupabaseClient } from '@/types/typedClientQuery.types';
 
 export const getTeams = (client: TypedSupabaseClient) => {
   return client.from('teams').select('id, name, logo, theme, tiers(name)').throwOnError();

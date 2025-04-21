@@ -50,7 +50,7 @@ export function URLFormatter({ url, showQuery, showDomain, showBasePath }: URLFo
           <span className="m-w-full inline-block w-[200px] truncate">
             <span>?</span>
             {formattedURL.queryParams.map((param, index) => (
-              <span key={index}>
+              <span key={param.key}>
                 {index > 0 && <span className="text-muted-foreground">&</span>}
                 <span className="text-muted-foreground">{param.key}=</span>
                 <span className="text-muted-foreground">{decodeURIComponent(param.value)}</span>

@@ -13,9 +13,11 @@ const queryClient = new QueryClient({
 });
 
 const Provider = ({ children }: { children: ReactNode }) => {
+  const root = domHelper.getRoot();
+
   return (
     <QueryClientProvider client={queryClient}>
-      <ReactQueryDevtools shadowDOMTarget={domHelper.getRoot()!} />
+      {root.shadowRoot && <ReactQueryDevtools shadowDOMTarget={root.shadowRoot} />}
       <Toaster />
       <TooltipProvider delayDuration={0}>{children}</TooltipProvider>
     </QueryClientProvider>

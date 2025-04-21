@@ -46,7 +46,7 @@ const handlePositionUpdate = (x: number, y: number, layer: HTMLElement) => {
     target = elements[0];
   }
 
-  //	layer.style.pointerEvents = 'auto'
+  //layer.style.pointerEvents = 'auto'
 
   const selector = target ? getCssSelector(target) : '';
   const rect = target?.getBoundingClientRect();
@@ -83,6 +83,7 @@ const Magnet = <T extends HTMLElement>({
     setDragPos({ x: position.left, y: position.top }); // update drag position only after setPos executes
   }, [position.left, position.top]);
 
+  // Draggable havn't been maintained for 8 months now, TODO: use motion for dragging instead
   if (!position.fail)
     return (
       <Draggable

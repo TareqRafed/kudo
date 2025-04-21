@@ -12,7 +12,7 @@ export default function NotFound() {
 
   return (
     <html lang="en">
-      <body></body>
+      <body />
     </html>
   );
 }

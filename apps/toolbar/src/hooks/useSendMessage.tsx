@@ -10,7 +10,6 @@ export const useSendMessage = <T extends Message>(message: T, key: QueryKeys = [
     queryFn: async () => {
       // const _key = key[0];
       const res = await sendMessage(message);
-      console.log();
       return res;
     },
   });

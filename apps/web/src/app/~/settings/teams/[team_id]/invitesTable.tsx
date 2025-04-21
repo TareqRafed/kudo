@@ -41,7 +41,7 @@ const columns: ColumnDef<Row>[] = [
   {
     accessorKey: 'status',
     header: 'Status',
-    cell: ({ row }) => (row.original.status == 'neutral' ? 'Pending' : ''),
+    cell: ({ row }) => (row.original.status === 'neutral' ? 'Pending' : ''),
   },
   {
     accessorKey: 'created_at',

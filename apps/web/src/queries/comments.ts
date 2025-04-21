@@ -1,4 +1,4 @@
-import { TypedSupabaseClient } from '@/types/typedClientQuery.types';
+import type { TypedSupabaseClient } from '@/types/typedClientQuery.types';
 
 export const getComments = (client: TypedSupabaseClient) => {
   return client

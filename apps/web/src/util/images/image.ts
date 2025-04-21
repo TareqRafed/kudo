@@ -78,7 +78,7 @@ export async function validateBase64Image(
 
     // Construct image info
     const imageInfo: ImageInfo = {
-      format: metadata.format!,
+      format: metadata.format ?? 'png',
       width: metadata.width,
       height: metadata.height,
       size: imageBuffer.length,
@@ -90,7 +90,7 @@ export async function validateBase64Image(
     // Handle unexpected errors (e.g., invalid Base64 or corrupted image)
     return {
       valid: false,
-      error: (error as any)?.message ?? 'Failed to process image.',
+      error: `Failed to process image: ${JSON.stringify(error)}`,
     };
   }
 }

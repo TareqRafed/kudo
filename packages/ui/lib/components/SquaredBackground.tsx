@@ -86,11 +86,11 @@ export const Squares = ({
         canvas.height / 2,
         Math.sqrt(canvas.width ** 2 + canvas.height ** 2) / 2,
       );
-      if (theme == 'dark') {
+      if (theme === 'dark') {
         gradient.addColorStop(0, 'rgba(6, 6, 6, 0)');
         gradient.addColorStop(1, '#060606');
       }
-      if (theme == 'light') {
+      if (theme === 'light') {
         gradient.addColorStop(0, 'rgba(255, 255, 255, 0)');
         gradient.addColorStop(1, '#fff');
       }
