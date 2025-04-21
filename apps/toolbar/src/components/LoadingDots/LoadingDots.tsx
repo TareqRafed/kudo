@@ -7,7 +7,7 @@ const LoadingDots = () => {
       opacity: [1, 0.8, 1], // Slight fade during bounce
       transition: {
         duration: 2,
-        repeat: Infinity,
+        repeat: Number.POSITIVE_INFINITY,
         ease: 'easeInOut',
         delay: i * 0.2, // Stagger each dot
       },

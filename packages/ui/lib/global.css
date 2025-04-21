@@ -36,7 +36,6 @@ p {
 }
 
 @layer base {
-
   :root {
     --background: 212 35.3% 100%;
     --background-gradient: 214 90% 100%;
@@ -123,5 +122,3 @@ p {
     @apply bg-background text-foreground;
   }
 }
-
-

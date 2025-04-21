@@ -1,4 +1,4 @@
-import { cn, useToast } from '@kudo/ui';
+import { cn } from '@kudo/ui';
 import useToolbarStore from '@src/store/toolbar';
 import type { MouseEventHandler, RefObject } from 'react';
 import { useRef, useState } from 'react';
@@ -18,14 +18,18 @@ import { useHotkeys } from 'react-hotkeys-hook';
 import { getPublic } from '@src/util';
 import { useRegisterDocument } from '@src/hooks/useRegisterDocument';
 
-const getCssSelector = (el: Element) => {
-  const path = [];
-  let parent: ParentNode | null;
-  while ((parent = el.parentNode)) {
-    path.unshift(`${el.tagName}:nth-child(${[].indexOf.call(parent.children, el) + 1})`);
-    el = parent;
+const getCssSelector = (el: Element): string => {
+  const path: string[] = [];
+  let elm = el;
+
+  while (elm.parentElement) {
+    const parent = elm.parentElement;
+    const index = Array.from(parent.children).indexOf(el) + 1;
+    path.unshift(`${el.tagName}:nth-child(${index})`);
+    elm = parent;
   }
-  return `${path.join(' > ')}`.toLowerCase();
+
+  return path.join(' > ').toLowerCase();
 };
 
 type NewThreadArgs = Extract<Message, { action: 'RPC'; payload: 'create_new_thread' }>['args'];
@@ -123,6 +127,7 @@ export const CommentLayer = () => {
 
   // if (!website.id) throw new Error('Something went wrong');
   return (
+    // biome-ignore lint/a11y/useKeyWithClickEvents: Hidden element
     <div
       id="ab-layer"
       ref={layerRef}
@@ -202,6 +207,7 @@ type Thread = {
   thread: ThreadData;
   layerRef: RefObject<HTMLDivElement>;
 };
+
 const MagnifiedTag = ({ thread, layerRef }: Thread) => {
   const clientQuery = useQueryClient();
   const [isDragging, setIsDragging] = useState(false);
@@ -227,13 +233,14 @@ const MagnifiedTag = ({ thread, layerRef }: Thread) => {
     mutateThread({ table_name: 'threads', record_id: id, updates: payload as Json });
   };
   const threadRef = useRef<HTMLDivElement>(null);
+  if (threadRef.current === null) return;
 
   return (
     <Magnet
-      draggedRef={threadRef}
+      draggedRef={threadRef as RefObject<HTMLDivElement>}
       onStart={() => setIsDragging(true)}
       layerRef={layerRef}
-      initData={{ targetSelector: thread.target_selector ?? undefined, x: thread.x, y: thread.y, rect: thread.rect }}
+      initData={{ targetSelector: thread.target_selector, x: thread.x, y: thread.y, rect: thread.rect }}
       onDrop={(e) => {
         setIsDragging(false);
         handleTagDrop(e, thread.id ?? 0);

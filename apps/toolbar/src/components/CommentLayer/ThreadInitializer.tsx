@@ -23,7 +23,7 @@ const ThreadInit = ({ onCreate, isDragging, ...rest }: ThreadInitProps) => {
         aria-hidden
         onClick={(e) => e.stopPropagation()}
         style={{ position: 'absolute', left: 0, top: 0 }}
-        className={cn([`pointer-events-auto forth-index bg-transparent items-start flex select-none`])}
+        className={cn(['pointer-events-auto forth-index bg-transparent items-start flex select-none'])}
       >
         <pre ref={pointerRef} className="cursor-grab active:cursor-grabbing">
           <CommentPin

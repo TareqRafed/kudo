@@ -6,22 +6,9 @@ class DOMHelper {
     this.elementCache = new Map();
   }
 
-  getRoot(): HTMLElement | null {
+  getRoot() {
+    if (!this.root) throw new Error('[DOMHelper]: Root is not initialized');
     return this.root;
-  }
-
-  getElementById(id: string): HTMLElement {
-    if (this.elementCache.has(id)) {
-      return this.elementCache.get(id)!;
-    }
-
-    const element = document.getElementById(id);
-    if (!element) {
-      throw new Error(`Element with ID "${id}" not found.`);
-    }
-
-    this.elementCache.set(id, element);
-    return element;
   }
 
   // Create a new element and optionally append it to a parent

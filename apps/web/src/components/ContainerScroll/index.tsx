@@ -1,6 +1,6 @@
 'use client';
 
-import { type ComponentPropsWithoutRef, useRef } from 'react';
+import { type ComponentPropsWithoutRef, type ReactNode, useRef } from 'react';
 import { useScroll, useTransform, motion, type MotionValue } from 'framer-motion';
 import { useIsMobile } from '@/hooks/use-mobile';
 
@@ -37,7 +37,7 @@ const ContainerScroll = ({ titleComponent, children, ...rest }: Props) => {
   );
 };
 
-const Header = ({ translate, titleComponent }: any) => {
+const Header = ({ translate, titleComponent }: { translate: MotionValue<string>; titleComponent: ReactNode }) => {
   return (
     <motion.div
       style={{

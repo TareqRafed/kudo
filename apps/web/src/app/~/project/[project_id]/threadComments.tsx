@@ -27,6 +27,7 @@ export const ThreadComments = ({ threadId }: Props) => {
       <>
         {new Array(5).fill(0).map((_, i) => {
           return (
+            // biome-ignore lint/suspicious/noArrayIndexKey: static elements
             <div key={i} className="mt-5 flex">
               <Skeleton className="mr-2 size-9 rounded-full" />
               <div className="flex size-full flex-col">

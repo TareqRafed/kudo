@@ -4,7 +4,7 @@ import { type ComponentPropsWithoutRef, useId } from 'react';
 import { Separator } from './Separator';
 import { Label } from './Label';
 import * as reactHookForm from 'react-hook-form';
-import * as z from 'zod';
+import type * as z from 'zod';
 import { Slot } from '@radix-ui/react-slot';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { cn } from '@/lib/utils';

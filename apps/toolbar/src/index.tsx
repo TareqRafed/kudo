@@ -44,7 +44,7 @@ const createRootContainer = () => {
 };
 
 const removeRootContainer = () => {
-  const root = domHelper.getElementById(rootId);
+  const root = domHelper.getRoot();
   root?.remove();
 };
 
@@ -96,10 +96,10 @@ const init = async () => {
   }
 };
 
-globalThis.chrome = {
-  runtime: {
-    id: 'your-extension-id', // You can set this to any value
-  },
-};
+// globalThis.chrome = {
+//   runtime: {
+//     id: 'your-extension-id',
+//   },
+// };
 
 init();

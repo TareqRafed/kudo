@@ -17,11 +17,11 @@ function InfiniteScroll(props: Props) {
   useEffect(() => {
     // is element in view?
     function handleIntersection(entries: IntersectionObserverEntry[]) {
-      entries.forEach((entry) => {
+      for (const entry of entries) {
         if (entry.isIntersecting && (!isLoadingMore || !isLoadingIntial)) {
           loadMore();
         }
-      });
+      }
     }
 
     // create observer instance

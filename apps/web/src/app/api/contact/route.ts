@@ -1,5 +1,5 @@
 import { Resend } from 'resend';
-import { NextRequest, NextResponse } from 'next/server';
+import { type NextRequest, NextResponse } from 'next/server';
 
 const resend = new Resend('re_jVzaDjEb_9CAoJFH9EbEbDdqtW7wRjamA');
 
@@ -41,9 +41,8 @@ export async function POST(req: NextRequest) {
 
     if (!resp) {
       return NextResponse.json({ success: true }, { status: 200 });
-    } else {
-      return NextResponse.json({ success: false, data: 'Failed to send E-mail' }, { status: 500 });
     }
+      return NextResponse.json({ success: false, data: 'Failed to send E-mail' }, { status: 500 });
   } catch (error) {
     return NextResponse.json({ error: 'Internal server error' }, { status: 500 });
   }

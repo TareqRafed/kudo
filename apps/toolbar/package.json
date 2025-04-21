@@ -15,8 +15,8 @@
     "build": "pnpm build:tailwindcss && vite build",
     "build:watch": "concurrently \"vite build --mode development\" \"pnpm build:tailwindcss -- -w\"",
     "dev": "pnpm build:tailwindcss && pnpm build:watch",
-    "lint": "pnpm lint",
-    "lint:fix": "pnpm lint --fix",
+    "lint": "pnpm biome lint",
+    "lint:fix": "pnpm biome lint --write",
     "format": "biome format --write",
     "type-check": "tsc --noEmit"
   },

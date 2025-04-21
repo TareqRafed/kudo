@@ -1,7 +1,7 @@
 import { Avatar, AvatarFallback, AvatarImage, cn } from '@kudo/ui';
 
 interface Props {
-  src: string;
+  src: string | null;
   color: string;
   className?: string;
 }
@@ -9,7 +9,7 @@ interface Props {
 export const UserAvatar = ({ color, src, className }: Props) => {
   return (
     <Avatar style={{ borderColor: color }} className={cn(['size-9 border-2', className])}>
-      <AvatarImage src={src} />
+      {src && <AvatarImage src={src} />}
       <AvatarFallback>
         <div className="size-full" style={{ background: `linear-gradient(135deg, ${color}, #000)` }} />
       </AvatarFallback>

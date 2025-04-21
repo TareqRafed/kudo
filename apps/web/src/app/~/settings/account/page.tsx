@@ -196,7 +196,7 @@ const GithubAccountDetails = () => {
       size={'sm'}
       variant={'destructive'}
       onClick={() => unlinkIdentity(githubIdentity)}
-      disabled={data?.identities.length == 1}
+      disabled={data?.identities.length === 1}
     >
       <span className="flex items-center justify-center">
         <GithubLogo className="mr-2" />

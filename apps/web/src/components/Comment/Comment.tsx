@@ -81,6 +81,7 @@ export const CommentArea = ({ value, withoutExpanding }: CommentAreaProps) => {
       </EditorProvider>
       {shouldBeExpandable && (
         <button
+          type="button"
           aria-label={isExpanded ? 'Show Less' : 'Show More'}
           onClick={toggleText}
           className="mt-2 w-full text-left text-xs font-semibold text-blue-500 hover:underline"

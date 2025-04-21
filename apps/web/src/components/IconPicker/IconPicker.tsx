@@ -3,7 +3,7 @@
 import { cn } from '@/lib/utils';
 import { Button } from '@kudo/ui';
 import { Input } from '@kudo/ui';
-import { ImageSquare } from '@phosphor-icons/react';
+import { type Icon, ImageSquare } from '@phosphor-icons/react';
 import * as Select from '@radix-ui/react-select';
 import { motion } from 'framer-motion';
 import { Search } from 'lucide-react';
@@ -26,7 +26,7 @@ const IconPicker = ({ defaultIcon, defaultColor, onIconChange, ...rest }: Props)
 
   const filteredIcons = icons.filter((icon) => icon.name.toLowerCase().includes(searchTerm.toLowerCase()));
 
-  const renderIcon = (IconComponent: React.ComponentType<any>) => {
+  const renderIcon = (IconComponent: Icon) => {
     return <IconComponent weight="fill" color={'#ffffff'} />;
   };
 
@@ -40,6 +40,7 @@ const IconPicker = ({ defaultIcon, defaultColor, onIconChange, ...rest }: Props)
       <Select.Trigger asChild>
         <Button
           {...rest}
+          // biome-ignore lint/a11y/useSemanticElements: Keep styling
           role="combobox"
           aria-label="Open icon picker"
           variant="outline"
