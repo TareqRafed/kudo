@@ -1,11 +1,10 @@
-name: Build And Upload Extension Zip Via Artifact
+name: Build And Upload Chrome Extension Zip Via Artifact
 
 on:
   push:
     branches: [ main ]
     paths:
-      - "apps/toolbar/**"
-      - "packages/**"
+      - 'packages/extension/CHANGELOG.md'
   pull_request:
 
 jobs:
@@ -23,7 +22,7 @@ jobs:
 
       - run: pnpm install --frozen-lockfile --prefer-offline
 
-      - run: pnpm build
+      - run: pnpm build:chrome
 
       - uses: actions/upload-artifact@v4
         with:

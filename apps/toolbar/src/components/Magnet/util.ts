@@ -1,4 +1,4 @@
-const getCssSelector = (el: Element): string => {
+export const getCssSelector = (el: Element): string => {
   const path: string[] = [];
   let elm = el;
 
