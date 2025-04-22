@@ -30,6 +30,7 @@
     "prepare": "husky"
   },
   "devDependencies": {
+    "@changesets/cli": "^2.29.2",
     "@kudo/biome-config": "workspace:*",
     "autoprefixer": "^10.4.20",
     "cross-env": "^7.0.3",

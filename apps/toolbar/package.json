@@ -1,6 +1,6 @@
 {
   "name": "@kudo/toolbar",
-  "version": "0.3.4",
+  "version": "0.0.1",
   "description": "Kudo - Toolbar",
   "type": "module",
   "private": true,

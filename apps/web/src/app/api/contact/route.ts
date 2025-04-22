@@ -42,7 +42,7 @@ export async function POST(req: NextRequest) {
     if (!resp) {
       return NextResponse.json({ success: true }, { status: 200 });
     }
-      return NextResponse.json({ success: false, data: 'Failed to send E-mail' }, { status: 500 });
+    return NextResponse.json({ success: false, data: 'Failed to send E-mail' }, { status: 500 });
   } catch (error) {
     return NextResponse.json({ error: 'Internal server error' }, { status: 500 });
   }
