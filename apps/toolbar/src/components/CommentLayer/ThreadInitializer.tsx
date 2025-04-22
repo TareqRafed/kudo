@@ -13,12 +13,18 @@ interface ThreadInitProps extends ComponentPropsWithoutRef<'div'> {
   isDragging?: boolean;
 }
 
-const ThreadInit = ({ onCreate, isDragging, ...rest }: ThreadInitProps) => {
+const ThreadInit = ({ onCreate, isDragging }: ThreadInitProps) => {
   const pointerRef = useRef<HTMLPreElement>(null);
-  const { data } = useSendMessage({ action: 'RPC', payload: 'get_current_member_with_metadata', args: {} });
-  const user = data?.data?.data?.[0];
+  const { data: userResponse } = useSendMessage({
+    action: 'RPC',
+    payload: 'get_current_member_with_metadata',
+    args: {},
+  });
+  const user = userResponse?.data?.data?.[0];
   return (
     <div>
+      {/* TODO: Handle `e.stopPropagation` */}
+      {/* biome-ignore lint/a11y/useKeyWithClickEvents: stopPropagation should be removed or at least inverse dep, it's used because it causes issues with <Magnet /> */}
       <div
         aria-hidden
         onClick={(e) => e.stopPropagation()}

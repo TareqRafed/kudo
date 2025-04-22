@@ -31,9 +31,9 @@ const LoadingDots = () => {
         background: 'transparent', // Transparent background
       }}
     >
-      {[...Array(3)].map((_, i) => (
+      {[1, 2, 3].map((key, i) => (
         <motion.div
-          key={i}
+          key={key}
           custom={i}
           variants={dotVariants}
           animate="animate"
