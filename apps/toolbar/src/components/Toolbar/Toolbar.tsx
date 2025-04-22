@@ -5,9 +5,9 @@ import useToolbarStore from '@src/store/toolbar';
 import { domHelper } from '@src/util';
 import { AnimatePresence, motion, useAnimate } from 'framer-motion';
 import { ArrowRight, MessageCircle } from 'lucide-react';
-import { type ComponentPropsWithoutRef, type ReactNode, useEffect } from 'react';
+import type { ComponentPropsWithoutRef, ReactNode } from 'react';
 import { useHotkeys } from 'react-hotkeys-hook';
-import Logo from '../../../public/logo.svg';
+import Logo from '../../assets/logo.svg';
 import LoadingDots from '../LoadingDots/LoadingDots';
 
 const TOOLBAR_DRAG_AREA_PADDING = 10;
@@ -135,7 +135,7 @@ const ToolbarItem = ({ isActive = false, onClick, children, tooltipContent, ...r
           </motion.span>
         </Button>
       </TooltipTrigger>
-      <TooltipPortal container={domHelper.getRoot()!}>
+      <TooltipPortal container={domHelper.getRoot()}>
         <TooltipContent className="dark" side="right">
           {tooltipContent}
         </TooltipContent>
