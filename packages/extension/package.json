@@ -10,9 +10,9 @@
     "build": "vite build",
     "dev": "vite build --mode development",
     "test": "vitest run",
-    "lint": "pnpm lint",
-    "lint:fix": "pnpm lint --fix",
-    "prettier": "prettier . --write --ignore-path ../.prettierignore",
+    "lint": "biome lint",
+    "lint:fix": "biome lint --write",
+    "format": "biome format",
     "type-check": "tsc --noEmit"
   },
   "dependencies": {

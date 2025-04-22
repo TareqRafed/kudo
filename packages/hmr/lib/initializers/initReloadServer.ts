@@ -29,9 +29,9 @@ function initReloadServer() {
       }
 
       if (message.type === BUILD_COMPLETE) {
-        clientsThatNeedToUpdate.forEach((ws: WebSocket) =>
-          ws.send(MessageInterpreter.send({ type: DO_UPDATE, id: message.id })),
-        );
+        for (const ws of clientsThatNeedToUpdate) {
+          ws.send(MessageInterpreter.send({ type: DO_UPDATE, id: message.id }));
+        }
       }
     });
   });
