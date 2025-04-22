@@ -17,9 +17,9 @@
     "build:rollup": "rollup --config rollup.config.mjs",
     "ready": "pnpm run build:tsc && pnpm run build:rollup",
     "dev": "node dist/lib/initializers/initReloadServer.js",
-    "lint": "pnpm lint",
-    "lint:fix": "pnpm lint --fix",
-    "format": "biome format --write",
+    "lint": "biome lint",
+    "lint:fix": "biome lint --write",
+    "format": "biome format",
     "type-check": "tsc --noEmit"
   },
   "devDependencies": {
