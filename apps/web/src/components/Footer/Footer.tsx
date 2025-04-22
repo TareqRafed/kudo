@@ -31,7 +31,7 @@ const Footer = ({ ...rest }: Props) => {
         <ul className="flex">
           <li>
             <Button asChild variant={'externalLink'}>
-              <Link href={'https://github.com/tareqrafed'}>Github</Link>
+              <Link href={'https://github.com/tareqrafed/kudo'}>Github</Link>
             </Button>
           </li>
           <li>

@@ -1,6 +1,7 @@
 {
   "name": "@kudo/extension",
   "version": "0.0.2",
+  "private": true,
   "description": "Extension - Kudo",
   "type": "module",
   "scripts": {
