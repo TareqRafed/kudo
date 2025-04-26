@@ -28,6 +28,7 @@ node_modules/
 # compiled
 chrome-extension/public/manifest.json
 **/tailwind-output.css
+target
 
 # vite timestamp (because of bug from lib, remove it after fix will have been realased)
 **/vite.config.mts.timestamp-*
