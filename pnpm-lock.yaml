@@ -107,6 +107,9 @@ importers:
       webextension-polyfill:
         specifier: ^0.12.0
         version: 0.12.0
+      zod:
+        specifier: ^3.24.1
+        version: 3.24.1
       zustand:
         specifier: ^5.0.3
         version: 5.0.3(@types/react@19.0.10)(react@19.0.0)
