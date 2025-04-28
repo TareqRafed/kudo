@@ -2,6 +2,7 @@ import { useToast } from '@kudo/ui';
 import useWebsiteStore from '@src/store/website';
 import { useEffect } from 'react';
 import { useSendMessage } from './useSendMessage';
+import { RPC } from '@src/util/RPC';
 
 /**
  * Move this function to the server
@@ -33,12 +34,12 @@ function cleanHTMLClone(currentElement: HTMLElement): HTMLElement {
 // This should be re-written, detecting documents should be triggered after
 // layout shifts or reflows
 // discard the usage of global state, did it like this cause there were other plans
-const edgeFunc = 'https://pfwrdyygogowjxyqcene.supabase.co/functions/v1/register-document';
 export const useRegisterDocument = () => {
   const { data: res } = useSendMessage({ action: 'GET_AUTH' });
   const { setWebsiteData } = useWebsiteStore();
 
   const { toast } = useToast();
+
   useEffect(() => {
     const registerDocument = async () => {
       if (!res?.success) return;
@@ -49,12 +50,9 @@ export const useRegisterDocument = () => {
         url: document.URL,
       };
 
-      fetch(edgeFunc, {
-        method: 'POST',
-        body: JSON.stringify(body),
-        headers: { Authorization: `Bearer ${res.data?.access_token}` },
-      })
-        .then((data) => data.json())
+      const { data, isLoading, error } = await RPC.registerDocument({ ...body, token: res.data.access_token });
+
+      const { data, isLoading, error } = await RPC.registerDocument({ ...body, token: res.data.access_token })
         .then((data) => {
           if (!data.success && data.error) {
             toast({
