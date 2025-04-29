@@ -1,15 +1,16 @@
-import { murmur3 } from 'murmurhash-js'; // npm install siphash
+import xxhash from 'xxhash-wasm';
 
-function hashFeature(feature: string): bigint {
-  return BigInt(murmur3(feature));
+async function hashFeature(feature: string) {
+  const { h64 } = await xxhash();
+  return h64(feature);
 }
 
-export function simhashStream(words: Iterable<string>): bigint {
+export async function simhashStream(words: Iterable<string>) {
   const v = new Array(64).fill(0);
   let simhash = 0n;
 
   for (const feature of words) {
-    const featureHash = hashFeature(feature);
+    const featureHash = await hashFeature(feature);
 
     for (let i = 0; i < 64; i++) {
       const bit = (featureHash >> BigInt(i)) & 1n;
@@ -30,7 +31,7 @@ export function simhashStream(words: Iterable<string>): bigint {
   return simhash;
 }
 
-export function simhash(text: string): bigint {
+export function simhash(text: string) {
   return simhashStream(text.split(/\s+/));
 }
 
@@ -49,32 +50,10 @@ export function hashSimilarity(hash1: bigint, hash2: bigint): number {
   return 1.0 - distance / 64.0;
 }
 
-export function similarityStreams(words1: Iterable<string>, words2: Iterable<string>): number {
-  return hashSimilarity(simhashStream(words1), simhashStream(words2));
+export async function similarityStreams(words1: Iterable<string>, words2: Iterable<string>) {
+  return hashSimilarity(await simhashStream(words1), await simhashStream(words2));
 }
 
-export function similarity(text1: string, text2: string): number {
+export async function similarity(text1: string, text2: string) {
   return similarityStreams(text1.split(/\s+/), text2.split(/\s+/));
 }
-
-// if (import.meta.vitest) {
-//   const { it, expect } = import.meta.vitest;
-//
-//   it('hamming distance', () => {
-//     expect(hammingDistance(0n, 0n)).toBe(0);
-//     expect(hammingDistance(0b1111111n, 0n)).toBe(7);
-//     expect(hammingDistance(0b0100101n, 0b1100110n)).toBe(3);
-//   });
-//
-//   it('hash similarity', () => {
-//     expect(hashSimilarity(0n, 0n)).toBe(1.0);
-//     expect(hashSimilarity(~0n, 0n)).toBe(0.0);
-//     expect(hashSimilarity(BigInt(~0 >>> 0), 0n)).toBeCloseTo(0.5, 1);
-//   });
-//
-//   it('similarity', () => {
-//     expect(similarity('Stop hammertime', 'Stop hammertime')).toBe(1.0);
-//     expect(similarity('Hocus pocus', 'Hocus pocus pilatus pas')).toBeGreaterThan(0.7);
-//     expect(similarity('Peanut butter', 'Strawberry cocktail')).toBeLessThan(0.6);
-//   });
-// }

@@ -1,0 +1,4 @@
+{
+  "extends": ["@kudo/biome-config/base"]
+}
+
