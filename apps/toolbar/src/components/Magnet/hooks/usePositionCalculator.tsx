@@ -40,6 +40,11 @@ const usePositionCalculator = (data: PositionData) => {
   useEffect(() => {
     const calculatePosition = () => {
       if (!data.rect) return;
+      console.log(
+        'newRect?',
+        data.targetSelector,
+        document.querySelector(data.targetSelector)?.getBoundingClientRect(),
+      );
       const newRect = data.targetSelector && document.querySelector(data.targetSelector)?.getBoundingClientRect();
 
       if (newRect) {

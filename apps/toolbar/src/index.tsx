@@ -20,7 +20,7 @@ const createRootContainer = () => {
   chrome.runtime.connect();
   const root = domHelper.createElement('div', { parent: document.body, id: rootId });
   const rootIntoShadow = domHelper.createElement('div', { parent: root, root: true, id: shadowRootId });
-  const shadowRoot = root.attachShadow({ mode: 'open', delegatesFocus: true });
+  const shadowRoot = root.attachShadow({ mode: 'closed', delegatesFocus: true });
 
   if (navigator.userAgent.includes('Firefox')) {
     /**

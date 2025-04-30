@@ -4,8 +4,8 @@ export const getCssSelector = (el: Element): string => {
 
   while (elm.parentElement) {
     const parent = elm.parentElement;
-    const index = Array.from(parent.children).indexOf(el) + 1;
-    path.unshift(`${el.tagName}:nth-child(${index})`);
+    const index = Array.from(parent.children).indexOf(elm) + 1;
+    path.unshift(`${elm.tagName}:nth-child(${index})`);
     elm = parent;
   }
 

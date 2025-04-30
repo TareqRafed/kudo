@@ -13,7 +13,7 @@
     "clean": "pnpm clean:bundle && pnpm clean:node_modules && pnpm clean:turbo",
     "build:tailwindcss": "pnpm tailwindcss -i ./src/tailwind-input.css -o ./dist/tailwind-output.css -m",
     "build": "pnpm build:tailwindcss && vite build",
-    "build:watch": "concurrently \"vite build --mode development\" \"pnpm build:tailwindcss -- -w\"",
+    "build:watch": "concurrently \"vite build --mode development --watch\" \"pnpm build:tailwindcss -- -w\"",
     "dev": "pnpm build:tailwindcss && pnpm build:watch",
     "lint": "pnpm biome lint",
     "lint:fix": "pnpm biome lint --write",

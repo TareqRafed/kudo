@@ -1,4 +1,4 @@
-import { cn } from '@kudo/ui';
+import { cn, useToast } from '@kudo/ui';
 import useToolbarStore from '@src/store/toolbar';
 import type { MouseEventHandler, RefObject } from 'react';
 import { useRef, useState } from 'react';
@@ -17,15 +17,16 @@ import CommentPin from './CommentPin';
 import { useHotkeys } from 'react-hotkeys-hook';
 import { getPublic } from '@src/util';
 import { useRegisterDocument } from '@src/hooks/useRegisterDocument';
+import { parseJSON } from 'date-fns';
 
-const getCssSelector = (el: Element): string => {
+export const getCssSelector = (el: Element): string => {
   const path: string[] = [];
   let elm = el;
 
   while (elm.parentElement) {
     const parent = elm.parentElement;
-    const index = Array.from(parent.children).indexOf(el) + 1;
-    path.unshift(`${el.tagName}:nth-child(${index})`);
+    const index = Array.from(parent.children).indexOf(elm) + 1;
+    path.unshift(`${elm.tagName}:nth-child(${index})`);
     elm = parent;
   }
 
@@ -38,6 +39,7 @@ type UpdateThreadArgs = Extract<Message, { action: 'RPC'; payload: 'update_recor
 export const CommentLayer = () => {
   useRegisterDocument();
 
+  const { toast } = useToast();
   const { website } = useWebsiteStore();
   const { toolbarItems, toggleToolbarItem } = useToolbarStore();
 
@@ -66,6 +68,9 @@ export const CommentLayer = () => {
     mutationKey: ['threads'],
     onSuccess: () => {
       clientQuery.invalidateQueries({ queryKey: ['threads'] });
+    },
+    onError: (e) => {
+      toast({ variant: 'destructive', description: `Something went wrong: ${e}` });
     },
   });
 
@@ -124,8 +129,10 @@ export const CommentLayer = () => {
   const threadInitRef = useRef<HTMLDivElement>(null);
 
   const addCursorUrl = getPublic('add-comment-cursor.png');
-
+  console.log(threadSpawn.active, !toolbarItems.comment.inUse);
   // if (!website.id) throw new Error('Something went wrong');
+  console.log(website, 'website id');
+  console.log(threads, 'threads');
   return (
     // biome-ignore lint/a11y/useKeyWithClickEvents: Hidden element
     <div
@@ -209,6 +216,7 @@ type Thread = {
 };
 
 const MagnifiedTag = ({ thread, layerRef }: Thread) => {
+  console.log('got a thread');
   const clientQuery = useQueryClient();
   const [isDragging, setIsDragging] = useState(false);
 
@@ -233,14 +241,21 @@ const MagnifiedTag = ({ thread, layerRef }: Thread) => {
     mutateThread({ table_name: 'threads', record_id: id, updates: payload as Json });
   };
   const threadRef = useRef<HTMLDivElement>(null);
-  if (threadRef.current === null) return;
 
+  if (!thread.x || !thread.y || !thread.rect) return null;
+  // force x, y and rect
+  const position = {
+    targetSelector: thread.target_selector,
+    x: thread.x,
+    y: thread.y,
+    rect: thread.rect as unknown as DOMRect,
+  };
   return (
     <Magnet
       draggedRef={threadRef as RefObject<HTMLDivElement>}
       onStart={() => setIsDragging(true)}
       layerRef={layerRef}
-      initData={{ targetSelector: thread.target_selector, x: thread.x, y: thread.y, rect: thread.rect }}
+      initData={position}
       onDrop={(e) => {
         setIsDragging(false);
         handleTagDrop(e, thread.id ?? 0);

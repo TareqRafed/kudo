@@ -58,7 +58,7 @@ export const useRegisterDocument = () => {
         });
       }
 
-      setWebsiteData(data?.id, data?.hash_id);
+      setWebsiteData(data?.data?.id, data?.data?.hash_id);
     };
 
     registerDocument();

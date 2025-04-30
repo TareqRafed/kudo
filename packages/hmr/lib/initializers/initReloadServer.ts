@@ -13,14 +13,17 @@ function initReloadServer() {
   });
 
   wss.on('connection', (ws) => {
+    console.log('[Reload-Server]: Add new client: ', ws.url);
     clientsThatNeedToUpdate.add(ws);
 
     ws.addEventListener('close', () => {
+      console.log('[Reload-Server]: Client removed');
       clientsThatNeedToUpdate.delete(ws);
     });
 
     ws.addEventListener('message', (event) => {
       if (typeof event.data !== 'string') return;
+      console.log('[Reload-Server]: Recived a message: ', event.data);
 
       const message = MessageInterpreter.receive(event.data);
 
@@ -29,6 +32,7 @@ function initReloadServer() {
       }
 
       if (message.type === BUILD_COMPLETE) {
+        console.log('[Reload-Server]: Build complete, trigger an update');
         for (const ws of clientsThatNeedToUpdate) {
           ws.send(MessageInterpreter.send({ type: DO_UPDATE, id: message.id }));
         }
