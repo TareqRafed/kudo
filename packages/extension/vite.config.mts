@@ -24,7 +24,7 @@ export default defineConfig(({ mode }) => {
       libAssetsPlugin({
         outputPath: outDir,
       }),
-      makeManifestPlugin({ outDir }),
+      makeManifestPlugin({ outDir }, { name: '[DEV] Kudo' }),
       watchPublicPlugin(),
       isDev && watchRebuildPlugin({ reload: true }),
     ],

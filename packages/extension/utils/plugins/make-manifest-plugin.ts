@@ -21,7 +21,7 @@ const getManifestWithCacheBurst = (): Promise<{ default: chrome.runtime.Manifest
   return import(withCacheBurst(manifestFile));
 };
 
-export default function makeManifestPlugin(config: { outDir: string }): PluginOption {
+export default function makeManifestPlugin(config: { outDir: string }, overwrite?: { name?: string }): PluginOption {
   function makeManifest(manifest: chrome.runtime.ManifestV3, to: string) {
     if (!fs.existsSync(to)) {
       fs.mkdirSync(to);
@@ -30,7 +30,7 @@ export default function makeManifestPlugin(config: { outDir: string }): PluginOp
     const manifestPath = resolve(to, 'manifest.json');
 
     // const isFirefox = process.env.__FIREFOX__ === 'true';
-    fs.writeFileSync(manifestPath, JSON.stringify(manifest)); // solve it l8er, this will work only for chrome
+    fs.writeFileSync(manifestPath, JSON.stringify({ ...manifest, ...overwrite })); // solve it l8er, this will work only for chrome
 
     console.log(`Manifest file copy complete: ${manifestPath}`);
   }

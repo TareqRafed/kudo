@@ -27,8 +27,9 @@ export function watchRebuildPlugin(config: PluginConfig): PluginOption {
       console.log(`[HMR] Connected to dev-server at ${LOCAL_RELOAD_SOCKET_URL}`);
     };
 
-    ws.onerror = () => {
+    ws.onerror = (event) => {
       console.error(`[HMR] Failed to connect server at ${LOCAL_RELOAD_SOCKET_URL}`);
+      console.error(`[HMR] Error: ${JSON.stringify(event)}`);
       console.warn('Retrying in 3 seconds...');
       ws = null;
 
