@@ -5,7 +5,6 @@ const host = env.HOST;
 async function fetchData(url: string, options?: RequestInit) {
   let data = null;
   let error = null;
-  let isLoading = true;
 
   try {
     const response = await fetch(url, options);
@@ -15,19 +14,20 @@ async function fetchData(url: string, options?: RequestInit) {
     data = await response.json();
   } catch (err) {
     error = err;
-  } finally {
-    isLoading = false;
   }
 
-  return { data, isLoading, error };
+  return { data, error };
 }
 
 export const RPC = {
-  registerDocument: async ({ document, url, token }: { document: string; url: string; token: string }) => {
+  registerDocument: async ({ document, domain, token }: { document: string; domain: string; token: string }) => {
     return fetchData(`${host}/api/register-document`, {
       method: 'POST',
-      body: JSON.stringify({ document, url }),
-      headers: { Authorization: `Bearer ${token}` },
+      credentials: 'omit',
+      headers: {
+        Authorization: token,
+      },
+      body: JSON.stringify({ document, domain }),
     });
   },
 };

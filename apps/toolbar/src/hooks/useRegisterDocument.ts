@@ -47,26 +47,20 @@ export const useRegisterDocument = () => {
 
       const body = {
         document: JSON.stringify(cleanHTMLClone(document.body).innerHTML),
-        url: document.URL,
+        domain: document.URL,
       };
 
-      const { data, isLoading, error } = await RPC.registerDocument({ ...body, token: res.data.access_token });
-
-      const { data, isLoading, error } = await RPC.registerDocument({ ...body, token: res.data.access_token })
-        .then((data) => {
-          if (!data.success && data.error) {
-            toast({
-              variant: 'destructive',
-              title: "Kudo couldn't retrive the project details",
-              description: data.error,
-            });
-          }
-          setWebsiteData(data?.data?.id, data?.data?.hash_id);
-        })
-        .catch(() => {
-          toast({ description: "Network issue, Kudo couldn't connect to servers" });
+      const { data, error } = await RPC.registerDocument({ ...body, token: res.data.access_token });
+      if (error) {
+        toast({
+          variant: 'destructive',
+          description: `Something went wrong: ${error}`,
         });
+      }
+
+      setWebsiteData(data?.id, data?.hash_id);
     };
+
     registerDocument();
   }, [res, toast, setWebsiteData]);
 };

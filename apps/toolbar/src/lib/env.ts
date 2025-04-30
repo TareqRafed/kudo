@@ -8,7 +8,7 @@ export type Env = z.infer<typeof envSchema>;
 
 function getEnv(): Env {
   const clientEnv = {
-    HOST: process.env.HOST,
+    HOST: import.meta.env.VITE_HOST,
   };
 
   const parsed = envSchema.safeParse(clientEnv);
